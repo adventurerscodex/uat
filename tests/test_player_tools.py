@@ -1,4 +1,9 @@
 """UAT test suite for Adventurer's Codex core player tools."""
+import pytest
+from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 from utils import click_link, click_button, click_radio
 from utils import set_input_value
@@ -37,3 +42,41 @@ def test_player_wizard(browser):
 
     # Finish the wizard
     click_button('Finish', browser)
+
+
+def test_attributes_required(browser):
+    """Test player wizard attribures are required fields."""
+    print('A user should be required to add attribute values.')
+
+    # AC homepage
+    click_link('Start Playing', browser)
+
+    # Get started with the wizard
+    click_button('Get Started', browser)
+
+    # Select type player
+    click_radio('characterPlayerType', browser)
+
+    # Navigate to the next step
+    click_button('Next', browser)
+
+    # Input required fields
+    set_input_value('Character Name', 'Test Char', browser)
+    set_input_value('Player Name', 'Automated Testing Bot.', browser)
+
+    # Navigate to the next
+    click_button('Next', browser)
+
+    xpath = "//div[@class='col-md-2 col-padded']//span[contains(text(), 'Required')]"
+    errors = WebDriverWait(browser, 30).until(
+        EC.presence_of_all_elements_located((By.XPATH, xpath)))
+
+    # There should be one required text for each attribute
+    assert len(errors) == 6
+
+    # With required fields, the finish button should not be visible
+    with pytest.raises(NoSuchElementException) as excinfo:
+        xpath = "//button[contains(text(), 'Finish')]"
+        browser.find_element_by_xpath(xpath)
+
+    assert 'no such element' in str(excinfo)
