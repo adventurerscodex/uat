@@ -16,8 +16,9 @@ Usage
 =====
 
 The script requires two paramaters:
-    * url
-    * web_driver
+
+* url
+* web_driver
 
 By default, url is https://adventurerscodex.com, and web_driver is chrome
 
