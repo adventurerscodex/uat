@@ -43,7 +43,7 @@ How to contribute
 * navigate to the uat_docs folder and find a user story to test (focus is player tools first)
 * add a test to the appropriate test file in tests/player_tools/
 * if no test file exists, make a new test file (be sure that file matches the patter test_*)
-* write the test
+* write the test (be sure to inlcude a print statement of the user story in the test, see other tests for example)
 * mark the test as complete in the uat_docs folder by appending '[complete]' to the end of the user story
 * make a pr
 * thanks for the contribution!
