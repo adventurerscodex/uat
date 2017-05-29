@@ -6,6 +6,7 @@ Requirements and setup
 ======================
 
 * Install python 3
+* Create a virtual environment
 * Install requirements `pip install -r requirements.txt`
 * Download chrome and/or firefox webdriver (https://selenium-python.readthedocs.io/installation.html#downloading-python-bindings-for-selenium)
 * Add path of webdriver executable to PATH environment variable
