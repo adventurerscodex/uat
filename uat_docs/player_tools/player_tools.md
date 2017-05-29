@@ -156,18 +156,16 @@ Savings throws bound to their reflective modifier
 Wizard
 ======
 
-The wizard can be completed [complete]
-Character name and player name are marked as required [complete]
-When character name and player name are entered, the required notice is no longer visible [complete]
-All fields persist
-Alignment auto-completes with OGL data
-Race auto-completes with OGL data
-Class auto-completes with OGL data
-Background auto-completes with OGL data
-All ability scores persist
-All ability scores are shown as required
-When ability scores are entered, the required notice is no longer visible
-All data completed in the wizard is displayed in the stats and profile modules
+As a player, I must add a character and player name to progress in the character creation wizard [complete]
+As a player, when I start typing in the alignment field, OGL data auto-completes
+As a player, when I start typing in the race field, OGL data auto-completes
+As a player, when I start typing in the class field, OGL data auto-completes
+As a player, when I starting typing in the background field, OGL data auto-completes
+As a player, I can add values to all my ability scores
+As a player, I am required to add values to all ability scores before progressing in the character creation wizard
+As a player, I can navigate and complete the character creation wizard [complete]
+As a player, after creating a character via the character creation wizard, I can view all the data entered in the stats and profile modules
+
 
 
 
