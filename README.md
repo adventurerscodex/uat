@@ -8,7 +8,7 @@ Requirements and setup
 * Install python 3
 * Install requirements `pip install -r requirements.txt`
 * Download chrome and/or firefox webdriver (https://selenium-python.readthedocs.io/installation.html#downloading-python-bindings-for-selenium)
-* Add path of webdriver executible to PATH environment variable
+* Add path of webdriver executable to PATH environment variable
 
 Currently Firefox and Chrome are supported.
 
