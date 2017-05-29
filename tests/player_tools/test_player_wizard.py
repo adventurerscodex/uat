@@ -5,8 +5,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-from utils import click_link, click_button, click_radio
-from utils import set_input_value
+from utils.utils import click_link, click_button, click_radio
+from utils.utils import set_input_value
 
 
 def test_player_wizard(browser):
