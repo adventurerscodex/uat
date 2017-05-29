@@ -1,4 +1,4 @@
-"""Utils for selenium testing at AC."""
+"""Selenium testing utils common to player, dm, and collab tools."""
 
 import time
 
