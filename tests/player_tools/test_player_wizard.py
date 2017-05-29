@@ -1,4 +1,4 @@
-"""UAT test suite for Adventurer's Codex core player tools."""
+"""UAT test file for Adventurer's Codex core player tools wizard."""
 import pytest
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By

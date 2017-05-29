@@ -1,4 +1,4 @@
-"""UAT test suite for Adventurer's Codex core dm tools.."""
+"""UAT test file for Adventurer's Codex core dm tools."""
 
 from utils import click_link, click_button, click_radio
 from utils import set_input_value
