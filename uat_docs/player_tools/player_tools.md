@@ -51,36 +51,55 @@ As a player, I can increase or decrease my savings throws via a modifier field
 Skills
 ======
 
-All fields for features, feats, traits, proficiencies, tracking, and skills persist after page refresh
+As a player, all changes I make to features, feats, traits, proficiencies, tracking, and skills persist after I refresh the browser
 
-Feature name field auto-completes with OGL data and the remaining fields pre-populate
+As a player, if I start typing in the feature name field, OGL data auto-completes and the remaining fields pre-populate
 
-Feats name field auto-completes with OGL data and the remaining fields pre-populate
+As a player, if I start typing in the feats name field, OGL data auto-completes and the remaining fields pre-populate
 
-Trait name field auto-completes with OGL data and the remaining fields pre-populate
+As a player, if I start typing in the traits name field, OGL data auto-completes and the remaining fields pre-populate
 
-Proficiencies and Languages name field auto-completes with OGL data and the remaining fields
-pre-populate
+As a player, if I start typing in the proficiencies and languages name field, OGL data auto-completes and the remaining fields pre-populate
 
-Features can be added, deleted, and edited
+As a player, I can add a feature
 
-Feats can be added, deleted, and edited
+As a player, I can delete a feature
 
-Traits can be added, deleted, and edited
+As a player, I can edit a feature
 
-Proficiencies and Languages can be added, deleted, and edited
+As a player, I can add a feat
 
-Features, Feats, Traits, Proficiencies and Languages include checkbox for tracked and can be set to reset on short or long rest
+As a player, I can delete a feat
 
-In the tracker, item may be set to short or long rest, and the table should show appropriate icon
+As a player, I can edit a feat
 
-Tracked items can be refreshed by clicking on the refresh icon in the table
+As a player, I can add a trait
 
-The stepper is functional in the tracked table and bar is increased and decreased accordingly
+As a player, I can delete a trait
 
-Skills marked as none, half, proficient, or expertise are calculated correctly
+As a player, I can edit a trait
 
-Passive score is calculated correctly for skills
+As a player, I can add a proficiency or language
+
+As a player, I can delete a proficiency or language
+
+As a player, I can edit a proficiency or language
+
+As a player, I can add tracking to a feature and can set it to reset on a long or short rest
+
+As a player, I can add tracking to a feat and can set it to reset on a long or short rest
+
+As a player, I can add tracking to a trait and can set it to reset on a long or short rest
+
+As a player, I can view the tracking table, and determine by icon if the ability resets on a short or long rest
+
+As a player, I can reset tracked items by clicking on the refresh icon in the table
+
+As a player, I can increase or decrease tracked abilities with the stepper widget and the bar reflects these changes
+
+As a player, I can mark a skill as none, half, proficient, or expertise and view these modifiers, and they are calculated correctly
+
+As a player, I can view my passive score for each skill which is calculated correctly
 
 Spells
 ======
@@ -150,17 +169,29 @@ If weapons or armor are magical, a badge indicating the modifier is present
 Inventory
 =========
 
-All fields for coins, magic items, Inventory persist after page refresh
+As a player, all fields for coins, magic items, and inventory persist after I refresh the browser
 
-Total weight calculated correctly for magic items, inventory, and coinsl
+As a player, I can view total weight for magic items
+
+As a player, I can view total weight for inventory
+
+As a player, I can view total weight for coins
 
 Magic items name field auto-completes with OGL data and the remaining fields pre-populate
 
 Inventory items name field auto-completes with OGL data and the remaining fields pre-populate
 
-Magic items can be added, deleted, and edited
+As a player, I can add a magic item
 
-Inventory items can be added, deleted, and edited
+As a player, I can delete a magic item
+
+As a player, I can edit a magic item
+
+As a player, I can an item to my inventory
+
+As a player, I can delete to my inventory
+
+As a player, I can edit my intentory
 
 If no magic items are in table, clicking the first row will trigger add modal
 
