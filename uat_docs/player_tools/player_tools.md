@@ -169,11 +169,15 @@ If no inventory items are in table, clicking the first row will trigger add moda
 Notes
 =====
 
-Notes can be added, deleted, and edited
+As a player, I can add a note
 
-The preview tab displays text in the edit tab as markdown
+As a player, I can delete a note
 
-The link to markdown guide is functional
+As a player, I can edit a note
+
+As a player, I can view markdown in the edit tab
+
+As a player, I can click on the link to the markdown guide
 
 Profile
 =======
