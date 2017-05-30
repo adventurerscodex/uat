@@ -182,9 +182,13 @@ As a player, I can click on the link to the markdown guide
 Profile
 =======
 
-All fields are editable and persist after refreshing the page
+As a player, all fields are editable and persist after refreshing the browser
 
-Race, Class, and Background fields auto-complete with OGL data
+As a player, if I start typing in the race field, OGL data auto-completes
+
+As a player, if I start typing in the class field, OGL data auto-completes
+
+As a player, if I start typing in the background field, OGL data auto-completes
 
 Global Page
 ===========
