@@ -1,37 +1,52 @@
 Stats
 =====
 
-All fields for hit points, hit dice, ability scores, savings throws, and other stats persist
+As a player, all changes I make to hit points, hit dice, ability scores, savings throws, and other stats persist after I refresh the browser
 
-Hit points stepper is functional and hit points bar increases and decreases accordingly
+As a player, I can increase or decrease my hit points via the stepper widget
 
-Hit points bar changes color at certain intervals as hit points decrease
+As a player, I can see the hit points bar change colors at certain intervals as hit points decrease
 
-Hit dice are clickable and images change when clicked
+As a player, hit dice are clickable and images change when clicked
 
-Hit dice changes persist
+As a player, if I click on a hit die, the changes persist after I refresh the browser
 
-When level is increased or decreased, the number of hit dice match the level number
+As a player, if I change the value in the level field, the number of hit dice match the level number
 
-Death save successes and failures are clickable and images change when clicked
+As a player, death save successes and failures are clickable and images change when clicked
 
-Death save changes persist
+As a player, death save changes persist after I refresh the browser
 
-Armor class is correctly calculated
+As a player, armor class is correctly calculated
 
-Initiative is correctly calculated
+As a player, initiative is correctly calculated
 
-Proficiency bonus is correctly calculated
+As a player, proficiency bonus is correctly calculated
 
-Popovers showing calculations are available for AC, Initiative, and Proficiency Bonus
+As a player, I can can click on a popover showing the calculation for Armor Class
 
-Modifiers in AC, Initiative, and Proficiency bonus are reflected
+As a player, I can can click on a popover showing the calculation for Initiative
 
-If inspiration is greater than 0, status line should indicate character is inspired
+As a player, I can can click on a popover showing the calculation for Proficiency Bonus
 
-Savings throws can be checked as proficient and a checkbox denotes this in table
+As a player, I can increase or decrease my calculated armor class via a modifier field and this is reflected in the label
 
-Savings throws modifier is functional for both positive and negative numbers
+As a player, I can increase or decrease my calculated initiative via a modifier field and this is reflected in the label
+
+As a player, I can increase or decrease my calculated proficiency via a modifier field and this is reflected in the label
+
+As a player, if I am inspired, the status line should indicate this
+
+As a player, I can select to become proficient in a savings throw, and this can be
+viewed in the table via in icon
+
+As a player, I can select to become half-proficient in a savings throw, and this can be
+viewed in the table via in icon
+
+As a player, I can select to become expertise in a savings throw, and this can be
+viewed in the table via in icon
+
+As a player, I can increase or decrease my savings throws via a modifier field
 
 Skills
 ======
