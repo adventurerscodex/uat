@@ -35,7 +35,7 @@ def browser(request, web_driver, url):
         driver = webdriver.Chrome()
 
     elif web_driver.lower() == 'firefox':
-        driver = webdriver.Safari()
+        driver = webdriver.Firefox()
 
     driver.get(url)
 
