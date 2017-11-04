@@ -1,7 +1,7 @@
 Stats
 =====
 
-As a player, all changes I make to hit points, hit dice, ability scores, savings throws, and other stats persist after I refresh the browser
+- [ ] As a player, all changes I make to hit points, hit dice, ability scores, savings throws, and other stats persist after I refresh the browser
 
 As a player, I can increase or decrease my hit points via the stepper widget
 
