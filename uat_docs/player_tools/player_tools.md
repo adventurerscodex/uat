@@ -5,6 +5,9 @@ As a player, all changes I make to hit points, hit dice, ability scores, savings
 
 As a player, I can increase or decrease my hit points via the stepper widget
 
+As a player, I can reset my hp by clicking on the
+reset icon
+
 As a player, I can see the hit points bar change colors at certain intervals as hit points decrease
 
 As a player, hit dice are clickable and images change when clicked
@@ -16,6 +19,10 @@ As a player, if I change the value in the level field, the number of hit dice ma
 As a player, death save successes and failures are clickable and images change when clicked
 
 As a player, death save changes persist after I refresh the browser
+
+If 3 death save success are clicked, an alert indicating the player is stable is presented
+
+If 3 death save failures are clicked, an alert indicating the player is unconscious is presented
 
 As a player, armor class is correctly calculated
 
@@ -37,14 +44,10 @@ As a player, I can increase or decrease my calculated proficiency via a modifier
 
 As a player, if I am inspired, the status line should indicate this
 
-As a player, I can select to become proficient in a savings throw, and this can be
-viewed in the table via in icon
+As a player, if I am inspired, there should be a
+blue circle around my profice pic
 
-As a player, I can select to become half-proficient in a savings throw, and this can be
-viewed in the table via in icon
-
-As a player, I can select to become expertise in a savings throw, and this can be
-viewed in the table via in icon
+As a player, I can select to become proficient in a savings throw, and this can be viewed in the table via in icon
 
 As a player, I can increase or decrease my savings throws via a modifier field
 
@@ -67,11 +70,15 @@ As a player, I can delete a feature
 
 As a player, I can edit a feature
 
+If there is no feature, clicking the first row will open the add modal
+
 As a player, I can add a feat
 
 As a player, I can delete a feat
 
 As a player, I can edit a feat
+
+If there is no feat, clicking the first row will open the add modal
 
 As a player, I can add a trait
 
@@ -79,11 +86,15 @@ As a player, I can delete a trait
 
 As a player, I can edit a trait
 
+If there is no trait, clicking the first row will open the add modal
+
 As a player, I can add a proficiency or language
 
 As a player, I can delete a proficiency or language
 
 As a player, I can edit a proficiency or language
+
+If there is no proficiency, clicking the first row will open the add modal
 
 As a player, I can add tracking to a feature and can set it to reset on a long or short rest
 
@@ -96,6 +107,8 @@ As a player, I can view the tracking table, and determine by icon if the ability
 As a player, I can reset tracked items by clicking on the refresh icon in the table
 
 As a player, I can increase or decrease tracked abilities with the stepper widget and the bar reflects these changes
+
+As a player, I can reset a tracked ability by clicking on the reset icon
 
 As a player, I can mark a skill as none, half, proficient, or expertise and view these modifiers, and they are calculated correctly
 
@@ -139,7 +152,6 @@ If the spell is a ritual, the text ritual is displayed in the spell name in the 
 If the spell is level 0, the spell is denoted in the table as a cantrip and there is no checkbox to prepare the spell
 
 In the spells modal footer, total spells and spells prepared are calculated correctly
-
 
 Equipment
 =========
@@ -200,6 +212,8 @@ If no inventory items are in table, clicking the first row will trigger add moda
 Notes
 =====
 
+Notes persist after a browser refresh
+
 As a player, I can add a note
 
 As a player, I can delete a note
@@ -224,9 +238,11 @@ As a player, if I start typing in the background field, OGL data auto-completes
 Global Page
 ===========
 
-Images may be added and displayed by URL
+Profile images may be added and displayed by URL
 
-Images may be added and displayed via Gravatar
+Profile images may be added and displayed via Gravatar
+
+Profile images may be added by using a default image
 
 User should be able to log in
 
@@ -277,18 +293,11 @@ Proficiency calculation reflects the change
 
 When Strength modifier if altered, verify the following are calculated correctly:
 
-Skills bound to strength
-Savings throws bound to strength
-Encumbrance
-To hit modifier
+Skills bound to strength Savings throws bound to strength Encumbrance To hit modifier
 
 When Dexterity modifier is altered, verify the following are calculated correctly:
 
-Skills bound to dexterity
-Savings throws bound to dexterity
-Initiative
-Armor class (Pro tip: if the armor is heavy, dex modifier is not used for positive or negative numbers)
-To hit bonus uses the higher of strength or dexterity if the weapon is of type finesse
+Skills bound to dexterity Savings throws bound to dexterity Initiative Armor class (Pro tip: if the armor is heavy, dex modifier is not used for positive or negative numbers) To hit bonus uses the higher of strength or dexterity if the weapon is of type finesse
 
 When Con, Int, Wis, Cha modifiers are altered, verify the following are calculated correctly:
 
@@ -316,7 +325,3 @@ As a player, I am required to add values to all ability scores before progressin
 As a player, I can navigate and complete the character creation wizard [complete]
 
 As a player, after creating a character via the character creation wizard, I can view all the data entered in the stats and profile modules
-
-
-
-
