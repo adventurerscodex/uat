@@ -291,17 +291,22 @@ Proficiency calculation reflects the change
 
 When Strength modifier if altered, verify the following are calculated correctly:
 
-Skills bound to strength Savings throws bound to strength Encumbrance To hit modifier
+* Skills bound to strength
+* Savings throws bound to strength
+* Encumbrance
+* To hit modifier
 
 When Dexterity modifier is altered, verify the following are calculated correctly:
 
-Skills bound to dexterity Savings throws bound to dexterity Initiative Armor class (Pro tip: if the armor is heavy, dex modifier is not used for positive or negative numbers) To hit bonus uses the higher of strength or dexterity if the weapon is of type finesse
+* Skills bound to dexterity
+* Savings throws bound to dexterity
+* Initiative Armor class (Pro tip: if the armor is heavy, dex modifier is not used for positive or negative numbers)
+* To hit bonus uses the higher of strength or dexterity if the weapon is of type finesse
 
 When Con, Int, Wis, Cha modifiers are altered, verify the following are calculated correctly:
 
-Skills bound to their reflective modifier
-
-Savings throws bound to their reflective modifier
+* Skills bound to their reflective modifier
+* Savings throws bound to their reflective modifier
 
 Wizard
 ======
