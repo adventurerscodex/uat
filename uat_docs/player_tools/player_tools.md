@@ -260,8 +260,6 @@ Remaining storage space is displayed in the modal and increases and decreases ac
 
 Switching between characters is functional
 
-More info on storage link is functional
-
 Export link is functional
 
 Manage party link is functional
