@@ -323,3 +323,5 @@ As a player, I am required to add values to all ability scores before progressin
 As a player, I can navigate and complete the character creation wizard [complete]
 
 As a player, after creating a character via the character creation wizard, I can view all the data entered in the stats and profile modules
+
+As a player, after selecting a backpack, all items are pre-populated in the inventory module
