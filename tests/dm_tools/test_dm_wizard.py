@@ -1,15 +1,12 @@
 """UAT test file for Adventurer's Codex core dm tools."""
 
-from utils.utils import click_link, click_button, click_radio
+from utils.utils import click_button, click_radio
 from utils.utils import set_input_value
 
 
 def test_dm_wizard(browser):
     """Test dm wizard using required values."""
     print('A dm should be able to navigate through the dm wizard.')
-
-    # AC homepage
-    click_link('Start Playing', browser)
 
     # Get started with the wizard
     click_button('Get Started', browser)

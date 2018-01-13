@@ -5,16 +5,13 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-from utils.utils import click_link, click_button, click_radio
+from utils.utils import click_button, click_radio
 from utils.utils import set_input_value
 
 
 def test_player_wizard(browser):
     """A user should be able to navigate through the player wizard."""
     print('A user should be able to navigate through the player wizard.')
-
-    # AC homepage
-    click_link('Start Playing', browser)
 
     # Get started with the wizard
     click_button('Get Started', browser)
@@ -28,7 +25,7 @@ def test_player_wizard(browser):
     # Input required fields
     set_input_value('Character Name', 'Test Char', browser)
     set_input_value('Player Name', 'Automated Testing Bot.', browser)
-
+    # from pdb import set_trace; set_trace()
     # Navigate to the next
     click_button('Next', browser)
 
@@ -47,9 +44,6 @@ def test_player_wizard(browser):
 def test_attributes_required(browser):
     """A user should be required to add attribute values."""
     print('A user should be required to add attribute values.')
-
-    # AC homepage
-    click_link('Start Playing', browser)
 
     # Get started with the wizard
     click_button('Get Started', browser)
@@ -85,9 +79,6 @@ def test_attributes_required(browser):
 def test_name_required(browser):
     """A user should be required to enter a char and player name."""
     print('A user should be required to enter a char and player name.')
-
-    # AC homepage
-    click_link('Start Playing', browser)
 
     # Get started with the wizard
     click_button('Get Started', browser)
