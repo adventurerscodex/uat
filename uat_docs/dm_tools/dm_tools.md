@@ -3,16 +3,15 @@ Overview
 
 Campaign info is editable and persists
 
-Notes are editable and persists
-
 Campaign info shows date created
 
-Markdown cheatsheet in note section is functional
+If no campaign map and image exists, I can add a new one by clicking in the first row. The image persists.
 
-Screen
-======
+I can add a campaign map or image by clicking on the + icon. The image persists.
 
-The tab is clickable and contains the dm screen content
+I can click on the trashcan and delete a map or image.
+
+I can sort a map or image by the name.
 
 Encounters
 ==========
@@ -21,7 +20,7 @@ Add an encounter via the + symbol
 
 Location and Encounter name are editable and persist
 
-Clicking add adds the encounter and the encounter is visible in the left and right pane
+Clicking + adds the encounter and the encounter is visible in the left and right pane
 
 Clicking on the corresponding trash can deletes the encounter
 
@@ -30,6 +29,8 @@ Clicking edit in the right pane brings up the encounter modal
 Selecting or removing sections from the encounters modal, adds or removes sections
 
 The environments fields are editable and persist
+
+Maps and images fields can be added, edited, deleted, and persist
 
 Points of interest fields can be added, edited, deleted, and persist
 
@@ -48,6 +49,11 @@ Link to markdown style guide in notes section is functional
 Monsters name field auto-completes OGL data and the relevant fields auto-populate
 
 In the treasure modal, armor, items, magic items, and weapons, auto-complete the name field and auto-populate relevant fields
+
+Screen
+======
+
+The tab is clickable and contains the dm screen content
 
 Global App
 ==========

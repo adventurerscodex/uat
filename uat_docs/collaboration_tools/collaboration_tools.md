@@ -26,6 +26,28 @@ As a player, when I receive a chat, I can click on the save to notes button, and
 DM Collaboration
 ================
 
-As a DM, I can click on the arrow button and push a read aloud text to the main chat
+As a DM, I can click on the arrow icon and push a read aloud text to the main chat
 
 As a DM, I can click on the tv icon and push an environment image to the exhibit tab
+
+As a DM, I can click on the arrow icon and push an environment to the chat
+
+As a DM, I can click on the tv icon and push an environment image to the exhibit tab
+
+As a DM, I can click on the tv icon and push a map or image to the exhibit tab
+
+As a DM, I can click on the tv icon and push an environment image to the exhibit tab
+
+As a DM, on the party tab, I can watch the stats of my party scale up or down in real time
+
+As a DM, I can create a new chat
+
+As a DM, I can send chats to chat groups
+
+As a DM, if I go to the party tab, and there is no party, there is text indicating I am not connected to party. Also there is functional link to sign up and a link to the party dashboard blog post
+
+As a DM, if I go to the chat tab, and there is no party, there is text indicating I am not connected to a party. Also there is a functional link to sign up and a link to the party tools blog in the chat section.
+
+As a DM, in the Campaign Maps and Images table, I can click on the arrow icon and send an image to a chat.
+
+As a DM, in the Campaign Maps and Images table, I can click on the TV icon, and push an image or map to the exhibit tab
