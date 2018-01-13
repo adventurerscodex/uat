@@ -21,7 +21,7 @@ The script requires two paramaters:
 * url
 * web_driver
 
-By default, url is https://adventurerscodex.com, and web_driver is chrome
+By default, url is https://nightly.adventurerscodex.com, and web_driver is chrome
 
 Sample usage:
 
