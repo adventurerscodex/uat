@@ -25,13 +25,13 @@ By default, url is https://adventurerscodex.com, and web_driver is chrome
 
 Sample usage:
 
-*always run in verbose mode and no capture (no params will default to https://adventurerscodex.com and chrome web_driver)*
+*always run in verbose mode and no capture (no params will default to https://nightly.adventurerscodex.com and chrome web_driver)*
 
 `py.test --verbose --capture=no tests/`
 
 *with explicit url and web_driver*
 
-`py.test --verbose --capture=no --web_driver=chrome --url=https://adventurerscodex.com tests/`
+`py.test --verbose --capture=no --web_driver=chrome --url=https://nightly.adventurerscodex.com tests/`
 
 *run specific test file*
 
