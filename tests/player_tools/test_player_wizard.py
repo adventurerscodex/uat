@@ -5,8 +5,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-from utils.utils import click_button, click_radio
-from utils.utils import set_input_value
+from utils import utils as ut
 
 
 def test_player_wizard(browser):
@@ -14,31 +13,31 @@ def test_player_wizard(browser):
     print('A user should be able to navigate through the player wizard.')
 
     # Get started with the wizard
-    click_button('Get Started', browser)
+    ut.click_button('Get Started', browser)
 
     # Select type player
-    click_radio('characterPlayerType', browser)
+    ut.click_radio('characterPlayerType', browser)
 
     # Navigate to the next step
-    click_button('Next', browser)
+    ut.click_button('Next', browser)
 
     # Input required fields
-    set_input_value('Character Name', 'Test Char', browser)
-    set_input_value('Player Name', 'Automated Testing Bot.', browser)
+    ut.set_input_value('Character Name', 'Test Char', browser)
+    ut.set_input_value('Player Name', 'Automated Testing Bot.', browser)
     # from pdb import set_trace; set_trace()
     # Navigate to the next
-    click_button('Next', browser)
+    ut.click_button('Next', browser)
 
     # Fill in values for attributes
-    set_input_value('Strength', '18', browser)
-    set_input_value('Dexterity', '18', browser)
-    set_input_value('Constitution', '18', browser)
-    set_input_value('Intelligence', '18', browser)
-    set_input_value('Wisdom', '18', browser)
-    set_input_value('Charisma', '18', browser)
+    ut.set_input_value('Strength', '18', browser)
+    ut.set_input_value('Dexterity', '18', browser)
+    ut.set_input_value('Constitution', '18', browser)
+    ut.set_input_value('Intelligence', '18', browser)
+    ut.set_input_value('Wisdom', '18', browser)
+    ut.set_input_value('Charisma', '18', browser)
 
     # Finish the wizard
-    click_button('Finish', browser)
+    ut.click_button('Finish', browser)
 
 
 def test_attributes_required(browser):
@@ -46,20 +45,20 @@ def test_attributes_required(browser):
     print('A user should be required to add attribute values.')
 
     # Get started with the wizard
-    click_button('Get Started', browser)
+    ut.click_button('Get Started', browser)
 
     # Select type player
-    click_radio('characterPlayerType', browser)
+    ut.click_radio('characterPlayerType', browser)
 
     # Navigate to the next step
-    click_button('Next', browser)
+    ut.click_button('Next', browser)
 
     # Input required fields
-    set_input_value('Character Name', 'Test Char', browser)
-    set_input_value('Player Name', 'Automated Testing Bot.', browser)
+    ut.set_input_value('Character Name', 'Test Char', browser)
+    ut.set_input_value('Player Name', 'Automated Testing Bot.', browser)
 
     # Navigate to the next
-    click_button('Next', browser)
+    ut.click_button('Next', browser)
 
     xpath = "//div[@class='col-md-2 col-padded']//span[contains(text(), 'Required')]"
     errors = WebDriverWait(browser, 30).until(
@@ -81,13 +80,13 @@ def test_name_required(browser):
     print('A user should be required to enter a char and player name.')
 
     # Get started with the wizard
-    click_button('Get Started', browser)
+    ut.click_button('Get Started', browser)
 
     # Select type player
-    click_radio('characterPlayerType', browser)
+    ut.click_radio('characterPlayerType', browser)
 
     # Navigate to the next step
-    click_button('Next', browser)
+    ut.click_button('Next', browser)
 
     xpath = "//div[@class='col-md-2 col-padded']//span[contains(text(), 'Required')]"
     errors = WebDriverWait(browser, 30).until(

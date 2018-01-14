@@ -1,7 +1,6 @@
 """UAT test file for Adventurer's Codex core dm tools."""
 
-from utils.utils import click_button, click_radio
-from utils.utils import set_input_value
+from utils import utils as ut
 
 
 def test_dm_wizard(browser):
@@ -9,17 +8,17 @@ def test_dm_wizard(browser):
     print('A dm should be able to navigate through the dm wizard.')
 
     # Get started with the wizard
-    click_button('Get Started', browser)
+    ut.click_button('Get Started', browser)
 
     # Select type player
-    click_radio('dmPlayerType', browser)
+    ut.click_radio('dmPlayerType', browser)
 
     # Navigate to the next step
-    click_button('Next', browser)
+    ut.click_button('Next', browser)
 
     # Input required fields
-    set_input_value('Campaign Name', 'Test Campaign', browser)
-    set_input_value('Player Name', 'Automated Testing Bot.', browser)
+    ut.set_input_value('Campaign Name', 'Test Campaign', browser)
+    ut.set_input_value('Player Name', 'Automated Testing Bot.', browser)
 
     # Finish the wizard
-    click_button('Finish', browser)
+    ut.click_button('Finish', browser)

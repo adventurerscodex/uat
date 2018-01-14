@@ -4,6 +4,8 @@ import pytest
 
 from selenium import webdriver
 
+from utils import utils as ut
+
 
 def pytest_addoption(parser):
     """Command line parameters."""
@@ -45,3 +47,54 @@ def browser(request, web_driver, url):
     request.addfinalizer(close_browser)
 
     return driver
+
+
+@pytest.fixture(scope='function')
+def dm_wizard(browser):
+    """Navigate through the dm wizard."""
+    # Get started with the wizard
+    ut.click_button('Get Started', browser)
+
+    # Select type player
+    ut.click_radio('dmPlayerType', browser)
+
+    # Navigate to the next step
+    ut.click_button('Next', browser)
+
+    # Input required fields
+    ut.set_input_value('Campaign Name', 'Test Campaign', browser)
+    ut.set_input_value('Player Name', 'Automated Testing Bot.', browser)
+
+    # Finish the wizard
+    ut.click_button('Finish', browser)
+
+
+@pytest.fixture(scope='function')
+def player_wizard(browser):
+    """Navigate through the player wizard."""
+    # Get started with the wizard
+    ut.click_button('Get Started', browser)
+
+    # Select type player
+    ut.click_radio('characterPlayerType', browser)
+
+    # Navigate to the next step
+    ut.click_button('Next', browser)
+
+    # Input required fields
+    ut.set_input_value('Character Name', 'Test Char', browser)
+    ut.set_input_value('Player Name', 'Automated Testing Bot.', browser)
+    # from pdb import set_trace; set_trace()
+    # Navigate to the next
+    ut.click_button('Next', browser)
+
+    # Fill in values for attributes
+    ut.set_input_value('Strength', '18', browser)
+    ut.set_input_value('Dexterity', '18', browser)
+    ut.set_input_value('Constitution', '18', browser)
+    ut.set_input_value('Intelligence', '18', browser)
+    ut.set_input_value('Wisdom', '18', browser)
+    ut.set_input_value('Charisma', '18', browser)
+
+    # Finish the wizard
+    ut.click_button('Finish', browser)

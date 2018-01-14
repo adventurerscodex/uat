@@ -1,7 +1,7 @@
 Overview
 ========
 
-Campaign info is editable and persists
+Campaign info is editable and persists [complete]
 
 Campaign info shows date created
 
