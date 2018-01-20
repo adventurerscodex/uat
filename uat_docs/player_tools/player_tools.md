@@ -227,7 +227,11 @@ As a player, I can click on the link to the markdown guide
 Profile
 =======
 
-As a player, all fields are editable and persist after refreshing the browser [complete]
+As a player, profile inputs persist data [complete]
+
+As a player, background textareas persist data [complete]
+
+As a player, appearance textareas persist data [complete]
 
 As a player, if I start typing in the race field, OGL data auto-completes
 

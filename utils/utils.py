@@ -4,42 +4,7 @@ import time
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-
-
-def set_input_value_assert_persists(label, expected_value, browser):
-    """Set a value, refresh, assert value."""
-    xpath = "//span[contains(text(), '{}')]/following-sibling::input"
-    xpath = xpath.format(label)
-    element = WebDriverWait(browser, 30).until(
-        EC.presence_of_element_located((By.XPATH, xpath)))
-    # add tab at the end to simulate blur event
-    # TODO maybe there is a better way?
-    element.send_keys(expected_value + '\t')
-    browser.refresh()
-
-    element = WebDriverWait(browser, 30).until(
-        EC.presence_of_element_located((By.XPATH, xpath)))
-    actual_value = element.get_attribute('value')
-
-    assert actual_value == expected_value
-
-
-def set_textarea_assert_persists(label, expected_value, browser):
-    """Set a value, refresh, assert value."""
-    xpath = "//label[contains(text(), '{}')]/following-sibling::textarea"
-    xpath = xpath.format(label)
-    element = WebDriverWait(browser, 30).until(
-        EC.presence_of_element_located((By.XPATH, xpath)))
-    # add tab at the end to simulate blur event
-    # TODO maybe there is a better way?
-    element.send_keys(expected_value + '\t')
-    browser.refresh()
-    element = WebDriverWait(browser, 30).until(
-        EC.presence_of_element_located((By.XPATH, xpath)))
-    actual_value = element.get_attribute('value')
-
-    assert actual_value == expected_value
+from selenium.webdriver.support import expected_conditions as EC # noqa
 
 
 def set_input_value(label, value, browser):
@@ -120,12 +85,3 @@ def click_radio(value, browser):
     browser.execute_script("$('input:radio[value={}]').click();".format(
         value)
     )
-
-
-def switch_tabs(tab, browser):
-    """Switch tabs in the player or dm tools."""
-    xpath = '//a[contains(@href,"{}")]'
-    xpath = xpath.format(tab)
-    tab = WebDriverWait(browser, 30).until(
-        EC.element_to_be_clickable((By.XPATH, xpath)))
-    tab.click()
