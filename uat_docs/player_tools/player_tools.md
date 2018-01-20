@@ -239,8 +239,10 @@ As a player, if I start typing in the class field, OGL data auto-completes
 
 As a player, if I start typing in the background field, OGL data auto-completes
 
+
 Global Page
 ===========
+As a player, I should be able to navigate through the player tabs [complete]
 
 Profile images may be added and displayed by URL
 

@@ -57,6 +57,7 @@ The tab is clickable and contains the dm screen content
 
 Global App
 ==========
+As a dm, I should be able to navigate through the dm tabs [complete]
 
 Images may be added and displayed by URL
 
