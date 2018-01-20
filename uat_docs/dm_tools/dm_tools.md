@@ -53,7 +53,7 @@ In the treasure modal, armor, items, magic items, and weapons, auto-complete the
 Screen
 ======
 
-The tab is clickable and contains the dm screen content
+As a dm, I can view the dm screen sections [complete]
 
 Global App
 ==========
