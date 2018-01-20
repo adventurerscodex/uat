@@ -98,4 +98,4 @@ Navbar footer links to facebook, twitter, google +, github, reddit, rss feed, co
 Wizard
 ======
 
-The wizard can be completed [complete]
+As a dm, I should be able to navigate through the dm wizard [complete]

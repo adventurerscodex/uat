@@ -5,7 +5,7 @@ from utils import utils as ut
 
 def test_dm_wizard(browser):
     """Test dm wizard using required values."""
-    print('A dm should be able to navigate through the dm wizard.')
+    print('As a dm, I should be able to navigate through the dm wizard.')
 
     # Get started with the wizard
     ut.click_button('Get Started', browser)

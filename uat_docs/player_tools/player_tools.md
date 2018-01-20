@@ -317,7 +317,11 @@ When Con, Int, Wis, Cha modifiers are altered, verify the following are calculat
 Wizard
 ======
 
-As a player, I must add a character and player name to progress in the character creation wizard [complete]
+As a player, I should be able to navigate through the player wizard [complete]
+
+As a player, I should be required to add attribute values [complete]
+
+As a player, I should be required to enter a char and player name [complete]
 
 As a player, when I start typing in the alignment field, OGL data auto-completes
 

@@ -10,7 +10,7 @@ from utils import utils as ut
 
 def test_player_wizard(browser):
     """A user should be able to navigate through the player wizard."""
-    print('A user should be able to navigate through the player wizard.')
+    print('As a player, I should be able to navigate through the player wizard.')
 
     # Get started with the wizard
     ut.click_button('Get Started', browser)
@@ -42,7 +42,7 @@ def test_player_wizard(browser):
 
 def test_attributes_required(browser):
     """A user should be required to add attribute values."""
-    print('A user should be required to add attribute values.')
+    print('As a player, I should be required to add attribute values.')
 
     # Get started with the wizard
     ut.click_button('Get Started', browser)
@@ -77,7 +77,7 @@ def test_attributes_required(browser):
 
 def test_name_required(browser):
     """A user should be required to enter a char and player name."""
-    print('A user should be required to enter a char and player name.')
+    print('As a player, I should be required to enter a char and player name.')
 
     # Get started with the wizard
     ut.click_button('Get Started', browser)
