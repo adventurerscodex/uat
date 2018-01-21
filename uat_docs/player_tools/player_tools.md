@@ -233,11 +233,13 @@ As a player, background textareas persist data [complete]
 
 As a player, appearance textareas persist data [complete]
 
-As a player, if I start typing in the race field, OGL data auto-completes
+As a player, if I start typing in the alignment field, OGL data auto-completes [complete]
 
-As a player, if I start typing in the class field, OGL data auto-completes
+As a player, if I start typing in the race field, OGL data auto-completes [complete]
 
-As a player, if I start typing in the background field, OGL data auto-completes
+As a player, if I start typing in the class field, OGL data auto-completes [complete]
+
+As a player, if I start typing in the background field, OGL data auto-completes [complete]
 
 
 Global Page
