@@ -56,13 +56,15 @@ Skills
 
 As a player, all changes I make to features, feats, traits, proficiencies, tracking, and skills persist after I refresh the browser
 
-As a player, if I start typing in the feature name field, OGL data auto-completes and the remaining fields pre-populate
+As a player, if I select from feature name field, OGL data auto-completes and the remaining fields pre-populate
 
-As a player, if I start typing in the feats name field, OGL data auto-completes and the remaining fields pre-populate
+As a player, if I start typing in the name field and class field, I can select suggested items in the dropdown
 
-As a player, if I start typing in the traits name field, OGL data auto-completes and the remaining fields pre-populate
+As a player, if I select from in the feats name field, OGL data auto-completes and the remaining fields pre-populate
 
-As a player, if I start typing in the proficiencies and languages name field, OGL data auto-completes and the remaining fields pre-populate
+As a player, if I select from in the traits name field, OGL data auto-completes and the remaining fields pre-populate
+
+As a player, if I select from in the proficiencies and languages name field, OGL data auto-completes and the remaining fields pre-populate
 
 As a player, I can add a feature
 
@@ -70,7 +72,7 @@ As a player, I can delete a feature
 
 As a player, I can edit a feature
 
-If there is no feature, clicking the first row will open the add modal
+As a player, I can click the first row to open the feature add modal
 
 As a player, I can add a feat
 

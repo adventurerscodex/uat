@@ -40,6 +40,7 @@ def browser(request, web_driver, url):
         driver = webdriver.Firefox()
 
     driver.get(url)
+    driver.implicitly_wait(10)
 
     def close_browser():
         driver.quit()
