@@ -56,31 +56,33 @@ Skills
 
 As a player, all changes I make to features, feats, traits, proficiencies, tracking, and skills persist after I refresh the browser
 
-As a player, if I select from feature name field, OGL data auto-completes and the remaining fields pre-populate
+As a player, if I select from feature name field, OGL data auto-completes and the remaining fields pre-populate [complete]
 
-As a player, if I start typing in the name field and class field, I can select suggested items in the dropdown
-
-As a player, if I select from in the feats name field, OGL data auto-completes and the remaining fields pre-populate
+As a player, if I select from in the feats name field, OGL data auto-completes and the remaining fields pre-populate [complete]
 
 As a player, if I select from in the traits name field, OGL data auto-completes and the remaining fields pre-populate
 
 As a player, if I select from in the proficiencies and languages name field, OGL data auto-completes and the remaining fields pre-populate
 
-As a player, I can add a feature
+As a player, if I start typing in the features name field and class field, I can select suggested items in the dropdown [complete]
 
-As a player, I can delete a feature
+As a player, if I start typing in the feats name field, I can select suggested items in the dropdown [complete]
 
-As a player, I can edit a feature
+As a player, I can add a feature [complete]
 
-As a player, I can click the first row to open the feature add modal
+As a player, I can delete a feature [complete]
 
-As a player, I can add a feat
+As a player, I can edit a feature [complete]
 
-As a player, I can delete a feat
+As a player, I can click the first row in feature table to open the feature add modal [complete]
 
-As a player, I can edit a feat
+As a player, I can add a feat [complete]
 
-If there is no feat, clicking the first row will open the add modal
+As a player, I can delete a feat [complete]
+
+As a player, I can edit a feat [complete]
+
+If there is no feat, clicking the first row will open the add modal [complete]
 
 As a player, I can add a trait
 
