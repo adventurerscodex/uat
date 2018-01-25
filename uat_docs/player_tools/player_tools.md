@@ -60,7 +60,7 @@ Skills
 
 - [x] As a player, if I select from in the feats name field, OGL data auto-completes and the remaining fields pre-populate
 
-- [ ] As a player, if I select from in the traits name field, OGL data auto-completes and the remaining fields pre-populate
+- [x] As a player, if I select from in the traits name field, OGL data auto-completes and the remaining fields pre-populate
 
 - [ ] As a player, if I select from in the proficiencies and languages name field, OGL data auto-completes and the remaining fields pre-populate
 
@@ -84,13 +84,13 @@ Skills
 
 - [x] As a player, if there is no feat, clicking the first row will open the add modal
 
-- [ ] As a player, I can add a trait
+- [x] As a player, I can add a trait
 
-- [ ] As a player, I can delete a trait
+- [x] As a player, I can delete a trait
 
-- [ ] As a player, I can edit a trait
+- [x] As a player, I can edit a trait
 
-- [ ] As a player, if there is no trait, clicking the first row will open the add modal
+- [x] As a player, if there is no trait, clicking the first row will open the add modal
 
 - [ ] As a player, I can add a proficiency or language
 

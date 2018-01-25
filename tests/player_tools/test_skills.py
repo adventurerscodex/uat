@@ -3,7 +3,7 @@ import time
 
 from selenium.webdriver.support import expected_conditions as EC # noqa
 
-from components.character import features, feats
+from components.character import features, feats, traits
 from components.character.tabs import Tabs
 from utils import utils as ut
 
@@ -41,6 +41,7 @@ def test_add_feature(player_wizard, browser): # noqa
     assert row.class_ == 'Add Class'
     assert row.feature == 'Add Name'
 
+
 def test_feature_ogl_pre_pop(player_wizard, browser): # noqa
     """As a player, if I select from feature name field, OGL data auto-completes and the remaining fields pre-populate."""
     print('As a player, if I select from feature name field, OGL data auto-completes and the remaining fields pre-populate.')
@@ -58,6 +59,7 @@ def test_feature_ogl_pre_pop(player_wizard, browser): # noqa
 
     assert row.class_ == 'Barbarian'
     assert row.feature == 'Rage'
+
 
 def test_delete_feature(player_wizard, browser): # noqa
     """As a player, I can delete a feature."""
@@ -78,6 +80,7 @@ def test_delete_feature(player_wizard, browser): # noqa
     rows = ut.get_table_rows(features_table, 'table', values=False)
 
     assert rows[0][0].text == 'Add a new Feature'
+
 
 def test_add_feature(player_wizard, browser): # noqa
     """As a player, if I start typing in the name field and class field, I can select suggested items in the dropdown."""
@@ -160,6 +163,7 @@ def test_edit_feature(player_wizard, browser): # noqa
     assert row.feature == 'Edited Name'
     assert row.class_ == 'Edited Class'
 
+
 def test_add_feat(player_wizard, browser): # noqa
     """As a player, I can add a feat."""
     print('As a player, I can add a feat.')
@@ -188,6 +192,7 @@ def test_add_feat(player_wizard, browser): # noqa
 
     assert row.feat == 'Add Name'
 
+
 def test_feat_ogl_pre_pop(player_wizard, browser): # noqa
     """As a player, if I select from feat name field, OGL data auto-completes and the remaining fields pre-populate."""
     print('As a player, if I select from feat name field, OGL data auto-completes and the remaining fields pre-populate.')
@@ -204,6 +209,7 @@ def test_feat_ogl_pre_pop(player_wizard, browser): # noqa
     row = ut.get_table_row(feats_table, 'table', 1)
 
     assert row.feat == 'Grappler'
+
 
 def test_delete_feat(player_wizard, browser): # noqa
     """As a player, I can delete a feat."""
@@ -224,6 +230,7 @@ def test_delete_feat(player_wizard, browser): # noqa
     rows = ut.get_table_rows(feats_table, 'table', values=False)
 
     assert rows[0][0].text == 'Add a new Feat'
+
 
 def test_add_feat(player_wizard, browser): # noqa
     """As a player, if I start typing in the name field and class field, I can select suggested items in the dropdown."""
@@ -296,3 +303,155 @@ def test_edit_feat(player_wizard, browser): # noqa
 
     row = ut.get_table_row(feats_table, 'table', 1)
     assert row.feat == 'Edited Name'
+
+
+def test_add_trait(player_wizard, browser): # noqa
+    """As a player, I can add a trait."""
+    print('As a player, I can add a trait.')
+
+    trait = traits.TraitAddModal(browser)
+    traits_table = traits.TraitsTable(browser)
+    tabs = Tabs(browser)
+    tabs.skills.click()
+
+    traits_table.add.click()
+    trait.name = 'Add Name'
+    trait.race = 'Add Race'
+    trait.description = 'Add Description'
+    trait.tracked.click()
+    trait.max_.clear()
+    trait.max_ = 4
+    trait.short_rest.click()
+
+    assert trait.name.get_attribute('value') == 'Add Name'
+    assert trait.class_.get_attribute('value') == 'Add Race'
+    assert trait.level.get_attribute('value') == '1'
+    assert trait.description.get_attribute('value') == 'Add Description'
+    assert trait.max_.get_attribute('value') == '4'
+    assert 'active' in trait.short_rest.get_attribute('class')
+
+    trait.add.click()
+
+    row = ut.get_table_row(traits_table, 'table', 1)
+
+    assert row.race == 'Add Race'
+    assert row.trait == 'Add Name'
+
+
+def test_trait_ogl_pre_pop(player_wizard, browser): # noqa
+    """As a player, if I select from trait name field, OGL data auto-completes and the remaining fields pre-populate."""
+    print('As a player, if I select from trait name field, OGL data auto-completes and the remaining fields pre-populate.')
+
+    trait = traits.TraitAddModal(browser)
+    traits_table = traits.TraitsTable(browser)
+    tabs = Tabs(browser)
+    tabs.skills.click()
+
+    traits_table.add.click()
+    ut.select_from_autocomplete(trait, 'name', '', browser)
+    trait.add.click()
+
+    row = ut.get_table_row(traits_table, 'table', 1)
+
+    assert row.race == 'Dragonborn'
+    assert row.trait == 'Ability Score Increase'
+
+
+def test_delete_trait(player_wizard, browser): # noqa
+    """As a player, I can delete a trait."""
+    print('As a player, I can delete a trait.')
+
+    trait = traits.TraitAddModal(browser)
+    traits_table = traits.TraitsTable(browser)
+    tabs = Tabs(browser)
+    tabs.skills.click()
+
+    traits_table.add.click()
+    ut.select_from_autocomplete(trait, 'name', '', browser)
+    trait.add.click()
+
+    rows = ut.get_table_rows(traits_table, 'table', values=False)
+    time.sleep(.3)
+    rows[0][2].click()
+    rows = ut.get_table_rows(traits_table, 'table', values=False)
+
+    assert rows[0][0].text == 'Add a new Trait'
+
+
+def test_add_trait(player_wizard, browser): # noqa
+    """As a player, if I start typing in the name field and class field, I can select suggested items in the dropdown."""
+    print('As a player, if I start typing in the name field and class field, I can select suggested items in the dropdown.')
+
+    trait = traits.TraitAddModal(browser)
+    traits_table = traits.TraitsTable(browser)
+    tabs = Tabs(browser)
+    tabs.skills.click()
+
+    traits_table.add.click()
+    ut.select_from_autocomplete(trait, 'name', '', browser)
+    ut.select_from_autocomplete(trait, 'race', '', browser)
+
+    assert trait.name.get_attribute('value') == 'Ability Score Increase (Dragonborn)'
+    assert trait.race.get_attribute('value') == 'Dwarf'
+
+
+def test_add_trait_open_model_by_row(player_wizard, browser): # noqa
+    """As a player, I can click the first row in trait table to open the trait add modal."""
+    print('As a player, I can click the first row in trait table to open the trait add modal.')
+
+    traits_table = traits.TraitsTable(browser)
+    tabs = Tabs(browser)
+    tabs.skills.click()
+
+    rows = ut.get_table_rows(traits_table, 'table', values=False)
+
+    assert rows[0][0].is_enabled()
+    assert rows[0][0].is_displayed()
+
+
+def test_edit_trait(player_wizard, browser): # noqa
+    """As a player, I can edit a trait."""
+    print('As a player, I can edit a trait.')
+
+    trait = traits.TraitAddModal(browser)
+    trait_edit = traits.TraitEditModal(browser)
+    traits_table = traits.TraitsTable(browser)
+    trait_tabs = traits.TraitModalTabs(browser)
+    tabs = Tabs(browser)
+    tabs.skills.click()
+
+    traits_table.add.click()
+    ut.select_from_autocomplete(trait, 'name', '', browser)
+    trait.add.click()
+
+    rows = ut.get_table_rows(traits_table, 'table', values=False)
+    time.sleep(.3)
+    rows[0][0].click()
+    time.sleep(.3)
+    trait_tabs.edit.click()
+
+    trait_edit.name.clear()
+    trait_edit.race.clear()
+    trait_edit.description.clear()
+
+    trait_edit.name = 'Edited Name'
+    trait_edit.race = 'Edited Race'
+    trait_edit.description = 'Edited Description'
+    trait_edit.tracked.click()
+    trait_edit.max_.clear()
+    trait_edit.max_ = 4
+    trait_edit.short_rest.click()
+
+    assert trait_edit.name.get_attribute('value') == 'Edited Name'
+    assert trait_edit.race.get_attribute('value') == 'Edited Race'
+    assert trait_edit.description.get_attribute('value') == 'Edited Description'
+    assert trait_edit.max_.get_attribute('value') == '4'
+    assert 'active' in trait_edit.short_rest.get_attribute('class')
+    trait_edit.done.click()
+
+    rows = ut.get_table_rows(traits_table, 'table', values=False)
+    time.sleep(.3)
+
+    row = ut.get_table_row(traits_table, 'table', 1)
+    assert row.trait == 'Edited Name'
+    assert row.race == 'Edited Race'

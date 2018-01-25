@@ -1,4 +1,4 @@
-"""feat components."""
+"""Feat components."""
 
 from modules.element import Element, Component
 
