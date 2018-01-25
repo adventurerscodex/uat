@@ -56,7 +56,7 @@ Skills
 
 - [ ] As a player, all changes I make to features, feats, traits, proficiencies, tracking, and skills persist after I refresh the browser
 
-- [x]As a player, if I select from feature name field, OGL data auto-completes and the remaining fields pre-populate
+- [x] As a player, if I select from feature name field, OGL data auto-completes and the remaining fields pre-populate
 
 - [x] As a player, if I select from in the feats name field, OGL data auto-completes and the remaining fields pre-populate
 
