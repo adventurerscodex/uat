@@ -292,7 +292,28 @@ Global Page
 
 - [ ] As a player, navbar header links to blog, newsletter, patreon, and website
 
-- [ ] As a player, navbar footer links to facebook, twitter, google +, github, reddit, rss feed, contact page, and ogl license
+- [x] As a player, navbar footer links to facebook.
+
+- [x] As a player, navbar footer links to twitter.
+
+- [x] As a player, navbar footer links to reddit.
+
+- [x] As a player, navbar footer links to google +.
+
+- [x] As a player, navbar footer links to github.
+
+- [x] As a player, navbar footer links to rss.
+
+- [x] As a player, navbar footer links to tiny letter.
+
+- [x] As a player, navbar footer links to blog.
+
+- [x] As a player, navbar footer links to contact us.
+
+- [x] As a player, navbar footer links to patreon.
+
+- [x] As a player, navbar footer links to ogl.
+
 
 Calculations
 ============
