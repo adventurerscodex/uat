@@ -4,6 +4,9 @@ import pytest
 
 from selenium import webdriver
 
+from components.core.general.new_character_campaign import NewCharacterCampaign
+from components.core.character import wizard
+from components.core.dm.wizard import TellUsAStory
 from utils import utils as ut
 
 
@@ -56,49 +59,40 @@ def browser(request, web_driver, url):
 @pytest.fixture(scope='function')
 def dm_wizard(browser):
     """Navigate through the dm wizard."""
-    # Get started with the wizard
-    ut.click_button('Get Started', browser)
+    wizard_main = NewCharacterCampaign(browser)
+    tell_us_a_story = TellUsAStory(browser)
 
-    # Select type player
-    ut.click_radio('dmPlayerType', browser)
+    wizard_main.get_started.click()
+    wizard_main.dm.click()
+    wizard_main.next_.click()
 
-    # Navigate to the next step
-    ut.click_button('Next', browser)
+    tell_us_a_story.campaign_name = 'Test Campaign'
+    tell_us_a_story.player_name = 'Automated Testing Bot.'
 
-    # Input required fields
-    ut.set_input_value('Campaign Name', 'Test Campaign', browser)
-    ut.set_input_value('Player Name', 'Automated Testing Bot.', browser)
-
-    # Finish the wizard
-    ut.click_button('Finish', browser)
+    wizard_main.finish.click()
 
 
 @pytest.fixture(scope='function')
 def player_wizard(browser):
     """Navigate through the player wizard."""
-    # Get started with the wizard
-    ut.click_button('Get Started', browser)
+    wizard_main = NewCharacterCampaign(browser)
+    who_are_you = wizard.WhoAreYou(browser)
+    ability_scores = wizard.AbilityScoresManual(browser)
 
-    # Select type player
-    ut.click_radio('characterPlayerType', browser)
+    wizard_main.get_started.click()
+    wizard_main.player.click()
+    wizard_main.next_.click()
 
-    # Navigate to the next step
-    ut.click_button('Next', browser)
+    who_are_you.character_name = 'Test Char'
+    who_are_you.player_name = 'Automated Testing Bot.'
 
-    # Input required fields
-    ut.set_input_value('Character Name', 'Test Char', browser)
-    ut.set_input_value('Player Name', 'Automated Testing Bot.', browser)
-    # from pdb import set_trace; set_trace()
-    # Navigate to the next
-    ut.click_button('Next', browser)
+    wizard_main.next_.click()
 
-    # Fill in values for attributes
-    ut.set_input_value('Strength', '18', browser)
-    ut.set_input_value('Dexterity', '18', browser)
-    ut.set_input_value('Constitution', '18', browser)
-    ut.set_input_value('Intelligence', '18', browser)
-    ut.set_input_value('Wisdom', '18', browser)
-    ut.set_input_value('Charisma', '18', browser)
+    ability_scores.strength = '18'
+    ability_scores.dexterity = '18'
+    ability_scores.constitution = '18'
+    ability_scores.intelligence = '18'
+    ability_scores.wisdom = '18'
+    ability_scores.charisma = '18'
 
-    # Finish the wizard
-    ut.click_button('Finish', browser)
+    wizard_main.finish.click()
