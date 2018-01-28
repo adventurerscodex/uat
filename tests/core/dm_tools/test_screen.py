@@ -1,7 +1,7 @@
 """Test dm screen."""
 
-from components.dm.screen import Screen
-from components.dm.tabs import DMTabs
+from components.core.dm.screen import Screen
+from components.core.dm.tabs import DMTabs
 
 
 def test_screen(dm_wizard, browser): # noqa

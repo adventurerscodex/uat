@@ -1,6 +1,6 @@
 """UAT test file for Adventurer's Codex dm tabs."""
 
-from components.dm.tabs import DMTabs
+from components.core.dm.tabs import DMTabs
 
 
 def test_navigate_tabs(dm_wizard, browser): # noqa

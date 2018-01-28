@@ -1,6 +1,6 @@
 """UAT test file for Adventurer's Codex player tabs."""
 
-from components.character.tabs import Tabs
+from components.core.character.tabs import Tabs
 
 
 def test_navigate_tabs(player_wizard, browser): # noqa

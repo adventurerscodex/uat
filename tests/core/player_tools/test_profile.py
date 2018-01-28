@@ -1,8 +1,8 @@
 """UAT test file for Adventurer's Codex player tools profile module."""
-from components.character.appearance import Appearance
-from components.character.background import Background
-from components.character.profile import Profile
-from components.character.tabs import Tabs
+from components.core.character.appearance import Appearance
+from components.core.character.background import Background
+from components.core.character.profile import Profile
+from components.core.character.tabs import Tabs
 from utils import utils as ut
 
 

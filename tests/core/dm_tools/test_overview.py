@@ -1,6 +1,6 @@
 """UAT test file for Adventurer's Codex dm tools overview module."""
 
-from components.dm.overview import DMOverview
+from components.core.dm.overview import DMOverview
 
 
 def test_campaign_info(dm_wizard, browser):

@@ -1,7 +1,7 @@
 """UAT test file for Adventurer's Codex footer."""
 from selenium.webdriver.support import expected_conditions as EC # noqa
 
-from components.general.footer import Footer
+from components.core.general.footer import Footer
 
 
 def test_facebook_link(player_wizard, browser): # noqa

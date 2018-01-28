@@ -3,8 +3,8 @@ import time
 
 from selenium.webdriver.support import expected_conditions as EC # noqa
 
-from components.character import features, feats, traits
-from components.character.tabs import Tabs
+from components.core.character import features, feats, traits
+from components.core.character.tabs import Tabs
 from utils import utils as ut
 
 
