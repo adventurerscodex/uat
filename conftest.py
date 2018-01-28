@@ -39,6 +39,9 @@ def browser(request, web_driver, url):
     elif web_driver.lower() == 'firefox':
         driver = webdriver.Firefox()
 
+    elif web_driver.lower() == 'safari':
+        driver = webdriver.Safari()
+
     driver.get(url)
     driver.implicitly_wait(10)
 
