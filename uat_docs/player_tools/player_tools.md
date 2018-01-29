@@ -350,20 +350,21 @@ Wizard
 
 - [x] As a player, I should be required to enter a char and player name
 
-- [ ] As a player, when I start typing in the alignment field, OGL data auto-completes
+- [x] As a player, when I start typing in the alignment field, OGL data auto-completes
 
-- [ ] As a player, when I start typing in the race field, OGL data auto-completes
+- [x] As a player, when I start typing in the race field, OGL data auto-completes
 
-- [ ] As a player, when I start typing in the class field, OGL data auto-completes
+- [x] As a player, when I start typing in the class field, OGL data auto-completes
 
-- [ ] As a player, when I starting typing in the background field, OGL data auto-completes
+- [x] As a player, when I starting typing in the background field, OGL data auto-completes
 
-- [ ] As a player, I can add values to all my ability scores
-
-- [ ] As a player, I am required to add values to all ability scores before progressing in the character creation wizard
+- [x] As a player, I can add values to all my ability scores
 
 - [x] As a player, I can navigate and complete the character creation wizard
 
 - [ ] As a player, after creating a character via the character creation wizard, I can view all the data entered in the stats and profile modules
 
 - [ ] As a player, after selecting a backpack, all items are pre-populated in the inventory module
+
+- [ ] As a player, the point buy method is functional and I can't proceed until I have zero points left
+
