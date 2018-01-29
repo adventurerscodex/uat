@@ -46,6 +46,4 @@ class Element:
     def __set__(self, obj, value):
         """Descriptor for setting a value."""
         element = self.__get__(obj, obj.__class__)
-        element.send_keys()
-
-        return element.send_keys(value)
+        element.send_keys(value)

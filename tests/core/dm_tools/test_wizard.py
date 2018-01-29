@@ -1,5 +1,8 @@
 """UAT test file for Adventurer's Codex core dm tools."""
 
+from components.core.general.new_character_campaign import NewCharacterCampaign
+from components.core.character import wizard
+from components.core.dm.wizard import TellUsAStory
 from utils import utils as ut
 
 
@@ -7,18 +10,14 @@ def test_dm_wizard(browser):
     """Test dm wizard using required values."""
     print('As a dm, I should be able to navigate through the dm wizard.')
 
-    # Get started with the wizard
-    ut.click_button('Get Started', browser)
+    wizard_main = NewCharacterCampaign(browser)
+    tell_us_a_story = TellUsAStory(browser)
 
-    # Select type player
-    ut.click_radio('dmPlayerType', browser)
+    wizard_main.get_started.click()
+    wizard_main.dm.click()
+    wizard_main.next_.click()
 
-    # Navigate to the next step
-    ut.click_button('Next', browser)
+    tell_us_a_story.campaign_name = 'Test Campaign'
+    tell_us_a_story.player_name = 'Automated Testing Bot.'
 
-    # Input required fields
-    ut.set_input_value('Campaign Name', 'Test Campaign', browser)
-    ut.set_input_value('Player Name', 'Automated Testing Bot.', browser)
-
-    # Finish the wizard
-    ut.click_button('Finish', browser)
+    wizard_main.finish.click()

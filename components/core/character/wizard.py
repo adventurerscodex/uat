@@ -6,8 +6,10 @@ from modules.element import Element, Component
 class WhoAreYou(Component):
     """Definition of wizard home component."""
 
-    character_name = Element(id_='whoAreYouCharacterName')
+    character_name = Element(id_='whoAreYouCharacterNameInput')
+    character_name_required = Element(id_='whoAreYouCharacterNameInputRequired')
     player_name = Element(id_='whoAreYouPlayerNameInput')
+    player_name_required = Element(id_='whoAreYouPlayerNameInputRequired')
     alignment = Element(id_='whoAreYouAlignmentInput')
     deity = Element(id_='whoAreYouDeityInput')
     race = Element(id_='whoAreYouRaceInput')
@@ -24,11 +26,17 @@ class AbilityScoresManual(Component):
     """Definition of ability scoreswizard home componenet."""
 
     strength = Element(id_='manualStrengthInput')
+    strength_required = Element(id_='manualStrengthInputRequired')
     dexterity = Element(id_='manualDexterityInput')
+    dexterity_required = Element(id_='manualDexterityInputRequired')
     constitution = Element(id_='manualConstitutionInput')
+    constitution_required = Element(id_='manualConstitutionInputRequired')
     intelligence = Element(id_='manualIntelligenceInput')
+    intelligence_required = Element(id_='manualIntelligenceInputRequired')
     wisdom = Element(id_='manualWisdomInput')
+    wisdom_required = Element(id_='manualWisdomInputRequired')
     charisma = Element(id_='manualCharismaInput')
+    charisma_required = Element(id_='manualCharismaInputRequired')
 
 
 class AbilityScoresPointBuy(Component):

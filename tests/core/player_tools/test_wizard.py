@@ -1,103 +1,80 @@
 """UAT test file for Adventurer's Codex core player tools wizard."""
 import pytest
 from selenium.common.exceptions import NoSuchElementException
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC # noqa
 
-from utils import utils as ut
+from components.core.general.new_character_campaign import NewCharacterCampaign
+from components.core.character import wizard
 
 
 def test_player_wizard(browser):
     """A user should be able to navigate through the player wizard."""
     print('As a player, I should be able to navigate through the player wizard.')
 
-    # Get started with the wizard
-    ut.click_button('Get Started', browser)
+    wizard_main = NewCharacterCampaign(browser)
+    who_are_you = wizard.WhoAreYou(browser)
+    ability_scores = wizard.AbilityScoresManual(browser)
 
-    # Select type player
-    ut.click_radio('characterPlayerType', browser)
+    wizard_main.get_started.click()
+    wizard_main.player.click()
+    wizard_main.next_.click()
 
-    # Navigate to the next step
-    ut.click_button('Next', browser)
+    who_are_you.character_name = 'Test Char'
+    who_are_you.player_name = 'Automated Testing Bot.'
 
-    # Input required fields
-    ut.set_input_value('Character Name', 'Test Char', browser)
-    ut.set_input_value('Player Name', 'Automated Testing Bot.', browser)
-    # from pdb import set_trace; set_trace()
-    # Navigate to the next
-    ut.click_button('Next', browser)
+    wizard_main.next_.click()
 
-    # Fill in values for attributes
-    ut.set_input_value('Strength', '18', browser)
-    ut.set_input_value('Dexterity', '18', browser)
-    ut.set_input_value('Constitution', '18', browser)
-    ut.set_input_value('Intelligence', '18', browser)
-    ut.set_input_value('Wisdom', '18', browser)
-    ut.set_input_value('Charisma', '18', browser)
+    ability_scores.strength = '18'
+    ability_scores.dexterity = '18'
+    ability_scores.constitution = '18'
+    ability_scores.intelligence = '18'
+    ability_scores.wisdom = '18'
+    ability_scores.charisma = '18'
 
-    # Finish the wizard
-    ut.click_button('Finish', browser)
+    wizard_main.finish.click()
 
 
 def test_attributes_required(browser):
     """A user should be required to add attribute values."""
     print('As a player, I should be required to add attribute values.')
 
-    # Get started with the wizard
-    ut.click_button('Get Started', browser)
+    wizard_main = NewCharacterCampaign(browser)
+    who_are_you = wizard.WhoAreYou(browser)
+    ability_scores = wizard.AbilityScoresManual(browser)
 
-    # Select type player
-    ut.click_radio('characterPlayerType', browser)
+    wizard_main.get_started.click()
+    wizard_main.player.click()
+    wizard_main.next_.click()
 
-    # Navigate to the next step
-    ut.click_button('Next', browser)
+    who_are_you.character_name = 'Test Char'
+    who_are_you.player_name = 'Automated Testing Bot.'
 
-    # Input required fields
-    ut.set_input_value('Character Name', 'Test Char', browser)
-    ut.set_input_value('Player Name', 'Automated Testing Bot.', browser)
+    wizard_main.next_.click()
 
-    # Navigate to the next
-    ut.click_button('Next', browser)
+    assert ability_scores.strength_required.is_displayed()
+    assert ability_scores.dexterity_required.is_displayed()
+    assert ability_scores.constitution_required.is_displayed()
+    assert ability_scores.intelligence_required.is_displayed()
+    assert ability_scores.wisdom_required.is_displayed()
+    assert ability_scores.charisma_required.is_displayed()
 
-    xpath = "//div[@class='col-md-2 col-padded']//span[contains(text(), 'Required')]"
-    errors = WebDriverWait(browser, 30).until(
-        EC.presence_of_all_elements_located((By.XPATH, xpath)))
-
-    # There should be one required text for each attribute
-    assert len(errors) == 6
-
-    # With required fields, the finish button should not be visible
     with pytest.raises(NoSuchElementException) as excinfo:
-        xpath = "//button[contains(text(), 'Finish')]"
-        browser.find_element_by_xpath(xpath)
-
-    assert 'no such element' in str(excinfo)
+        browser.find_element_by_id('newCharCampaignFinishButton')
 
 
 def test_name_required(browser):
     """A user should be required to enter a char and player name."""
     print('As a player, I should be required to enter a char and player name.')
 
-    # Get started with the wizard
-    ut.click_button('Get Started', browser)
+    wizard_main = NewCharacterCampaign(browser)
+    who_are_you = wizard.WhoAreYou(browser)
 
-    # Select type player
-    ut.click_radio('characterPlayerType', browser)
+    wizard_main.get_started.click()
+    wizard_main.player.click()
+    wizard_main.next_.click()
 
-    # Navigate to the next step
-    ut.click_button('Next', browser)
+    assert who_are_you.character_name_required.is_displayed()
+    assert who_are_you.player_name_required.is_displayed()
 
-    xpath = "//div[@class='col-md-2 col-padded']//span[contains(text(), 'Required')]"
-    errors = WebDriverWait(browser, 30).until(
-        EC.presence_of_all_elements_located((By.XPATH, xpath)))
-
-    # There should be one required text for each attribute
-    assert len(errors) == 2
-
-    # With required fields, the finish button should not be visible
     with pytest.raises(NoSuchElementException) as excinfo:
-        xpath = "//button[contains(text(), 'Next')]"
-        browser.find_element_by_xpath(xpath)
-
-    assert 'no such element' in str(excinfo)
+        browser.find_element_by_id('newCharCampaignNextButton')
