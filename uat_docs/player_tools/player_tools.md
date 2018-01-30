@@ -62,7 +62,7 @@ Skills
 
 - [x] As a player, if I select from in the traits name field, OGL data auto-completes and the remaining fields pre-populate
 
-- [ ] As a player, if I select from in the proficiencies and languages name field, OGL data auto-completes and the remaining fields pre-populate
+- [x] As a player, if I select from in the proficiencies name field, OGL data auto-completes and the remaining fields pre-populate
 
 - [x] As a player, if I start typing in the features name field and class field, I can select suggested items in the dropdown
 
@@ -92,13 +92,13 @@ Skills
 
 - [x] As a player, if there is no trait, clicking the first row will open the add modal
 
-- [ ] As a player, I can add a proficiency or language
+- [x] As a player, I can add a proficiency
 
-- [ ] As a player, I can delete a proficiency or language
+- [x] As a player, I can delete a proficiency
 
-- [ ] As a player, I can edit a proficiency or language
+- [x] As a player, I can edit a proficiency
 
-- [ ] As a plyer, if there is no proficiency, clicking the first row will open the add modal
+- [x] As a plyer, if there is no proficiency, clicking the first row will open the add modal
 
 - [ ] As a player, I can add tracking to a feature and can set it to reset on a long or short rest
 

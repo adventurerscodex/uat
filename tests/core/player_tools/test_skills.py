@@ -3,7 +3,7 @@ import time
 
 from selenium.webdriver.support import expected_conditions as EC # noqa
 
-from components.core.character import features, feats, traits
+from components.core.character import features, feats, traits, proficiency
 from components.core.character.tabs import Tabs
 from utils import utils as ut
 
@@ -82,7 +82,7 @@ def test_delete_feature(player_wizard, browser): # noqa
     assert rows[0][0].text == 'Add a new Feature'
 
 
-def test_add_feature(player_wizard, browser): # noqa
+def test_add_autocomplete_feature(player_wizard, browser): # noqa
     """As a player, if I start typing in the name field and class field, I can select suggested items in the dropdown."""
     print('As a player, if I start typing in the name field and class field, I can select suggested items in the dropdown.')
 
@@ -232,7 +232,7 @@ def test_delete_feat(player_wizard, browser): # noqa
     assert rows[0][0].text == 'Add a new Feat'
 
 
-def test_add_feat(player_wizard, browser): # noqa
+def test_add_autocomplete_feat(player_wizard, browser): # noqa
     """As a player, if I start typing in the name field and class field, I can select suggested items in the dropdown."""
     print('As a player, if I start typing in the name field and class field, I can select suggested items in the dropdown.')
 
@@ -324,8 +324,7 @@ def test_add_trait(player_wizard, browser): # noqa
     trait.short_rest.click()
 
     assert trait.name.get_attribute('value') == 'Add Name'
-    assert trait.class_.get_attribute('value') == 'Add Race'
-    assert trait.level.get_attribute('value') == '1'
+    assert trait.race.get_attribute('value') == 'Add Race'
     assert trait.description.get_attribute('value') == 'Add Description'
     assert trait.max_.get_attribute('value') == '4'
     assert 'active' in trait.short_rest.get_attribute('class')
@@ -372,13 +371,13 @@ def test_delete_trait(player_wizard, browser): # noqa
 
     rows = ut.get_table_rows(traits_table, 'table', values=False)
     time.sleep(.3)
-    rows[0][2].click()
+    rows[0][2].find_element_by_tag_name('a').click()
     rows = ut.get_table_rows(traits_table, 'table', values=False)
 
     assert rows[0][0].text == 'Add a new Trait'
 
 
-def test_add_trait(player_wizard, browser): # noqa
+def test_add_autocomplete_trait(player_wizard, browser): # noqa
     """As a player, if I start typing in the name field and class field, I can select suggested items in the dropdown."""
     print('As a player, if I start typing in the name field and class field, I can select suggested items in the dropdown.')
 
@@ -455,3 +454,136 @@ def test_edit_trait(player_wizard, browser): # noqa
     row = ut.get_table_row(traits_table, 'table', 1)
     assert row.trait == 'Edited Name'
     assert row.race == 'Edited Race'
+
+
+def test_add_proficiency(player_wizard, browser): # noqa
+    """As a player, I can add a proficiency."""
+    print('As a player, I can add a proficiency.')
+
+    proficiency_add = proficiency.ProficiencyAddModal(browser)
+    proficiency_table = proficiency.ProficiencyTable(browser)
+    tabs = Tabs(browser)
+    tabs.skills.click()
+
+    proficiency_table.add.click()
+    proficiency_add.name = 'Add Name'
+    proficiency_add.type_ = 'Add Type'
+    proficiency_add.description = 'Add Description'
+
+    assert proficiency_add.name.get_attribute('value') == 'Add Name'
+    assert proficiency_add.type_.get_attribute('value') == 'Add Type'
+    assert proficiency_add.description.get_attribute('value') == 'Add Description'
+
+    proficiency_add.add.click()
+
+    row = ut.get_table_row(proficiency_table, 'table', 1)
+    assert row.type == 'Add Type'
+    assert row.proficiency == 'Add Name'
+
+def test_proficiency_ogl_pre_pop(player_wizard, browser): # noqa
+    """As a player, if I select from proficiency name field, OGL data auto-completes and the remaining fields pre-populate."""
+    print('As a player, if I select from proficiency name field, OGL data auto-completes and the remaining fields pre-populate.')
+
+    proficiency_add = proficiency.ProficiencyAddModal(browser)
+    proficiency_table = proficiency.ProficiencyTable(browser)
+    tabs = Tabs(browser)
+    tabs.skills.click()
+
+    proficiency_table.add.click()
+    ut.select_from_autocomplete(proficiency_add, 'name', '', browser)
+    proficiency_add.add.click()
+
+    row = ut.get_table_row(proficiency_table, 'table', 1)
+
+    assert row.type == 'Languages'
+    assert row.proficiency == 'Abyssal'
+
+def test_delete_proficiency(player_wizard, browser): # noqa
+    """As a player, I can delete a proficiency."""
+    print('As a player, I can delete a proficiency.')
+
+    proficiency_add = proficiency.ProficiencyAddModal(browser)
+    proficiency_table = proficiency.ProficiencyTable(browser)
+    tabs = Tabs(browser)
+    tabs.skills.click()
+
+    proficiency_table.add.click()
+    ut.select_from_autocomplete(proficiency_add, 'name', '', browser)
+    proficiency_add.add.click()
+
+    rows = ut.get_table_rows(proficiency_table, 'table', values=False)
+    time.sleep(.3)
+    rows[0][2].find_element_by_tag_name('a').click()
+    rows = ut.get_table_rows(proficiency_table, 'table', values=False)
+
+    assert rows[0][0].text == 'Add a new Proficiency'
+
+def test_autocomplete_proficiency(player_wizard, browser): # noqa
+    """As a player, if I start typing in the name field and class field, I can select suggested items in the dropdown."""
+    print('As a player, if I start typing in the name field and type field, I can select suggested items in the dropdown.')
+
+    proficiency_add = proficiency.ProficiencyAddModal(browser)
+    proficiency_table = proficiency.ProficiencyTable(browser)
+    tabs = Tabs(browser)
+    tabs.skills.click()
+
+    proficiency_table.add.click()
+    ut.select_from_autocomplete(proficiency_add, 'name', '', browser)
+    ut.select_from_autocomplete(proficiency_add, 'type_', '', browser)
+
+    assert proficiency_add.name.get_attribute('value') == 'Abyssal'
+    assert proficiency_add.type_.get_attribute('value') == 'Armor'
+
+def test_add_proficiency_open_model_by_row(player_wizard, browser): # noqa
+    """As a player, I can click the first row in proficiency table to open the proficiency add modal."""
+    print('As a player, I can click the first row in proficiency table to open the proficiency add modal.')
+
+    proficiency_table = proficiency.ProficiencyTable(browser)
+    tabs = Tabs(browser)
+    tabs.skills.click()
+
+    rows = ut.get_table_rows(proficiency_table, 'table', values=False)
+
+    assert rows[0][0].is_enabled()
+    assert rows[0][0].is_displayed()
+
+def test_edit_proficiency(player_wizard, browser): # noqa
+    """As a player, I can edit a proficiency."""
+    print('As a player, I can edit a proficiency.')
+
+    proficiency_add = proficiency.ProficiencyAddModal(browser)
+    proficiency_edit = proficiency.ProficiencyEditModal(browser)
+    proficiency_table = proficiency.ProficiencyTable(browser)
+    proficiency_tabs = proficiency.ProficiencyModalTabs(browser)
+    tabs = Tabs(browser)
+    tabs.skills.click()
+
+    proficiency_table.add.click()
+    ut.select_from_autocomplete(proficiency_add, 'name', '', browser)
+    proficiency_add.add.click()
+
+    rows = ut.get_table_rows(proficiency_table, 'table', values=False)
+    time.sleep(.3)
+    rows[0][0].click()
+    time.sleep(.3)
+    proficiency_tabs.edit.click()
+
+    proficiency_edit.name.clear()
+    proficiency_edit.type_.clear()
+    proficiency_edit.description.clear()
+
+    proficiency_edit.name = 'Edited Name'
+    proficiency_edit.type_ = 'Edited Type'
+    proficiency_edit.description = 'Edited Description'
+
+    assert proficiency_edit.name.get_attribute('value') == 'Edited Name'
+    assert proficiency_edit.type_.get_attribute('value') == 'Edited Type'
+    assert proficiency_edit.description.get_attribute('value') == 'Edited Description'
+    proficiency_edit.done.click()
+
+    rows = ut.get_table_rows(proficiency_table, 'table', values=False)
+    time.sleep(.3)
+
+    row = ut.get_table_row(proficiency_table, 'table', 1)
+    assert row.proficiency == 'Edited Name'
+    assert row.type == 'Edited Type'
