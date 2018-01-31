@@ -38,6 +38,7 @@ class InventoryPreviewModal(Component):
     cost = Element(id_='inventoryPreviewCostInput')
     stealth = Element(id_='inventoryPreviewStealthLabel')
     description = Element(id_='InventoryPreviewDescriptionTextarea')
+    done = Element(id_='inventoryDoneButton')
 
 
 class InventoryModalTabs(Component):

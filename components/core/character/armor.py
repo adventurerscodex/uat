@@ -47,6 +47,7 @@ class ArmorPreviewModal(Component):
     weight = Element(id_='armorPreviewWeightLabel')
     stealth = Element(id_='armorPreviewStealthLabel')
     description = Element(id_='ArmorPreviewDescriptionTextarea')
+    done = Element(id_='armorPreviewDoneButton')
 
 
 class ArmorModalTabs(Component):

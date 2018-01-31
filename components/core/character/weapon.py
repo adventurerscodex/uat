@@ -61,6 +61,7 @@ class WeaponPreviewModal(Component):
     damage_type = Element(id_='weaponPreviewDamageTypeLabel')
     property_ = Element(id_='weaponPreviewPropertyLabel')
     description = Element(id_='weaponPreviewDescriptionTextarea')
+    done = Element(id_='weaponPreviewCancelButton')
 
 
 class WeaponModalTabs(Component):
