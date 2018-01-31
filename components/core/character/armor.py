@@ -40,12 +40,12 @@ class ArmorEditModal(Component):
 
 
 class ArmorPreviewModal(Component):
-    """Definition of armor edit modal component."""
+    """Definition of armor preview modal component."""
 
-    name = Element(id_='armorEditNameInput')
-    type_ = Element(id_='armorEditTypeInput')
-    weight = Element(id_='armorEdit')
-    stealth = Element(id_='armorEdit')
+    name = Element(id_='armorPreviewNameLabel')
+    type_ = Element(id_='armorPreviewTypeLabel')
+    weight = Element(id_='armorPreviewWeightLabel')
+    stealth = Element(id_='armorPreviewStealthLabel')
     description = Element(id_='ArmorPreviewDescriptionTextarea')
 
 
