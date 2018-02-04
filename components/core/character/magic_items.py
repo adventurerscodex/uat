@@ -10,6 +10,7 @@ class MagicItemsAddModal(Component):
     type_ = Element(id_='magicItemsAddTypeInput')
     rarity = Element(id_='magicItemsAddRarityInput')
     max_charges = Element(id_='magicItemsAddMaxChargesInput')
+    charges = Element(id_='magicItemsAddChargesInput')
     weight = Element(id_='magicItemsAddWeightInput')
     requires_attunement = Element(id_='magicItemsAddRequiresAttunementCheckbox')
     attuned = Element(id_='magicItemsAddAttunedCheckbox')
@@ -25,18 +26,19 @@ class MagicItemsEditModal(Component):
     type_ = Element(id_='magicItemsEditTypeInput')
     rarity = Element(id_='magicItemsEditRarityInput')
     max_charges = Element(id_='magicItemsEditMaxChargesInput')
+    max_charges = Element(id_='magicItemsEditChargesInput')
     weight = Element(id_='magicItemsEditWeightInput')
     requires_attunement = Element(id_='magicItemsEditRequiresAttunementCheckbox')
     attuned = Element(id_='magicItemsEditAttunedCheckbox')
     description = Element(id_='magicItemsEditDescriptionTextarea')
-    add = Element(id_='magicItemsEditAddButton')
-    cancel = Element(id_='magicItemsEditCancelButton')
+    done = Element(id_='magicItemsEditDoneButton')
 
 
 class MagicItemsPreviewModal(Component):
     """Definition of magicItems preview modal component."""
 
     item = Element(id_='magicItemsPreviewItemInput')
+    rarity = Element(id_='magicItemsPreviewRarityInput')
     type_ = Element(id_='magicItemsPreviewTypeInput')
     max_charges = Element(id_='magicItemsPreviewMaxChargesInput')
     weight = Element(id_='magicItemsPreviewWeightInput')

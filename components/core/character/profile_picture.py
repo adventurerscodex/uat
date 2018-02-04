@@ -8,9 +8,9 @@ class ProfilePicture(Component):
 
     add = Element(id_='profilePictureAddToggle')
     done = Element(id_='profilePictureDoneButton')
-    default = Element(id_='profilePictureDefaultButton')
+    default = Element(id_='profilePictureDefaultInput')
     default_image = Element(id_='profilePictureDefaultImageImg')
-    image_link = Element(id_='profilePictureImageLinkButton')
+    image_link = Element(id_='profilePictureImageLinkInput')
     link = Element(id_='profilePictureLinkInput')
-    gravatar = Element(id_='profilePictureGravatarButton')
+    gravatar = Element(id_='profilePictureGravatarInput')
     gravatar_email = Element(id_='profilePictureGravatarEmailInput')

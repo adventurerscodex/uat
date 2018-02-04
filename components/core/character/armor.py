@@ -35,7 +35,7 @@ class ArmorEditModal(Component):
     don = Element(id_='armorEditDonButton')
     doff = Element(id_='armorEditDoffButton')
     description = Element(id_='ArmorEditDescriptionTextarea')
-    add = Element(id_='armorEditAddButton')
+    done = Element(id_='armorEditDoneButton')
     cancel = Element(id_='armorEditCancelButton')
 
 
