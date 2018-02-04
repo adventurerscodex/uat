@@ -160,27 +160,43 @@ Spells
 Equipment
 =========
 
-- [ ] As a player, all fields for weapons and armor persist after page refresh
+- [ ] As a player, all fields for weapon persist after page refresh
 
-- [ ] As a player, weapons name field auto-completes with OGL data and the remaining fields pre-populate
+- [ ] As a player, I can add an weapon
 
-- [ ] As a player, armor items name field auto-completes with OGL data and the remaining fields pre-populate
+- [ ] As a player, I can delete an weapon
 
-- [ ] As a player, weapons can be added, deleted, and edited
+- [ ] As a player, I can edit an weapon
 
-- [ ] As a player, armor can be added, deleted, and edited
+- [ ] As a player, I can click the first row in weapon table to open the weapon add modal
 
-- [ ] As a player, if no weapons are in table, clicking the first row will trigger add modal
+- [ ] As a player, if I start typing in the name, type, handedness, damage_type, and property field, I can select suggested items in the dropdown
 
-- [ ] As a player, if no armor are in table, clicking the first row will trigger add modal
+- [ ] As a player, if I select from weapon name field, OGL data auto-completes and the remaining fields pre-populate
 
-- [ ] As a player, in the weapons table, total weight is calculated correctly
+- [ ] As a player, if weapon is magical, a badge indicating the modifier is present
+
+- [ ] As a player, in the weapon table, total weight is calculated correctly
+
+- [ ] As a player, all fields for armor persist after page refresh
+
+- [x] As a player, I can add an armor
+
+- [x] As a player, I can delete an armor
+
+- [x] As a player, I can edit an armor
+
+- [x] As a player, I can click the first row in armor table to open the armor add modal
+
+- [x] As a player, if I start typing in the name, type and stealth field, I can select suggested items in the dropdown
+
+- [x] As a player, if I select from armor name field, OGL data auto-completes and the remaining fields pre-populate
+
+- [ ] As a player, if armor is magical, a badge indicating the modifier is present
 
 - [ ] As a player, in the armor table, total weight is calculated correctly
 
-- [ ] As a player, armor don and doff is working, and the checkbox appears when armor is donned
-
-- [ ] As a player, if weapons or armor are magical, a badge indicating the modifier is present
+- [ ] As a player, the checkbox appears when armor is donned
 
 Inventory
 =========
@@ -289,8 +305,6 @@ Global Page
 - [ ] As a player, unicode characters should be saved
 
 - [ ] As a player, status line is functional and displays weight, inspiration, heathiness, features, spells
-
-- [ ] As a player, navbar header links to blog, newsletter, patreon, and website
 
 - [x] As a player, navbar footer links to facebook.
 

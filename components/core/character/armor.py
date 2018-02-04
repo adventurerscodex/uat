@@ -34,16 +34,15 @@ class ArmorEditModal(Component):
     stealth = Element(id_='armorEditStealthInput')
     don = Element(id_='armorEditDonButton')
     doff = Element(id_='armorEditDoffButton')
-    description = Element(id_='ArmorEditDescriptionTextarea')
+    description = Element(id_='armorEditDescriptionTextarea')
     done = Element(id_='armorEditDoneButton')
-    cancel = Element(id_='armorEditCancelButton')
 
 
 class ArmorPreviewModal(Component):
     """Definition of armor preview modal component."""
 
     name = Element(id_='armorPreviewNameLabel')
-    type_ = Element(id_='armorPreviewTypeLabel')
+    summary = Element(id_='armorPreviewSummaryLabel')
     weight = Element(id_='armorPreviewWeightLabel')
     stealth = Element(id_='armorPreviewStealthLabel')
     description = Element(id_='ArmorPreviewDescriptionTextarea')
