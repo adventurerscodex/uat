@@ -178,7 +178,9 @@ Equipment
 
 - [ ] As a player, in the weapon table, total weight is calculated correctly
 
-- [ ] As a player, all fields for armor persist after page refresh
+- [ ] As a player, I can sort the weapon table by clicking on the sortable columns
+
+- [x] As a player, all fields for armor persist after page refresh
 
 - [x] As a player, I can add an armor
 
@@ -192,11 +194,13 @@ Equipment
 
 - [x] As a player, if I select from armor name field, OGL data auto-completes and the remaining fields pre-populate
 
-- [ ] As a player, if armor is magical, a badge indicating the modifier is present
+- [x] As a player, if armor is magical, a badge indicating the modifier is present
 
 - [ ] As a player, in the armor table, total weight is calculated correctly
 
-- [ ] As a player, the checkbox appears when armor is donned
+- [ ] As a player, I can sort the armor table by clicking on the sortable columns
+
+- [x] As a player, the checkbox appears when armor is donned
 
 Inventory
 =========

@@ -25,8 +25,7 @@ class InventoryEditModal(Component):
     cost = Element(id_='inventoryEditCostInput')
     currency_denomination = Element(id_='inventoryEditCurrencyDenominationInput')
     description = Element(id_='inventoryEditDescriptionTextarea')
-    add = Element(id_='inventoryEditAddButton')
-    cancel = Element(id_='inventoryEditCancelButton')
+    done = Element(id_='inventoryEditDoneButton')
 
 
 class InventoryPreviewModal(Component):
@@ -36,7 +35,6 @@ class InventoryPreviewModal(Component):
     weight = Element(id_='inventoryPreviewWeightLabel')
     quantity = Element(id_='inventoryPreviewQuantityInput')
     cost = Element(id_='inventoryPreviewCostInput')
-    stealth = Element(id_='inventoryPreviewStealthLabel')
     description = Element(id_='InventoryPreviewDescriptionTextarea')
     done = Element(id_='inventoryDoneButton')
 

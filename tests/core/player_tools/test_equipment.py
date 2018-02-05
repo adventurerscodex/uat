@@ -174,3 +174,63 @@ def test_armor_ogl_pre_pop(player_wizard, browser): # noqa
     assert row.armor.strip() == 'Breastplate'
     assert row.armor_class == '14'
     assert row.type == 'Medium'
+
+def test_magical_modifier(player_wizard, browser): # noqa
+    """As a player, if armor is magical, a badge indicating the modifier is present."""
+    print('As a player, if armor is magical, a badge indicating the modifier is present.')
+
+    armor_add = armor.ArmorAddModal(browser)
+    armor_table = armor.ArmorTable(browser)
+    tabs = Tabs(browser)
+    tabs.equipment.click()
+
+    armor_table.add.click()
+    armor_add.name = 'Add Name'
+    armor_add.magical_modifier.clear()
+    armor_add.magical_modifier = 3
+
+    armor_add.add.click()
+    time.sleep(.5)
+
+    row = ut.get_table_row(armor_table, 'table', 1)
+    assert row.armor == 'Add Name  + 3'
+
+def test_armor_persists(player_wizard, browser): # noqa
+    """As a player, all fields for armor persist after page refresh."""
+    print('As a player, all fields for armor persist after page refresh.')
+
+    armor_add = armor.ArmorAddModal(browser)
+    armor_table = armor.ArmorTable(browser)
+    tabs = Tabs(browser)
+    tabs.equipment.click()
+
+    armor_table.add.click()
+    ut.select_from_autocomplete(armor_add, 'name', '', browser)
+    armor_add.add.click()
+
+    browser.refresh()
+
+    row = ut.get_table_row(armor_table, 'table', 1)
+
+    assert row.armor.strip() == 'Breastplate'
+    assert row.armor_class == '14'
+    assert row.type == 'Medium'
+
+def test_armor_donned(player_wizard, browser): # noqa
+    """As a player, the checkbox appears when armor is donned."""
+    print('As a player, the checkbox appears when armor is donned.')
+
+    armor_add = armor.ArmorAddModal(browser)
+    armor_table = armor.ArmorTable(browser)
+    tabs = Tabs(browser)
+    tabs.equipment.click()
+
+    armor_table.add.click()
+    armor_add.name = 'Add Name'
+    armor_add.don.click()
+
+    armor_add.add.click()
+    time.sleep(.3)
+
+    row = ut.get_table_row(armor_table, 'table', 1, values=False)
+    assert 'fa fa-check' in row[0].find_element_by_tag_name('span').get_attribute('class')

@@ -43,19 +43,20 @@ class WeaponEditModal(Component):
     property_ = Element(id_='weaponEditPropertyInput')
     quantity = Element(id_='weaponEditQuantityInput')
     description = Element(id_='weaponEditDescriptionTextarea')
-    add = Element(id_='weaponEditAddButton')
-    cancel = Element(id_='weaponEditCancelButton')
+    done = Element(id_='weaponEditDoneButton')
 
 
 class WeaponPreviewModal(Component):
     """Definition of weapon priview modal component."""
 
     name = Element(id_='weaponPreviewNameLabel')
+    magical_modifier = Element(id_='weaponPreviewMagicalModifierLabel')
     damage = Element(id_='weaponPreviewDamageLabel')
     to_hit_modifier = Element(id_='weaponPreviewToHitModifierLabel')
+    range_ = Element(id_='weaponPreviewRangeLabel')
     type_ = Element(id_='weaponPreviewTypeLabel')
-    handedness = Element(id_='weaponPreviewHandednessLabel')
     proficiency = Element(id_='weaponPreviewProficiencyLabel')
+    handedness = Element(id_='weaponPreviewHandednessLabel')
     weight = Element(id_='weaponPreviewWeightLabel')
     range_ = Element(id_='weaponPreviewRangeLabel')
     damage_type = Element(id_='weaponPreviewDamageTypeLabel')
