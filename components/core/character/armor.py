@@ -61,3 +61,8 @@ class ArmorTable(Component):
 
     add = Element(id_='armorAddIcon')
     table = Element(id_='armorTable')
+    equipped_header = Element(id_='armorTableEquippedHeader')
+    armor_header = Element(id_='armorTableArmorHeader')
+    type_header = Element(id_='armorTableTypeHeader')
+    ac_header = Element(id_='armorTableAcHeader')
+    total_weight = Element(id_='armorTableTotalWeightSpan')

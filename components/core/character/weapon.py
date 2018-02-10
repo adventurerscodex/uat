@@ -77,3 +77,11 @@ class WeaponTable(Component):
 
     add = Element(id_='weaponAddIcon')
     table = Element(id_='weaponTable')
+    weapon_header = Element(id_='weaponTableWeaponHeader')
+    to_hit_header = Element(id_='weaponTableToHitHeader')
+    damage_header = Element(id_='weaponTableDamageHeader')
+    damage_type_header = Element(id_='weaponTableDamageTypeHeader')
+    range_header = Element(id_='weaponTableRangeHeader')
+    property_header = Element(id_='weaponTablePropertyHeader')
+    quantity_header = Element(id_='weaponTableQuantityHeader')
+    total_weight = Element(id_='weaponTableTotalWeightSpan')

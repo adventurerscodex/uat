@@ -160,25 +160,33 @@ Spells
 Equipment
 =========
 
-- [ ] As a player, all fields for weapon persist after page refresh
+- [x] As a player, all fields for weapon persist after page refresh
 
-- [ ] As a player, I can add an weapon
+- [x] As a player, I can add an weapon
 
-- [ ] As a player, I can delete an weapon
+- [x] As a player, I can delete an weapon
 
-- [ ] As a player, I can edit an weapon
+- [x] As a player, I can edit an weapon
 
-- [ ] As a player, I can click the first row in weapon table to open the weapon add modal
+- [x] As a player, I can select a row in the weapon table and view the item in the preview tab
 
-- [ ] As a player, if I start typing in the name, type, handedness, damage_type, and property field, I can select suggested items in the dropdown
+- [x] As a player, I can click the first row in weapon table to open the weapon add modal
 
-- [ ] As a player, if I select from weapon name field, OGL data auto-completes and the remaining fields pre-populate
+- [x] As a player, if I start typing in the autocomplete inputs, I can select suggested items in the dropdown
 
-- [ ] As a player, if weapon is magical, a badge indicating the modifier is present
+- [x] As a player, if I select from weapon name field, OGL data auto-completes and the remaining fields pre-populate
 
-- [ ] As a player, in the weapon table, total weight is calculated correctly
+- [x] As a player, if weapon is magical, a badge indicating the modifier is present
 
-- [ ] As a player, I can sort the weapon table by clicking on the sortable columns
+- [x] As a player, in the weapon table, total weight is calculated correctly
+
+- [x] As a player, if I add a melee weapon, the range of 5 ft. is assigned after I close the modal
+
+- [x] As a player, if I add a ranged weapon, ft. is appended to the range after I close the modal
+
+- [x] As a player, if I add a weapon with property reach, 5 ft. is added after I close the modal
+
+- [x] As a player, I can sort the weapon table by clicking on the sortable columns
 
 - [x] As a player, all fields for armor persist after page refresh
 
@@ -188,6 +196,8 @@ Equipment
 
 - [x] As a player, I can edit an armor
 
+- [x] As a player, I can select a row in the armor table and view the item in the preview tab
+
 - [x] As a player, I can click the first row in armor table to open the armor add modal
 
 - [x] As a player, if I start typing in the name, type and stealth field, I can select suggested items in the dropdown
@@ -196,9 +206,9 @@ Equipment
 
 - [x] As a player, if armor is magical, a badge indicating the modifier is present
 
-- [ ] As a player, in the armor table, total weight is calculated correctly
+- [x] As a player, in the armor table, total weight is calculated correctly
 
-- [ ] As a player, I can sort the armor table by clicking on the sortable columns
+- [x] As a player, I can sort the armor table by clicking on the sortable columns
 
 - [x] As a player, the checkbox appears when armor is donned
 

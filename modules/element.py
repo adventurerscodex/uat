@@ -45,7 +45,11 @@ class Element:
 
     def __set__(self, obj, value):
         """Descriptor for setting a value."""
-        element = self.__get__(obj, obj.__class__)
+        element = WebDriverWait(obj.browser, 30).until(
+            EC.presence_of_element_located(
+                (self.locating_key, self.locating_value)
+            )
+        )
         element.send_keys()
-
+        element.clear()
         element.send_keys(value)
