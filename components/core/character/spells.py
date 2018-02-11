@@ -82,7 +82,7 @@ class SpellsEditModal(Component):
     damage = Element(id_='spellsEditDamageInput')
     cast_time = Element(id_='spellsEditCastTimeInput')
     range_ = Element(id_='spellsEditRangeInput')
-    components = Element(id_='spellsEditCompenentsInput')
+    components = Element(id_='spellsEditComponentsInput')
     material_components = Element(id_='spellsEditMaterialComponentsInput')
     duration = Element(id_='spellsEditDurationInput')
     description = Element(id_='spellsEditDescriptionTextarea')
