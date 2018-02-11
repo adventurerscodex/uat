@@ -35,7 +35,7 @@ Sample usage:
 
 *run specific test file*
 
-`py.test --verbose --capture=no tests/player_tools/test_player_wizard.py::test_attributes_required`
+`py.test --verbose --capture=no tests/core/player_tools/test_player_wizard.py::test_attributes_required`
 
 How to contribute
 =================

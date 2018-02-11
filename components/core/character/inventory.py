@@ -51,3 +51,8 @@ class InventoryTable(Component):
 
     add = Element(id_='inventoryAddIcon')
     table = Element(id_='inventoryTable')
+    item_header = Element(id_="inventoryTableItemHeader")
+    quantity_header = Element(id_="inventoryTableQuantityHeader")
+    weight_header = Element(id_="inventoryTableWeightHeader")
+    cost_header = Element(id_="inventoryTableCostHeader")
+    total_weight = Element(id_='inventoryTableTotalWeightSpan')

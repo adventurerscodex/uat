@@ -215,17 +215,13 @@ Equipment
 Inventory
 =========
 
-- [ ] As a player, all fields for coins, magic items, and inventory persist after I refresh the browser
+- [ ] As a player, I can add coins
 
-- [ ] As a player, I can view total weight for magic items
+- [ ] As a player, I can delete coins
 
-- [ ] As a player, I can view total weight for inventory
+- [ ] As a player, I can edit coins
 
 - [ ] As a player, I can view total weight for coins
-
-- [ ] Magic items name field auto-completes with OGL data and the remaining fields pre-populate
-
-- [ ] Inventory items name field auto-completes with OGL data and the remaining fields pre-populate
 
 - [ ] As a player, I can add a magic item
 
@@ -233,15 +229,35 @@ Inventory
 
 - [ ] As a player, I can edit a magic item
 
-- [ ] As a player, I can an item to my inventory
+- [ ] As a player, I can select a row in the magic items table and view the item in the preview tab
 
-- [ ] As a player, I can delete to my inventory
+- [ ] As a player, I can click the first row in magic items table to open the inventory add modal.
 
-- [ ] As a player, I can edit my intentory
+- [ ] As a player, if I start typing in the magic items autocomplete inputs, I can select suggested items in the dropdown.
 
-- [ ] As a player, if no magic items are in table, clicking the first row will trigger add modal
+- [ ] As a player, if I select from magic items name field, OGL data auto-completes and the remaining fields pre-populate.
 
-- [ ] As a player, if no inventory items are in table, clicking the first row will trigger add modal
+- [ ] As a player, all fields for magic items persist after page refresh.
+
+- [ ] As a player, I can sort the magic items by clicking on the sortable columns.
+
+- [x] As a player, I can add an item to my inventory
+
+- [x] As a player, I can delete to my inventory
+
+- [x] As a player, I can edit my intentory
+
+- [x] As a player, I can select a row in the inventory table and view the item in the preview tab
+
+- [x] As a player, I can click the first row in inventory table to open the inventory add modal.
+
+- [x] As a player, if I start typing in the autocomplete inputs, I can select suggested items in the dropdown.
+
+- [x] As a player, if I select from inventory name field, OGL data auto-completes and the remaining fields pre-populate.
+
+- [x] As a player, all fields for inventory persist after page refresh.
+
+- [x] As a player, I can sort the inventory table by clicking on the sortable columns.
 
 Notes
 =====
