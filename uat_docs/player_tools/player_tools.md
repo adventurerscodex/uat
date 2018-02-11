@@ -243,9 +243,9 @@ Inventory
 
 - [x] As a player, I can add an item to my inventory
 
-- [x] As a player, I can delete to my inventory
+- [x] As a player, I can delete an item in my inventory
 
-- [x] As a player, I can edit my intentory
+- [x] As a player, I can edit an item in my inventory
 
 - [x] As a player, I can select a row in the inventory table and view the item in the preview tab
 

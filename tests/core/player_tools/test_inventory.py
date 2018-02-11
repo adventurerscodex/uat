@@ -8,8 +8,8 @@ from components.core.character.tabs import Tabs
 from utils import utils as ut
 
 def test_add_inventory(player_wizard, browser): # noqa
-    """As a player, I can add a inventory."""
-    print('As a player, I can add a inventory.')
+    """As a player, I can add an item to my inventory."""
+    print('As a player, I can add an item to my inventory.')
 
     inventory_add = inventory.InventoryAddModal(browser)
     inventory_table = inventory.InventoryTable(browser)
@@ -42,8 +42,8 @@ def test_add_inventory(player_wizard, browser): # noqa
 
 
 def test_delete_inventory(player_wizard, browser): # noqa
-    """As a player, I can delete a inventory."""
-    print('As a player, I can delete a inventory.')
+    """As a player, I can delete an item in my inventory."""
+    print('As a player, I can delete an item to my inventory.')
 
     inventory_add = inventory.InventoryAddModal(browser)
     inventory_table = inventory.InventoryTable(browser)
@@ -63,8 +63,8 @@ def test_delete_inventory(player_wizard, browser): # noqa
 
 
 def test_edit_inventory(player_wizard, browser): # noqa
-    """As a player, I can edit a inventory."""
-    print('As a player, I can edit a inventory.')
+    """As a player, I can edit an item in my inventory."""
+    print('As a player, I can edit an item in my inventory.')
 
     inventory_add = inventory.InventoryAddModal(browser)
     inventory_edit = inventory.InventoryEditModal(browser)
