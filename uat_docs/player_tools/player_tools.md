@@ -215,13 +215,15 @@ Equipment
 Inventory
 =========
 
-- [ ] As a player, I can add coins
+- [x] As a player, I can add coins
 
-- [ ] As a player, I can delete coins
+- [x] As a player, I can delete coins
 
-- [ ] As a player, I can edit coins
+- [x] As a player, I can edit coins
 
-- [ ] As a player, I can view total weight for coins
+- [x] As a player, I can view total weight for coins
+
+- [x] As a player, I can view total gold for coins
 
 - [ ] As a player, I can add a magic item
 

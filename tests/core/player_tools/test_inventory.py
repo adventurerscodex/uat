@@ -3,7 +3,7 @@ import time
 
 from selenium.webdriver.support import expected_conditions as EC # noqa
 
-from components.core.character import inventory
+from components.core.character import inventory, coins
 from components.core.character.tabs import Tabs
 from utils import utils as ut
 
@@ -277,3 +277,124 @@ def test_inventory_sorting(player_wizard, browser): # noqa
     time.sleep(.3)
     rows = ut.get_table_row(inventory_table, 'table', values=False)
     assert rows[2].text.strip() == '1 lbs.'
+
+
+def test_add_coins(player_wizard, browser): # noqa
+    """As a player, I can add coins."""
+    print('As a player, I can add coins')
+
+    coins_table = coins.Coins(browser)
+    tabs = Tabs(browser)
+    tabs.inventory.click()
+
+    coins_table.platinum = 2
+    coins_table.gold = 4
+    coins_table.electrum = 6
+    coins_table.silver = 8
+    coins_table.copper = 10
+
+    assert coins_table.platinum.get_attribute('value') == '2'
+    assert coins_table.gold.get_attribute('value') == '4'
+    assert coins_table.electrum.get_attribute('value') == '6'
+    assert coins_table.silver.get_attribute('value') == '8'
+    assert coins_table.copper.get_attribute('value') == '10'
+
+
+def test_delete_coins(player_wizard, browser): # noqa
+    """As a player, I can delete coins."""
+    print('As a player, I can delete coins')
+
+    coins_table = coins.Coins(browser)
+    tabs = Tabs(browser)
+    tabs.inventory.click()
+
+    coins_table.platinum = 2
+    coins_table.gold = 4
+    coins_table.electrum = 6
+    coins_table.silver = 8
+    coins_table.copper = 10
+
+    assert coins_table.platinum.get_attribute('value') == '2'
+    assert coins_table.gold.get_attribute('value') == '4'
+    assert coins_table.electrum.get_attribute('value') == '6'
+    assert coins_table.silver.get_attribute('value') == '8'
+    assert coins_table.copper.get_attribute('value') == '10'
+
+    coins_table.platinum = 0
+    coins_table.gold = 0
+    coins_table.electrum = 0
+    coins_table.silver = 0
+    coins_table.copper = 0
+
+    assert coins_table.platinum.get_attribute('value') == '0'
+    assert coins_table.gold.get_attribute('value') == '0'
+    assert coins_table.electrum.get_attribute('value') == '0'
+    assert coins_table.silver.get_attribute('value') == '0'
+    assert coins_table.copper.get_attribute('value') == '0'
+
+
+def test_edit_coins(player_wizard, browser): # noqa
+    """As a player, I can edit coins."""
+    print('As a player, I can delete coins')
+
+    coins_table = coins.Coins(browser)
+    tabs = Tabs(browser)
+    tabs.inventory.click()
+
+    coins_table.platinum = 2
+    coins_table.gold = 4
+    coins_table.electrum = 6
+    coins_table.silver = 8
+    coins_table.copper = 10
+
+    assert coins_table.platinum.get_attribute('value') == '2'
+    assert coins_table.gold.get_attribute('value') == '4'
+    assert coins_table.electrum.get_attribute('value') == '6'
+    assert coins_table.silver.get_attribute('value') == '8'
+    assert coins_table.copper.get_attribute('value') == '10'
+
+    coins_table.platinum = 4
+    coins_table.gold = 6
+    coins_table.electrum = 8
+    coins_table.silver = 10
+    coins_table.copper = 12
+
+    assert coins_table.platinum.get_attribute('value') == '4'
+    assert coins_table.gold.get_attribute('value') == '6'
+    assert coins_table.electrum.get_attribute('value') == '8'
+    assert coins_table.silver.get_attribute('value') == '10'
+    assert coins_table.copper.get_attribute('value') == '12'
+
+
+def test_worth_in_gold_coins(player_wizard, browser): # noqa
+    """As a player, I can view total gold for coins."""
+    print('As a player, I can view total gold for coins')
+
+    coins_table = coins.Coins(browser)
+    tabs = Tabs(browser)
+    tabs.inventory.click()
+
+    coins_table.platinum = 1
+    coins_table.gold = 1
+    coins_table.electrum = 2
+    coins_table.silver = 10
+    coins_table.copper = '100\t'
+
+    assert coins_table.worth_in_gold.text == '14'
+
+
+def test_total_weight(player_wizard, browser): # noqa
+    """As a player, I can view total weight for coins."""
+    print('As a player, I can view total weight for coins')
+
+    coins_table = coins.Coins(browser)
+    tabs = Tabs(browser)
+    tabs.inventory.click()
+
+    coins_table.platinum = 50
+    coins_table.gold = 50
+    coins_table.electrum = 50
+    coins_table.silver = 50
+    coins_table.copper = '49\t'
+
+    assert coins_table.total_weight.text == '4 (lbs)'
