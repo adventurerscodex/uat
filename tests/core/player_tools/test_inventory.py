@@ -3,7 +3,7 @@ import time
 
 from selenium.webdriver.support import expected_conditions as EC # noqa
 
-from components.core.character import inventory, coins
+from components.core.character import inventory, coins, magic_items
 from components.core.character.tabs import Tabs
 from utils import utils as ut
 
@@ -383,7 +383,7 @@ def test_worth_in_gold_coins(player_wizard, browser): # noqa
     assert coins_table.worth_in_gold.text == '14'
 
 
-def test_total_weight(player_wizard, browser): # noqa
+def test_coins_total_weight(player_wizard, browser): # noqa
     """As a player, I can view total weight for coins."""
     print('As a player, I can view total weight for coins')
 
@@ -398,3 +398,314 @@ def test_total_weight(player_wizard, browser): # noqa
     coins_table.copper = '49\t'
 
     assert coins_table.total_weight.text == '4 (lbs)'
+
+def test_coins_persists(player_wizard, browser): # noqa
+    """As a player, all fields for coins persist after page refresh."""
+    print('As a player, all fields for coins persist after page refresh.')
+
+    coins_table = coins.Coins(browser)
+    tabs = Tabs(browser)
+    tabs.inventory.click()
+
+    coins_table.platinum = 50
+    coins_table.gold = 50
+    coins_table.electrum = 50
+    coins_table.silver = 50
+    coins_table.copper = '50\t'
+
+    browser.refresh()
+
+    assert coins_table.platinum.get_attribute('value') == '50'
+    assert coins_table.gold.get_attribute('value') == '50'
+    assert coins_table.electrum.get_attribute('value') == '50'
+    assert coins_table.silver.get_attribute('value') == '50'
+    assert coins_table.copper.get_attribute('value') == '50'
+
+
+def test_add_magic_items(player_wizard, browser): # noqa
+    """As a player, I can add an item to my magic_items."""
+    print('As a player, I can add an item to my magic_items.')
+
+    magic_items_add = magic_items.MagicItemsAddModal(browser)
+    magic_items_table = magic_items.MagicItemsTable(browser)
+    tabs = Tabs(browser)
+    tabs.inventory.click()
+
+    magic_items_table.add.click()
+    magic_items_add.item = 'Add Name'
+    magic_items_add.type_ = 'Add Armor'
+    magic_items_add.rarity = 'Add Rare'
+    magic_items_add.max_charges = 3
+    magic_items_add.charges = 3
+    magic_items_add.weight = 100
+    magic_items_add.requires_attunement.click()
+    magic_items_add.attuned.click()
+    magic_items_add.description = 'Add Description'
+
+    assert magic_items_add.item.get_attribute('value') == 'Add Name'
+    assert magic_items_add.type_.get_attribute('value') == 'Add Armor'
+    assert magic_items_add.rarity.get_attribute('value') == 'Add Rare'
+    assert magic_items_add.max_charges.get_attribute('value') == '3'
+    assert magic_items_add.charges.get_attribute('value') == '3'
+    assert magic_items_add.weight.get_attribute('value') == '100'
+    assert magic_items_add.requires_attunement.is_selected()
+    assert magic_items_add.attuned.is_selected()
+    assert magic_items_add.description.get_attribute('value') == 'Add Description'
+
+    magic_items_add.add.click()
+
+    row = ut.get_table_row(magic_items_table, 'table', 1)
+    assert row.magic_item == 'Add Name'
+    assert row.charges == '3'
+    assert row.weight == '100 lbs.'
+    assert row.description == 'Add Description'
+
+    row = ut.get_table_row(magic_items_table, 'table', 1, values=False)
+    assert row[2].find_element_by_tag_name('input').is_selected()
+
+def test_delete_magic_items(player_wizard, browser): # noqa
+    """As a player, I can delete an item in my magic_items."""
+    print('As a player, I can delete an item to my magic_items.')
+
+    magic_items_add = magic_items.MagicItemsAddModal(browser)
+    magic_items_table = magic_items.MagicItemsTable(browser)
+    tabs = Tabs(browser)
+    tabs.inventory.click()
+
+    magic_items_table.add.click()
+    ut.select_from_autocomplete(magic_items_add, 'item', '', browser)
+    magic_items_add.add.click()
+
+    rows = ut.get_table_rows(magic_items_table, 'table', values=False)
+    time.sleep(.3)
+    rows[0][5].find_element_by_tag_name('a').click()
+    rows = ut.get_table_rows(magic_items_table, 'table', values=False)
+
+    assert rows[0][0].text == 'Add a new magic item'
+
+def test_edit_magic_items(player_wizard, browser): # noqa
+    """As a player, I can edit an item in my magic_items."""
+    print('As a player, I can edit an item in my magic_items.')
+
+    magic_items_add = magic_items.MagicItemsAddModal(browser)
+    magic_items_edit = magic_items.MagicItemsEditModal(browser)
+    magic_items_table = magic_items.MagicItemsTable(browser)
+    magic_items_tabs = magic_items.MagicItemsModalTabs(browser)
+    tabs = Tabs(browser)
+    tabs.inventory.click()
+
+    magic_items_table.add.click()
+    ut.select_from_autocomplete(magic_items_add, 'item', '', browser)
+    magic_items_add.add.click()
+
+    rows = ut.get_table_rows(magic_items_table, 'table', values=False)
+    time.sleep(.3)
+    rows[0][0].click()
+    time.sleep(.3)
+    magic_items_tabs.edit.click()
+    time.sleep(.3)
+
+    magic_items_edit.item = 'Edit Name'
+    magic_items_edit.type_ = 'Edit Armor'
+    magic_items_edit.rarity = 'Edit Rare'
+    magic_items_edit.max_charges = 3
+    magic_items_edit.charges = 3
+    magic_items_edit.weight = 100
+    magic_items_edit.requires_attunement.click()
+    magic_items_edit.attuned.click()
+    magic_items_edit.description = 'Edit Description'
+
+    assert magic_items_edit.item.get_attribute('value') == 'Edit Name'
+    assert magic_items_edit.type_.get_attribute('value') == 'Edit Armor'
+    assert magic_items_edit.rarity.get_attribute('value') == 'Edit Rare'
+    assert magic_items_edit.max_charges.get_attribute('value') == '3'
+    assert magic_items_edit.charges.get_attribute('value') == '3'
+    assert magic_items_edit.weight.get_attribute('value') == '100'
+    assert magic_items_edit.requires_attunement.is_selected()
+    assert magic_items_edit.attuned.is_selected()
+    assert magic_items_edit.description.get_attribute('value') == 'Edit Description'
+
+    magic_items_edit.done.click()
+    time.sleep(.3)
+    row = ut.get_table_row(magic_items_table, 'table', 1)
+    assert row.magic_item == 'Edit Name'
+    assert row.charges == '3'
+    assert row.weight == '100 lbs.'
+    assert row.description == 'Edit Description'
+
+    row = ut.get_table_row(magic_items_table, 'table', 1, values=False)
+    assert row[2].find_element_by_tag_name('input').is_selected()
+
+
+def test_preview_magic_items(player_wizard, browser): # noqa
+    """As a player, I can select a row in the magic_items table and view the item in the preview tab."""
+    print('As a player, I can select a row in the magic_items table and view the item in the preview tab')
+
+    magic_items_add = magic_items.MagicItemsAddModal(browser)
+    magic_items_table = magic_items.MagicItemsTable(browser)
+    magic_items_preview = magic_items.MagicItemsPreviewModal(browser)
+    tabs = Tabs(browser)
+    tabs.inventory.click()
+
+    magic_items_table.add.click()
+    ut.select_from_autocomplete(magic_items_add, 'item', '', browser)
+    magic_items_add.add.click()
+
+    time.sleep(.3)
+    row = ut.get_table_row(magic_items_table, 'table', values=False)
+    time.sleep(.3)
+    row[0].click()
+    time.sleep(.5)
+
+    assert magic_items_preview.item.text == 'Adamantine Armor'
+    assert magic_items_preview.rarity.text == 'Uncommon'
+    assert magic_items_preview.type_.text == 'Type: Armor (medium or heavy but not hide)'
+    assert magic_items_preview.max_charges.text == 'Max Charges: 0'
+    assert magic_items_preview.weight.text == 'Weight: 0 lbs.'
+    assert 'reinforced with adamantine' in magic_items_preview.description.text
+
+
+def test_add_magic_items_open_model_by_row(player_wizard, browser): # noqa
+    """As a player, I can click the first row in magic_items table to open the magic_items add modal."""
+    print('As a player, I can click the first row in magic_items table to open the magic_items add modal.')
+
+    magic_items_table = magic_items.MagicItemsTable(browser)
+    tabs = Tabs(browser)
+    tabs.inventory.click()
+
+    rows = ut.get_table_rows(magic_items_table, 'table', values=False)
+
+    assert rows[0][0].is_enabled()
+    assert rows[0][0].is_displayed()
+
+
+def test_autocomplete_magic_items(player_wizard, browser): # noqa
+    """As a player, if I start typing in the autocomplete inputs, I can select suggested items in the dropdown."""
+    print('As a player, if I start typing in the autocomplete inputs, I can select suggested items in the dropdown.')
+
+    magic_items_add = magic_items.MagicItemsAddModal(browser)
+    magic_items_table = magic_items.MagicItemsTable(browser)
+    tabs = Tabs(browser)
+    tabs.inventory.click()
+
+    magic_items_table.add.click()
+    ut.select_from_autocomplete(magic_items_add, 'item', '', browser)
+    ut.select_from_autocomplete(magic_items_add, 'type_', '', browser)
+    ut.select_from_autocomplete(magic_items_add, 'rarity', '', browser)
+
+    assert magic_items_add.item.get_attribute('value') == 'Adamantine Armor'
+    assert magic_items_add.type_.get_attribute('value') == 'Armor'
+    assert magic_items_add.rarity.get_attribute('value') == 'Common'
+
+
+def test_magic_items_persists(player_wizard, browser): # noqa
+    """As a player, all fields for magic_items persist after page refresh."""
+    print('As a player, all fields for magic_items persist after page refresh.')
+
+    magic_items_add = magic_items.MagicItemsAddModal(browser)
+    magic_items_edit = magic_items.MagicItemsEditModal(browser)
+    magic_items_table = magic_items.MagicItemsTable(browser)
+    magic_items_tabs = magic_items.MagicItemsModalTabs(browser)
+    tabs = Tabs(browser)
+    tabs.inventory.click()
+
+    magic_items_table.add.click()
+    ut.select_from_autocomplete(magic_items_add, 'item', '', browser)
+    magic_items_add.add.click()
+
+    browser.refresh()
+
+    row = ut.get_table_row(magic_items_table, 'table', 1)
+
+    assert row.magic_item.strip() == 'Adamantine Armor'
+    assert row.charges == 'N/A'
+    assert row.weight == '0 lbs.'
+    assert 'with adamantine' in row.description
+
+    row = ut.get_table_row(magic_items_table, 'table', 1, values=False)
+    assert row[2].find_element_by_tag_name('input').is_displayed() is False
+
+    row = ut.get_table_row(magic_items_table, 'table', values=False)
+    time.sleep(.3)
+    row[0].click()
+    time.sleep(.3)
+    magic_items_tabs.edit.click()
+
+    assert magic_items_edit.item.get_attribute('value') == 'Adamantine Armor'
+    assert magic_items_edit.type_.get_attribute('value') == 'Armor (medium or heavy but not hide)'
+    assert magic_items_edit.rarity.get_attribute('value') == 'Uncommon'
+    assert magic_items_edit.max_charges.get_attribute('value') == '0'
+    assert magic_items_edit.charges.get_attribute('value') == '0'
+    assert magic_items_edit.weight.get_attribute('value') == '0'
+    assert magic_items_edit.requires_attunement.is_selected() is False
+    assert magic_items_edit.attuned.is_selected() is False
+    assert 'reinforced with adamantine' in magic_items_edit.description.get_attribute('value')
+
+
+def test_magic_items_total_weight(player_wizard, browser): # noqa
+    """As a player, in the magic_items table, total weight is calculated correctly."""
+    print('As a player, in the armor table, total weight is calculated correctly')
+
+    magic_items_add = magic_items.MagicItemsAddModal(browser)
+    magic_items_table = magic_items.MagicItemsTable(browser)
+    tabs = Tabs(browser)
+    tabs.inventory.click()
+
+    magic_items_table.add.click()
+    ut.select_from_autocomplete(magic_items_add, 'item', 'b', browser)
+    magic_items_add.weight = 5
+    magic_items_add.add.click()
+
+    time.sleep(.3)
+
+    magic_items_table.add.click()
+    ut.select_from_autocomplete(magic_items_add, 'item', 'b', browser)
+    magic_items_add.weight = 10
+    magic_items_add.add.click()
+
+    assert magic_items_table.total_weight.text == '15 (lbs)'
+
+def test_magic_items_sorting(player_wizard, browser): # noqa
+    """As a player, I can sort the magic_items table by clicking on the sortable columns."""
+    print('As a player, I can sort the magic_items table by clicking on the sortable columns')
+
+    magic_items_add = magic_items.MagicItemsAddModal(browser)
+    magic_items_table = magic_items.MagicItemsTable(browser)
+    tabs = Tabs(browser)
+    tabs.inventory.click()
+
+    magic_items_table.add.click()
+    ut.select_from_autocomplete(magic_items_add, 'item', '', browser)
+    magic_items_add.weight = 100
+    magic_items_add.add.click()
+
+    time.sleep(.3)
+    magic_items_table.add.click()
+    ut.select_from_autocomplete(magic_items_add, 'item', '', browser, arrow_down_count=2)
+    magic_items_add.max_charges = 2
+    magic_items_add.charges = 1
+    magic_items_add.add.click()
+
+    time.sleep(.3)
+    magic_items_table.magic_item_header.click()
+    time.sleep(.3)
+    rows = ut.get_table_row(magic_items_table, 'table', values=False)
+    assert rows[0].text.strip() == 'Amulet of Health'
+
+    time.sleep(.3)
+    magic_items_table.charges_header.click()
+    time.sleep(.3)
+    rows = ut.get_table_row(magic_items_table, 'table', values=False)
+    assert rows[1].text.strip() == 'N/A'
+
+    time.sleep(.3)
+    magic_items_table.weight_header.click()
+    time.sleep(.3)
+    rows = ut.get_table_row(magic_items_table, 'table', values=False)
+    assert rows[3].text.strip() == '0 lbs.'
+
+    time.sleep(.3)
+    magic_items_table.weight_header.click()
+    time.sleep(.3)
+    rows = ut.get_table_row(magic_items_table, 'table', values=False)
+    assert rows[3].text.strip() == '100 lbs.'

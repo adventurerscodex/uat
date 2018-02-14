@@ -26,7 +26,7 @@ class MagicItemsEditModal(Component):
     type_ = Element(id_='magicItemsEditTypeInput')
     rarity = Element(id_='magicItemsEditRarityInput')
     max_charges = Element(id_='magicItemsEditMaxChargesInput')
-    max_charges = Element(id_='magicItemsEditChargesInput')
+    charges = Element(id_='magicItemsEditChargesInput')
     weight = Element(id_='magicItemsEditWeightInput')
     requires_attunement = Element(id_='magicItemsEditRequiresAttunementCheckbox')
     attuned = Element(id_='magicItemsEditAttunedCheckbox')
@@ -54,7 +54,12 @@ class MagicItemsModalTabs(Component):
 
 
 class MagicItemsTable(Component):
-    """Definition of magicItemss edit modal componenet."""
+    """Definition of magicItems edit modal componenet."""
 
     add = Element(id_='magicItemsAddIcon')
     table = Element(id_='magicItemsTable')
+    total_weight = Element(id_='magicItemsTableTotalWeight')
+    magic_item_header = Element(id_='magicItemsMagicItemHeader')
+    charges_header = Element(id_='magicItemsChargesHeader')
+    attuned_header = Element(id_='magicItemsAttunedHeader')
+    weight_header = Element(id_='magicItemsWeightHeader')

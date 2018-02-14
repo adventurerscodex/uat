@@ -180,11 +180,11 @@ Equipment
 
 - [x] As a player, in the weapon table, total weight is calculated correctly
 
-- [x] As a player, if I add a melee weapon, the range of 5 ft. is assigned after I close the modal
+- [x] As a player, if I add a melee weapon, the range of 5 ft is assigned after I close the modal
 
-- [x] As a player, if I add a ranged weapon, ft. is appended to the range after I close the modal
+- [x] As a player, if I add a ranged weapon, ft is appended to the range after I close the modal
 
-- [x] As a player, if I add a weapon with property reach, 5 ft. is added after I close the modal
+- [x] As a player, if I add a weapon with property reach, 5 ft is added after I close the modal
 
 - [x] As a player, I can sort the weapon table by clicking on the sortable columns
 
@@ -225,23 +225,25 @@ Inventory
 
 - [x] As a player, I can view total gold for coins
 
-- [ ] As a player, I can add a magic item
+- [x] As a player, all coin fields persist after page refresh
 
-- [ ] As a player, I can delete a magic item
+- [x] As a player, I can add a magic item
 
-- [ ] As a player, I can edit a magic item
+- [x] As a player, I can delete a magic item
 
-- [ ] As a player, I can select a row in the magic items table and view the item in the preview tab
+- [x] As a player, I can edit a magic item
 
-- [ ] As a player, I can click the first row in magic items table to open the inventory add modal.
+- [x] As a player, I can select a row in the magic items table and view the item in the preview tab
 
-- [ ] As a player, if I start typing in the magic items autocomplete inputs, I can select suggested items in the dropdown.
+- [x] As a player, I can click the first row in magic items table to open the inventory add modal
 
-- [ ] As a player, if I select from magic items name field, OGL data auto-completes and the remaining fields pre-populate.
+- [x] As a player, if I start typing in the magic items autocomplete inputs, I can select suggested items in the dropdown
 
-- [ ] As a player, all fields for magic items persist after page refresh.
+- [x] As a player, if I select from magic items name field, OGL data auto-completes and the remaining fields pre-populate
 
-- [ ] As a player, I can sort the magic items by clicking on the sortable columns.
+- [x] As a player, all fields for magic items persist after page refresh
+
+- [x] As a player, I can sort the magic items by clicking on the sortable columns
 
 - [x] As a player, I can add an item to my inventory
 
@@ -251,15 +253,15 @@ Inventory
 
 - [x] As a player, I can select a row in the inventory table and view the item in the preview tab
 
-- [x] As a player, I can click the first row in inventory table to open the inventory add modal.
+- [x] As a player, I can click the first row in inventory table to open the inventory add modal
 
-- [x] As a player, if I start typing in the autocomplete inputs, I can select suggested items in the dropdown.
+- [x] As a player, if I start typing in the autocomplete inputs, I can select suggested items in the dropdown
 
-- [x] As a player, if I select from inventory name field, OGL data auto-completes and the remaining fields pre-populate.
+- [x] As a player, if I select from inventory name field, OGL data auto-completes and the remaining fields pre-populate
 
-- [x] As a player, all fields for inventory persist after page refresh.
+- [x] As a player, all fields for inventory persist after page refresh
 
-- [x] As a player, I can sort the inventory table by clicking on the sortable columns.
+- [x] As a player, I can sort the inventory table by clicking on the sortable columns
 
 Notes
 =====
@@ -328,37 +330,37 @@ Global Page
 
 - [ ] As a player, long and short resting is functional including toastr notifications
 
-- [ ] As a player, a previously saved .json character should import the saved data elements
+- [ ] As a player, a previously saved json character should import the saved data elements
 
 - [ ] As a player, all imported data elements should include unicode and there should be no html entities
 
-- [ ] As a player, a character export should save all data elements in a .json format
+- [ ] As a player, a character export should save all data elements in a json format
 
 - [ ] As a player, unicode characters should be saved
 
 - [ ] As a player, status line is functional and displays weight, inspiration, heathiness, features, spells
 
-- [x] As a player, navbar footer links to facebook.
+- [x] As a player, navbar footer links to facebook
 
-- [x] As a player, navbar footer links to twitter.
+- [x] As a player, navbar footer links to twitter
 
-- [x] As a player, navbar footer links to reddit.
+- [x] As a player, navbar footer links to reddit
 
-- [x] As a player, navbar footer links to google +.
+- [x] As a player, navbar footer links to google +
 
-- [x] As a player, navbar footer links to github.
+- [x] As a player, navbar footer links to github
 
-- [x] As a player, navbar footer links to rss.
+- [x] As a player, navbar footer links to rss
 
-- [x] As a player, navbar footer links to tiny letter.
+- [x] As a player, navbar footer links to tiny letter
 
-- [x] As a player, navbar footer links to blog.
+- [x] As a player, navbar footer links to blog
 
-- [x] As a player, navbar footer links to contact us.
+- [x] As a player, navbar footer links to contact us
 
-- [x] As a player, navbar footer links to patreon.
+- [x] As a player, navbar footer links to patreon
 
-- [x] As a player, navbar footer links to ogl.
+- [x] As a player, navbar footer links to ogl
 
 
 Calculations
