@@ -206,9 +206,8 @@ def test_autocomplete_weapon(player_wizard, browser): # noqa
     ut.select_from_autocomplete(weapon_add, 'type_', '', browser)
     ut.select_from_autocomplete(weapon_add, 'handedness', '', browser)
     ut.select_from_autocomplete(weapon_add, 'proficiency', '', browser)
-    # note sure why we have to click twice below, maybe this could be fixed?
-    ut.select_from_autocomplete(weapon_add, 'damage_type', '', browser, arrow_down_count=2)
-    ut.select_from_autocomplete(weapon_add, 'property_', '', browser, arrow_down_count=2)
+    ut.select_from_autocomplete(weapon_add, 'damage_type', '', browser)
+    ut.select_from_autocomplete(weapon_add, 'property_', '', browser)
 
     assert weapon_add.name.get_attribute('value') == 'Battleaxe'
     assert weapon_add.type_.get_attribute('value') == 'Melee'

@@ -11,5 +11,5 @@ class Coins(Component):
     electrum = Element(id_='coinsElectrumInput')
     silver = Element(id_='coinsSilverInput')
     copper = Element(id_='coinsCopperInput')
-    worth_in_gold = Element(id_='coinsWorthInGold')
-    total_weight = Element(id_='coinsTotalWeight')
+    worth_in_gold = Element(id_='coinsWorthInGoldLabel')
+    total_weight = Element(id_='coinsTotalWeightLabel')
