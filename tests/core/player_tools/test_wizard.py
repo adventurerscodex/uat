@@ -5,6 +5,10 @@ from selenium.webdriver.support import expected_conditions as EC # noqa
 
 from components.core.general.new_character_campaign import NewCharacterCampaign
 from components.core.character import wizard
+from components.core.character.tabs import Tabs
+from components.core.character.profile import Profile
+from components.core.character.other_stats import OtherStats
+from components.core.character.hud import HUD
 from utils import utils as ut
 
 
@@ -174,3 +178,57 @@ def test_add_ability_scores(browser): # noqa
     assert ability_scores.intelligence.get_attribute('value') == '18'
     assert ability_scores.wisdom.get_attribute('value') == '18'
     assert ability_scores.charisma.get_attribute('value') == '18'
+
+def test_wizard_profile_stats(browser): # noqa
+    """As a player, after creating a character via the character creation wizard, I can view all the data entered in the stats and profile modules."""
+    print('As a player, after creating a character via the character creation wizard, I can view all the data entered in the stats and profile modules.')
+    wizard_main = NewCharacterCampaign(browser)
+    who_are_you = wizard.WhoAreYou(browser)
+    ability_scores = wizard.AbilityScoresManual(browser)
+    tabs = Tabs(browser)
+    profile = Profile(browser)
+    stats = OtherStats(browser)
+    hud  = HUD(browser)
+
+    wizard_main.get_started.click()
+    wizard_main.player.click()
+    wizard_main.next_.click()
+
+    who_are_you.character_name = 'Test Char'
+    who_are_you.player_name = 'Automated Testing Bot.'
+    ut.select_from_autocomplete(who_are_you, 'alignment', '', browser)
+    who_are_you.deity = 'Test Deity'
+    ut.select_from_autocomplete(who_are_you, 'race', '', browser)
+    ut.select_from_autocomplete(who_are_you, 'class_', '', browser)
+    who_are_you.gender = 'Test Male'
+    who_are_you.age = 21
+    ut.select_from_autocomplete(who_are_you, 'background', '', browser)
+    who_are_you.level = 3
+    who_are_you.experience = 1000
+
+    wizard_main.next_.click()
+
+    ability_scores.strength = '18'
+    ability_scores.dexterity = '18'
+    ability_scores.constitution = '18'
+    ability_scores.intelligence = '18'
+    ability_scores.wisdom = '18'
+    ability_scores.charisma = '18'
+
+    wizard_main.finish.click()
+
+    tabs.profile.click()
+
+    assert profile.name.get_attribute('value') == 'Automated Testing Bot.'
+    assert profile.background.get_attribute('value') == 'Acolyte'
+    assert profile.alignment.get_attribute('value') == 'Lawful good'
+    assert profile.deity.get_attribute('value') == 'Test Deity'
+    assert profile.race.get_attribute('value') == 'Dwarf'
+    assert profile.class_.get_attribute('value') == 'Barbarian'
+    assert profile.gender.get_attribute('value') == 'Test Male'
+    assert profile.age.get_attribute('value') == '21'
+
+    tabs.stats.click()
+
+    assert stats.level.get_attribute('value') == '3'
+    assert stats.experience.get_attribute('value') == '1000'
