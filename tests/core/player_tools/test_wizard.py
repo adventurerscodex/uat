@@ -180,9 +180,8 @@ def test_add_ability_scores(browser): # noqa
     assert ability_scores.charisma.get_attribute('value') == '18'
 
 def test_wizard_profile_stats(browser): # noqa
-    """As a player, after creating a character via the character creation wizard, I can view all the data entered in the stats and profile modules
-"""
-    print('As a player, after creating a character via the character creation wizard, I can view all the data entered in the stats and profile modules')
+    """As a player, after creating a character via the character creation wizard, I can view all the data entered in the stats and profile modules."""
+    print('As a player, after creating a character via the character creation wizard, I can view all the data entered in the stats and profile modules.')
     wizard_main = NewCharacterCampaign(browser)
     who_are_you = wizard.WhoAreYou(browser)
     ability_scores = wizard.AbilityScoresManual(browser)
@@ -216,9 +215,7 @@ def test_wizard_profile_stats(browser): # noqa
     ability_scores.wisdom = '18'
     ability_scores.charisma = '18'
 
-
     wizard_main.finish.click()
-
 
     tabs.profile.click()
 
@@ -236,7 +233,3 @@ def test_wizard_profile_stats(browser): # noqa
     assert stats.level.get_attribute('value') == '3'
     assert stats.experience.get_attribute('value') == '1000'
 
-    # should I also run checks on ability_scores using assert?
-
-
-    # from pdb import set_trace; set_trace()
