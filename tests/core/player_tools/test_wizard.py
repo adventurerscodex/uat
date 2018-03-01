@@ -232,4 +232,3 @@ def test_wizard_profile_stats(browser): # noqa
 
     assert stats.level.get_attribute('value') == '3'
     assert stats.experience.get_attribute('value') == '1000'
-
