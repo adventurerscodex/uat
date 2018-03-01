@@ -410,7 +410,7 @@ Wizard
 
 - [x] As a player, I can navigate and complete the character creation wizard
 
-- [ ] As a player, after creating a character via the character creation wizard, I can view all the data entered in the stats and profile modules
+- [x] As a player, after creating a character via the character creation wizard, I can view all the data entered in the stats and profile modules
 
 - [ ] As a player, after selecting a backpack, all items are pre-populated in the inventory module
 
