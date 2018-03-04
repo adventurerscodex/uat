@@ -4,7 +4,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 from components.core.character.notes import NotesList, NotesDetail
 from components.core.character.tabs import Tabs
-from utils import utils as ut
 from expected_conditions.conditions import url_in_new_tab_matches
 
 
@@ -109,6 +108,7 @@ def test_markdown_cheatsheet_link(player_wizard, browser): # noqa
     WebDriverWait(browser, 20).until(EC.number_of_windows_to_be(2))
     browser.switch_to.window(browser.window_handles[1])
     WebDriverWait(browser, 20).until(url_in_new_tab_matches('https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet'))
+
     assert browser.current_url == 'https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet'
 
 
