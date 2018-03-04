@@ -35,7 +35,7 @@ class Element:
 
     def __get__(self, obj, objtype):
         """Descriptor for retrieving element."""
-        element = WebDriverWait(obj.browser, 30).until(
+        element = WebDriverWait(obj.browser, 5).until(
             EC.presence_of_element_located(
                 (self.locating_key, self.locating_value)
             )
@@ -45,7 +45,7 @@ class Element:
 
     def __set__(self, obj, value):
         """Descriptor for setting a value."""
-        element = WebDriverWait(obj.browser, 30).until(
+        element = WebDriverWait(obj.browser, 5).until(
             EC.presence_of_element_located(
                 (self.locating_key, self.locating_value)
             )

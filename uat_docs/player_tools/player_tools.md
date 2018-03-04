@@ -266,17 +266,19 @@ Inventory
 Notes
 =====
 
-- [ ] As a player, Notes persist after a browser refresh
+- [x] As a player, I can add a note
 
-- [ ] As a player, I can add a note
+- [x] As a player, I can delete a note
 
-- [ ] As a player, I can delete a note
+- [x] As a player, I can edit a note
 
-- [ ] As a player, I can edit a note
+- [x] As a player, if no notes are visible, I can add a note by clicking on the detail div
 
-- [ ] As a player, I can view markdown in the edit tab
+- [x] As a player, notes persist after a browser refresh
 
-- [ ] As a player, I can click on the link to the markdown guide
+- [x] As a player, I can preview a note in markdown in the prevew tab
+
+- [x] As a player, I can click on the link to the markdown guide
 
 Profile
 =======
