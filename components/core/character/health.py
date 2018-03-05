@@ -14,6 +14,7 @@ class HitPointHitDice(Component):
     hitdice1 = Element(xpath='//*[@id="0"]')
     hitdice2 = Element(xpath='//*[@id="1"]')
     hitdice3 = Element(xpath='//*[@id="2"]')
+    open_edit_modal = Element(xpath='//*[@id="stats"]/div[1]/div[2]/stats/div/div/div/div/table/tbody/tr/td[1]')
 
 
 class HitPointEditModal(Component):
