@@ -3,10 +3,15 @@ Stats
 
 - [ ] As a player, all changes I make to hit points, hit dice, ability scores, savings throws, and other stats persist after I refresh the browser
 
+- [x] As a player, I can edit my ability scores
+
+- [x] As a player, I can view my ability score modifiers
+
+- [x] As a player, ability scores persist after page refresh
+
 - [ ] As a player, I can increase or decrease my hit points via the stepper widget
 
-- [ ] As a player, I can reset my hp by clicking on the
-reset icon
+- [ ] As a player, I can reset my hp by clicking on the reset icon
 
 - [ ] As a player, I can see the hit points bar change colors at certain intervals as hit points decrease
 

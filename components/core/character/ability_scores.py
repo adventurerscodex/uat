@@ -22,7 +22,7 @@ class AbilityScoresTable(Component):
     strength = Element(id_='abilityScoresTableStrengthSpan')
     strength_modifier = Element(id_='abilityScoresTableStrengthModifierSpan')
     dexterity = Element(id_='abilityScoresTableDexteritySpan')
-    dexterity_modifer = Element(id_='abilityScoresTableDexterityModifierSpan')
+    dexterity_modifier = Element(id_='abilityScoresTableDexterityModifierSpan')
     constitution = Element(id_='abilityScoresTableConstitutionSpan')
     constitution_modifier = Element(id_='abilityScoresTableConstitutionModifierSpan')
     intelligence = Element(id_='abilityScoresTableIntelligIntelligenceSpan')
