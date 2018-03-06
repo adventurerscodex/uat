@@ -62,5 +62,3 @@ class AbilityScoresGeneral(Component):
 
     manual = Element(xpath='//*[@id="content"]/wizard/div/div/div/wizard-ability-score-step/div/div/div[2]/div[1]/div[1]/div/div/label[1]')
     point_buy = Element(xpath='//*[@id="content"]/wizard/div/div/div/wizard-ability-score-step/div/div/div[2]/div[1]/div[1]/div/div/label[2]')
-    # back = Element(id_='abilityScoresBackButton')
-    # finish = Element(id_='abilityScoresFinishButton')
