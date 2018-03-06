@@ -9,9 +9,9 @@ Stats
 
 - [x] As a player, ability scores persist after page refresh
 
-- [ ] As a player, I can increase or decrease my hit points via the stepper widget
+- [x] As a player, I can increase or decrease my hit points via the stepper widget
 
-- [ ] As a player, I can reset my hp by clicking on the reset icon
+- [x] As a player, I can reset my hp by clicking on the reset icon
 
 - [ ] As a player, I can see the hit points bar change colors at certain intervals as hit points decrease
 
@@ -31,7 +31,7 @@ Stats
 
 - [ ] As a player, armor class is correctly calculated
 
-- [ ] As a player, initiative is correctly calculated
+- [x] As a player, initiative is correctly calculated
 
 - [ ] As a player, proficiency bonus is correctly calculated
 
@@ -43,14 +43,13 @@ Stats
 
 - [ ] As a player, I can increase or decrease my calculated armor class via a modifier field and this is reflected in the label
 
-- [ ] As a player, I can increase or decrease my calculated initiative via a modifier field and this is reflected in the label
+- [x] As a player, I can increase or decrease my calculated initiative via a modifier field and this is reflected in the label
 
 - [ ] As a player, I can increase or decrease my calculated proficiency via a modifier field and this is reflected in the label
 
 - [ ] As a player, if I am inspired, the status line should indicate this
 
-- [ ] As a player, if I am inspired, there should be a
-blue circle around my profice pic
+- [ ] As a player, if I am inspired, there should be a blue circle around my profice pic
 
 - [ ] As a player, I can select to become proficient in a savings throw, and this can be viewed in the table via in icon
 

@@ -2,10 +2,14 @@
 import time
 
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC # noqa
 from selenium.webdriver.support.ui import WebDriverWait
 
 from components.core.character.ability_scores import AbilityScoresEditModal, AbilityScoresTable
+from components.core.character.health import HitPointHitDice, HitPointEditModal
+from components.core.character.other_stats import OtherStats
+from components.core.character.saving_throw import SavingThrowEditModal, SavingThrowTable
 from components.core.character.tabs import Tabs
 from expected_conditions.conditions import url_in_new_tab_matches
 
@@ -112,3 +116,74 @@ def test_ability_scores_persist(player_wizard, browser): # noqa
     assert ability_scores_table.intelligence.text == '16'
     assert ability_scores_table.wisdom.text == '15'
     assert ability_scores_table.charisma.text == '14'
+
+def test_hp_stepper(player_wizard, browser): # noqa
+    """As a player, I can increase or decrease my hit points via the stepper widget."""
+    print('As a player, I can increase or decrease my hit points via the stepper widget.')
+    hp_hd = HitPointHitDice(browser)
+
+    tabs = Tabs(browser)
+    tabs.stats.click()
+
+    hp_hd.damage_up.click()
+
+    assert hp_hd.hit_points_bar_label.text == 'HP: 9'
+
+    hp_hd.damage_down.click()
+
+    assert hp_hd.hit_points_bar_label.text == 'HP: 10'
+
+def test_hp_reset(player_wizard, browser): # noqa
+    """As a player, I can reset my hp by clicking on the reset icon."""
+    print('As a player, I can reset my hp by clicking on the reset icon.')
+    hp_hd = HitPointHitDice(browser)
+
+    tabs = Tabs(browser)
+    tabs.stats.click()
+
+    hp_hd.damage_up.click()
+
+    assert hp_hd.hit_points_bar_label.text == 'HP: 9'
+
+    hp_hd.reset.click()
+
+    assert hp_hd.hit_points_bar_label.text == 'HP: 10'
+
+def test_initiative_calculation(player_wizard, browser): # noqa
+    """As a player, initiative is correctly calculated."""
+    print('As a player, initiative is correctly calculated.')
+    other_stats = OtherStats(browser)
+
+    tabs = Tabs(browser)
+    tabs.stats.click()
+
+    assert other_stats.initiative.text == '4'
+
+def test_initiative_modifier(player_wizard, browser): # noqa
+    """As a player, I can increase or decrease my calculated initiative via a modifier field and this is reflected in the label."""
+    print('As a player, I can increase or decrease my calculated initiative via a modifier field and this is reflected in the label.')
+    other_stats = OtherStats(browser)
+
+    tabs = Tabs(browser)
+    tabs.stats.click()
+
+    other_stats.initiative_modifier = 1
+    other_stats.initiative_modifier.send_keys(Keys.TAB)
+
+    assert other_stats.initiative.text == '5'
+
+    other_stats.initiative_modifier = -1
+
+    assert other_stats.initiative.text == '4'
+
+def test_initiative_popover(player_wizard, browser): # noqa
+    """As a player, I can can click on a popover showing the calculation for Initiative."""
+    print('As a player, I can can click on a popover showing the calculation for Initiative.')
+    other_stats = OtherStats(browser)
+
+    tabs = Tabs(browser)
+    tabs.stats.click()
+
+    other_stats.initiative_popover_icon.click()
+
+    assert other_stats.initiative_popover_content.text == 'Initiative = Dexterity Modifier + Modifier\nInitiative = 4 + 0'
