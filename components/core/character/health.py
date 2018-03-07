@@ -8,6 +8,7 @@ class HitPointHitDice(Component):
 
     max_hit_points = Element(xpath='//*[@id="stats"]/div[1]/div[2]/stats/div/div/div/div/table/tbody/tr/td[2]/span')
     hit_points_bar_label = Element(xpath='//*[@id="hitpointsCounter"]')
+    hit_points_bar_regular_hp = Element(xpath='//*[@id="regularHitPoints"]')
     damage_up = Element(xpath='//*[@id="stats"]/div[1]/div[2]/stats/div/div/div/div/table/tbody/tr/td[3]/plus-minus/div[1]/div/button[1]')
     damage_down = Element(xpath='//*[@id="stats"]/div[1]/div[2]/stats/div/div/div/div/table/tbody/tr/td[3]/plus-minus/div[1]/div/button[2]')
     reset = Element(xpath='//*[@id="stats"]/div[1]/div[2]/stats/div/div/div/div/table/tbody/tr/td[4]/a')

@@ -33,19 +33,19 @@ Stats
 
 - [x] As a player, initiative is correctly calculated
 
-- [ ] As a player, proficiency bonus is correctly calculated
+- [x] As a player, proficiency bonus is correctly calculated
 
 - [ ] As a player, I can can click on a popover showing the calculation for Armor Class
 
-- [ ] As a player, I can can click on a popover showing the calculation for Initiative
+- [x] As a player, I can can click on a popover showing the calculation for Initiative
 
-- [ ] As a player, I can can click on a popover showing the calculation for Proficiency Bonus
+- [x] As a player, I can can click on a popover showing the calculation for Proficiency Bonus
 
 - [ ] As a player, I can increase or decrease my calculated armor class via a modifier field and this is reflected in the label
 
 - [x] As a player, I can increase or decrease my calculated initiative via a modifier field and this is reflected in the label
 
-- [ ] As a player, I can increase or decrease my calculated proficiency via a modifier field and this is reflected in the label
+- [x] As a player, I can increase or decrease my calculated proficiency via a modifier field and this is reflected in the label
 
 - [ ] As a player, if I am inspired, the status line should indicate this
 
@@ -374,7 +374,7 @@ Calculations
 
 When level is altered, verify the following:
 
-- [ ] Proficiency calculation reflects the change
+- [x] Proficiency calculation reflects the change
 
 When Strength modifier if altered, verify the following are calculated correctly:
 

@@ -1,6 +1,4 @@
 """UAT test file for Adventurer's Codex player tools stats module."""
-import time
-
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC # noqa
@@ -9,9 +7,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from components.core.character.ability_scores import AbilityScoresEditModal, AbilityScoresTable
 from components.core.character.health import HitPointHitDice, HitPointEditModal
 from components.core.character.other_stats import OtherStats
+from components.core.character.profile_picture import ProfilePicture
 from components.core.character.saving_throw import SavingThrowEditModal, SavingThrowTable
-from components.core.character.tabs import Tabs
-from expected_conditions.conditions import url_in_new_tab_matches
 
 
 def test_edit_ability_scores(player_wizard, browser): # noqa
@@ -19,9 +16,6 @@ def test_edit_ability_scores(player_wizard, browser): # noqa
     print('As a player, I can edit my ability scores.')
     ability_scores_edit = AbilityScoresEditModal(browser)
     ability_scores_table = AbilityScoresTable(browser)
-
-    tabs = Tabs(browser)
-    tabs.stats.click()
 
     ability_scores_table.table.click()
     ability_scores_edit.strength = 15
@@ -54,9 +48,6 @@ def test_ability_scores_modifiers(player_wizard, browser): # noqa
     ability_scores_edit = AbilityScoresEditModal(browser)
     ability_scores_table = AbilityScoresTable(browser)
 
-    tabs = Tabs(browser)
-    tabs.stats.click()
-
     ability_scores_table.table.click()
     ability_scores_edit.strength = 15
     ability_scores_edit.dexterity = 16
@@ -87,9 +78,6 @@ def test_ability_scores_persist(player_wizard, browser): # noqa
     print('As a player, ability scores persist after page refresh.')
     ability_scores_edit = AbilityScoresEditModal(browser)
     ability_scores_table = AbilityScoresTable(browser)
-
-    tabs = Tabs(browser)
-    tabs.stats.click()
 
     ability_scores_table.table.click()
     ability_scores_edit.strength = 15
@@ -122,9 +110,6 @@ def test_hp_stepper(player_wizard, browser): # noqa
     print('As a player, I can increase or decrease my hit points via the stepper widget.')
     hp_hd = HitPointHitDice(browser)
 
-    tabs = Tabs(browser)
-    tabs.stats.click()
-
     hp_hd.damage_up.click()
 
     assert hp_hd.hit_points_bar_label.text == 'HP: 9'
@@ -137,9 +122,6 @@ def test_hp_reset(player_wizard, browser): # noqa
     """As a player, I can reset my hp by clicking on the reset icon."""
     print('As a player, I can reset my hp by clicking on the reset icon.')
     hp_hd = HitPointHitDice(browser)
-
-    tabs = Tabs(browser)
-    tabs.stats.click()
 
     hp_hd.damage_up.click()
 
@@ -154,18 +136,12 @@ def test_initiative_calculation(player_wizard, browser): # noqa
     print('As a player, initiative is correctly calculated.')
     other_stats = OtherStats(browser)
 
-    tabs = Tabs(browser)
-    tabs.stats.click()
-
     assert other_stats.initiative.text == '4'
 
 def test_initiative_modifier(player_wizard, browser): # noqa
     """As a player, I can increase or decrease my calculated initiative via a modifier field and this is reflected in the label."""
     print('As a player, I can increase or decrease my calculated initiative via a modifier field and this is reflected in the label.')
     other_stats = OtherStats(browser)
-
-    tabs = Tabs(browser)
-    tabs.stats.click()
 
     other_stats.initiative_modifier = 1
     other_stats.initiative_modifier.send_keys(Keys.TAB)
@@ -181,9 +157,68 @@ def test_initiative_popover(player_wizard, browser): # noqa
     print('As a player, I can can click on a popover showing the calculation for Initiative.')
     other_stats = OtherStats(browser)
 
-    tabs = Tabs(browser)
-    tabs.stats.click()
-
     other_stats.initiative_popover_icon.click()
 
     assert other_stats.initiative_popover_content.text == 'Initiative = Dexterity Modifier + Modifier\nInitiative = 4 + 0'
+
+def test_proficieny_bonus_calculation(player_wizard, browser): # noqa
+    """As a player, proficieny bonus is correctly calculated."""
+    print('As a player, proficieny bonus is correctly calculated.')
+    other_stats = OtherStats(browser)
+
+    other_stats.level = 5
+    other_stats.level.send_keys(Keys.TAB)
+
+    assert other_stats.proficiency_bonus.text == '3'
+
+def test_proficiency_modifier(player_wizard, browser): # noqa
+    """As a player, I can increase or decrease my calculated proficiency via a modifier field and this is reflected in the label."""
+    print('As a player, I can increase or decrease my calculated proficiency via a modifier field and this is reflected in the label.')
+    other_stats = OtherStats(browser)
+
+    other_stats.level = 5
+    other_stats.level.send_keys(Keys.TAB)
+
+    other_stats.proficiency_bonus_modifier = 1
+    other_stats.proficiency_bonus_modifier.send_keys(Keys.TAB)
+
+    assert other_stats.proficiency_bonus.text == '4'
+
+def test_proficiency_popover(player_wizard, browser): # noqa
+    """As a player, I can can click on a popover showing the calculation for Proficiency Bonus."""
+    print('As a player, I can can click on a popover showing the calculation for Proficiency Bonus.')
+    other_stats = OtherStats(browser)
+
+    other_stats.proficiency_popover_icon.click()
+
+    assert other_stats.proficiency_popover_content.text == 'Proficiency = (Level / 4) + 1 + Modifier\nProficiency = 1 + 1 + 0'
+
+def test_inpiration_blue_circle(player_wizard, browser): # noqa
+    """As a player, if I am inspired, there should be a blue circle around my profice pic."""
+    print('As a player, if I am inspired, there should be a blue circle around my profice pic.')
+    other_stats = OtherStats(browser)
+    profile_pic = ProfilePicture(browser)
+
+    other_stats.inspiration = 1
+    other_stats.inspiration.send_keys(Keys.TAB)
+
+    assert 'image-border-inspired' in profile_pic.profile_pic_border.get_attribute('class')
+
+def test_health_bar_changes_color(player_wizard, browser): # noqa
+    """As a player, I can see the hit points bar change colors at certain intervals as hit points decrease."""
+    print('As a player, I can see the hit points bar change colors at certain intervals as hit points decrease.')
+    health = HitPointHitDice(browser)
+
+    assert 'progress-bar-danger' not in health.hit_points_bar_regular_hp.get_attribute('class')
+
+    health.damage_up.click()
+    health.damage_up.click()
+    health.damage_up.click()
+    health.damage_up.click()
+    health.damage_up.click()
+    health.damage_up.click()
+    health.damage_up.click()
+    health.damage_up.click()
+    health.damage_up.click()
+
+    assert 'progress-bar-danger' in health.hit_points_bar_regular_hp.get_attribute('class')
