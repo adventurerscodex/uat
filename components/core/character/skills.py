@@ -25,10 +25,10 @@ class SkillsEditModal(Component):
 
     modifer = Element(id_='skillsEditNameInput')
     none = Element(id_='skillsEditNoneButton')
-    half = Element(id_='skillsEditHalfButton')
-    proficient = Element(id_='skillsEditProfcientButton')
-    expertise = Element(id_='skillsEditExpertiseButton')
-    done = Element(id_='skillsEditDoneButton')
+    half = Element(xpath='//*[@id="skills"]/div[3]/div[1]/skills/div[2]/div/div/div[2]/form/div[2]/div/div/label[2]')
+    proficient = Element(xpath='//*[@id="skills"]/div[3]/div[1]/skills/div[2]/div/div/div[2]/form/div[2]/div/div/label[3]')
+    expertise = Element(xpath='//*[@id="skills"]/div[3]/div[1]/skills/div[2]/div/div/div[2]/form/div[2]/div/div/label[4]')
+    done = Element(xpath='//*[@id="skills"]/div[3]/div[1]/skills/div[2]/div/div/div[3]/button')
 
 
 class SkillsTable(Component):

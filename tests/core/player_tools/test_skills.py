@@ -3,7 +3,8 @@ import time
 
 from selenium.webdriver.support import expected_conditions as EC # noqa
 
-from components.core.character import features, feats, traits, proficiency
+from components.core.character import features, feats, traits
+from components.core.character import tracked, proficiency, skills
 from components.core.character.tabs import Tabs
 from utils import utils as ut
 
@@ -14,6 +15,7 @@ def test_add_feature(player_wizard, browser): # noqa
 
     feature = features.FeatureAddModal(browser)
     features_table = features.FeaturesTable(browser)
+    tracked_table = tracked.TrackedTable(browser)
     tabs = Tabs(browser)
     tabs.skills.click()
 
@@ -38,6 +40,8 @@ def test_add_feature(player_wizard, browser): # noqa
 
     row = ut.get_table_row(features_table, 'table', 1)
 
+    assert tracked_table.tracked1_name.text == 'Add Name'
+    assert tracked_table.tracked1_max.text == '4'
     assert row.class_ == 'Add Class'
     assert row.feature == 'Add Name'
 
@@ -170,6 +174,7 @@ def test_add_feat(player_wizard, browser): # noqa
 
     feat = feats.FeatAddModal(browser)
     feats_table = feats.FeatsTable(browser)
+    tracked_table = tracked.TrackedTable(browser)
     tabs = Tabs(browser)
     tabs.skills.click()
 
@@ -190,6 +195,8 @@ def test_add_feat(player_wizard, browser): # noqa
 
     row = ut.get_table_row(feats_table, 'table', 1)
 
+    assert tracked_table.tracked1_name.text == 'Add Name'
+    assert tracked_table.tracked1_max.text == '4'
     assert row.feat == 'Add Name'
 
 
@@ -311,6 +318,7 @@ def test_add_trait(player_wizard, browser): # noqa
 
     trait = traits.TraitAddModal(browser)
     traits_table = traits.TraitsTable(browser)
+    tracked_table = tracked.TrackedTable(browser)
     tabs = Tabs(browser)
     tabs.skills.click()
 
@@ -333,6 +341,8 @@ def test_add_trait(player_wizard, browser): # noqa
 
     row = ut.get_table_row(traits_table, 'table', 1)
 
+    assert tracked_table.tracked1_name.text == 'Add Name'
+    assert tracked_table.tracked1_max.text == '4'
     assert row.race == 'Add Race'
     assert row.trait == 'Add Name'
 
@@ -587,3 +597,63 @@ def test_edit_proficiency(player_wizard, browser): # noqa
     row = ut.get_table_row(proficiency_table, 'table', 1)
     assert row.proficiency == 'Edited Name'
     assert row.type == 'Edited Type'
+
+def test_proficiency_types(player_wizard, browser): # noqa
+    """As a player, I can mark a skill as none, half, proficient, or expertise and view these modifiers, and they are calculated correctly."""
+
+    print('As a player, I can mark a skill as none, half, proficient, or expertise and view these modifiers, and they are calculated correctly.')
+
+    skills_table = skills.SkillsTable(browser)
+    skills_edit = skills.SkillsEditModal(browser)
+    tabs = Tabs(browser)
+    tabs.skills.click()
+
+    acrobatics = ut.get_table_row(skills_table, 'table', values=False)
+    none = acrobatics[0].find_element_by_tag_name('span').get_attribute('class')
+    acrobatics[0].click()
+    time.sleep(.3)
+    skills_edit.half.click()
+    skills_edit.done.click()
+
+    time.sleep(.3)
+    acrobatics = ut.get_table_row(skills_table, 'table', values=False)
+    spans = acrobatics[0].find_element_by_tag_name('span')
+    half = spans.find_element_by_tag_name('span').get_attribute('class')
+
+    acrobatics[0].click()
+    time.sleep(.3)
+    skills_edit.proficient.click()
+    skills_edit.done.click()
+
+    time.sleep(.3)
+    acrobatics = ut.get_table_row(skills_table, 'table', values=False)
+    spans = acrobatics[0].find_element_by_tag_name('span')
+    proficient = spans.find_element_by_tag_name('span').get_attribute('class')
+
+    acrobatics[0].click()
+    time.sleep(.5)
+    skills_edit.expertise.click()
+    skills_edit.done.click()
+
+    time.sleep(.3)
+    acrobatics = ut.get_table_row(skills_table, 'table', values=False)
+    spans = acrobatics[0].find_element_by_tag_name('span')
+    expertise = spans.find_element_by_tag_name('span').get_attribute('class')
+
+    assert '' in none
+    assert 'fa fa-adjust' in half
+    assert 'fa fa-check' in proficient
+    assert 'fa fa-check close-check' in expertise
+
+def test_passive_score(player_wizard, browser): # noqa
+    """As a player, I can view my passive score for each skill which is calculated correctly."""
+
+    print('As a player, I can view my passive score for each skill which is calculated correctly.')
+
+    skills_table = skills.SkillsTable(browser)
+    tabs = Tabs(browser)
+    tabs.skills.click()
+
+    acrobatics = ut.get_table_row(skills_table, 'table')
+
+    assert acrobatics.passive == '14'

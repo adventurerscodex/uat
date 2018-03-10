@@ -104,12 +104,6 @@ Skills
 
 - [x] As a plyer, if there is no proficiency, clicking the first row will open the add modal
 
-- [ ] As a player, I can add tracking to a feature and can set it to reset on a long or short rest
-
-- [ ] As a player, I can add tracking to a feat and can set it to reset on a long or short rest
-
-- [ ] As a player, I can add tracking to a trait and can set it to reset on a long or short rest
-
 - [ ] As a player, I can view the tracking table, and determine by icon if the ability resets on a short or long rest
 
 - [ ] As a player, I can reset tracked items by clicking on the refresh icon in the table
@@ -118,9 +112,9 @@ Skills
 
 - [ ] As a player, I can reset a tracked ability by clicking on the reset icon
 
-- [ ] As a player, I can mark a skill as none, half, proficient, or expertise and view these modifiers, and they are calculated correctly
+- [x] As a player, I can mark a skill as none, half, proficient, or expertise and view these modifiers, and they are calculated correctly
 
-- [ ] As a player, I can view my passive score for each skill which is calculated correctly
+- [x] As a player, I can view my passive score for each skill which is calculated correctly
 
 Spells
 ======
