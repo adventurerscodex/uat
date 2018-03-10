@@ -51,3 +51,8 @@ docs/_build/
 
 # Mac
 .DS_Store
+
+# Sublime Text 3
+
+*.sublime-project
+*.sublime-workspace
