@@ -13,7 +13,7 @@ Stats
 
 - [x] As a player, I can reset my hp by clicking on the reset icon
 
-- [ ] As a player, I can see the hit points bar change colors at certain intervals as hit points decrease
+- [x] As a player, I can see the hit points bar change colors at certain intervals as hit points decrease
 
 - [ ] As a player, hit dice are clickable and images change when clicked
 
@@ -35,25 +35,25 @@ Stats
 
 - [x] As a player, proficiency bonus is correctly calculated
 
-- [ ] As a player, I can can click on a popover showing the calculation for Armor Class
+- [x] As a player, I can can click on a popover showing the calculation for Armor Class
 
 - [x] As a player, I can can click on a popover showing the calculation for Initiative
 
 - [x] As a player, I can can click on a popover showing the calculation for Proficiency Bonus
 
-- [ ] As a player, I can increase or decrease my calculated armor class via a modifier field and this is reflected in the label
+- [x] As a player, I can increase or decrease my calculated armor class via a modifier field and this is reflected in the label
 
 - [x] As a player, I can increase or decrease my calculated initiative via a modifier field and this is reflected in the label
 
 - [x] As a player, I can increase or decrease my calculated proficiency via a modifier field and this is reflected in the label
 
-- [ ] As a player, if I am inspired, the status line should indicate this
+- [x] As a player, if I am inspired, the status line should indicate this
 
-- [ ] As a player, if I am inspired, there should be a blue circle around my profice pic
+- [x] As a player, if I am inspired, there should be a blue circle around my profice pic
 
-- [ ] As a player, I can select to become proficient in a savings throw, and this can be viewed in the table via in icon
+- [x] As a player, I can select to become proficient in a savings throw, and this can be viewed in the table via in icon
 
-- [ ] As a player, I can increase or decrease my savings throws via a modifier field
+- [x] As a player, I can increase or decrease my savings throws via a modifier field
 
 Skills
 ======
@@ -375,25 +375,12 @@ Calculations
 When level is altered, verify the following:
 
 - [x] Proficiency calculation reflects the change
-
-When Strength modifier if altered, verify the following are calculated correctly:
-
-- [ ] Skills bound to strength
-- [ ] Savings throws bound to strength
-- [ ] Encumbrance
-- [ ] To hit modifier
-
-When Dexterity modifier is altered, verify the following are calculated correctly:
-
-- [ ] Skills bound to dexterity
-- [ ] Savings throws bound to dexterity
-- [ ] Initiative Armor class (Pro tip: if the armor is heavy, dex modifier is not used for positive or negative numbers)
-- [ ] To hit bonus uses the higher of strength or dexterity if the weapon is of type finesse
-
-When Con, Int, Wis, Cha modifiers are altered, verify the following are calculated correctly:
-
-- [ ] Skills bound to their reflective modifier
-- [ ] Savings throws bound to their reflective modifier
+- [x] When strength is increased or decreased, relevant skills, savings throws, to hit, and encumbrance reflect the change
+- [x] When dexterity is increased or decreased, relevant skills, savings throws, initiative, and to hit (finesse weapons) reflect the change
+- [x] When constitution is increased or decreased, relevant skills reflect the change
+- [x] When intelligence is increased or decreased, relevant skills and savings throws reflect the change
+- [x] When wisdom is increased or decreased, relevant skills and savings throws reflect the change
+- [x] When charisma is increased or decreased, relevant skills and savings throws reflect the change
 
 Wizard
 ======
