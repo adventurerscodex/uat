@@ -7,3 +7,4 @@ class HUD(Component):
     """Definition of a HUD component."""
 
     character_name = Element(id_='characterNameLabel')
+    status_line = Element(xpath='//*[@id="characters"]/div/div/div/div[2]/div[1]/div/player-status-line')
