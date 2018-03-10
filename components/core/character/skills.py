@@ -36,4 +36,4 @@ class SkillsTable(Component):
 
     sort_by_skill = Element(id_='skillsTableSkillSortSpan')
     sort_by_proficiency = Element(id_='skillsTableProficiencySortSpan')
-    table = Element(id_='skillsTable')
+    table = Element(xpath='//*[@id="skills"]/div[3]/div[1]/skills/div[1]/div/table')

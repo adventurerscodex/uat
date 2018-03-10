@@ -17,3 +17,4 @@ class SavingThrowTable(Component):
 
     sort_by_saving_throw = Element(id_='savingThrowTableSortSavingThrowSpan')
     table = Element(id_='savingThrowTable')
+    edit_charisma = Element(xpath='//*[@id="savingThrowTable"]/tbody/tr[1]/td[1]')
