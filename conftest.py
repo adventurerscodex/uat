@@ -1,13 +1,17 @@
 """Test fixtures for selenium UAT for adventurer's codex."""
 
+import logging
 import pytest
 
 from selenium import webdriver
+from selenium.webdriver.remote.remote_connection import LOGGER
 
 from components.core.general.new_character_campaign import NewCharacterCampaign
 from components.core.character import wizard
 from components.core.dm.wizard import TellUsAStory
 from utils import utils as ut
+
+LOGGER.setLevel(logging.WARNING)
 
 
 def pytest_addoption(parser):
