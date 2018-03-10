@@ -58,8 +58,6 @@ Stats
 Skills
 ======
 
-- [ ] As a player, all changes I make to features, feats, traits, proficiencies, tracking, and skills persist after I refresh the browser
-
 - [x] As a player, if I select from feature name field, OGL data auto-completes and the remaining fields pre-populate
 
 - [x] As a player, if I select from in the feats name field, OGL data auto-completes and the remaining fields pre-populate
@@ -104,17 +102,15 @@ Skills
 
 - [x] As a plyer, if there is no proficiency, clicking the first row will open the add modal
 
-- [ ] As a player, I can view the tracking table, and determine by icon if the ability resets on a short or long rest
+- [x] As a player, I can increase or decrease tracked abilities with the stepper widget and the bar reflects these changes
 
-- [ ] As a player, I can reset tracked items by clicking on the refresh icon in the table
-
-- [ ] As a player, I can increase or decrease tracked abilities with the stepper widget and the bar reflects these changes
-
-- [ ] As a player, I can reset a tracked ability by clicking on the reset icon
+- [x] As a player, I can reset a tracked ability by clicking on the reset icon
 
 - [x] As a player, I can mark a skill as none, half, proficient, or expertise and view these modifiers, and they are calculated correctly
 
 - [x] As a player, I can view my passive score for each skill which is calculated correctly
+
+- [x] As a player, all changes I make to features, feats, traits, proficiencies, tracking, and skills persist after I refresh the browser
 
 Spells
 ======

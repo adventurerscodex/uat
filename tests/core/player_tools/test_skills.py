@@ -598,6 +598,68 @@ def test_edit_proficiency(player_wizard, browser): # noqa
     assert row.proficiency == 'Edited Name'
     assert row.type == 'Edited Type'
 
+def test_tracked_increase_decrease(player_wizard, browser): # noqa
+    """As a player, I can increase or decrease tracked abilities with the stepper widget and the bar reflects these changes."""
+
+    print('As a player, I can increase or decrease tracked abilities with the stepper widget and the bar reflects these changes.')
+
+    feature = features.FeatureAddModal(browser)
+    features_table = features.FeaturesTable(browser)
+    tracked_table = tracked.TrackedTable(browser)
+    tabs = Tabs(browser)
+    tabs.skills.click()
+
+    features_table.add.click()
+    feature.name = 'Add Name'
+    feature.class_ = 'Add Class'
+    feature.level = 1
+    feature.description = 'Add Description'
+    feature.tracked.click()
+    feature.max_.clear()
+    feature.max_ = 4
+    feature.short_rest.click()
+
+    feature.add.click()
+
+    tracked_table.tracked1_used_up.click()
+
+    assert tracked_table.tracked1_used.text == '1'
+
+    tracked_table.tracked1_used_down.click()
+
+    assert tracked_table.tracked1_used.text == '0'
+
+def test_tracked_reset(player_wizard, browser): # noqa
+    """As a player, I can reset a tracked ability by clicking on the reset icon."""
+
+    print('As a player, I can reset a tracked ability by clicking on the reset icon.')
+
+    feature = features.FeatureAddModal(browser)
+    features_table = features.FeaturesTable(browser)
+    tracked_table = tracked.TrackedTable(browser)
+    tabs = Tabs(browser)
+    tabs.skills.click()
+
+    features_table.add.click()
+    feature.name = 'Add Name'
+    feature.class_ = 'Add Class'
+    feature.level = 1
+    feature.description = 'Add Description'
+    feature.tracked.click()
+    feature.max_.clear()
+    feature.max_ = 4
+    feature.short_rest.click()
+
+    feature.add.click()
+
+    tracked_table.tracked1_used_up.click()
+
+    assert tracked_table.tracked1_used.text == '1'
+
+    tracked_table.tracked1_refresh.click()
+
+    assert tracked_table.tracked1_used.text == '0'
+
 def test_proficiency_types(player_wizard, browser): # noqa
     """As a player, I can mark a skill as none, half, proficient, or expertise and view these modifiers, and they are calculated correctly."""
 
@@ -657,3 +719,87 @@ def test_passive_score(player_wizard, browser): # noqa
     acrobatics = ut.get_table_row(skills_table, 'table')
 
     assert acrobatics.passive == '14'
+
+def test_data_persists(player_wizard, browser): # noqa
+    """As a player, all changes I make to features, feats, traits, proficiencies, tracking, and skills persist after I refresh the browser."""
+
+    print('As a player, all changes I make to features, feats, traits, proficiencies, tracking, and skills persist after I refresh the browser.')
+
+    feature = features.FeatureAddModal(browser)
+    features_table = features.FeaturesTable(browser)
+    feat = feats.FeatAddModal(browser)
+    feats_table = feats.FeatsTable(browser)
+    trait = traits.TraitAddModal(browser)
+    traits_table = traits.TraitsTable(browser)
+    tracked_table = tracked.TrackedTable(browser)
+    proficiency_add = proficiency.ProficiencyAddModal(browser)
+    proficiency_table = proficiency.ProficiencyTable(browser)
+    skills_table = skills.SkillsTable(browser)
+    skills_edit = skills.SkillsEditModal(browser)
+    tabs = Tabs(browser)
+    tabs.skills.click()
+
+    features_table.add.click()
+    feature.name = 'Add Name'
+    feature.class_ = 'Add Class'
+    feature.level = 1
+    feature.description = 'Add Description'
+    feature.tracked.click()
+    feature.max_.clear()
+    feature.max_ = 4
+    feature.short_rest.click()
+
+    feature.add.click()
+
+    time.sleep(.3)
+
+    feats_table.add.click()
+    ut.select_from_autocomplete(feat, 'name', '', browser)
+    feat.add.click()
+
+    time.sleep(.3)
+
+    traits_table.add.click()
+    ut.select_from_autocomplete(trait, 'name', '', browser)
+    trait.add.click()
+
+    time.sleep(.3)
+
+    proficiency_table.add.click()
+    ut.select_from_autocomplete(proficiency_add, 'name', '', browser)
+    proficiency_add.add.click()
+
+    time.sleep(.3)
+
+    acrobatics = ut.get_table_row(skills_table, 'table', values=False)
+    acrobatics[0].click()
+
+    time.sleep(.3)
+
+    skills_edit.half.click()
+    skills_edit.done.click()
+
+    time.sleep(.3)
+
+    browser.refresh()
+    time.sleep(.3)
+    row = ut.get_table_row(features_table, 'table', 1)
+
+    assert tracked_table.tracked1_name.text == 'Add Name'
+    assert tracked_table.tracked1_max.text == '4'
+    assert row.class_ == 'Add Class'
+    assert row.feature == 'Add Name'
+
+    row = ut.get_table_row(feats_table, 'table', 1)
+
+    assert row.feat == 'Grappler'
+
+    row = ut.get_table_row(traits_table, 'table', 1)
+
+    assert row.race == 'Dragonborn'
+    assert row.trait == 'Ability Score Increase'
+
+    row = ut.get_table_row(proficiency_table, 'table', 1)
+
+    assert row.type == 'Languages'
+    assert row.proficiency == 'Abyssal'
