@@ -15,7 +15,7 @@ from components.core.character.saving_throw import SavingThrowEditModal, SavingT
 from components.core.character.skills import SkillsTable
 from components.core.character.weapon import WeaponTable, WeaponAddModal
 from components.core.character.tabs import Tabs
-from expected_conditions.conditions import table_col_updated
+from expected_conditions.conditions import table_cell_updated
 from utils import utils as ut
 
 def test_strength_increase(player_wizard, browser): # noqa
@@ -37,7 +37,7 @@ def test_strength_increase(player_wizard, browser): # noqa
     ability_scores_edit.done.click()
 
     WebDriverWait(browser, 10).until(
-        table_col_updated(
+        table_cell_updated(
             saving_throw,
             'blank2',
             '+ 2',
@@ -92,7 +92,7 @@ def test_dexterity_increase(player_wizard, browser): # noqa
     ability_scores_edit.done.click()
 
     WebDriverWait(browser, 10).until(
-        table_col_updated(
+        table_cell_updated(
             saving_throw,
             'blank2',
             '+ 2',
@@ -140,7 +140,7 @@ def test_constitution_increase(player_wizard, browser): # noqa
     ability_scores_edit.done.click()
 
     WebDriverWait(browser, 10).until(
-        table_col_updated(
+        table_cell_updated(
             saving_throw,
             'blank2',
             '+ 2',
@@ -169,7 +169,7 @@ def test_intelligence_increase(player_wizard, browser): # noqa
     ability_scores_edit.done.click()
 
     WebDriverWait(browser, 10).until(
-        table_col_updated(
+        table_cell_updated(
             saving_throw,
             'blank2',
             '+ 2',
@@ -211,7 +211,7 @@ def test_wisdom_increase(player_wizard, browser): # noqa
     ability_scores_edit.done.click()
 
     WebDriverWait(browser, 10).until(
-        table_col_updated(
+        table_cell_updated(
             saving_throw,
             'blank2',
             '+ 2',
@@ -253,7 +253,7 @@ def test_charisma_increase(player_wizard, browser): # noqa
     ability_scores_edit.done.click()
 
     WebDriverWait(browser, 10).until(
-        table_col_updated(
+        table_cell_updated(
             saving_throw,
             'blank2',
             '+ 2',

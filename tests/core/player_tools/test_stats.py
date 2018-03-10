@@ -11,7 +11,7 @@ from components.core.character.health import HitPointHitDice, HitPointEditModal
 from components.core.character.other_stats import OtherStats
 from components.core.character.profile_picture import ProfilePicture
 from components.core.character.saving_throw import SavingThrowEditModal, SavingThrowTable
-from expected_conditions.conditions import table_col_updated
+from expected_conditions.conditions import table_cell_updated
 from utils import utils as ut
 
 
@@ -304,7 +304,7 @@ def test_saving_throw_modifier(player_wizard, browser): # noqa
     saving_throw_edit.done.click()
 
     WebDriverWait(browser, 10).until(
-        table_col_updated(
+        table_cell_updated(
             saving_throw,
             'blank2',
             '+ 5',
