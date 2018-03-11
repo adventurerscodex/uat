@@ -1,6 +1,6 @@
 """Health components."""
 
-from modules.element import Element, Component
+from modules.element import Element, Elements, Component
 
 
 class HitPointHitDice(Component):
@@ -15,6 +15,11 @@ class HitPointHitDice(Component):
     hitdice1 = Element(xpath='//*[@id="0"]')
     hitdice2 = Element(xpath='//*[@id="1"]')
     hitdice3 = Element(xpath='//*[@id="2"]')
+    toast_title = Element(xpath='//*[@id="toast-container"]/div/div[2]')
+    toast_message = Element(xpath='//*[@id="toast-container"]/div/div[3]')
+    death_successes_empty = Elements(class_name='ds-success-empty')
+    death_failures_empty = Elements(class_name='ds-failure-empty')
+    hit_dice_list = Element(xpath='//*[@id="stats"]/div[1]/div[2]/stats/div/div/div/div/div[2]/div')
     open_edit_modal = Element(xpath='//*[@id="stats"]/div[1]/div[2]/stats/div/div/div/div/table/tbody/tr/td[1]')
 
 

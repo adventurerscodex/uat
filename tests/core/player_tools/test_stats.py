@@ -14,11 +14,76 @@ from components.core.character.saving_throw import SavingThrowEditModal, SavingT
 from expected_conditions.conditions import table_cell_updated
 from utils import utils as ut
 
+def test_data_persists(player_wizard, browser): # noqa
+    """As a player, all changes I make to hit points, hit dice, ability scores, savings throws, and other stats persist after I refresh the browser."""
+
+    print('As a player, all changes I make to hit points, hit dice, ability scores, savings throws, and other stats persist after I refresh the browser.')
+
+    ability_scores_edit = AbilityScoresEditModal(browser)
+    ability_scores_table = AbilityScoresTable(browser)
+    hp_hd = HitPointHitDice(browser)
+    other_stats = OtherStats(browser)
+    saving_throw = SavingThrowTable(browser)
+    saving_throw_edit = SavingThrowEditModal(browser)
+
+    ability_scores_table.table.click()
+    ability_scores_edit.strength = 15
+    ability_scores_edit.done.click()
+
+    time.sleep(.3)
+
+    hp_hd.damage_up.click()
+
+    hp_hd.hitdice1.click()
+
+    row = ut.get_table_row(saving_throw, 'table', values=False)
+    # open edit modal
+    row[0].click()
+    saving_throw_edit.modifier = 1
+    saving_throw_edit.proficiency.click()
+    saving_throw_edit.done.click()
+
+    other_stats.ac_modifier = 1
+    other_stats.ac_modifier.send_keys(Keys.TAB)
+
+    other_stats.initiative_modifier = 1
+    other_stats.initiative_modifier.send_keys(Keys.TAB)
+
+    other_stats.proficiency_bonus_modifier = 1
+    other_stats.proficiency_bonus_modifier.send_keys(Keys.TAB)
+
+    other_stats.speed = 40
+    other_stats.speed.send_keys(Keys.TAB)
+
+    other_stats.level = 3
+    other_stats.level.send_keys(Keys.TAB)
+
+    other_stats.experience = 2000
+    other_stats.experience.send_keys(Keys.TAB)
+
+    browser.refresh()
+
+    row = ut.get_table_row(saving_throw, 'table', values=False)
+    proficieny = row[0].find_elements(By.TAG_NAME, 'span')
+
+    charisma = ut.get_table_row(saving_throw, 'table')
+
+    assert ability_scores_table.strength.text == '15'
+    assert hp_hd.hit_points_bar_label.text == 'HP: 9'
+    assert hp_hd.hitdice1.get_attribute('class') == 'dice-empty'
+    assert charisma.blank2 == '+ 8'
+    assert proficieny[0].get_attribute('class') == 'fa fa-check'
+    assert other_stats.initiative.text == '5'
+    assert other_stats.proficiency_bonus.text == '3'
+    assert other_stats.speed.get_attribute('value') == '40'
+    assert other_stats.level.get_attribute('value') == '3'
+    assert other_stats.experience.get_attribute('value') == '2000'
 
 def test_edit_ability_scores(player_wizard, browser): # noqa
     """As a player, I can edit my ability scores."""
 
     print('As a player, I can edit my ability scores.')
+
     ability_scores_edit = AbilityScoresEditModal(browser)
     ability_scores_table = AbilityScoresTable(browser)
 
@@ -51,6 +116,7 @@ def test_ability_scores_modifiers(player_wizard, browser): # noqa
     """As a player, I can view my ability score modifiers."""
 
     print('As a player, I can view my ability score modifiers.')
+
     ability_scores_edit = AbilityScoresEditModal(browser)
     ability_scores_table = AbilityScoresTable(browser)
 
@@ -139,6 +205,128 @@ def test_hp_reset(player_wizard, browser): # noqa
     hp_hd.reset.click()
 
     assert hp_hd.hit_points_bar_label.text == 'HP: 10'
+
+def test_hit_dice_clickable(player_wizard, browser): # noqa
+    """As a player, hit dice are clickable and images change when clicked."""
+
+    print('As a player, hit dice are clickable and images change when clicked.')
+
+    hp_hd = HitPointHitDice(browser)
+
+    assert hp_hd.hitdice1.get_attribute('class') == 'dice-full'
+
+    hp_hd.hitdice1.click()
+
+    assert hp_hd.hitdice1.get_attribute('class') == 'dice-empty'
+
+def test_hit_dice_persists(player_wizard, browser): # noqa
+    """As a player, if I click on a hit die, the changes persist after I refresh the browser."""
+
+    print('As a player, if I click on a hit die, the changes persist after I refresh the browser.')
+
+    hp_hd = HitPointHitDice(browser)
+    hp_hd.hitdice1.click()
+
+    assert hp_hd.hitdice1.get_attribute('class') == 'dice-empty'
+
+    browser.refresh()
+
+    assert hp_hd.hitdice1.get_attribute('class') == 'dice-empty'
+
+def test_hit_dice_level(player_wizard, browser): # noqa
+    """As a player, if I change the value in the level field, the number of hit dice match the level number."""
+
+    print('As a player, if I change the value in the level field, the number of hit dice match the level number.')
+
+    hp_hd = HitPointHitDice(browser)
+    other_stats = OtherStats(browser)
+
+    other_stats.level = 3
+    other_stats.level.send_keys(Keys.TAB)
+
+    hit_dice_count = len(hp_hd.hit_dice_list.find_elements_by_tag_name('span'))
+
+    assert hit_dice_count == 3
+
+def test_death_saves_clickable(player_wizard, browser): # noqa
+    """As a player, death save successes and failures are clickable and images change when clicked."""
+
+    print('As a player, death save successes and failures are clickable and images change when clicked.')
+
+    hp_hd = HitPointHitDice(browser)
+
+    # reduce character to 0 hit points
+    for i in range(10):
+        hp_hd.damage_up.click()
+
+    success = hp_hd.death_successes_empty[0]
+    success.click()
+
+    failure = hp_hd.death_failures_empty[0]
+    failure.click()
+
+    assert success.get_attribute('class') == 'ds-success-full'
+    assert failure.get_attribute('class') == 'ds-failure-full'
+
+def test_death_saves_persist(player_wizard, browser): # noqa
+    """As a player, death save changes persist after I refresh the browser."""
+
+    print('As a player, death save changes persist after I refresh the browser.')
+
+    hp_hd = HitPointHitDice(browser)
+
+    # reduce character to 0 hit points
+    for i in range(10):
+        hp_hd.damage_up.click()
+
+    success = hp_hd.death_successes_empty[0]
+    success.click()
+
+    failure = hp_hd.death_failures_empty[0]
+    failure.click()
+
+    browser.refresh()
+
+    assert len(hp_hd.death_successes_empty) == 2
+    assert len(hp_hd.death_failures_empty) == 2
+
+def test_character_stable_alert(player_wizard, browser): # noqa
+    """If 3 death save success are clicked, an alert indicating the player is stable is presented."""
+
+    print('If 3 death save success are clicked, an alert indicating the player is stable is presented.')
+
+    hp_hd = HitPointHitDice(browser)
+
+    # reduce character to 0 hit points
+    for i in range(10):
+        hp_hd.damage_up.click()
+
+    successes = hp_hd.death_successes_empty
+    successes[0].click()
+    successes[1].click()
+    successes[2].click()
+
+    assert hp_hd.toast_title.text == 'You are now stable.'
+    assert hp_hd.toast_message.text == 'You have been spared...for now.'
+
+def test_character_dead_alert(player_wizard, browser): # noqa
+    """If 3 death save success are clicked, an alert indicating the player is dead is presented."""
+
+    print('If 3 death save success are clicked, an alert indicating the player is dead is presented.')
+
+    hp_hd = HitPointHitDice(browser)
+
+    # reduce character to 0 hit points
+    for i in range(10):
+        hp_hd.damage_up.click()
+
+    failures = hp_hd.death_failures_empty
+    failures[0].click()
+    failures[1].click()
+    failures[2].click()
+
+    assert hp_hd.toast_title.text == 'You have died.'
+    assert hp_hd.toast_message.text == 'Failing all 3 death saves will do that...'
 
 def test_initiative_calculation(player_wizard, browser): # noqa
     """As a player, initiative is correctly calculated."""

@@ -1,7 +1,7 @@
 Stats
 =====
 
-- [ ] As a player, all changes I make to hit points, hit dice, ability scores, savings throws, and other stats persist after I refresh the browser
+- [x] As a player, all changes I make to hit points, hit dice, ability scores, savings throws, and other stats persist after I refresh the browser
 
 - [x] As a player, I can edit my ability scores
 
@@ -15,21 +15,19 @@ Stats
 
 - [x] As a player, I can see the hit points bar change colors at certain intervals as hit points decrease
 
-- [ ] As a player, hit dice are clickable and images change when clicked
+- [x] As a player, hit dice are clickable and images change when clicked
 
-- [ ] As a player, if I click on a hit die, the changes persist after I refresh the browser
+- [x] As a player, if I click on a hit die, the changes persist after I refresh the browser
 
-- [ ] As a player, if I change the value in the level field, the number of hit dice match the level number
+- [x] As a player, if I change the value in the level field, the number of hit dice match the level number
 
-- [ ] As a player, death save successes and failures are clickable and images change when clicked
+- [x] As a player, death save successes and failures are clickable and images change when clicked
 
-- [ ] As a player, death save changes persist after I refresh the browser
+- [x] As a player, death save changes persist after I refresh the browser
 
-- [ ] If 3 death save success are clicked, an alert indicating the player is stable is presented
+- [x] If 3 death save success are clicked, an alert indicating the player is stable is presented
 
-- [ ] If 3 death save failures are clicked, an alert indicating the player is unconscious is presented
-
-- [ ] As a player, armor class is correctly calculated
+- [x] If 3 death save failures are clicked, an alert indicating the player is dead is presented
 
 - [x] As a player, initiative is correctly calculated
 
@@ -320,8 +318,6 @@ Global Page
 
 - [ ] As a player, export link is functional
 
-- [ ] As a player, manage party link is functional
-
 - [ ] As a player, actions button is functional
 
 - [ ] As a player, long and short resting is functional including toastr notifications
@@ -362,15 +358,14 @@ Global Page
 Calculations
 ============
 
-When level is altered, verify the following:
-
-- [x] Proficiency calculation reflects the change
 - [x] When strength is increased or decreased, relevant skills, savings throws, to hit, and encumbrance reflect the change
 - [x] When dexterity is increased or decreased, relevant skills, savings throws, initiative, and to hit (finesse weapons) reflect the change
 - [x] When constitution is increased or decreased, relevant skills reflect the change
 - [x] When intelligence is increased or decreased, relevant skills and savings throws reflect the change
 - [x] When wisdom is increased or decreased, relevant skills and savings throws reflect the change
 - [x] When charisma is increased or decreased, relevant skills and savings throws reflect the change
+
+- [ ] As a player, armor class is correctly calculated
 
 Wizard
 ======
