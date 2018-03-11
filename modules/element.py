@@ -25,7 +25,7 @@ class Component:
 
 
 class Element:
-    """Class definition of a selenium DOM element."""
+    """Class definition of a selenium element object."""
 
     def __init__(self, **kwargs):
         """Populate values."""
@@ -53,3 +53,28 @@ class Element:
         element.send_keys()
         element.clear()
         element.send_keys(value)
+
+
+class Elements:
+    """Class definition of multiple selenium element objects."""
+
+    def __init__(self, **kwargs):
+        """Populate values."""
+        key, value = next(iter(kwargs.items()))
+        self.locating_key = LOCATOR_MAP[key]
+        self.locating_value = value
+
+    def __get__(self, obj, objtype):
+        """Descriptor for retrieving element."""
+        # from pdb import set_trace; set_trace()
+        elements = WebDriverWait(obj.browser, 5).until(
+            EC.presence_of_all_elements_located(
+                (self.locating_key, self.locating_value)
+            )
+        )
+
+        return elements
+
+    def __set__(self, obj, value):
+        """Descriptor for setting a value."""
+        raise('Setting values not supported for this object.')
