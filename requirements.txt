@@ -2,11 +2,15 @@ attrs==17.4.0
 beautifulsoup4==4.6.0
 certifi==2018.1.18
 chardet==3.0.4
+factory-boy==2.10.0
+Faker==0.8.11
 idna==2.6
 pluggy==0.6.0
 py==1.5.2
 pytest==3.3.2
+python-dateutil==2.6.1
 requests==2.18.4
 selenium==3.8.1
 six==1.11.0
+text-unidecode==1.2
 urllib3==1.22

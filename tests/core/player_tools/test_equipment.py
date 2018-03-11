@@ -2,9 +2,11 @@
 import time
 
 from selenium.webdriver.support import expected_conditions as EC # noqa
+from selenium.webdriver.common.keys import Keys
 
 from components.core.character import armor, weapon
 from components.core.character.tabs import Tabs
+from factories.core.character.armor import ArmorFactory
 from utils import utils as ut
 
 
@@ -474,34 +476,41 @@ def test_add_armor(player_wizard, browser): # noqa
     tabs = Tabs(browser)
     tabs.equipment.click()
 
-    armor_table.add.click()
-    armor_add.name = 'Add Name'
-    armor_add.type_ = 'Add Type'
-    armor_add.magical_modifier = 1
-    armor_add.price = 200
-    armor_add.currency_denomination = 'GP'
-    armor_add.weight = 100
-    armor_add.armor_class = 15
-    armor_add.stealth = 'Disadvantage\t'
-    armor_add.don.click()
-    armor_add.description = 'Add Description'
+    stub = ArmorFactory.stub()
 
-    assert armor_add.name.get_attribute('value') == 'Add Name'
-    assert armor_add.type_.get_attribute('value') == 'Add Type'
-    assert armor_add.magical_modifier.get_attribute('value') == '1'
-    assert armor_add.price.get_attribute('value') == '200'
-    assert armor_add.currency_denomination.get_attribute('value') == 'GP'
-    assert armor_add.weight.get_attribute('value') == '100'
-    assert armor_add.armor_class.get_attribute('value') == '15'
-    assert armor_add.stealth.get_attribute('value') == 'Disadvantage'
+    armor_table.add.click()
+    armor_add.name = stub.name
+    armor_add.type_ = stub.type_
+    armor_add.magical_modifier = stub.magical_modifier
+    armor_add.price = stub.price
+    armor_add.currency_denomination = stub.currency_denomination
+    armor_add.weight = stub.weight
+    armor_add.armor_class = stub.armor_class
+    armor_add.stealth = stub.stealth
+    armor_add.stealth.send_keys(Keys.TAB)
+    armor_add.don.click()
+    armor_add.description = stub.description
+
+    assert armor_add.name.get_attribute('value') == stub.name
+    assert armor_add.type_.get_attribute('value') == stub.type_
+    assert armor_add.magical_modifier.get_attribute('value') == str(
+        stub.magical_modifier
+    )
+    assert armor_add.price.get_attribute('value') == str(stub.price)
+    assert armor_add.currency_denomination.get_attribute('value') == stub.currency_denomination
+    assert armor_add.weight.get_attribute('value') == str(stub.weight)
+    assert armor_add.armor_class.get_attribute('value') == str(stub.armor_class)
+    assert armor_add.stealth.get_attribute('value') == stub.stealth
     assert 'active' in armor_add.don.get_attribute('class')
-    assert armor_add.description.get_attribute('value') == 'Add Description'
+    assert armor_add.description.get_attribute('value') == stub.description
     armor_add.add.click()
 
     row = ut.get_table_row(armor_table, 'table', 1)
-    assert row.armor == 'Add Name  + 1'
-    assert row.armor_class == '15'
-    assert row.type == 'Add Type'
+    assert row.armor == '{}  + {}'.format(
+        stub.name, stub.magical_modifier
+    )
+    assert row.armor_class == str(stub.armor_class)
+    assert row.type == stub.type_
 
 def test_delete_armor(player_wizard, browser): # noqa
     """As a player, I can delete an armor."""
