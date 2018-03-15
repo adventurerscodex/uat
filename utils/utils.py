@@ -86,6 +86,9 @@ def get_table_rows(element_,
 
     rows = table.find_elements(By.TAG_NAME, 'tr')
 
+    # remove headers
+    rows.pop(0)
+
     if values:
         Row = named_tuple_from_headers(headers) # noqa
         output = []
@@ -97,8 +100,7 @@ def get_table_rows(element_,
         return output
 
     output = []
-    # remove headers
-    rows.pop(0)
+
     for tr in rows:
         row = tr.find_elements(By.TAG_NAME, 'td')
         output.append(row)
