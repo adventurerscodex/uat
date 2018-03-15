@@ -4,6 +4,7 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.support import expected_conditions as EC # noqa
 
 from components.core.general.new_character_campaign import NewCharacterCampaign
+from components.core.character import inventory
 from components.core.character import wizard
 from components.core.character.tabs import Tabs
 from components.core.character.profile import Profile
@@ -232,3 +233,61 @@ def test_wizard_profile_stats(browser): # noqa
 
     assert stats.level.get_attribute('value') == '3'
     assert stats.experience.get_attribute('value') == '1000'
+
+def test_wizard_backpack_prepop(browser): # noqa
+    """As a player, after selecting a backpack, all items are pre-populated in the inventory module."""
+    print('As a player, after selecting a backpack, all items are pre-populated in the inventory module.')
+
+    wizard_main = NewCharacterCampaign(browser)
+    who_are_you = wizard.WhoAreYou(browser)
+    ability_scores = wizard.AbilityScoresManual(browser)
+    tabs = Tabs(browser)
+    inventory_table = inventory.InventoryTable(browser)
+
+    wizard_main.get_started.click()
+    wizard_main.player.click()
+    wizard_main.next_.click()
+
+    who_are_you.character_name = 'Test Char'
+    who_are_you.player_name = 'Automated Testing Bot.'
+    ut.select_from_autocomplete(who_are_you, 'backpack', '', browser)
+
+    wizard_main.next_.click()
+
+    ability_scores.strength = '18'
+    ability_scores.dexterity = '18'
+    ability_scores.constitution = '18'
+    ability_scores.intelligence = '18'
+    ability_scores.wisdom = '18'
+    ability_scores.charisma = '18'
+
+    wizard_main.finish.click()
+
+    tabs.inventory.click()
+
+    rows = ut.get_table_rows(inventory_table, 'table')
+
+    assert rows[0].item == 'Backpack'
+    assert rows[0].quantity == '1'
+    assert rows[0].weight == '5 lbs.'
+    assert rows[0].cost == '2 GP'
+    assert rows[0].description == ''
+
+    assert rows[1].item == 'Ball bearings (bag of 1000)'
+    assert rows[2].item == 'Bell'
+    assert rows[3].item == 'Candle'
+    assert rows[4].item == 'Crowbar'
+    assert rows[5].item == 'Hammer'
+    assert rows[6].item == 'Lantern hooded'
+    assert rows[7].item == 'Oil (flask)'
+    assert rows[8].item == 'Piton'
+    assert rows[9].item == 'Rations (1 day)'
+    assert rows[10].item == 'Rope hempen (50 feet)'
+    assert rows[11].item == 'String (10 feet)'
+    assert rows[12].item == 'Tinderbox'
+
+    assert rows[13].item == 'Waterskin'
+    assert rows[13].quantity == '1'
+    assert rows[13].weight == '5 lbs.'
+    assert rows[13].cost == '2 SP'
+    assert rows[13].description == '(full)'
