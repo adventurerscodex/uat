@@ -418,7 +418,7 @@ Wizard
 
 - [x] As a player, after creating a character via the character creation wizard, I can view all the data entered in the stats and profile modules
 
-- [ ] As a player, after selecting a backpack, all items are pre-populated in the inventory module
+- [x] As a player, after selecting a backpack, all items are pre-populated in the inventory module
 
 - [ ] As a player, the point buy method is functional and I can't proceed until I have zero points left
 
