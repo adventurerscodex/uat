@@ -4,7 +4,10 @@ import logging
 import pytest
 
 from selenium import webdriver
+from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.remote_connection import LOGGER
+from selenium.webdriver.support import expected_conditions as EC # noqa
+from selenium.webdriver.support.ui import WebDriverWait
 
 from components.core.general.new_character_campaign import NewCharacterCampaign
 from components.core.character import wizard
@@ -89,6 +92,12 @@ def player_wizard(browser):
 
     who_are_you.character_name = 'Test Char'
     who_are_you.player_name = 'Automated Testing Bot.'
+
+    WebDriverWait(browser, 10).until(
+        EC.element_to_be_clickable(
+            (By.ID, wizard_main.next_id)
+        )
+    )
 
     wizard_main.next_.click()
 

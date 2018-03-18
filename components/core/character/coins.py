@@ -6,10 +6,18 @@ from modules.element import Element, Component
 class Coins(Component):
     """Definition of coins component."""
 
-    platinum = Element(id_='coinsPlatinumInput')
-    gold = Element(id_='coinsGoldInput')
-    electrum = Element(id_='coinsElectrumInput')
-    silver = Element(id_='coinsSilverInput')
-    copper = Element(id_='coinsCopperInput')
-    worth_in_gold = Element(id_='coinsWorthInGoldLabel')
-    total_weight = Element(id_='coinsTotalWeightLabel')
+    platinum_id = 'coinsPlatinumInput'
+    gold_id = 'coinsGoldInput'
+    electrum_id = 'coinsElectrumInput'
+    silver_id = 'coinsSilverInput'
+    copper_id = 'coinsCopperInput'
+    worth_in_gold_id = 'coinsWorthInGoldLabel'
+    total_weight_id = 'coinsTotalWeightLabel'
+
+    platinum = Element(id_=platinum_id)
+    gold = Element(id_=gold_id)
+    electrum = Element(id_=electrum_id)
+    silver = Element(id_=silver_id)
+    copper = Element(id_=copper_id)
+    worth_in_gold = Element(id_=worth_in_gold_id)
+    total_weight = Element(id_=total_weight_id)

@@ -6,36 +6,58 @@ from modules.element import Element, Component
 class FeatAddModal(Component):
     """Definition of feat add modal component."""
 
-    name = Element(id_='featAddNameInput')
-    description = Element(id_='featAddDescriptionTextarea')
-    tracked = Element(id_='featAddTrackedCheckbox')
-    max_ = Element(id_='featAddMaxInput')
-    short_rest = Element(id_='featAddShortRestInput')
-    long_rest = Element(id_='featAddLongRestInput')
-    add = Element(id_='featAddAddButton')
+    name_id = 'featAddNameInput'
+    description_id = 'featAddDescriptionTextarea'
+    tracked_id = 'featAddTrackedCheckbox'
+    max_id = 'featAddMaxInput'
+    short_rest_id = 'featAddShortRestInput'
+    long_rest_id = 'featAddLongRestInput'
+    add_id = 'featAddAddButton'
+
+    name = Element(id_=name_id)
+    description = Element(id_=description_id)
+    tracked = Element(id_=tracked_id)
+    max_ = Element(id_=max_id)
+    short_rest = Element(id_=short_rest_id)
+    long_rest = Element(id_=long_rest_id)
+    add = Element(id_=add_id)
 
 
 class FeatEditModal(Component):
     """Definition of feat edit modal component."""
 
-    name = Element(id_='featEditNameInput')
-    description = Element(id_='featEditDescriptionTextarea')
-    tracked = Element(id_='featEditTrackedCheckbox')
-    max_ = Element(id_='featEditMaxInput')
-    short_rest = Element(id_='featEditShortRestInput')
-    long_rest = Element(id_='featEditLongRestInput')
-    done = Element(id_='featEditDoneButton')
+    name_id = 'featEditNameInput'
+    description_id = 'featEditDescriptionTextarea'
+    tracked_id = 'featEditTrackedCheckbox'
+    max_id = 'featEditMaxInput'
+    short_rest_id = 'featEditShortRestInput'
+    long_rest_id = 'featEditLongRestInput'
+    done_id = 'featEditDoneButton'
+
+    name = Element(id_=name_id)
+    description = Element(id_=description_id)
+    tracked = Element(id_=tracked_id)
+    max_ = Element(id_=max_id)
+    short_rest = Element(id_=short_rest_id)
+    long_rest = Element(id_=long_rest_id)
+    done = Element(id_=done_id)
 
 
 class FeatModalTabs(Component):
     """Definition of feat modal tabs component."""
 
-    preview = Element(id_='featModalPreview')
-    edit = Element(id_='featModalEdit')
+    preview_id = 'featModalPreview'
+    edit_id = 'featModalEdit'
+
+    preview = Element(id_=preview_id)
+    edit = Element(id_=edit_id)
 
 
 class FeatsTable(Component):
     """Definition of feats edit modal componenet."""
 
-    add = Element(id_='featAddIcon')
-    table = Element(id_='featTable')
+    add_id = 'featAddIcon'
+    table_id = 'featTable'
+
+    add = Element(id_=add_id)
+    table = Element(id_=table_id)

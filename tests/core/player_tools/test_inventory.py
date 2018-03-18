@@ -1,7 +1,10 @@
 """UAT test file for Adventurer's Codex player tools inventory module."""
 import time
 
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC # noqa
+from selenium.webdriver.support.ui import WebDriverWait
 
 from components.core.character import inventory, coins, magic_items
 from components.core.character.tabs import Tabs
@@ -55,7 +58,16 @@ def test_delete_inventory(player_wizard, browser): # noqa
     inventory_add.add.click()
 
     rows = ut.get_table_rows(inventory_table, 'table', values=False)
-    time.sleep(.3)
+    WebDriverWait(browser, 10).until(
+        EC.invisibility_of_element_located(
+            (By.CLASS_NAME, 'modal-backdrop fade')
+        )
+    )
+    WebDriverWait(browser, 10).until(
+        EC.invisibility_of_element_located(
+            (By.ID, 'addItem')
+        )
+    )
     rows[0][5].find_element_by_tag_name('a').click()
     rows = ut.get_table_rows(inventory_table, 'table', values=False)
 
@@ -477,7 +489,16 @@ def test_delete_magic_items(player_wizard, browser): # noqa
     magic_items_add.add.click()
 
     rows = ut.get_table_rows(magic_items_table, 'table', values=False)
-    time.sleep(.3)
+    WebDriverWait(browser, 10).until(
+        EC.invisibility_of_element_located(
+            (By.CLASS_NAME, 'modal-backdrop fade')
+        )
+    )
+    WebDriverWait(browser, 10).until(
+        EC.invisibility_of_element_located(
+            (By.ID, 'addMagicItem')
+        )
+    )
     rows[0][5].find_element_by_tag_name('a').click()
     rows = ut.get_table_rows(magic_items_table, 'table', values=False)
 

@@ -6,5 +6,8 @@ from modules.element import Element, Component
 class DMOverview(Component):
     """Definition of dm overview component."""
 
-    setting = Element(id_='dmOverviewSettingInput')
-    dm_name = Element(id_='dmOverviewDMNameInput')
+    setting_id = 'dmOverviewSettingInput'
+    dm_name_id = 'dmOverviewDMNameInput'
+
+    setting = Element(id_=setting_id)
+    dm_name = Element(id_=dm_name_id)

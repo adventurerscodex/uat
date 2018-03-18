@@ -26,6 +26,17 @@ class table_has_data:  # noqa
 
         return len(tds) > 1
 
+class element_is_clickable:  # noqa
+    """Wait element is clickable."""
+
+    def __init__(self, element):
+        """Init expected condition."""
+        self.element = element
+
+    def __call__(self, driver):
+        """Test if element is clickable."""
+        return all([self.element.is_enabled(), self.element.is_displayed()])
+
 class table_cell_updated: # noqa
     """Wait until cell data has updated."""
 

@@ -6,8 +6,14 @@ from modules.element import Element, Component
 class Appearance(Component):
     """Definition of appearance componenet."""
 
-    height = Element(id_='appearanceHeightInput')
-    weight = Element(id_='appearanceWeightInput')
-    hair_color = Element(id_='appearanceHairColorInput')
-    eye_color = Element(id_='appearanceEyeColorInput')
-    skin_color = Element(id_='appearanceSkinColorInput')
+    height_id = 'appearanceHeightInput'
+    weight_id = 'appearanceWeightInput'
+    hair_color_id = 'appearanceHairColorInput'
+    eye_color_id = 'appearanceEyeColorInput'
+    skin_color_id = 'appearanceSkinColorInput'
+
+    height = Element(id_=height_id)
+    weight = Element(id_=weight_id)
+    hair_color = Element(id_=hair_color_id)
+    eye_color = Element(id_=eye_color_id)
+    skin_color = Element(id_=skin_color_id)

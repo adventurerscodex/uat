@@ -45,13 +45,18 @@ class Element:
 
     def __set__(self, obj, value):
         """Descriptor for setting a value."""
-        element = WebDriverWait(obj.browser, 5).until(
+        element = WebDriverWait(obj.browser, 10).until(
             EC.presence_of_element_located(
                 (self.locating_key, self.locating_value)
             )
         )
         element.send_keys()
-        element.clear()
+        # TODO: this is a workaround for firefox
+        try:
+            element.clear()
+        except:
+            pass
+
         element.send_keys(value)
 
 

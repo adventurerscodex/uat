@@ -1,11 +1,14 @@
 """UAT test file for Adventurer's Codex player tools equipment module."""
 import time
 
-from selenium.webdriver.support import expected_conditions as EC # noqa
+from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support import expected_conditions as EC # noqa
+from selenium.webdriver.support.ui import WebDriverWait
 
 from components.core.character import armor, weapon
 from components.core.character.tabs import Tabs
+from expected_conditions.conditions import element_is_clickable
 from factories.core.character.armor import ArmorFactory
 from utils import utils as ut
 
@@ -54,6 +57,7 @@ def test_add_weapon(player_wizard, browser): # noqa
     weapon_add.add.click()
 
     row = ut.get_table_row(weapon_table, 'table', 1)
+
     assert row.weapon == 'Add Name  + 1'
     assert row.to_hit == '+ 9'
     assert row.damage == 'Add Damage'
@@ -76,8 +80,20 @@ def test_delete_weapon(player_wizard, browser): # noqa
     weapon_add.add.click()
 
     rows = ut.get_table_rows(weapon_table, 'table', values=False)
-    time.sleep(.3)
+
+    WebDriverWait(browser, 20).until(
+        EC.invisibility_of_element_located(
+            (By.CLASS_NAME, 'modal-backdrop fade')
+        )
+    )
+    WebDriverWait(browser, 20).until(
+        EC.invisibility_of_element_located(
+            (By.ID, 'addWeapon')
+        )
+    )
+
     rows[0][7].find_element_by_tag_name('a').click()
+
     rows = ut.get_table_rows(weapon_table, 'table', values=False)
 
     assert rows[0][0].text == 'Add a new weapon'
@@ -99,11 +115,33 @@ def test_edit_weapon(player_wizard, browser): # noqa
     weapon_add.add.click()
 
     rows = ut.get_table_rows(weapon_table, 'table', values=False)
-    time.sleep(.3)
+
+    WebDriverWait(browser, 20).until(
+        EC.invisibility_of_element_located(
+            (By.CLASS_NAME, 'modal-backdrop fade')
+        )
+    )
+    WebDriverWait(browser, 20).until(
+        EC.invisibility_of_element_located(
+            (By.ID, 'addWeapon')
+        )
+    )
+
     rows[0][0].click()
-    time.sleep(.3)
+
+    WebDriverWait(browser, 10).until(
+        EC.element_to_be_clickable(
+            (By.ID, 'weaponModalEditTab')
+        )
+    )
+
     weapon_tabs.edit.click()
-    time.sleep(.3)
+
+    WebDriverWait(browser, 10).until(
+        EC.presence_of_element_located(
+            (By.ID, 'weaponEditNameInput')
+        )
+    )
 
     weapon_edit.name = 'Edit Name'
     weapon_edit.damage = '1d10'
@@ -137,8 +175,21 @@ def test_edit_weapon(player_wizard, browser): # noqa
     assert weapon_edit.quantity.get_attribute('value') == '2'
     assert weapon_edit.description.get_attribute('value') == 'Edit Description'
     weapon_edit.done.click()
-    time.sleep(.3)
+
+    WebDriverWait(browser, 20).until(
+        EC.invisibility_of_element_located(
+            (By.CLASS_NAME, 'modal-backdrop fade')
+        )
+    )
+
+    WebDriverWait(browser, 20).until(
+        EC.invisibility_of_element_located(
+            (By.ID, 'editWeapon')
+        )
+    )
+
     row = ut.get_table_row(weapon_table, 'table', 1)
+
     assert row.weapon == 'Edit Name  + 2'
     assert row.to_hit == '+ 10'
     assert row.damage == '1d10'
@@ -161,11 +212,26 @@ def test_preview_weapon(player_wizard, browser): # noqa
     ut.select_from_autocomplete(weapon_add, 'name', '', browser)
     weapon_add.add.click()
 
-    time.sleep(.3)
+    WebDriverWait(browser, 20).until(
+        EC.invisibility_of_element_located(
+            (By.CLASS_NAME, 'modal-backdrop fade')
+        )
+    )
+    WebDriverWait(browser, 20).until(
+        EC.invisibility_of_element_located(
+            (By.ID, 'addWeapon')
+        )
+    )
+
     row = ut.get_table_row(weapon_table, 'table', values=False)
-    time.sleep(.3)
+
     row[0].click()
-    time.sleep(.5)
+
+    WebDriverWait(browser, 10).until(
+        EC.element_to_be_clickable(
+            (By.XPATH, '//*[@id="weaponsModalPreview"]/div[4]/button')
+        )
+    )
 
     assert weapon_preview.name.text == 'Battleaxe'
     assert weapon_preview.magical_modifier.text == ''
@@ -257,9 +323,20 @@ def test_weapon_magical_modifier(player_wizard, browser): # noqa
     weapon_add.magical_modifier = 3
 
     weapon_add.add.click()
-    time.sleep(.5)
+
+    WebDriverWait(browser, 20).until(
+        EC.invisibility_of_element_located(
+            (By.CLASS_NAME, 'modal-backdrop fade')
+        )
+    )
+    WebDriverWait(browser, 20).until(
+        EC.invisibility_of_element_located(
+            (By.ID, 'addWeapon')
+        )
+    )
 
     row = ut.get_table_row(weapon_table, 'table', 1)
+
     assert row.weapon == 'Add Name  + 3'
 
 
@@ -326,7 +403,16 @@ def test_weapon_total_weight(player_wizard, browser): # noqa
     ut.select_from_autocomplete(weapon_add, 'name', '', browser)
     weapon_add.add.click()
 
-    time.sleep(.3)
+    WebDriverWait(browser, 20).until(
+        EC.invisibility_of_element_located(
+            (By.CLASS_NAME, 'modal-backdrop fade')
+        )
+    )
+    WebDriverWait(browser, 20).until(
+        EC.invisibility_of_element_located(
+            (By.ID, 'addWeapon')
+        )
+    )
 
     weapon_table.add.click()
     ut.select_from_autocomplete(weapon_add, 'name', '', browser)
@@ -345,14 +431,31 @@ def test_melee_ft(player_wizard, browser): # noqa
     tabs.equipment.click()
 
     weapon_table.add.click()
+
     weapon_add.name = 'Test name'
     weapon_add.type_ = 'Melee'
-    time.sleep(.3)
+
+    WebDriverWait(browser, 10).until(
+        EC.element_to_be_clickable(
+            (By.ID, weapon_add.add_id)
+        )
+    )
+
     weapon_add.add.click()
 
-    time.sleep(.3)
+    WebDriverWait(browser, 20).until(
+        EC.invisibility_of_element_located(
+            (By.CLASS_NAME, 'modal-backdrop fade')
+        )
+    )
+    WebDriverWait(browser, 20).until(
+        EC.invisibility_of_element_located(
+            (By.ID, 'addWeapon')
+        )
+    )
 
     row = ut.get_table_row(weapon_table, 'table', values=False)
+
     assert row[4].text == '5 ft.'
 
 
@@ -369,12 +472,23 @@ def test_ranged_ft(player_wizard, browser): # noqa
     weapon_add.name = 'Test name'
     weapon_add.type_ = 'Ranged'
     weapon_add.range_ = '25'
-    time.sleep(.3)
+
     weapon_add.add.click()
 
-    time.sleep(.3)
+    WebDriverWait(browser, 20).until(
+        EC.invisibility_of_element_located(
+            (By.CLASS_NAME, 'modal-backdrop fade')
+        )
+    )
+
+    WebDriverWait(browser, 20).until(
+        EC.invisibility_of_element_located(
+            (By.ID, 'addWeapon')
+        )
+    )
 
     row = ut.get_table_row(weapon_table, 'table', values=False)
+
     assert row[4].text == '25 ft.'
 
 
@@ -394,9 +508,20 @@ def test_reach_ft(player_wizard, browser): # noqa
     weapon_add.range_ = '5'
     weapon_add.add.click()
 
-    time.sleep(.5)
+    WebDriverWait(browser, 20).until(
+        EC.invisibility_of_element_located(
+            (By.CLASS_NAME, 'modal-backdrop fade')
+        )
+    )
+
+    WebDriverWait(browser, 20).until(
+        EC.invisibility_of_element_located(
+            (By.ID, 'addWeapon')
+        )
+    )
 
     row = ut.get_table_row(weapon_table, 'table', values=False)
+
     assert row[4].text == '10 ft.'
 
 
@@ -526,7 +651,18 @@ def test_delete_armor(player_wizard, browser): # noqa
     armor_add.add.click()
 
     rows = ut.get_table_rows(armor_table, 'table', values=False)
-    time.sleep(.3)
+
+    WebDriverWait(browser, 20).until(
+        EC.invisibility_of_element_located(
+            (By.CLASS_NAME, 'modal-backdrop fade')
+        )
+    )
+    WebDriverWait(browser, 20).until(
+        EC.invisibility_of_element_located(
+            (By.ID, 'addArmor')
+        )
+    )
+
     rows[0][4].find_element_by_tag_name('a').click()
     rows = ut.get_table_rows(armor_table, 'table', values=False)
 
@@ -548,7 +684,18 @@ def test_edit_armor(player_wizard, browser): # noqa
     armor_add.add.click()
 
     rows = ut.get_table_rows(armor_table, 'table', values=False)
-    time.sleep(.3)
+
+    WebDriverWait(browser, 20).until(
+        EC.invisibility_of_element_located(
+            (By.CLASS_NAME, 'modal-backdrop fade')
+        )
+    )
+    WebDriverWait(browser, 20).until(
+        EC.invisibility_of_element_located(
+            (By.ID, 'addArmor')
+        )
+    )
+
     rows[0][0].click()
     time.sleep(.3)
     armor_tabs.edit.click()
@@ -597,7 +744,17 @@ def test_preview_armor(player_wizard, browser): # noqa
     ut.select_from_autocomplete(armor_add, 'name', '', browser)
     armor_add.add.click()
 
-    time.sleep(.3)
+    WebDriverWait(browser, 20).until(
+        EC.invisibility_of_element_located(
+            (By.CLASS_NAME, 'modal-backdrop fade')
+        )
+    )
+    WebDriverWait(browser, 20).until(
+        EC.invisibility_of_element_located(
+            (By.ID, 'addArmor')
+        )
+    )
+
     row = ut.get_table_row(armor_table, 'table', values=False)
     time.sleep(.3)
     row[0].click()
@@ -673,9 +830,20 @@ def test_magical_modifier(player_wizard, browser): # noqa
     armor_add.magical_modifier = 3
 
     armor_add.add.click()
-    time.sleep(.5)
+
+    WebDriverWait(browser, 20).until(
+        EC.invisibility_of_element_located(
+            (By.CLASS_NAME, 'modal-backdrop fade')
+        )
+    )
+    WebDriverWait(browser, 20).until(
+        EC.invisibility_of_element_located(
+            (By.ID, 'addArmor')
+        )
+    )
 
     row = ut.get_table_row(armor_table, 'table', 1)
+
     assert row.armor == 'Add Name  + 3'
 
 def test_armor_persists(player_wizard, browser): # noqa
@@ -731,10 +899,19 @@ def test_armor_donned(player_wizard, browser): # noqa
     armor_table.add.click()
     armor_add.name = 'Add Name'
     armor_add.don.click()
-    time.sleep(.5)
 
     armor_add.add.click()
-    time.sleep(.5)
+
+    WebDriverWait(browser, 20).until(
+        EC.invisibility_of_element_located(
+            (By.CLASS_NAME, 'modal-backdrop fade')
+        )
+    )
+    WebDriverWait(browser, 20).until(
+        EC.invisibility_of_element_located(
+            (By.ID, 'addArmor')
+        )
+    )
 
     row = ut.get_table_row(armor_table, 'table', 1, values=False)
     assert 'fa fa-check' in row[0].find_element_by_tag_name('span').get_attribute('class')
@@ -752,7 +929,16 @@ def test_armor_total_weight(player_wizard, browser): # noqa
     ut.select_from_autocomplete(armor_add, 'name', '', browser)
     armor_add.add.click()
 
-    time.sleep(.3)
+    WebDriverWait(browser, 20).until(
+        EC.invisibility_of_element_located(
+            (By.CLASS_NAME, 'modal-backdrop fade')
+        )
+    )
+    WebDriverWait(browser, 20).until(
+        EC.invisibility_of_element_located(
+            (By.ID, 'addArmor')
+        )
+    )
 
     armor_table.add.click()
     ut.select_from_autocomplete(armor_add, 'name', '', browser)
@@ -774,12 +960,32 @@ def test_armor_sorting(player_wizard, browser): # noqa
     ut.select_from_autocomplete(armor_add, 'name', '', browser)
     armor_add.add.click()
 
-    time.sleep(.3)
+    WebDriverWait(browser, 20).until(
+        EC.invisibility_of_element_located(
+            (By.CLASS_NAME, 'modal-backdrop fade')
+        )
+    )
+    WebDriverWait(browser, 20).until(
+        EC.invisibility_of_element_located(
+            (By.ID, 'addArmor')
+        )
+    )
+
     armor_table.add.click()
     ut.select_from_autocomplete(armor_add, 'name', '', browser, arrow_down_count=2)
     armor_add.add.click()
 
-    time.sleep(.3)
+    WebDriverWait(browser, 20).until(
+        EC.invisibility_of_element_located(
+            (By.CLASS_NAME, 'modal-backdrop fade')
+        )
+    )
+    WebDriverWait(browser, 20).until(
+        EC.invisibility_of_element_located(
+            (By.ID, 'addArmor')
+        )
+    )
+
     armor_table.armor_header.click()
     time.sleep(.3)
     rows = ut.get_table_row(armor_table, 'table', values=False)

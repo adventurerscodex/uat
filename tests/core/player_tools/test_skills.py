@@ -1,7 +1,10 @@
 """UAT test file for Adventurer's Codex player tools skills module."""
 import time
 
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC # noqa
+from selenium.webdriver.support.ui import WebDriverWait
 
 from components.core.character import features, feats, traits
 from components.core.character import tracked, proficiency, skills
@@ -79,7 +82,16 @@ def test_delete_feature(player_wizard, browser): # noqa
     feature.add.click()
 
     rows = ut.get_table_rows(features_table, 'table', values=False)
-    time.sleep(.3)
+    WebDriverWait(browser, 10).until(
+        EC.invisibility_of_element_located(
+            (By.CLASS_NAME, 'modal-backdrop fade')
+        )
+    )
+    WebDriverWait(browser, 10).until(
+        EC.invisibility_of_element_located(
+            (By.ID, 'addFeature')
+        )
+    )
     rows[0][2].click()
     rows = ut.get_table_rows(features_table, 'table', values=False)
 
@@ -232,7 +244,12 @@ def test_delete_feat(player_wizard, browser): # noqa
     feat.add.click()
 
     rows = ut.get_table_rows(feats_table, 'table', values=False)
-    time.sleep(.3)
+
+    WebDriverWait(browser, 10).until(
+        EC.invisibility_of_element_located(
+            (By.ID, 'addFeat')
+        )
+    )
     rows[0][1].click()
     rows = ut.get_table_rows(feats_table, 'table', values=False)
 

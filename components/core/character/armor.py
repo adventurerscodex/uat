@@ -6,63 +6,108 @@ from modules.element import Element, Component
 class ArmorAddModal(Component):
     """Definition of armor add modal component."""
 
-    name = Element(id_='armorAddNameInput')
-    type_ = Element(id_='armorAddTypeInput')
-    magical_modifier = Element(id_='armorAddMagicalModifierInput')
-    price = Element(id_='armorAddPriceInput')
-    currency_denomination = Element(id_='armorAddCurrencyDenominationInput')
-    weight = Element(id_='armorAddWeightInput')
-    armor_class = Element(id_='armorAddArmorClassInput')
-    stealth = Element(id_='armorAddStealthInput')
-    don = Element(id_='armorAddDonButton')
-    doff = Element(id_='armorAddDoffButton')
-    description = Element(id_='armorAddDescriptionTextarea')
-    add = Element(id_='armorAddAddButton')
-    cancel = Element(id_='armorAddCancelButton')
+    name_id = 'armorAddNameInput'
+    type_id = 'armorAddTypeInput'
+    magical_modifier_id = 'armorAddMagicalModifierInput'
+    price_id = 'armorAddPriceInput'
+    currency_denomination_id = 'armorAddCurrencyDenominationInput'
+    weight_id = 'armorAddWeightInput'
+    armor_class_id = 'armorAddArmorClassInput'
+    stealth_id = 'armorAddStealthInput'
+    don_id = 'armorAddDonButton'
+    doff_id = 'armorAddDoffButton'
+    description_id = 'armorAddDescriptionTextarea'
+    add_id = 'armorAddAddButton'
+    cancel_id = 'armorAddCancelButton'
+
+    name = Element(id_=name_id)
+    type_ = Element(id_=type_id)
+    magical_modifier = Element(id_=magical_modifier_id)
+    price = Element(id_=price_id)
+    currency_denomination = Element(id_=currency_denomination_id)
+    weight = Element(id_=weight_id)
+    armor_class = Element(id_=armor_class_id)
+    stealth = Element(id_=stealth_id)
+    don = Element(id_=don_id)
+    doff = Element(id_=doff_id)
+    description = Element(id_=description_id)
+    add = Element(id_=add_id)
+    cancel = Element(id_=cancel_id)
 
 
 class ArmorEditModal(Component):
     """Definition of armor edit modal component."""
 
-    name = Element(id_='armorEditNameInput')
-    type_ = Element(id_='armorEditTypeInput')
-    magical_modifier = Element(id_='armorEditMagicalModifierInput')
-    price = Element(id_='armorEditPriceInput')
-    currency_denomination = Element(id_='armorEditCurrencyDenominationInput')
-    weight = Element(id_='armorEditWeightInput')
-    armor_class = Element(id_='armorEditArmorClassInput')
-    stealth = Element(id_='armorEditStealthInput')
-    don = Element(id_='armorEditDonButton')
-    doff = Element(id_='armorEditDoffButton')
-    description = Element(id_='armorEditDescriptionTextarea')
-    done = Element(id_='armorEditDoneButton')
+    name_id = 'armorEditNameInput'
+    type_id = 'armorEditTypeInput'
+    magical_modifier_id = 'armorEditMagicalModifierInput'
+    price_id = 'armorEditPriceInput'
+    currency_denomination_id = 'armorEditCurrencyDenominationInput'
+    weight_id = 'armorEditWeightInput'
+    armor_class_id = 'armorEditArmorClassInput'
+    stealth_id = 'armorEditStealthInput'
+    don_id = 'armorEditDonButton'
+    doff_id = 'armorEditDoffButton'
+    description_id = 'armorEditDescriptionTextarea'
+    done_id = 'armorEditDoneButton'
+
+    name = Element(id_=name_id)
+    type_ = Element(id_=type_id)
+    magical_modifier = Element(id_=magical_modifier_id)
+    price = Element(id_=price_id)
+    currency_denomination = Element(id_=currency_denomination_id)
+    weight = Element(id_=weight_id)
+    armor_class = Element(id_=armor_class_id)
+    stealth = Element(id_=stealth_id)
+    don = Element(id_=don_id)
+    doff = Element(id_=doff_id)
+    description = Element(id_=description_id)
+    done = Element(id_=done_id)
 
 
 class ArmorPreviewModal(Component):
     """Definition of armor preview modal component."""
 
-    name = Element(id_='armorPreviewNameLabel')
-    summary = Element(id_='armorPreviewSummaryLabel')
-    weight = Element(id_='armorPreviewWeightLabel')
-    stealth = Element(id_='armorPreviewStealthLabel')
-    description = Element(id_='ArmorPreviewDescriptionTextarea')
-    done = Element(id_='armorPreviewDoneButton')
+    name_id = 'armorPreviewNameLabel'
+    summary_id = 'armorPreviewSummaryLabel'
+    weight_id = 'armorPreviewWeightLabel'
+    stealth_id = 'armorPreviewStealthLabel'
+    description_id = 'ArmorPreviewDescriptionTextarea'
+    done_id = 'armorPreviewDoneButton'
+
+    name = Element(id_=name_id)
+    summary = Element(id_=summary_id)
+    weight = Element(id_=weight_id)
+    stealth = Element(id_=stealth_id)
+    description = Element(id_=description_id)
+    done = Element(id_=done_id)
 
 
 class ArmorModalTabs(Component):
     """Definition of armor modal tabs component."""
 
-    preview = Element(id_='armorModalPreviewTab')
-    edit = Element(id_='armorModalEditTab')
+    preview_id = 'armorModalPreviewTab'
+    edit_id = 'armorModalEditTab'
+
+    preview = Element(id_=preview_id)
+    edit = Element(id_=edit_id)
 
 
 class ArmorTable(Component):
     """Definition of armors edit modal componenet."""
 
-    add = Element(id_='armorAddIcon')
-    table = Element(id_='armorTable')
-    equipped_header = Element(id_='armorTableEquippedHeader')
-    armor_header = Element(id_='armorTableArmorHeader')
-    type_header = Element(id_='armorTableTypeHeader')
-    ac_header = Element(id_='armorTableAcHeader')
-    total_weight = Element(id_='armorTableTotalWeightSpan')
+    add_id = 'armorAddIcon'
+    table_id = 'armorTable'
+    equipped_header_id = 'armorTableEquippedHeader'
+    armor_header_id = 'armorTableArmorHeader'
+    type_header_id = 'armorTableTypeHeader'
+    ac_header_id = 'armorTableAcHeader'
+    total_weight_id = 'armorTableTotalWeightSpan'
+
+    add = Element(id_=add_id)
+    table = Element(id_=table_id)
+    equipped_header = Element(id_=equipped_header_id)
+    armor_header = Element(id_=armor_header_id)
+    type_header = Element(id_=type_header_id)
+    ac_header = Element(id_=ac_header_id)
+    total_weight = Element(id_=total_weight_id)

@@ -6,82 +6,146 @@ from modules.element import Element, Component
 class WeaponAddModal(Component):
     """Definition of weapon add modal component."""
 
-    name = Element(id_='weaponAddNameInput')
-    damage = Element(id_='weaponAddDamageInput')
-    magical_modifier = Element(id_='weaponAddMagicalModifierInput')
-    to_hit_modifier = Element(id_='weaponAddToHitModifierInput')
-    type_ = Element(id_='weaponAddTypeInput')
-    handedness = Element(id_='weaponAddHandednessInput')
-    proficiency = Element(id_='weaponAddProficiencyInput')
-    price = Element(id_='weaponAddPriceInput')
-    currency_denomination = Element(id_='weaponAddCurrencyDenominationInput')
-    weight = Element(id_='weaponAddWeightInput')
-    range_ = Element(id_='weaponAddRangeInput')
-    damage_type = Element(id_='weaponAddDamageTypeInput')
-    property_ = Element(id_='weaponAddPropertyInput')
-    quantity = Element(id_='weaponAddQuantityInput')
-    description = Element(id_='weaponAddDescriptionTextarea')
-    add = Element(id_='weaponAddAddButton')
-    cancel = Element(id_='weaponAddCancelButton')
+    name_id = 'weaponAddNameInput'
+    damage_id = 'weaponAddDamageInput'
+    magical_modifier_id = 'weaponAddMagicalModifierInput'
+    to_hit_modifier_id = 'weaponAddToHitModifierInput'
+    type_id = 'weaponAddTypeInput'
+    handedness_id = 'weaponAddHandednessInput'
+    proficiency_id = 'weaponAddProficiencyInput'
+    price_id = 'weaponAddPriceInput'
+    currency_denomination_id = 'weaponAddCurrencyDenominationInput'
+    weight_id = 'weaponAddWeightInput'
+    range_id = 'weaponAddRangeInput'
+    damage_type_id = 'weaponAddDamageTypeInput'
+    property_id = 'weaponAddPropertyInput'
+    quantity_id = 'weaponAddQuantityInput'
+    description_id = 'weaponAddDescriptionTextarea'
+    add_id = 'weaponAddAddButton'
+    cancel_id = 'weaponAddCancelButton'
+
+    name = Element(id_=name_id)
+    damage = Element(id_=damage_id)
+    magical_modifier = Element(id_=magical_modifier_id)
+    to_hit_modifier = Element(id_=to_hit_modifier_id)
+    type_ = Element(id_=type_id)
+    handedness = Element(id_=handedness_id)
+    proficiency = Element(id_=proficiency_id)
+    price = Element(id_=price_id)
+    currency_denomination = Element(id_=currency_denomination_id)
+    weight = Element(id_=weight_id)
+    range_ = Element(id_=range_id)
+    damage_type = Element(id_=damage_type_id)
+    property_ = Element(id_=property_id)
+    quantity = Element(id_=quantity_id)
+    description = Element(id_=description_id)
+    add = Element(id_=add_id)
+    cancel = Element(id_=cancel_id)
 
 
 class WeaponEditModal(Component):
     """Definition of weapon edit modal component."""
 
-    name = Element(id_='weaponEditNameInput')
-    damage = Element(id_='weaponEditDamageInput')
-    magical_modifier = Element(id_='weaponEditMagicalModifierInput')
-    to_hit_modifier = Element(id_='weaponEditToHitModifierInput')
-    type_ = Element(id_='weaponEditTypeInput')
-    handedness = Element(id_='weaponEditHandednessInput')
-    proficiency = Element(id_='weaponEditProficiencyInput')
-    price = Element(id_='weaponEditPriceInput')
-    currency_denomination = Element(id_='weaponEditCurrencyDenominationInput')
-    weight = Element(id_='weaponEditWeightInput')
-    range_ = Element(id_='weaponEditRangeInput')
-    damage_type = Element(id_='weaponEditDamageTypeInput')
-    property_ = Element(id_='weaponEditPropertyInput')
-    quantity = Element(id_='weaponEditQuantityInput')
-    description = Element(id_='weaponEditDescriptionTextarea')
-    done = Element(id_='weaponEditDoneButton')
+    name_id = 'weaponEditNameInput'
+    damage_id = 'weaponEditDamageInput'
+    magical_modifier_id = 'weaponEditMagicalModifierInput'
+    to_hit_modifier_id = 'weaponEditToHitModifierInput'
+    type_id = 'weaponEditTypeInput'
+    handedness_id = 'weaponEditHandednessInput'
+    proficiency_id = 'weaponEditProficiencyInput'
+    price_id = 'weaponEditPriceInput'
+    currency_denomination_id = 'weaponEditCurrencyDenominationInput'
+    weight_id = 'weaponEditWeightInput'
+    range_id = 'weaponEditRangeInput'
+    damage_type_id = 'weaponEditDamageTypeInput'
+    property_id = 'weaponEditPropertyInput'
+    quantity_id = 'weaponEditQuantityInput'
+    description_id = 'weaponEditDescriptionTextarea'
+    done_id = 'weaponEditDoneButton'
+
+    name = Element(id_=name_id)
+    damage = Element(id_=damage_id)
+    magical_modifier = Element(id_=magical_modifier_id)
+    to_hit_modifier = Element(id_=to_hit_modifier_id)
+    type_ = Element(id_=type_id)
+    handedness = Element(id_=handedness_id)
+    proficiency = Element(id_=proficiency_id)
+    price = Element(id_=price_id)
+    currency_denomination = Element(id_=currency_denomination_id)
+    weight = Element(id_=weight_id)
+    range_ = Element(id_=range_id)
+    damage_type = Element(id_=damage_type_id)
+    property_ = Element(id_=property_id)
+    quantity = Element(id_=quantity_id)
+    description = Element(id_=description_id)
+    done = Element(id_=done_id)
 
 
 class WeaponPreviewModal(Component):
     """Definition of weapon priview modal component."""
 
-    name = Element(id_='weaponPreviewNameLabel')
-    magical_modifier = Element(id_='weaponPreviewMagicalModifierLabel')
-    damage = Element(id_='weaponPreviewDamageLabel')
-    to_hit_modifier = Element(id_='weaponPreviewToHitModifierLabel')
-    range_ = Element(id_='weaponPreviewRangeLabel')
-    type_ = Element(id_='weaponPreviewTypeLabel')
-    proficiency = Element(id_='weaponPreviewProficiencyLabel')
-    handedness = Element(id_='weaponPreviewHandednessLabel')
-    weight = Element(id_='weaponPreviewWeightLabel')
-    range_ = Element(id_='weaponPreviewRangeLabel')
-    damage_type = Element(id_='weaponPreviewDamageTypeLabel')
-    property_ = Element(id_='weaponPreviewPropertyLabel')
-    description = Element(id_='weaponPreviewDescriptionTextarea')
-    done = Element(id_='weaponPreviewCancelButton')
+    name_id = 'weaponPreviewNameLabel'
+    magical_modifier_id = 'weaponPreviewMagicalModifierLabel'
+    damage_id = 'weaponPreviewDamageLabel'
+    to_hit_modifier_id = 'weaponPreviewToHitModifierLabel'
+    range_id = 'weaponPreviewRangeLabel'
+    type_id = 'weaponPreviewTypeLabel'
+    proficiency_id = 'weaponPreviewProficiencyLabel'
+    handedness_id = 'weaponPreviewHandednessLabel'
+    weight_id = 'weaponPreviewWeightLabel'
+    range_id = 'weaponPreviewRangeLabel'
+    damage_type_id = 'weaponPreviewDamageTypeLabel'
+    property_id = 'weaponPreviewPropertyLabel'
+    description_id = 'weaponPreviewDescriptionTextarea'
+    done_xpath = '//*[@id="weaponsModalPreview"]/div[4]/button'
+
+    name = Element(id_=name_id)
+    magical_modifier = Element(id_=magical_modifier_id)
+    damage = Element(id_=damage_id)
+    to_hit_modifier = Element(id_=to_hit_modifier_id)
+    range_ = Element(id_=range_id)
+    type_ = Element(id_=type_id)
+    proficiency = Element(id_=proficiency_id)
+    handedness = Element(id_=handedness_id)
+    weight = Element(id_=weight_id)
+    range_ = Element(id_=range_id)
+    damage_type = Element(id_=damage_type_id)
+    property_ = Element(id_=property_id)
+    description = Element(id_=description_id)
+    done = Element(xpath=done_xpath)
 
 
 class WeaponModalTabs(Component):
     """Definition of weapon modal tabs component."""
 
-    preview = Element(id_='weaponModalPreviewTab')
-    edit = Element(id_='weaponModalEditTab')
+    preview_id = 'weaponModalPreviewTab'
+    edit_id = 'weaponModalEditTab'
+
+    preview = Element(id_=preview_id)
+    edit = Element(id_=edit_id)
 
 
 class WeaponTable(Component):
     """Definition of weapons edit modal componenet."""
 
-    add = Element(id_='weaponAddIcon')
-    table = Element(id_='weaponTable')
-    weapon_header = Element(id_='weaponTableWeaponHeader')
-    to_hit_header = Element(id_='weaponTableToHitHeader')
-    damage_header = Element(id_='weaponTableDamageHeader')
-    damage_type_header = Element(id_='weaponTableDamageTypeHeader')
-    range_header = Element(id_='weaponTableRangeHeader')
-    property_header = Element(id_='weaponTablePropertyHeader')
-    quantity_header = Element(id_='weaponTableQuantityHeader')
-    total_weight = Element(id_='weaponTableTotalWeightSpan')
+    add_id = 'weaponAddIcon'
+    table_id = 'weaponTable'
+    weapon_header_id = 'weaponTableWeaponHeader'
+    to_hit_header_id = 'weaponTableToHitHeader'
+    damage_header_id = 'weaponTableDamageHeader'
+    damage_type_header_id = 'weaponTableDamageTypeHeader'
+    range_header_id = 'weaponTableRangeHeader'
+    property_header_id = 'weaponTablePropertyHeader'
+    quantity_header_id = 'weaponTableQuantityHeader'
+    total_weight_id = 'weaponTableTotalWeightSpan'
+
+    add = Element(id_=add_id)
+    table = Element(id_=table_id)
+    weapon_header = Element(id_=weapon_header_id)
+    to_hit_header = Element(id_=to_hit_header_id)
+    damage_header = Element(id_=damage_header_id)
+    damage_type_header = Element(id_=damage_type_header_id)
+    range_header = Element(id_=range_header_id)
+    property_header = Element(id_=property_header_id)
+    quantity_header = Element(id_=quantity_header_id)
+    total_weight = Element(id_=total_weight_id)

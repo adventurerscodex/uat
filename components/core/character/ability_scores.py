@@ -6,28 +6,50 @@ from modules.element import Element, Component
 class AbilityScoresEditModal(Component):
     """Definition of abilityScores add modal component."""
 
-    strength = Element(id_='abilityScoresEditStrengthInput')
-    dexterity = Element(id_='abilityScoresEditDexterityInput')
-    constitution = Element(id_='abilityScoresEditConstitutionInput')
-    intelligence = Element(id_='abilityScoresEditIntelligenceInput')
-    wisdom = Element(id_='abilityScoresEditWisdomInput')
-    charisma = Element(id_='abilityScoresEditCharismaTextarea')
-    done = Element(id_='abilityScoresEditDoneButton')
+    strength_id = 'abilityScoresEditStrengthInput'
+    dexterity_id = 'abilityScoresEditDexterityInput'
+    constitution_id = 'abilityScoresEditConstitutionInput'
+    intelligence_id = 'abilityScoresEditIntelligenceInput'
+    wisdom_id = 'abilityScoresEditWisdomInput'
+    charisma_id = 'abilityScoresEditCharismaTextarea'
+    done_id = 'abilityScoresEditDoneButton'
+
+    strength = Element(id_=strength_id)
+    dexterity = Element(id_=dexterity_id)
+    constitution = Element(id_=constitution_id)
+    intelligence = Element(id_=intelligence_id)
+    wisdom = Element(id_=wisdom_id)
+    charisma = Element(id_=charisma_id)
+    done = Element(id_=done_id)
 
 
 class AbilityScoresTable(Component):
     """Definition of abilityScoress edit modal componenet."""
 
-    table = Element(id_='abilityScoresTable')
-    strength = Element(id_='abilityScoresTableStrengthSpan')
-    strength_modifier = Element(id_='abilityScoresTableStrengthModifierSpan')
-    dexterity = Element(id_='abilityScoresTableDexteritySpan')
-    dexterity_modifier = Element(id_='abilityScoresTableDexterityModifierSpan')
-    constitution = Element(id_='abilityScoresTableConstitutionSpan')
-    constitution_modifier = Element(id_='abilityScoresTableConstitutionModifierSpan')
-    intelligence = Element(id_='abilityScoresTableIntelligIntelligenceSpan')
-    intelligence_modifier = Element(id_='abilityScoresTableIntelligIntelligenceModifierSpan')
-    wisdom = Element(id_='abilityScoresTableWisdomSpan')
-    wisdom_modifier = Element(id_='abilityScoresTableWisdomModifierSpan')
-    charisma = Element(id_='abilityScoresTableCharismaSpan')
-    charisma_modifier = Element(id_='abilityScoresTableCharismaModifierSpan')
+    table_id = 'abilityScoresTable'
+    strength_id = 'abilityScoresTableStrengthSpan'
+    strength_modifier_id = 'abilityScoresTableStrengthModifierSpan'
+    dexterity_id = 'abilityScoresTableDexteritySpan'
+    dexterity_modifier_id = 'abilityScoresTableDexterityModifierSpan'
+    constitution_id = 'abilityScoresTableConstitutionSpan'
+    constitution_modifier_id = 'abilityScoresTableConstitutionModifierSpan'
+    intelligence_id = 'abilityScoresTableIntelligIntelligenceSpan'
+    intelligence_modifier_id = 'abilityScoresTableIntelligIntelligenceModifierSpan'
+    wisdom_id = 'abilityScoresTableWisdomSpan'
+    wisdom_modifier_id = 'abilityScoresTableWisdomModifierSpan'
+    charisma_id = 'abilityScoresTableCharismaSpan'
+    charisma_modifier_id = 'abilityScoresTableCharismaModifierSpan'
+
+    table = Element(id_=table_id)
+    strength = Element(id_=strength_id)
+    strength_modifier = Element(id_=strength_modifier_id)
+    dexterity = Element(id_=dexterity_id)
+    dexterity_modifier = Element(id_=dexterity_modifier_id)
+    constitution = Element(id_=constitution_id)
+    constitution_modifier = Element(id_=constitution_modifier_id)
+    intelligence = Element(id_=intelligence_id)
+    intelligence_modifier = Element(id_=intelligence_modifier_id)
+    wisdom = Element(id_=wisdom_id)
+    wisdom_modifier = Element(id_=wisdom_modifier_id)
+    charisma = Element(id_=charisma_id)
+    charisma_modifier = Element(id_=charisma_modifier_id)

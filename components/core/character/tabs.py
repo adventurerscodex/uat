@@ -6,29 +6,56 @@ from modules.element import Element, Component
 class Tabs(Component):
     """Definition of player tabs componenet."""
 
-    stats = Element(id_='tabStatsLink')
-    stats_label = Element(id_='tabStatsSpan')
+    stats_id = 'tabStatsLink'
+    stats_label_id = 'tabStatsSpan'
 
-    skills = Element(id_='tabSkillsLink')
-    skills_label = Element(id_='tabSkillsSpan')
+    skills_id = 'tabSkillsLink'
+    skills_label_id = 'tabSkillsSpan'
 
-    spells = Element(id_='tabSpellsLink')
-    spells_label = Element(id_='tabSpellsSpan')
+    spells_id = 'tabSpellsLink'
+    spells_label_id = 'tabSpellsSpan'
 
-    equipment = Element(id_='tabEquipmentLink')
-    equipment_label = Element(id_='tabEquipmentSpan')
+    equipment_id = 'tabEquipmentLink'
+    equipment_label_id = 'tabEquipmentSpan'
 
-    inventory = Element(id_='tabInventoryLink')
-    inventory_label = Element(id_='tabInventorySpan')
+    inventory_id = 'tabInventoryLink'
+    inventory_label_id = 'tabInventorySpan'
 
-    notes = Element(id_='tabNotesLink')
-    notes_label = Element(id_='tabNotesSpan')
+    notes_id = 'tabNotesLink'
+    notes_label_id = 'tabNotesSpan'
 
-    profile = Element(id_='tabProfileLink')
-    profile_label = Element(id_='tabProfileSpan')
+    profile_id = 'tabProfileLink'
+    profile_label_id = 'tabProfileSpan'
 
-    chat = Element(id_='tabChatLink')
-    chat_label = Element(id_='tabChatSpan')
+    chat_id = 'tabChatLink'
+    chat_label_id = 'tabChatSpan'
 
-    exhibit = Element(id_='tabExhibitLink')
-    exhibit_label = Element(id_='tabExhibitSpan')
+    exhibit_id = 'tabExhibitLink'
+    exhibit_label_id = 'tabExhibitSpan'
+
+    stats = Element(id_=stats_id)
+    stats_label = Element(id_=stats_label_id)
+
+    skills = Element(id_=skills_id)
+    skills_label = Element(id_=skills_label_id)
+
+    spells = Element(id_=spells_id)
+    spells_label = Element(id_=spells_label_id)
+
+    equipment = Element(id_=equipment_id)
+    equipment_label = Element(id_=equipment_label_id)
+
+    inventory = Element(id_=inventory_id)
+    inventory_label = Element(id_=inventory_label_id)
+
+    notes = Element(id_=notes_id)
+    notes_label = Element(id_=notes_label_id)
+
+    profile = Element(id_=profile_id)
+    profile_label = Element(id_=profile_label_id)
+
+    chat = Element(id_=chat_id)
+    chat_label = Element(id_=chat_label_id)
+
+    exhibit = Element(id_=exhibit_id)
+    exhibit_label = Element(id_=exhibit_label_id)

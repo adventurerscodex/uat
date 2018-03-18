@@ -6,20 +6,38 @@ from modules.element import Element, Component
 class DMTabs(Component):
     """Definition of dm tabs componenet."""
 
-    overview = Element(id_='tabOverviewLink')
-    overview_label = Element(id_='tabOverviewSpan')
+    overview_id = 'tabOverviewLink'
+    overview_label_id = 'tabOverviewSpan'
 
-    encounters = Element(id_='tabEncountersLink')
-    encounters_label = Element(id_='tabEncountersSpan')
+    encounters_id = 'tabEncountersLink'
+    encounters_label_id = 'tabEncountersSpan'
 
-    screen = Element(id_='tabScreenLink')
-    screen_label = Element(id_='tabScreenSpan')
+    screen_id = 'tabScreenLink'
+    screen_label_id = 'tabScreenSpan'
 
-    notes = Element(id_='tabNotesLink')
-    notes_label = Element(id_='tabNotesSpan')
+    notes_id = 'tabNotesLink'
+    notes_label_id = 'tabNotesSpan'
 
-    party = Element(id_='tabPartyLink')
-    party_label = Element(id_='tabPartySpan')
+    party_id = 'tabPartyLink'
+    party_label_id = 'tabPartySpan'
 
-    chat = Element(id_='tabChatLink')
-    chat_label = Element(id_='tabChatSpan')
+    chat_id = 'tabChatLink'
+    chat_label_id = 'tabChatSpan'
+
+    overview = Element(id_=overview_id)
+    overview_label = Element(id_=overview_label_id)
+
+    encounters = Element(id_=encounters_id)
+    encounters_label = Element(id_=encounters_label_id)
+
+    screen = Element(id_=screen_id)
+    screen_label = Element(id_=screen_label_id)
+
+    notes = Element(id_=notes_id)
+    notes_label = Element(id_=notes_label_id)
+
+    party = Element(id_=party_id)
+    party_label = Element(id_=party_label_id)
+
+    chat = Element(id_=chat_id)
+    chat_label = Element(id_=chat_label_id)
