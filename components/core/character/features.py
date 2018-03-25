@@ -6,6 +6,7 @@ from modules.element import Element, Component
 class FeatureAddModal(Component):
     """Definition of feature add modal component."""
 
+    modal_div_id = 'addFeature'
     name_id = 'featureAddNameInput'
     class_id = 'featureAddClassInput'
     level_id = 'featureAddLevelInput'
@@ -16,6 +17,7 @@ class FeatureAddModal(Component):
     long_rest_id = 'featureAddLongRestInput'
     add_id = 'featureAddAddButton'
 
+    modal_div = Element(id_=modal_div_id)
     name = Element(id_=name_id)
     class_ = Element(id_=class_id)
     level = Element(id_=level_id)
@@ -30,6 +32,7 @@ class FeatureAddModal(Component):
 class FeatureEditModal(Component):
     """Definition of feature edit modal component."""
 
+    modal_div_id = 'viewWeapon'
     name_id = 'featureEditNameInput'
     class_id = 'featureEditClassInput'
     level_id = 'featureEditLevelInput'
@@ -40,6 +43,7 @@ class FeatureEditModal(Component):
     long_rest_id = 'featureEditLongRestInput'
     done_id = 'featureEditDoneButton'
 
+    modal_div = Element(id_=modal_div_id)
     name = Element(id_=name_id)
     class_ = Element(id_=class_id)
     level = Element(id_=level_id)

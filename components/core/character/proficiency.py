@@ -6,11 +6,13 @@ from modules.element import Element, Component
 class ProficiencyAddModal(Component):
     """Definition of proficiency add modal component."""
 
+    modal_div_id = 'addProficiency'
     name_id = 'proficiencyAddNameInput'
     type_id = 'proficiencyAddTypeInput'
     description_id = 'proficiencyAddDescriptionTextarea'
     add_id = 'proficiencyAddAddButton'
 
+    modal_div = Element(id_=modal_div_id)
     name = Element(id_=name_id)
     type_ = Element(id_=type_id)
     description = Element(id_=description_id)
@@ -20,11 +22,13 @@ class ProficiencyAddModal(Component):
 class ProficiencyEditModal(Component):
     """Definition of proficiency edit modal component."""
 
+    modal_div_id = 'viewProficiency'
     name_id = 'proficiencyEditNameInput'
     type_id = 'proficiencyEditTypeInput'
     description_id = 'proficiencyEditDescriptionTextarea'
     done_id = 'proficiencyEditDoneButton'
 
+    modal_div = Element(id_=modal_div_id)
     name = Element(id_=name_id)
     type_ = Element(id_=type_id)
     description = Element(id_=description_id)

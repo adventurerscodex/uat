@@ -6,11 +6,13 @@ from modules.element import Element, Component
 class SavingThrowEditModal(Component):
     """Definition of Saving Throw edit modal component."""
 
+    modal_div_id = 'viewSavingThrow'
     name_id = 'savingThrowEditNameInput'
     modifier_id = 'savingThrowEditModifierButton'
     proficiency_id = 'savingThrowEditProficiencyCheckbox'
     done_id = 'savingThrowEditDoneButton'
 
+    modal_div = Element(id_=modal_div_id)
     name = Element(id_=name_id)
     modifier = Element(id_=modifier_id)
     proficiency = Element(id_=proficiency_id)

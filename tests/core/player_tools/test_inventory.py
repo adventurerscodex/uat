@@ -8,6 +8,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 from components.core.character import inventory, coins, magic_items
 from components.core.character.tabs import Tabs
+from expected_conditions.conditions import modal_finished_closing
+from expected_conditions.conditions import sorting_arrow_up, sorting_arrow_down
 from utils import utils as ut
 
 def test_add_inventory(player_wizard, browser): # noqa
@@ -18,6 +20,12 @@ def test_add_inventory(player_wizard, browser): # noqa
     inventory_table = inventory.InventoryTable(browser)
     tabs = Tabs(browser)
     tabs.inventory.click()
+
+    WebDriverWait(browser, 10).until(
+        EC.element_to_be_clickable(
+            (By.ID, inventory_table.add_id)
+        )
+    )
 
     inventory_table.add.click()
     inventory_add.name = 'Add Name'
@@ -37,6 +45,7 @@ def test_add_inventory(player_wizard, browser): # noqa
     inventory_add.add.click()
 
     row = ut.get_table_row(inventory_table, 'table', 1)
+
     assert row.item == 'Add Name'
     assert row.quantity == '2'
     assert row.weight == '100 lbs.'
@@ -57,17 +66,11 @@ def test_delete_inventory(player_wizard, browser): # noqa
     ut.select_from_autocomplete(inventory_add, 'name', '', browser)
     inventory_add.add.click()
 
+    WebDriverWait(browser, 10).until(
+        modal_finished_closing(inventory_add.modal_div_id)
+    )
+
     rows = ut.get_table_rows(inventory_table, 'table', values=False)
-    WebDriverWait(browser, 10).until(
-        EC.invisibility_of_element_located(
-            (By.CLASS_NAME, 'modal-backdrop fade')
-        )
-    )
-    WebDriverWait(browser, 10).until(
-        EC.invisibility_of_element_located(
-            (By.ID, 'addItem')
-        )
-    )
     rows[0][5].find_element_by_tag_name('a').click()
     rows = ut.get_table_rows(inventory_table, 'table', values=False)
 
@@ -89,12 +92,26 @@ def test_edit_inventory(player_wizard, browser): # noqa
     ut.select_from_autocomplete(inventory_add, 'name', '', browser)
     inventory_add.add.click()
 
+    WebDriverWait(browser, 10).until(
+        modal_finished_closing(inventory_add.modal_div_id)
+    )
+
     rows = ut.get_table_rows(inventory_table, 'table', values=False)
-    time.sleep(.3)
     rows[0][0].click()
-    time.sleep(.3)
+
+    WebDriverWait(browser, 10).until(
+        EC.element_to_be_clickable(
+            (By.ID, inventory_tabs.edit_id)
+        )
+    )
+
     inventory_tabs.edit.click()
-    time.sleep(.3)
+
+    WebDriverWait(browser, 10).until(
+        EC.presence_of_element_located(
+            (By.ID, inventory_edit.name_id)
+        )
+    )
 
     inventory_edit.name = 'Edit Name'
     inventory_edit.weight = 100
@@ -111,8 +128,11 @@ def test_edit_inventory(player_wizard, browser): # noqa
     assert inventory_edit.description.get_attribute('value') == 'Edit Description'
 
     inventory_edit.done.click()
-    time.sleep(.3)
+    WebDriverWait(browser, 10).until(
+        modal_finished_closing(inventory_edit.modal_div_id)
+    )
     row = ut.get_table_row(inventory_table, 'table', 1)
+
     assert row.item == 'Edit Name'
     assert row.quantity == '2'
     assert row.weight == '100 lbs.'
@@ -120,8 +140,10 @@ def test_edit_inventory(player_wizard, browser): # noqa
     assert row.description == 'Edit Description'
 
 def test_preview_inventory(player_wizard, browser): # noqa
-    """As a player, I can select a row in the inventory table and view the item in the preview tab."""
-    print('As a player, I can select a row in the inventory table and view the item in the preview tab')
+    """As a player, I can select a row in the inventory table and view the
+       item in the preview tab."""
+    print(('As a player, I can select a row in the inventory table and view '
+           'the item in the preview tab'))
 
     inventory_add = inventory.InventoryAddModal(browser)
     inventory_table = inventory.InventoryTable(browser)
@@ -129,15 +151,28 @@ def test_preview_inventory(player_wizard, browser): # noqa
     tabs = Tabs(browser)
     tabs.inventory.click()
 
+    WebDriverWait(browser, 10).until(
+        EC.element_to_be_clickable(
+            (By.ID, inventory_table.addd_id)
+        )
+    )
+
     inventory_table.add.click()
     ut.select_from_autocomplete(inventory_add, 'name', '', browser)
     inventory_add.add.click()
 
-    time.sleep(.3)
+    WebDriverWait(browser, 10).until(
+        modal_finished_closing(inventory_add.modal_div_id)
+    )
+
     row = ut.get_table_row(inventory_table, 'table', values=False)
-    time.sleep(.3)
     row[0].click()
-    time.sleep(.5)
+
+    WebDriverWait(browser, 10).until(
+        EC.element_to_be_clickable(
+            (By.ID, inventory_preview.done_id)
+        )
+    )
 
     assert inventory_preview.name.text == 'Abacus'
     assert inventory_preview.weight.text == '2 lbs.'
@@ -146,8 +181,10 @@ def test_preview_inventory(player_wizard, browser): # noqa
     assert inventory_preview.description.text == 'Add a description via the edit tab.'
 
 def test_add_inventory_open_model_by_row(player_wizard, browser): # noqa
-    """As a player, I can click the first row in inventory table to open the inventory add modal."""
-    print('As a player, I can click the first row in inventory table to open the inventory add modal.')
+    """As a player, I can click the first row in inventory table to open the
+       inventory add modal."""
+    print(('As a player, I can click the first row in inventory table to open '
+           'the inventory add modal.'))
 
     inventory_table = inventory.InventoryTable(browser)
     tabs = Tabs(browser)
@@ -159,13 +196,21 @@ def test_add_inventory_open_model_by_row(player_wizard, browser): # noqa
     assert rows[0][0].is_displayed()
 
 def test_autocomplete_inventory(player_wizard, browser): # noqa
-    """As a player, if I start typing in the autocomplete inputs, I can select suggested items in the dropdown."""
-    print('As a player, if I start typing in the autocomplete inputs, I can select suggested items in the dropdown.')
+    """As a player, if I start typing in the autocomplete inputs, I can select
+       suggested items in the dropdown."""
+    print(('As a player, if I start typing in the autocomplete inputs, I can '
+          'select suggested items in the dropdown.'))
 
     inventory_add = inventory.InventoryAddModal(browser)
     inventory_table = inventory.InventoryTable(browser)
     tabs = Tabs(browser)
     tabs.inventory.click()
+
+    WebDriverWait(browser, 10).until(
+        EC.element_to_be_clickable(
+            (By.ID, inventory_table.add_id)
+        )
+    )
 
     inventory_table.add.click()
     ut.select_from_autocomplete(inventory_add, 'name', '', browser)
@@ -174,13 +219,21 @@ def test_autocomplete_inventory(player_wizard, browser): # noqa
 
 
 def test_inventory_ogl_pre_pop(player_wizard, browser): # noqa
-    """As a player, if I select from inventory name field, OGL data auto-completes and the remaining fields pre-populate."""
-    print('As a player, if I select from inventory name field, OGL data auto-completes and the remaining fields pre-populate.')
+    """As a player, if I select from inventory name field, OGL data
+       auto-completes and the remaining fields pre-populate."""
+    print(('As a player, if I select from inventory name field, OGL data '
+           'auto-completes and the remaining fields pre-populate.'))
 
     inventory_add = inventory.InventoryAddModal(browser)
     inventory_table = inventory.InventoryTable(browser)
     tabs = Tabs(browser)
     tabs.inventory.click()
+
+    WebDriverWait(browser, 10).until(
+        EC.element_to_be_clickable(
+            (By.ID, inventory_table.add_id)
+        )
+    )
 
     inventory_table.add.click()
     ut.select_from_autocomplete(inventory_add, 'name', '', browser)
@@ -205,6 +258,12 @@ def test_inventory_persists(player_wizard, browser): # noqa
     tabs = Tabs(browser)
     tabs.inventory.click()
 
+    WebDriverWait(browser, 10).until(
+        EC.element_to_be_clickable(
+            (By.ID, inventory_table.add_id)
+        )
+    )
+
     inventory_table.add.click()
     ut.select_from_autocomplete(inventory_add, 'name', '', browser)
     inventory_add.add.click()
@@ -220,9 +279,14 @@ def test_inventory_persists(player_wizard, browser): # noqa
     assert row.description == ''
 
     row = ut.get_table_row(inventory_table, 'table', values=False)
-    time.sleep(.3)
     row[0].click()
-    time.sleep(.3)
+
+    WebDriverWait(browser, 10).until(
+        EC.element_to_be_clickable(
+            (By.ID, inventory_tabs.edit_id)
+        )
+    )
+
     inventory_tabs.edit.click()
 
     assert inventory_edit.name.get_attribute('value') == 'Abacus'
@@ -233,19 +297,29 @@ def test_inventory_persists(player_wizard, browser): # noqa
     assert inventory_edit.description.get_attribute('value') == ''
 
 def test_inventory_total_weight(player_wizard, browser): # noqa
-    """As a player, in the inventory table, total weight is calculated correctly."""
-    print('As a player, in the armor table, total weight is calculated correctly')
+    """As a player, in the inventory table, total weight is calculated
+       correctly."""
+    print(('As a player, in the armor table, total weight is calculated '
+           'correctly'))
 
     inventory_add = inventory.InventoryAddModal(browser)
     inventory_table = inventory.InventoryTable(browser)
     tabs = Tabs(browser)
     tabs.inventory.click()
 
+    WebDriverWait(browser, 10).until(
+        EC.element_to_be_clickable(
+            (By.ID, inventory_table.add_id)
+        )
+    )
+
     inventory_table.add.click()
     ut.select_from_autocomplete(inventory_add, 'name', '', browser)
     inventory_add.add.click()
 
-    time.sleep(.3)
+    WebDriverWait(browser, 10).until(
+        modal_finished_closing(inventory_add.modal_div_id)
+    )
 
     inventory_table.add.click()
     ut.select_from_autocomplete(inventory_add, 'name', '', browser)
@@ -255,39 +329,71 @@ def test_inventory_total_weight(player_wizard, browser): # noqa
 
 
 def test_inventory_sorting(player_wizard, browser): # noqa
-    """As a player, I can sort the inventory table by clicking on the sortable columns."""
-    print('As a player, I can sort the inventory table by clicking on the sortable columns')
+    """As a player, I can sort the inventory table by clicking on the
+       sortable columns."""
+    print(('As a player, I can sort the inventory table by clicking on the '
+           'sortable columns'))
 
     inventory_add = inventory.InventoryAddModal(browser)
     inventory_table = inventory.InventoryTable(browser)
     tabs = Tabs(browser)
     tabs.inventory.click()
 
+    WebDriverWait(browser, 10).until(
+        EC.element_to_be_clickable(
+            (By.ID, inventory_table.add_id)
+        )
+    )
+
     inventory_table.add.click()
     ut.select_from_autocomplete(inventory_add, 'name', '', browser)
     inventory_add.add.click()
 
-    time.sleep(.3)
+    WebDriverWait(browser, 10).until(
+        modal_finished_closing(inventory_add.modal_div_id)
+    )
+
     inventory_table.add.click()
     ut.select_from_autocomplete(inventory_add, 'name', '', browser, arrow_down_count=2)
     inventory_add.add.click()
 
-    time.sleep(.3)
+    WebDriverWait(browser, 10).until(
+        modal_finished_closing(inventory_add.modal_div_id)
+    )
+
     inventory_table.item_header.click()
-    time.sleep(.3)
+
+    WebDriverWait(browser, 5).until(
+        sorting_arrow_down(
+            inventory_table.item_header_sorting_arrow,
+        )
+    )
     rows = ut.get_table_row(inventory_table, 'table', values=False)
+
     assert rows[0].text.strip() == 'Acid (vial)'
 
-    time.sleep(.3)
     inventory_table.quantity_header.click()
-    time.sleep(.3)
+
+    WebDriverWait(browser, 5).until(
+        sorting_arrow_up(
+            inventory_table.quantity_header_sorting_arrow,
+        )
+    )
+
     rows = ut.get_table_row(inventory_table, 'table', values=False)
+
     assert rows[1].text.strip() == '1'
 
-    time.sleep(.3)
     inventory_table.weight_header.click()
-    time.sleep(.3)
+
+    WebDriverWait(browser, 5).until(
+        sorting_arrow_up(
+            inventory_table.weight_header_sorting_arrow,
+        )
+    )
+
     rows = ut.get_table_row(inventory_table, 'table', values=False)
+
     assert rows[2].text.strip() == '1 lbs.'
 
 
@@ -467,12 +573,14 @@ def test_add_magic_items(player_wizard, browser): # noqa
     magic_items_add.add.click()
 
     row = ut.get_table_row(magic_items_table, 'table', 1)
+
     assert row.magic_item == 'Add Name'
     assert row.charges == '3'
     assert row.weight == '100 lbs.'
     assert row.description == 'Add Description'
 
     row = ut.get_table_row(magic_items_table, 'table', 1, values=False)
+
     assert row[2].find_element_by_tag_name('input').is_selected()
 
 def test_delete_magic_items(player_wizard, browser): # noqa
@@ -489,16 +597,11 @@ def test_delete_magic_items(player_wizard, browser): # noqa
     magic_items_add.add.click()
 
     rows = ut.get_table_rows(magic_items_table, 'table', values=False)
+
     WebDriverWait(browser, 10).until(
-        EC.invisibility_of_element_located(
-            (By.CLASS_NAME, 'modal-backdrop fade')
-        )
+        modal_finished_closing(magic_items_add.modal_div_id)
     )
-    WebDriverWait(browser, 10).until(
-        EC.invisibility_of_element_located(
-            (By.ID, 'addMagicItem')
-        )
-    )
+
     rows[0][5].find_element_by_tag_name('a').click()
     rows = ut.get_table_rows(magic_items_table, 'table', values=False)
 
@@ -519,12 +622,20 @@ def test_edit_magic_items(player_wizard, browser): # noqa
     ut.select_from_autocomplete(magic_items_add, 'item', '', browser)
     magic_items_add.add.click()
 
+    WebDriverWait(browser, 10).until(
+        modal_finished_closing(magic_items_add.modal_div_id)
+    )
+
     rows = ut.get_table_rows(magic_items_table, 'table', values=False)
-    time.sleep(.3)
     rows[0][0].click()
-    time.sleep(.3)
+
+    WebDriverWait(browser, 10).until(
+        EC.element_to_be_clickable(
+            (By.ID, magic_items_tabs.edit_id)
+        )
+    )
+
     magic_items_tabs.edit.click()
-    time.sleep(.3)
 
     magic_items_edit.item = 'Edit Name'
     magic_items_edit.type_ = 'Edit Armor'
@@ -547,20 +658,28 @@ def test_edit_magic_items(player_wizard, browser): # noqa
     assert magic_items_edit.description.get_attribute('value') == 'Edit Description'
 
     magic_items_edit.done.click()
-    time.sleep(.3)
+
+    WebDriverWait(browser, 10).until(
+        modal_finished_closing(magic_items_edit.modal_div_id)
+    )
+
     row = ut.get_table_row(magic_items_table, 'table', 1)
+
     assert row.magic_item == 'Edit Name'
     assert row.charges == '3'
     assert row.weight == '100 lbs.'
     assert row.description == 'Edit Description'
 
     row = ut.get_table_row(magic_items_table, 'table', 1, values=False)
+
     assert row[2].find_element_by_tag_name('input').is_selected()
 
 
 def test_preview_magic_items(player_wizard, browser): # noqa
-    """As a player, I can select a row in the magic_items table and view the item in the preview tab."""
-    print('As a player, I can select a row in the magic_items table and view the item in the preview tab')
+    """As a player, I can select a row in the magic_items table and view the
+       item in the preview tab."""
+    print(('As a player, I can select a row in the magic_items table and view '
+           ' the item in the preview tab'))
 
     magic_items_add = magic_items.MagicItemsAddModal(browser)
     magic_items_table = magic_items.MagicItemsTable(browser)
@@ -572,11 +691,18 @@ def test_preview_magic_items(player_wizard, browser): # noqa
     ut.select_from_autocomplete(magic_items_add, 'item', '', browser)
     magic_items_add.add.click()
 
-    time.sleep(.3)
+    WebDriverWait(browser, 10).until(
+        modal_finished_closing(magic_items_add.modal_div_id)
+    )
+
     row = ut.get_table_row(magic_items_table, 'table', values=False)
-    time.sleep(.3)
     row[0].click()
-    time.sleep(.5)
+
+    WebDriverWait(browser, 10).until(
+        EC.text_to_be_present_in_element(
+            (By.ID, magic_items_preview.item_id), 'Adamantine Armor'
+        )
+    )
 
     assert magic_items_preview.item.text == 'Adamantine Armor'
     assert magic_items_preview.rarity.text == 'Uncommon'
@@ -587,8 +713,10 @@ def test_preview_magic_items(player_wizard, browser): # noqa
 
 
 def test_add_magic_items_open_model_by_row(player_wizard, browser): # noqa
-    """As a player, I can click the first row in magic_items table to open the magic_items add modal."""
-    print('As a player, I can click the first row in magic_items table to open the magic_items add modal.')
+    """As a player, I can click the first row in magic_items table to open the
+       magic_items add modal."""
+    print(('As a player, I can click the first row in magic_items table to '
+           'open the magic_items add modal.'))
 
     magic_items_table = magic_items.MagicItemsTable(browser)
     tabs = Tabs(browser)
@@ -601,8 +729,10 @@ def test_add_magic_items_open_model_by_row(player_wizard, browser): # noqa
 
 
 def test_autocomplete_magic_items(player_wizard, browser): # noqa
-    """As a player, if I start typing in the autocomplete inputs, I can select suggested items in the dropdown."""
-    print('As a player, if I start typing in the autocomplete inputs, I can select suggested items in the dropdown.')
+    """As a player, if I start typing in the autocomplete inputs, I can select
+       suggested items in the dropdown."""
+    print(('As a player, if I start typing in the autocomplete inputs, I can '
+           'select suggested items in the dropdown.'))
 
     magic_items_add = magic_items.MagicItemsAddModal(browser)
     magic_items_table = magic_items.MagicItemsTable(browser)
@@ -644,12 +774,18 @@ def test_magic_items_persists(player_wizard, browser): # noqa
     assert 'with adamantine' in row.description
 
     row = ut.get_table_row(magic_items_table, 'table', 1, values=False)
+
     assert row[2].find_element_by_tag_name('input').is_displayed() is False
 
     row = ut.get_table_row(magic_items_table, 'table', values=False)
-    time.sleep(.3)
     row[0].click()
-    time.sleep(.3)
+
+    WebDriverWait(browser, 10).until(
+        EC.element_to_be_clickable(
+            (By.ID, magic_items_tabs.edit_id)
+        )
+    )
+
     magic_items_tabs.edit.click()
 
     assert magic_items_edit.item.get_attribute('value') == 'Adamantine Armor'
@@ -664,8 +800,10 @@ def test_magic_items_persists(player_wizard, browser): # noqa
 
 
 def test_magic_items_total_weight(player_wizard, browser): # noqa
-    """As a player, in the magic_items table, total weight is calculated correctly."""
-    print('As a player, in the armor table, total weight is calculated correctly')
+    """As a player, in the magic_items table, total weight is calculated
+       correctly."""
+    print(('As a player, in the armor table, total weight is calculated '
+           'correctly'))
 
     magic_items_add = magic_items.MagicItemsAddModal(browser)
     magic_items_table = magic_items.MagicItemsTable(browser)
@@ -677,7 +815,9 @@ def test_magic_items_total_weight(player_wizard, browser): # noqa
     magic_items_add.weight = 5
     magic_items_add.add.click()
 
-    time.sleep(.3)
+    WebDriverWait(browser, 10).until(
+        modal_finished_closing(magic_items_add.modal_div_id)
+    )
 
     magic_items_table.add.click()
     ut.select_from_autocomplete(magic_items_add, 'item', 'b', browser)
@@ -687,46 +827,78 @@ def test_magic_items_total_weight(player_wizard, browser): # noqa
     assert magic_items_table.total_weight.text == '15 (lbs)'
 
 def test_magic_items_sorting(player_wizard, browser): # noqa
-    """As a player, I can sort the magic_items table by clicking on the sortable columns."""
-    print('As a player, I can sort the magic_items table by clicking on the sortable columns')
+    """As a player, I can sort the magic_items table by clicking on the
+       sortable columns."""
+    print(('As a player, I can sort the magic_items table by clicking on the '
+           'sortable columns'))
 
     magic_items_add = magic_items.MagicItemsAddModal(browser)
     magic_items_table = magic_items.MagicItemsTable(browser)
     tabs = Tabs(browser)
     tabs.inventory.click()
 
+    WebDriverWait(browser, 10).until(
+        EC.element_to_be_clickable(
+            (By.ID, magic_items_table.add_id)
+        )
+    )
+
     magic_items_table.add.click()
     ut.select_from_autocomplete(magic_items_add, 'item', '', browser)
     magic_items_add.weight = 100
     magic_items_add.add.click()
 
-    time.sleep(.3)
+    WebDriverWait(browser, 10).until(
+        modal_finished_closing(magic_items_add.modal_div_id)
+    )
+
     magic_items_table.add.click()
-    ut.select_from_autocomplete(magic_items_add, 'item', '', browser, arrow_down_count=2)
+    ut.select_from_autocomplete(
+        magic_items_add, 'item', '', browser, arrow_down_count=2)
     magic_items_add.max_charges = 2
     magic_items_add.charges = 1
     magic_items_add.add.click()
 
-    time.sleep(.3)
+    WebDriverWait(browser, 10).until(
+        modal_finished_closing(magic_items_add.modal_div_id)
+    )
+
     magic_items_table.magic_item_header.click()
-    time.sleep(.3)
+    WebDriverWait(browser, 10).until(
+        sorting_arrow_down(
+            magic_items_table.magic_item_header_sorting_arrow,
+        )
+    )
     rows = ut.get_table_row(magic_items_table, 'table', values=False)
+
     assert rows[0].text.strip() == 'Amulet of Health'
 
-    time.sleep(.3)
     magic_items_table.charges_header.click()
-    time.sleep(.3)
+    WebDriverWait(browser, 10).until(
+        sorting_arrow_up(
+            magic_items_table.charges_header_sorting_arrow,
+        )
+    )
     rows = ut.get_table_row(magic_items_table, 'table', values=False)
+
     assert rows[1].text.strip() == 'N/A'
 
-    time.sleep(.3)
     magic_items_table.weight_header.click()
-    time.sleep(.3)
+    WebDriverWait(browser, 10).until(
+        sorting_arrow_up(
+            magic_items_table.weight_header_sorting_arrow,
+        )
+    )
     rows = ut.get_table_row(magic_items_table, 'table', values=False)
+
     assert rows[3].text.strip() == '0 lbs.'
 
-    time.sleep(.3)
     magic_items_table.weight_header.click()
-    time.sleep(.3)
+    WebDriverWait(browser, 10).until(
+        sorting_arrow_down(
+            magic_items_table.weight_header_sorting_arrow,
+        )
+    )
     rows = ut.get_table_row(magic_items_table, 'table', values=False)
+
     assert rows[3].text.strip() == '100 lbs.'

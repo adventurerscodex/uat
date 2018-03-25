@@ -6,6 +6,7 @@ from modules.element import Element, Component
 class InventoryAddModal(Component):
     """Definition of inventory add modal component."""
 
+    modal_div_id = 'addItem'
     name_id = 'inventoryAddNameInput'
     weight_id = 'inventoryAddWeightInput'
     quantity_id = 'inventoryAddQuantityInput'
@@ -15,6 +16,7 @@ class InventoryAddModal(Component):
     add_id = 'inventoryAddAddButton'
     cancel_id = 'inventoryAddCancelButton'
 
+    modal_div = Element(id_=modal_div_id)
     name = Element(id_=name_id)
     weight = Element(id_=weight_id)
     quantity = Element(id_=quantity_id)
@@ -28,6 +30,7 @@ class InventoryAddModal(Component):
 class InventoryEditModal(Component):
     """Definition of inventory edit modal component."""
 
+    modal_div_id = 'viewItem'
     name_id = 'inventoryEditNameInput'
     weight_id = 'inventoryEditWeightInput'
     quantity_id = 'inventoryEditQuantityInput'
@@ -36,6 +39,7 @@ class InventoryEditModal(Component):
     description_id = 'inventoryEditDescriptionTextarea'
     done_id = 'inventoryEditDoneButton'
 
+    modal_div = Element(id_=modal_div_id)
     name = Element(id_=name_id)
     weight = Element(id_=weight_id)
     quantity = Element(id_=quantity_id)
@@ -79,15 +83,23 @@ class InventoryTable(Component):
     add_id = 'inventoryAddIcon'
     table_id = 'inventoryTable'
     item_header_id = 'inventoryTableItemHeader'
+    item_header_sorting_arrow_xpath = '//*[@id="inventoryTableItemHeader"]/span'
     quantity_header_id = 'inventoryTableQuantityHeader'
+    quantity_header_sorting_arrow_xpath = '//*[@id="inventoryTableQuantityHeader"]/span'
     weight_header_id = 'inventoryTableWeightHeader'
+    wegith_header_sorting_arrow_xpath = '//*[@id="inventoryTableWeightHeader"]/span'
     cost_header_id = 'inventoryTableCostHeader'
+    cost_header_sorting_arrow_xpath = '//*[@id="inventoryTableCostHeader"]/span'
     total_weight_id = 'inventoryTableTotalWeightSpan'
 
     add = Element(id_=add_id)
     table = Element(id_=table_id)
     item_header = Element(id_=item_header_id)
+    item_header_sorting_arrow = Element(xpath=item_header_sorting_arrow_xpath)
     quantity_header = Element(id_=quantity_header_id)
+    quantity_header_sorting_arrow = Element(xpath=quantity_header_sorting_arrow_xpath)
     weight_header = Element(id_=weight_header_id)
+    weight_header_sorting_arrow = Element(xpath=wegith_header_sorting_arrow_xpath)
     cost_header = Element(id_=cost_header_id)
+    cost_header_sorting_arrow = Element(xpath=cost_header_sorting_arrow_xpath)
     total_weight = Element(id_=total_weight_id)

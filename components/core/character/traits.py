@@ -6,6 +6,7 @@ from modules.element import Element, Component
 class TraitAddModal(Component):
     """Definition of trait add modal component."""
 
+    modal_div_id = 'addTrait'
     name_id = 'traitAddNameInput'
     race_id = 'traitAddRaceInput'
     description_id = 'traitAddDescriptionTextarea'
@@ -15,6 +16,7 @@ class TraitAddModal(Component):
     long_rest_id = 'traitAddLongRestInput'
     add_id = 'traitAddAddButton'
 
+    modal_div = Element(id_=modal_div_id)
     name = Element(id_=name_id)
     race = Element(id_=race_id)
     description = Element(id_=description_id)
@@ -28,6 +30,7 @@ class TraitAddModal(Component):
 class TraitEditModal(Component):
     """Definition of trait edit modal component."""
 
+    modal_div_id = 'viewWeapon'
     name_id = 'traitEditNameInput'
     race_id = 'traitEditRaceInput'
     description_id = 'traitEditDescriptionTextarea'
@@ -37,6 +40,7 @@ class TraitEditModal(Component):
     long_rest_id = 'traitEditLongRestInput'
     done_id = 'traitEditDoneButton'
 
+    modal_div = Element(id_=modal_div_id)
     name = Element(id_=name_id)
     race = Element(id_=race_id)
     description = Element(id_=description_id)

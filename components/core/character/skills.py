@@ -6,6 +6,7 @@ from modules.element import Element, Component
 class SkillsAddModal(Component):
     """Definition of skills add modal component."""
 
+    modal_div_id = 'addSkill'
     name_id = 'skillsAddNameInput'
     none_id = 'skillsAddNoneButton'
     half_id = 'skillsAddHalfButton'
@@ -19,6 +20,7 @@ class SkillsAddModal(Component):
     cha_id = 'skillsAddChaButton'
     add_id = 'skillsAddAddButton'
 
+    modal_div = Element(id_=modal_div_id)
     name = Element(id_=name_id)
     none = Element(id_=none_id)
     half = Element(id_=half_id)
@@ -36,6 +38,7 @@ class SkillsAddModal(Component):
 class SkillsEditModal(Component):
     """Definition of skills edit modal component."""
 
+    modal_div_xpath = '//*[@id="skills"]/div[3]/div[1]/skills/div[2]'
     modifer_id = 'skillsEditNameInput'
     none_id = 'skillsEditNoneButton'
     half_xpath = '//*[@id="skills"]/div[3]/div[1]/skills/div[2]/div/div/div[2]/form/div[2]/div/div/label[2]'
@@ -43,6 +46,7 @@ class SkillsEditModal(Component):
     expertise_xpath = '//*[@id="skills"]/div[3]/div[1]/skills/div[2]/div/div/div[2]/form/div[2]/div/div/label[4]'
     done_xpath = '//*[@id="skills"]/div[3]/div[1]/skills/div[2]/div/div/div[3]/button'
 
+    modal_div = Element(xpath=modal_div_xpath)
     modifer = Element(id_=modifer_id)
     none = Element(id_=none_id)
     half = Element(xpath=half_xpath)

@@ -6,6 +6,7 @@ from modules.element import Element, Component
 class WeaponAddModal(Component):
     """Definition of weapon add modal component."""
 
+    modal_div_id = 'addWeapon'
     name_id = 'weaponAddNameInput'
     damage_id = 'weaponAddDamageInput'
     magical_modifier_id = 'weaponAddMagicalModifierInput'
@@ -24,6 +25,7 @@ class WeaponAddModal(Component):
     add_id = 'weaponAddAddButton'
     cancel_id = 'weaponAddCancelButton'
 
+    modal_div = Element(id_=modal_div_id)
     name = Element(id_=name_id)
     damage = Element(id_=damage_id)
     magical_modifier = Element(id_=magical_modifier_id)
@@ -46,6 +48,7 @@ class WeaponAddModal(Component):
 class WeaponEditModal(Component):
     """Definition of weapon edit modal component."""
 
+    modal_div_id = 'editWeapon'
     name_id = 'weaponEditNameInput'
     damage_id = 'weaponEditDamageInput'
     magical_modifier_id = 'weaponEditMagicalModifierInput'
@@ -63,6 +66,7 @@ class WeaponEditModal(Component):
     description_id = 'weaponEditDescriptionTextarea'
     done_id = 'weaponEditDoneButton'
 
+    modal_div = Element(id_=modal_div_id)
     name = Element(id_=name_id)
     damage = Element(id_=damage_id)
     magical_modifier = Element(id_=magical_modifier_id)
@@ -131,21 +135,35 @@ class WeaponTable(Component):
     add_id = 'weaponAddIcon'
     table_id = 'weaponTable'
     weapon_header_id = 'weaponTableWeaponHeader'
+    weapon_header_sorting_arrow_xpath = '//*[@id="weaponTableWeaponHeader"]/span'
     to_hit_header_id = 'weaponTableToHitHeader'
+    to_hit_header_sorting_arrow_xpath = '//*[@id="weaponTableToHitHeader"]/span'
     damage_header_id = 'weaponTableDamageHeader'
+    damage_header_sorting_arrow_xpath = '//*[@id="weaponTableDamageHeader"]/span'
     damage_type_header_id = 'weaponTableDamageTypeHeader'
+    damage_type_header_sorting_arrow_xpath = '//*[@id="weaponTableDamageTypeHeader"]/span'
     range_header_id = 'weaponTableRangeHeader'
+    range_header_sorting_arrow_xpath = '//*[@id="weaponTableRangeHeader"]/span'
     property_header_id = 'weaponTablePropertyHeader'
+    property_header_sorting_arrow_xpath = '//*[@id="weaponTablePropertyHeader"]/span'
     quantity_header_id = 'weaponTableQuantityHeader'
+    quantity_header_sorting_arrow_xpath = '//*[@id="weaponTableQuantityHeader"]/span'
     total_weight_id = 'weaponTableTotalWeightSpan'
 
     add = Element(id_=add_id)
     table = Element(id_=table_id)
     weapon_header = Element(id_=weapon_header_id)
+    weapon_header_sorting_arrow = Element(xpath=weapon_header_sorting_arrow_xpath)
     to_hit_header = Element(id_=to_hit_header_id)
+    to_hit_header_sorting_arrow = Element(xpath=to_hit_header_sorting_arrow_xpath)
     damage_header = Element(id_=damage_header_id)
+    damage_header_sorting_arrow = Element(xpath=damage_header_sorting_arrow_xpath)
     damage_type_header = Element(id_=damage_type_header_id)
+    damage_type_header_sorting_arrow = Element(xpath=damage_type_header_sorting_arrow_xpath)
     range_header = Element(id_=range_header_id)
+    range_header_sorting_arrow = Element(xpath=range_header_sorting_arrow_xpath)
     property_header = Element(id_=property_header_id)
+    property_header_sorting_arrow = Element(xpath=property_header_sorting_arrow_xpath)
     quantity_header = Element(id_=quantity_header_id)
+    quantity_header_sorting_arrow = Element(xpath=quantity_header_sorting_arrow_xpath)
     total_weight = Element(id_=total_weight_id)

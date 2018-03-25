@@ -6,6 +6,7 @@ from modules.element import Element, Component
 class FeatAddModal(Component):
     """Definition of feat add modal component."""
 
+    modal_div_id = 'addFeat'
     name_id = 'featAddNameInput'
     description_id = 'featAddDescriptionTextarea'
     tracked_id = 'featAddTrackedCheckbox'
@@ -14,6 +15,7 @@ class FeatAddModal(Component):
     long_rest_id = 'featAddLongRestInput'
     add_id = 'featAddAddButton'
 
+    modal_div = Element(id_=modal_div_id)
     name = Element(id_=name_id)
     description = Element(id_=description_id)
     tracked = Element(id_=tracked_id)
@@ -26,6 +28,7 @@ class FeatAddModal(Component):
 class FeatEditModal(Component):
     """Definition of feat edit modal component."""
 
+    modal_div_id = 'viewWeapon'
     name_id = 'featEditNameInput'
     description_id = 'featEditDescriptionTextarea'
     tracked_id = 'featEditTrackedCheckbox'
@@ -34,6 +37,7 @@ class FeatEditModal(Component):
     long_rest_id = 'featEditLongRestInput'
     done_id = 'featEditDoneButton'
 
+    modal_div = Element(id_=modal_div_id)
     name = Element(id_=name_id)
     description = Element(id_=description_id)
     tracked = Element(id_=tracked_id)

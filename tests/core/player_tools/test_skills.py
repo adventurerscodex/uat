@@ -1,6 +1,4 @@
 """UAT test file for Adventurer's Codex player tools skills module."""
-import time
-
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC # noqa
@@ -9,6 +7,9 @@ from selenium.webdriver.support.ui import WebDriverWait
 from components.core.character import features, feats, traits
 from components.core.character import tracked, proficiency, skills
 from components.core.character.tabs import Tabs
+from expected_conditions.conditions import modal_finished_closing
+from expected_conditions.conditions import sorting_arrow_up, sorting_arrow_down
+from expected_conditions.conditions import table_cell_updated
 from utils import utils as ut
 
 
@@ -140,14 +141,29 @@ def test_edit_feature(player_wizard, browser): # noqa
     tabs = Tabs(browser)
     tabs.skills.click()
 
+    WebDriverWait(browser, 10).until(
+        EC.element_to_be_clickable(
+            (By.ID, features_table.add_id)
+        )
+    )
+
     features_table.add.click()
     ut.select_from_autocomplete(feature, 'name', '', browser)
     feature.add.click()
 
+    WebDriverWait(browser, 10).until(
+        modal_finished_closing(feature.modal_div_id)
+    )
+
     rows = ut.get_table_rows(features_table, 'table', values=False)
-    time.sleep(.3)
     rows[0][0].click()
-    time.sleep(.3)
+
+    WebDriverWait(browser, 10).until(
+        EC.element_to_be_clickable(
+            (By.ID, feature_tabs.edit_id)
+        )
+    )
+
     feature_tabs.edit.click()
 
     feature_edit.name.clear()
@@ -170,12 +186,15 @@ def test_edit_feature(player_wizard, browser): # noqa
     assert feature_edit.description.get_attribute('value') == 'Edited Description'
     assert feature_edit.max_.get_attribute('value') == '4'
     assert 'active' in feature_edit.short_rest.get_attribute('class')
+
     feature_edit.done.click()
 
-    rows = ut.get_table_rows(features_table, 'table', values=False)
-    time.sleep(.3)
+    WebDriverWait(browser, 10).until(
+        modal_finished_closing(feature_edit.modal_div_id)
+    )
 
     row = ut.get_table_row(features_table, 'table', 1)
+
     assert row.feature == 'Edited Name'
     assert row.class_ == 'Edited Class'
 
@@ -296,14 +315,29 @@ def test_edit_feat(player_wizard, browser): # noqa
     tabs = Tabs(browser)
     tabs.skills.click()
 
+    WebDriverWait(browser, 10).until(
+        EC.element_to_be_clickable(
+            (By.ID, feats_table.add_id)
+        )
+    )
+
     feats_table.add.click()
     ut.select_from_autocomplete(feat, 'name', '', browser)
     feat.add.click()
 
+    WebDriverWait(browser, 10).until(
+        modal_finished_closing(feat.modal_div_id)
+    )
+
     rows = ut.get_table_rows(feats_table, 'table', values=False)
-    time.sleep(.3)
     rows[0][0].click()
-    time.sleep(.3)
+
+    WebDriverWait(browser, 10).until(
+        EC.element_to_be_clickable(
+            (By.ID, feat_tabs.edit_id)
+        )
+    )
+
     feat_tabs.edit.click()
 
     feat_edit.name.clear()
@@ -320,12 +354,25 @@ def test_edit_feat(player_wizard, browser): # noqa
     assert feat_edit.description.get_attribute('value') == 'Edited Description'
     assert feat_edit.max_.get_attribute('value') == '4'
     assert 'active' in feat_edit.short_rest.get_attribute('class')
+
     feat_edit.done.click()
 
-    rows = ut.get_table_rows(feats_table, 'table', values=False)
-    time.sleep(.3)
+    WebDriverWait(browser, 10).until(
+        modal_finished_closing(feat_edit.modal_div_id)
+    )
+
+    WebDriverWait(browser, 10).until(
+        table_cell_updated(
+            feats_table,
+            'feat',
+            'Edited Name',
+            'table',
+            1
+        )
+    )
 
     row = ut.get_table_row(feats_table, 'table', 1)
+
     assert row.feat == 'Edited Name'
 
 
@@ -392,12 +439,21 @@ def test_delete_trait(player_wizard, browser): # noqa
     tabs = Tabs(browser)
     tabs.skills.click()
 
+    WebDriverWait(browser, 10).until(
+        EC.element_to_be_clickable(
+            (By.ID, traits_table.add_id)
+        )
+    )
+
     traits_table.add.click()
     ut.select_from_autocomplete(trait, 'name', '', browser)
     trait.add.click()
 
+    WebDriverWait(browser, 10).until(
+        modal_finished_closing(trait.modal_div_id)
+    )
+
     rows = ut.get_table_rows(traits_table, 'table', values=False)
-    time.sleep(.3)
     rows[0][2].find_element_by_tag_name('a').click()
     rows = ut.get_table_rows(traits_table, 'table', values=False)
 
@@ -446,15 +502,36 @@ def test_edit_trait(player_wizard, browser): # noqa
     tabs = Tabs(browser)
     tabs.skills.click()
 
+    WebDriverWait(browser, 10).until(
+        EC.element_to_be_clickable(
+            (By.ID, traits_table.add_id)
+        )
+    )
+
     traits_table.add.click()
     ut.select_from_autocomplete(trait, 'name', '', browser)
     trait.add.click()
 
+    WebDriverWait(browser, 10).until(
+        modal_finished_closing(trait.modal_div_id)
+    )
+
     rows = ut.get_table_rows(traits_table, 'table', values=False)
-    time.sleep(.3)
     rows[0][0].click()
-    time.sleep(.3)
+
+    WebDriverWait(browser, 10).until(
+        EC.element_to_be_clickable(
+            (By.ID, trait_tabs.edit_id)
+        )
+    )
+
     trait_tabs.edit.click()
+
+    WebDriverWait(browser, 10).until(
+        EC.presence_of_element_located(
+            (By.ID, trait_edit.name_id)
+        )
+    )
 
     trait_edit.name.clear()
     trait_edit.race.clear()
@@ -473,12 +550,27 @@ def test_edit_trait(player_wizard, browser): # noqa
     assert trait_edit.description.get_attribute('value') == 'Edited Description'
     assert trait_edit.max_.get_attribute('value') == '4'
     assert 'active' in trait_edit.short_rest.get_attribute('class')
+
     trait_edit.done.click()
 
     rows = ut.get_table_rows(traits_table, 'table', values=False)
-    time.sleep(.3)
+
+    WebDriverWait(browser, 10).until(
+        modal_finished_closing(trait.modal_div_id)
+    )
+
+    WebDriverWait(browser, 10).until(
+        table_cell_updated(
+            traits_table,
+            'trait',
+            'Edited Name',
+            'table',
+            1
+        )
+    )
 
     row = ut.get_table_row(traits_table, 'table', 1)
+
     assert row.trait == 'Edited Name'
     assert row.race == 'Edited Race'
 
@@ -534,12 +626,22 @@ def test_delete_proficiency(player_wizard, browser): # noqa
     tabs = Tabs(browser)
     tabs.skills.click()
 
+    WebDriverWait(browser, 10).until(
+        EC.element_to_be_clickable(
+            (By.ID, proficiency_table.add_id)
+        )
+    )
+
     proficiency_table.add.click()
     ut.select_from_autocomplete(proficiency_add, 'name', '', browser)
     proficiency_add.add.click()
 
     rows = ut.get_table_rows(proficiency_table, 'table', values=False)
-    time.sleep(.3)
+
+    WebDriverWait(browser, 10).until(
+        modal_finished_closing(proficiency_add.modal_div_id)
+    )
+
     rows[0][2].find_element_by_tag_name('a').click()
     rows = ut.get_table_rows(proficiency_table, 'table', values=False)
 
@@ -585,14 +687,29 @@ def test_edit_proficiency(player_wizard, browser): # noqa
     tabs = Tabs(browser)
     tabs.skills.click()
 
+    WebDriverWait(browser, 10).until(
+        EC.element_to_be_clickable(
+            (By.ID, proficiency_table.add_id)
+        )
+    )
+
     proficiency_table.add.click()
     ut.select_from_autocomplete(proficiency_add, 'name', '', browser)
     proficiency_add.add.click()
 
+    WebDriverWait(browser, 10).until(
+        modal_finished_closing(proficiency_add.modal_div_id)
+    )
+
     rows = ut.get_table_rows(proficiency_table, 'table', values=False)
-    time.sleep(.3)
     rows[0][0].click()
-    time.sleep(.3)
+
+    WebDriverWait(browser, 10).until(
+        EC.element_to_be_clickable(
+            (By.ID, proficiency_tabs.edit_id)
+        )
+    )
+
     proficiency_tabs.edit.click()
 
     proficiency_edit.name.clear()
@@ -606,12 +723,15 @@ def test_edit_proficiency(player_wizard, browser): # noqa
     assert proficiency_edit.name.get_attribute('value') == 'Edited Name'
     assert proficiency_edit.type_.get_attribute('value') == 'Edited Type'
     assert proficiency_edit.description.get_attribute('value') == 'Edited Description'
+
     proficiency_edit.done.click()
 
-    rows = ut.get_table_rows(proficiency_table, 'table', values=False)
-    time.sleep(.3)
+    WebDriverWait(browser, 10).until(
+        modal_finished_closing(proficiency_edit.modal_div_id)
+    )
 
     row = ut.get_table_row(proficiency_table, 'table', 1)
+
     assert row.proficiency == 'Edited Name'
     assert row.type == 'Edited Type'
 
@@ -678,9 +798,12 @@ def test_tracked_reset(player_wizard, browser): # noqa
     assert tracked_table.tracked1_used.text == '0'
 
 def test_proficiency_types(player_wizard, browser): # noqa
-    """As a player, I can mark a skill as none, half, proficient, or expertise and view these modifiers, and they are calculated correctly."""
+    """As a player, I can mark a skill as none, half, proficient, or
+       expertise and view these modifiers, and they are calculated correctly."""
 
-    print('As a player, I can mark a skill as none, half, proficient, or expertise and view these modifiers, and they are calculated correctly.')
+    print(('As a player, I can mark a skill as none, half, proficient, or '
+           'expertise and view these modifiers, and they are calculated '
+           'correctly.'))
 
     skills_table = skills.SkillsTable(browser)
     skills_edit = skills.SkillsEditModal(browser)
@@ -690,31 +813,51 @@ def test_proficiency_types(player_wizard, browser): # noqa
     acrobatics = ut.get_table_row(skills_table, 'table', values=False)
     none = acrobatics[0].find_element_by_tag_name('span').get_attribute('class')
     acrobatics[0].click()
-    time.sleep(.3)
+    WebDriverWait(browser, 10).until(
+        EC.element_to_be_clickable(
+            (By.XPATH, skills_edit.half_xpath)
+        )
+    )
     skills_edit.half.click()
     skills_edit.done.click()
 
-    time.sleep(.3)
+    WebDriverWait(browser, 10).until(
+        modal_finished_closing(skills_edit.modal_div_xpath)
+    )
+
     acrobatics = ut.get_table_row(skills_table, 'table', values=False)
     spans = acrobatics[0].find_element_by_tag_name('span')
     half = spans.find_element_by_tag_name('span').get_attribute('class')
 
     acrobatics[0].click()
-    time.sleep(.3)
+    WebDriverWait(browser, 10).until(
+        EC.element_to_be_clickable(
+            (By.XPATH, skills_edit.proficient_xpath)
+        )
+    )
     skills_edit.proficient.click()
     skills_edit.done.click()
 
-    time.sleep(.3)
+    WebDriverWait(browser, 10).until(
+        modal_finished_closing(skills_edit.modal_div_xpath)
+    )
     acrobatics = ut.get_table_row(skills_table, 'table', values=False)
     spans = acrobatics[0].find_element_by_tag_name('span')
     proficient = spans.find_element_by_tag_name('span').get_attribute('class')
 
     acrobatics[0].click()
-    time.sleep(.5)
+    WebDriverWait(browser, 10).until(
+        EC.element_to_be_clickable(
+            (By.XPATH, skills_edit.expertise_xpath)
+        )
+    )
     skills_edit.expertise.click()
     skills_edit.done.click()
 
-    time.sleep(.3)
+    WebDriverWait(browser, 10).until(
+        modal_finished_closing(skills_edit.modal_div_xpath)
+    )
+
     acrobatics = ut.get_table_row(skills_table, 'table', values=False)
     spans = acrobatics[0].find_element_by_tag_name('span')
     expertise = spans.find_element_by_tag_name('span').get_attribute('class')
@@ -768,38 +911,52 @@ def test_data_persists(player_wizard, browser): # noqa
 
     feature.add.click()
 
-    time.sleep(.3)
+    WebDriverWait(browser, 10).until(
+        modal_finished_closing(feature.modal_div_id)
+    )
 
     feats_table.add.click()
     ut.select_from_autocomplete(feat, 'name', '', browser)
     feat.add.click()
 
-    time.sleep(.3)
+    WebDriverWait(browser, 10).until(
+        modal_finished_closing(feat.modal_div_id)
+    )
 
     traits_table.add.click()
     ut.select_from_autocomplete(trait, 'name', '', browser)
     trait.add.click()
 
-    time.sleep(.3)
+    WebDriverWait(browser, 10).until(
+        modal_finished_closing(trait.modal_div_id)
+    )
 
     proficiency_table.add.click()
     ut.select_from_autocomplete(proficiency_add, 'name', '', browser)
     proficiency_add.add.click()
 
-    time.sleep(.3)
+    WebDriverWait(browser, 10).until(
+        modal_finished_closing(proficiency_add.modal_div_id)
+    )
 
     acrobatics = ut.get_table_row(skills_table, 'table', values=False)
     acrobatics[0].click()
 
-    time.sleep(.3)
+    WebDriverWait(browser, 10).until(
+        EC.element_to_be_clickable(
+            (By.XPATH, skills_edit.half_xpath)
+        )
+    )
 
     skills_edit.half.click()
     skills_edit.done.click()
 
-    time.sleep(.3)
+    WebDriverWait(browser, 10).until(
+        modal_finished_closing(skills_edit.modal_div_xpath)
+    )
 
     browser.refresh()
-    time.sleep(.3)
+
     row = ut.get_table_row(features_table, 'table', 1)
 
     assert tracked_table.tracked1_name.text == 'Add Name'

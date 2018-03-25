@@ -44,7 +44,7 @@ class ArmorFactory(factory.Factory):
     type_ = factory.fuzzy.FuzzyChoice(
         Fixtures['armor']['armorTypeOptions']
     )
-    magical_modifier = factory.fuzzy.FuzzyInteger(0, 10)
+    magical_modifier = factory.fuzzy.FuzzyInteger(1, 10)
     price = factory.fuzzy.FuzzyInteger(0, 1000000)
     currency_denomination = factory.fuzzy.FuzzyChoice(
         Fixtures['general']['currencyDenominationList']

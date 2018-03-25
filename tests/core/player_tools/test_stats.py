@@ -12,6 +12,7 @@ from components.core.character.other_stats import OtherStats
 from components.core.character.profile_picture import ProfilePicture
 from components.core.character.saving_throw import SavingThrowEditModal, SavingThrowTable
 from expected_conditions.conditions import table_cell_updated
+from expected_conditions.conditions import modal_finished_closing
 from utils import utils as ut
 
 def test_data_persists(player_wizard, browser): # noqa
@@ -30,7 +31,9 @@ def test_data_persists(player_wizard, browser): # noqa
     ability_scores_edit.strength = 15
     ability_scores_edit.done.click()
 
-    time.sleep(.3)
+    WebDriverWait(browser, 10).until(
+        modal_finished_closing(ability_scores_edit.modal_div_xpath)
+    )
 
     hp_hd.damage_up.click()
 
@@ -470,7 +473,9 @@ def test_saving_throw_proficiency(player_wizard, browser): # noqa
     saving_throw_edit.done.click()
 
     # add custom wait to test for class in nested element
-    time.sleep(.3)
+    WebDriverWait(browser, 10).until(
+        modal_finished_closing(saving_throw_edit.modal_div_id)
+    )
 
     row = ut.get_table_row(saving_throw, 'table', values=False)
     span = row[0].find_elements(By.TAG_NAME, 'span')

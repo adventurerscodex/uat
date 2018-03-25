@@ -6,6 +6,7 @@ from modules.element import Element, Component
 class MagicItemsAddModal(Component):
     """Definition of magicItems add modal component."""
 
+    modal_div_id = 'addMagicItem'
     item_id = 'magicItemsAddItemInput'
     type_id = 'magicItemsAddTypeInput'
     rarity_id = 'magicItemsAddRarityInput'
@@ -18,6 +19,7 @@ class MagicItemsAddModal(Component):
     add_id = 'magicItemsAddAddButton'
     cancel_id = 'magicItemsAddCancelButton'
 
+    modal_div = Element(id_=modal_div_id)
     item = Element(id_=item_id)
     type_ = Element(id_=type_id)
     rarity = Element(id_=rarity_id)
@@ -34,6 +36,7 @@ class MagicItemsAddModal(Component):
 class MagicItemsEditModal(Component):
     """Definition of magicItems edit modal component."""
 
+    modal_div_id = 'viewMagicItem'
     item_id = 'magicItemsEditItemInput'
     type_id = 'magicItemsEditTypeInput'
     rarity_id = 'magicItemsEditRarityInput'
@@ -45,6 +48,7 @@ class MagicItemsEditModal(Component):
     description_id = 'magicItemsEditDescriptionTextarea'
     done_id = 'magicItemsEditDoneButton'
 
+    modal_div = Element(id_=modal_div_id)
     item = Element(id_=item_id)
     type_ = Element(id_=type_id)
     rarity = Element(id_=rarity_id)
@@ -94,14 +98,22 @@ class MagicItemsTable(Component):
     table_id = 'magicItemsTable'
     total_weight_id = 'magicItemsTableTotalWeight'
     magic_item_header_id = 'magicItemsMagicItemHeader'
+    magic_item_header_sorting_arrow_xpath = '//*[@id="magicItemsMagicItemHeader"]/span'
     charges_header_id = 'magicItemsChargesHeader'
+    charges_header_sorting_arrow_xpath = '//*[@id="magicItemsChargesHeader"]/span'
     attuned_header_id = 'magicItemsAttunedHeader'
+    attuned_header_sorting_arrow_xpath = '//*[@id="magicItemsAttunedHeader"]/span'
     weight_header_id = 'magicItemsWeightHeader'
+    weight_header_sorting_arrow_xpath = '//*[@id="magicItemsWeightHeader"]/span'
 
     add = Element(id_=add_id)
     table = Element(id_=table_id)
     total_weight = Element(id_=total_weight_id)
     magic_item_header = Element(id_=magic_item_header_id)
+    magic_item_header_sorting_arrow = Element(xpath=magic_item_header_sorting_arrow_xpath)
     charges_header = Element(id_=charges_header_id)
+    charges_header_sorting_arrow = Element(xpath=charges_header_sorting_arrow_xpath)
     attuned_header = Element(id_=attuned_header_id)
+    attuned_header_sorting_arrow = Element(xpath=attuned_header_sorting_arrow_xpath)
     weight_header = Element(id_=weight_header_id)
+    weight_header_sorting_arrow = Element(xpath=weight_header_sorting_arrow_xpath)

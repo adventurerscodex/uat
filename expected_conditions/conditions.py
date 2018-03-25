@@ -1,5 +1,14 @@
 """Custom expected conditions."""
 
+from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import NoSuchFrameException
+from selenium.common.exceptions import StaleElementReferenceException
+from selenium.common.exceptions import WebDriverException
+from selenium.common.exceptions import NoAlertPresentException
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC # noqa
+from selenium.webdriver.support.ui import WebDriverWait
+
 from utils import utils as ut
 
 class url_in_new_tab_matches:  # noqa
@@ -66,3 +75,65 @@ class table_cell_updated: # noqa
         actual = getattr(row, self.header)
 
         return actual == self.expected
+
+class sorting_arrow_up: # noqa
+    """Wait until sorting arrow is pointing up."""
+
+    def __init__(self, element):
+        """Init expected condition.
+
+        :param element: Selenium WebElement object
+        """
+        self.element = element
+
+    def __call__(self, driver):
+        """Test is arrow is pointing up."""
+        return 'fa-arrow-up' in self.element.get_attribute('class')
+
+class sorting_arrow_down: # noqa
+    """Wait until sorting arrow is pointing down."""
+
+    def __init__(self, element):
+        """Init expected condition.
+
+        :param element: Selenium WebElement object
+        """
+        self.element = element
+
+    def __call__(self, driver):
+        """Test if arrow is pointing down."""
+        return 'fa-arrow-down' in self.element.get_attribute('class')
+
+
+class modal_finished_closing: # noqa
+    """Wait until modal finished closing."""
+
+    def __init__(self, element_id):
+        """Init expected condition.
+
+        :param element_id: ID of DOM element
+        """
+        self.element_id = element_id
+
+    def __call__(self, driver):
+        """Test if modal has closed."""
+        # Required for Firefox
+        try:
+            WebDriverWait(driver, 10).until(
+                EC.invisibility_of_element_located(
+                    (By.CLASS_NAME, 'modal-backdrop fade')
+                )
+            )
+        except NoSuchElementException:
+            pass
+
+        try:
+            WebDriverWait(driver, 10).until(
+                EC.invisibility_of_element_located(
+                    (By.ID, self.element_id)
+                )
+            )
+        except NoSuchElementException:
+            pass
+
+        return True

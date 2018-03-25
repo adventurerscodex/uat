@@ -6,6 +6,7 @@ from modules.element import Element, Component
 class ArmorAddModal(Component):
     """Definition of armor add modal component."""
 
+    modal_div_id = 'addArmor'
     name_id = 'armorAddNameInput'
     type_id = 'armorAddTypeInput'
     magical_modifier_id = 'armorAddMagicalModifierInput'
@@ -20,6 +21,7 @@ class ArmorAddModal(Component):
     add_id = 'armorAddAddButton'
     cancel_id = 'armorAddCancelButton'
 
+    modal_div = Element(id_=modal_div_id)
     name = Element(id_=name_id)
     type_ = Element(id_=type_id)
     magical_modifier = Element(id_=magical_modifier_id)
@@ -99,15 +101,23 @@ class ArmorTable(Component):
     add_id = 'armorAddIcon'
     table_id = 'armorTable'
     equipped_header_id = 'armorTableEquippedHeader'
+    equipped_header_sorting_arrow_xpath = '//*[@id="armorTableEquippedHeader"]/span[2]'
     armor_header_id = 'armorTableArmorHeader'
+    armor_header_sorting_arrow_xpath = '//*[@id="armorTableArmorHeader"]/span'
     type_header_id = 'armorTableTypeHeader'
+    type_header_sorting_arrow_xpath = '//*[@id="armorTableTypeHeader"]/span'
     ac_header_id = 'armorTableAcHeader'
+    ac_header_sorting_arrow_xpath = '//*[@id="armorTableAcHeader"]/span'
     total_weight_id = 'armorTableTotalWeightSpan'
 
     add = Element(id_=add_id)
     table = Element(id_=table_id)
     equipped_header = Element(id_=equipped_header_id)
+    equipped_header_sorting_arrow = Element(xpath=equipped_header_sorting_arrow_xpath)
     armor_header = Element(id_=armor_header_id)
+    armor_header_sorting_arrow = Element(xpath=armor_header_sorting_arrow_xpath)
     type_header = Element(id_=type_header_id)
+    type_header_sorting_arrow = Element(xpath=type_header_sorting_arrow_xpath)
     ac_header = Element(id_=ac_header_id)
+    ac_header_sorting_arrow = Element(xpath=ac_header_sorting_arrow_xpath)
     total_weight = Element(id_=total_weight_id)

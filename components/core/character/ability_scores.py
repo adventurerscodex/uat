@@ -6,6 +6,7 @@ from modules.element import Element, Component
 class AbilityScoresEditModal(Component):
     """Definition of abilityScores add modal component."""
 
+    modal_div_xpath = '//*[@id="stats"]/div[3]/div/ability-scores/div[2]'
     strength_id = 'abilityScoresEditStrengthInput'
     dexterity_id = 'abilityScoresEditDexterityInput'
     constitution_id = 'abilityScoresEditConstitutionInput'
@@ -14,6 +15,7 @@ class AbilityScoresEditModal(Component):
     charisma_id = 'abilityScoresEditCharismaTextarea'
     done_id = 'abilityScoresEditDoneButton'
 
+    modal_div = Element(xpath=modal_div_xpath)
     strength = Element(id_=strength_id)
     dexterity = Element(id_=dexterity_id)
     constitution = Element(id_=constitution_id)
