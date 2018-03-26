@@ -1,6 +1,4 @@
 """UAT test file for Adventurer's Codex player tools inventory module."""
-import time
-
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC # noqa
@@ -153,7 +151,7 @@ def test_preview_inventory(player_wizard, browser): # noqa
 
     WebDriverWait(browser, 10).until(
         EC.element_to_be_clickable(
-            (By.ID, inventory_table.addd_id)
+            (By.ID, inventory_table.add_id)
         )
     )
 

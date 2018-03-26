@@ -25,7 +25,7 @@ def select_from_autocomplete(element_,
     time.sleep(.3)
     for i in range(arrow_down_count):
         element.send_keys(Keys.DOWN)
-        element.send_keys(Keys.RETURN)
+    element.send_keys(Keys.RETURN)
 
 
 def named_tuple_from_headers(headers):

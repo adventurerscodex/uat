@@ -1,7 +1,10 @@
 """UAT test file for Adventurer's Codex core player tools wizard."""
 import pytest
 from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC # noqa
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support.ui import Select
 
 from components.core.general.new_character_campaign import NewCharacterCampaign
 from components.core.character import inventory
@@ -9,7 +12,6 @@ from components.core.character import wizard
 from components.core.character.tabs import Tabs
 from components.core.character.profile import Profile
 from components.core.character.other_stats import OtherStats
-from components.core.character.hud import HUD
 from utils import utils as ut
 
 
@@ -189,7 +191,6 @@ def test_wizard_profile_stats(browser): # noqa
     tabs = Tabs(browser)
     profile = Profile(browser)
     stats = OtherStats(browser)
-    hud  = HUD(browser)
 
     wizard_main.get_started.click()
     wizard_main.player.click()
@@ -244,13 +245,41 @@ def test_wizard_backpack_prepop(browser): # noqa
     tabs = Tabs(browser)
     inventory_table = inventory.InventoryTable(browser)
 
+    WebDriverWait(browser, 10).until(
+        EC.element_to_be_clickable(
+            (By.ID, wizard_main.get_started_id)
+        )
+    )
+
     wizard_main.get_started.click()
+
+    WebDriverWait(browser, 10).until(
+        EC.element_to_be_clickable(
+            (By.ID, wizard_main.player_id)
+        )
+    )
+
     wizard_main.player.click()
+
+    WebDriverWait(browser, 10).until(
+        EC.element_to_be_clickable(
+            (By.ID, wizard_main.next_id)
+        )
+    )
+
     wizard_main.next_.click()
 
     who_are_you.character_name = 'Test Char'
     who_are_you.player_name = 'Automated Testing Bot.'
-    ut.select_from_autocomplete(who_are_you, 'backpack', '', browser)
+
+    backpack = Select(browser.find_element_by_id(who_are_you.backpack_id))
+    backpack.select_by_index(1)
+
+    WebDriverWait(browser, 10).until(
+        EC.element_to_be_clickable(
+            (By.ID, wizard_main.next_id)
+        )
+    )
 
     wizard_main.next_.click()
 
@@ -262,6 +291,12 @@ def test_wizard_backpack_prepop(browser): # noqa
     ability_scores.charisma = '18'
 
     wizard_main.finish.click()
+
+    WebDriverWait(browser, 10).until(
+        EC.element_to_be_clickable(
+            (By.ID, tabs.inventory_id)
+        )
+    )
 
     tabs.inventory.click()
 

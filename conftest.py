@@ -69,8 +69,28 @@ def dm_wizard(browser):
     wizard_main = NewCharacterCampaign(browser)
     tell_us_a_story = TellUsAStory(browser)
 
+    WebDriverWait(browser, 10).until(
+        EC.element_to_be_clickable(
+            (By.ID, wizard_main.get_started_id)
+        )
+    )
+
     wizard_main.get_started.click()
+
+    WebDriverWait(browser, 10).until(
+        EC.element_to_be_clickable(
+            (By.ID, wizard_main.dm_id)
+        )
+    )
+
     wizard_main.dm.click()
+
+    WebDriverWait(browser, 10).until(
+        EC.element_to_be_clickable(
+            (By.ID, wizard_main.next_id)
+        )
+    )
+
     wizard_main.next_.click()
 
     tell_us_a_story.campaign_name = 'Test Campaign'
@@ -86,8 +106,28 @@ def player_wizard(browser):
     who_are_you = wizard.WhoAreYou(browser)
     ability_scores = wizard.AbilityScoresManual(browser)
 
+    WebDriverWait(browser, 10).until(
+        EC.element_to_be_clickable(
+            (By.ID, wizard_main.get_started_id)
+        )
+    )
+
     wizard_main.get_started.click()
+
+    WebDriverWait(browser, 10).until(
+        EC.element_to_be_clickable(
+            (By.ID, wizard_main.player_id)
+        )
+    )
+
     wizard_main.player.click()
+
+    WebDriverWait(browser, 10).until(
+        EC.element_to_be_clickable(
+            (By.ID, wizard_main.next_id)
+        )
+    )
+
     wizard_main.next_.click()
 
     who_are_you.character_name = 'Test Char'
