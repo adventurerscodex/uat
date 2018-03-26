@@ -29,7 +29,6 @@ def test_add_feature(player_wizard, browser): # noqa
     feature.level = 1
     feature.description = 'Add Description'
     feature.tracked.click()
-    feature.max_.clear()
     feature.max_ = 4
     feature.short_rest.click()
 
@@ -166,17 +165,11 @@ def test_edit_feature(player_wizard, browser): # noqa
 
     feature_tabs.edit.click()
 
-    feature_edit.name.clear()
-    feature_edit.class_.clear()
-    feature_edit.level.clear()
-    feature_edit.description.clear()
-
     feature_edit.name = 'Edited Name'
     feature_edit.class_ = 'Edited Class'
     feature_edit.level = 1
     feature_edit.description = 'Edited Description'
     feature_edit.tracked.click()
-    feature_edit.max_.clear()
     feature_edit.max_ = 4
     feature_edit.short_rest.click()
 
@@ -213,7 +206,6 @@ def test_add_feat(player_wizard, browser): # noqa
     feat.name = 'Add Name'
     feat.description = 'Add Description'
     feat.tracked.click()
-    feat.max_.clear()
     feat.max_ = 4
     feat.short_rest.click()
 
@@ -340,13 +332,9 @@ def test_edit_feat(player_wizard, browser): # noqa
 
     feat_tabs.edit.click()
 
-    feat_edit.name.clear()
-    feat_edit.description.clear()
-
     feat_edit.name = 'Edited Name'
     feat_edit.description = 'Edited Description'
     feat_edit.tracked.click()
-    feat_edit.max_.clear()
     feat_edit.max_ = 4
     feat_edit.short_rest.click()
 
@@ -391,7 +379,6 @@ def test_add_trait(player_wizard, browser): # noqa
     trait.race = 'Add Race'
     trait.description = 'Add Description'
     trait.tracked.click()
-    trait.max_.clear()
     trait.max_ = 4
     trait.short_rest.click()
 
@@ -533,15 +520,10 @@ def test_edit_trait(player_wizard, browser): # noqa
         )
     )
 
-    trait_edit.name.clear()
-    trait_edit.race.clear()
-    trait_edit.description.clear()
-
     trait_edit.name = 'Edited Name'
     trait_edit.race = 'Edited Race'
     trait_edit.description = 'Edited Description'
     trait_edit.tracked.click()
-    trait_edit.max_.clear()
     trait_edit.max_ = 4
     trait_edit.short_rest.click()
 
@@ -712,10 +694,6 @@ def test_edit_proficiency(player_wizard, browser): # noqa
 
     proficiency_tabs.edit.click()
 
-    proficiency_edit.name.clear()
-    proficiency_edit.type_.clear()
-    proficiency_edit.description.clear()
-
     proficiency_edit.name = 'Edited Name'
     proficiency_edit.type_ = 'Edited Type'
     proficiency_edit.description = 'Edited Description'
@@ -752,7 +730,6 @@ def test_tracked_increase_decrease(player_wizard, browser): # noqa
     feature.level = 1
     feature.description = 'Add Description'
     feature.tracked.click()
-    feature.max_.clear()
     feature.max_ = 4
     feature.short_rest.click()
 
@@ -783,7 +760,6 @@ def test_tracked_reset(player_wizard, browser): # noqa
     feature.level = 1
     feature.description = 'Add Description'
     feature.tracked.click()
-    feature.max_.clear()
     feature.max_ = 4
     feature.short_rest.click()
 
@@ -905,7 +881,6 @@ def test_data_persists(player_wizard, browser): # noqa
     feature.level = 1
     feature.description = 'Add Description'
     feature.tracked.click()
-    feature.max_.clear()
     feature.max_ = 4
     feature.short_rest.click()
 
