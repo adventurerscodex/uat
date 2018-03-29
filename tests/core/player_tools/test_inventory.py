@@ -1,5 +1,6 @@
 """UAT test file for Adventurer's Codex player tools inventory module."""
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC # noqa
 from selenium.webdriver.support.ui import WebDriverWait
 
@@ -493,7 +494,8 @@ def test_worth_in_gold_coins(player_wizard, browser): # noqa
     coins_table.gold = 1
     coins_table.electrum = 2
     coins_table.silver = 10
-    coins_table.copper = '100\t'
+    coins_table.copper = '100'
+    coins_table.copper.send_keys(Keys.TAB)
 
     assert coins_table.worth_in_gold.text == '14'
 
@@ -510,7 +512,8 @@ def test_coins_total_weight(player_wizard, browser): # noqa
     coins_table.gold = 50
     coins_table.electrum = 50
     coins_table.silver = 50
-    coins_table.copper = '49\t'
+    coins_table.copper = '49'
+    coins_table.copper.send_keys(Keys.TAB)
 
     assert coins_table.total_weight.text == '4 (lbs)'
 
@@ -526,7 +529,8 @@ def test_coins_persists(player_wizard, browser): # noqa
     coins_table.gold = 50
     coins_table.electrum = 50
     coins_table.silver = 50
-    coins_table.copper = '50\t'
+    coins_table.copper = '50'
+    coins_table.copper.send_keys(Keys.TAB)
 
     browser.refresh()
 
