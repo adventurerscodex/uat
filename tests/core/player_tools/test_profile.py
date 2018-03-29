@@ -1,4 +1,6 @@
 """UAT test file for Adventurer's Codex player tools profile module."""
+from selenium.webdriver.common.keys import Keys
+
 from components.core.character.appearance import Appearance
 from components.core.character.background import Background
 from components.core.character.profile import Profile
@@ -14,42 +16,50 @@ def test_profile_persists(player_wizard, browser):
     tabs = Tabs(browser)
     tabs.profile.click()
 
-    profile.name = 'Gandalf\t'
+    profile.name = 'Gandalf'
+    profile.name.send_keys(Keys.TAB)
     browser.refresh()
 
     assert profile.name.get_attribute('value') == 'Gandalf'
 
-    profile.background = 'Sage\t'
+    profile.background = 'Sage'
+    profile.background.send_keys(Keys.TAB)
     browser.refresh()
 
     assert profile.background.get_attribute('value') == 'Sage'
 
-    profile.alignment = 'Chaotic Good\t'
+    profile.alignment = 'Chaotic Good'
+    profile.alignment.send_keys(Keys.TAB)
     browser.refresh()
 
     assert profile.alignment.get_attribute('value') == 'Chaotic Good'
 
-    profile.deity = 'Moridin\t'
+    profile.deity = 'Moridin'
+    profile.deity.send_keys(Keys.TAB)
     browser.refresh()
 
     assert profile.deity.get_attribute('value') == 'Moridin'
 
-    profile.race = 'Gnome\t'
+    profile.race = 'Gnome'
+    profile.race.send_keys(Keys.TAB)
     browser.refresh()
 
     assert profile.race.get_attribute('value') == 'Gnome'
 
-    profile.class_ = 'Fighter\t'
+    profile.class_ = 'Fighter'
+    profile.class_.send_keys(Keys.TAB)
     browser.refresh()
 
     assert profile.class_.get_attribute('value') == 'Fighter'
 
-    profile.gender = 'Male\t'
+    profile.gender = 'Male'
+    profile.gender.send_keys(Keys.TAB)
     browser.refresh()
 
     assert profile.gender.get_attribute('value') == 'Male'
 
-    profile.age = '12\t'
+    profile.age = '12'
+    profile.age.send_keys(Keys.TAB)
     browser.refresh()
 
     assert profile.age.get_attribute('value') == '12'
@@ -63,22 +73,26 @@ def test_background_persists(player_wizard, browser):
     tabs = Tabs(browser)
     tabs.profile.click()
 
-    background.traits = 'Traits...\t'
+    background.traits = 'Traits...'
+    background.traits.send_keys(Keys.TAB)
     browser.refresh()
 
     assert background.traits.get_attribute('value') == 'Traits...'
 
-    background.ideals = 'Ideals...\t'
+    background.ideals = 'Ideals...'
+    background.ideals.send_keys(Keys.TAB)
     browser.refresh()
 
     assert background.ideals.get_attribute('value') == 'Ideals...'
 
-    background.bonds = 'Bonds...\t'
+    background.bonds = 'Bonds...'
+    background.bonds.send_keys(Keys.TAB)
     browser.refresh()
 
     assert background.bonds.get_attribute('value') == 'Bonds...'
 
-    background.flaws = 'Flaws...\t'
+    background.flaws = 'Flaws...'
+    background.flaws.send_keys(Keys.TAB)
     browser.refresh()
 
     assert background.flaws.get_attribute('value') == 'Flaws...'
@@ -92,27 +106,32 @@ def test_appearance_persists(player_wizard, browser):
     tabs = Tabs(browser)
     tabs.profile.click()
 
-    appearance.height = '5ft\t'
+    appearance.height = '5ft'
+    appearance.height.send_keys(Keys.TAB)
     browser.refresh()
 
     assert appearance.height.get_attribute('value') == '5ft'
 
-    appearance.weight = '165\t'
+    appearance.weight = '165'
+    appearance.weight.send_keys(Keys.TAB)
     browser.refresh()
 
     assert appearance.weight.get_attribute('value') == '165'
 
-    appearance.hair_color = 'Brown\t'
+    appearance.hair_color = 'Brown'
+    appearance.hair_color.send_keys(Keys.TAB)
     browser.refresh()
 
     assert appearance.hair_color.get_attribute('value') == 'Brown'
 
-    appearance.eye_color = 'Brown\t'
+    appearance.eye_color = 'Brown'
+    appearance.eye_color.send_keys(Keys.TAB)
     browser.refresh()
 
     assert appearance.eye_color.get_attribute('value') == 'Brown'
 
-    appearance.skin_color = 'Fair\t'
+    appearance.skin_color = 'Fair'
+    appearance.skin_color.send_keys(Keys.TAB)
     browser.refresh()
 
     assert appearance.skin_color.get_attribute('value') == 'Fair'
