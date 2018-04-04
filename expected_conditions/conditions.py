@@ -31,7 +31,7 @@ class table_has_data:  # noqa
 
     def __call__(self, driver):
         """Test if table has more than one column."""
-        tds = self.table.find_elements_by_tag_name('td')
+        tds = self.table.table.find_elements_by_tag_name('td')
 
         return len(tds) > 1
 
@@ -73,6 +73,7 @@ class table_cell_updated: # noqa
         )
 
         actual = getattr(row, self.header)
+        actual = ' '.join([string.strip() for string in actual.split()])
 
         return actual == self.expected
 

@@ -10,16 +10,16 @@ def test_navigate_tabs(dm_wizard, browser): # noqa
     tabs = DMTabs(browser)
 
     tabs.overview.click()
-    assert tabs.overview_label.text == 'Overview'
+    assert tabs.overview_label.text.strip() == 'Overview'
 
     tabs.encounters.click()
-    assert tabs.encounters_label.text == 'Encounters'
+    assert tabs.encounters_label.text.strip() == 'Encounters'
 
     tabs.screen.click()
-    assert tabs.screen_label.text == 'Screen'
+    assert tabs.screen_label.text.strip() == 'Screen'
 
     tabs.notes.click()
-    assert tabs.notes_label.text == 'Notes'
+    assert tabs.notes_label.text.strip() == 'Notes'
 
     # TODO: add chat and chat after login fixture and party connection
     # testing is ready

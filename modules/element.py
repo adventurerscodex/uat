@@ -35,8 +35,8 @@ class Element:
 
     def __get__(self, obj, objtype):
         """Descriptor for retrieving element."""
-        element = WebDriverWait(obj.browser, 5).until(
-            EC.presence_of_element_located(
+        element = WebDriverWait(obj.browser, 10).until(
+            EC.visibility_of_element_located(
                 (self.locating_key, self.locating_value)
             )
         )
@@ -46,11 +46,12 @@ class Element:
     def __set__(self, obj, value):
         """Descriptor for setting a value."""
         element = WebDriverWait(obj.browser, 10).until(
-            EC.presence_of_element_located(
+            EC.visibility_of_element_located(
                 (self.locating_key, self.locating_value)
             )
         )
-        element.send_keys()
+
+        # element.send_keys()
         # TODO: this is a workaround for firefox
         try:
             element.clear()
@@ -71,7 +72,6 @@ class Elements:
 
     def __get__(self, obj, objtype):
         """Descriptor for retrieving element."""
-        # from pdb import set_trace; set_trace()
         elements = WebDriverWait(obj.browser, 5).until(
             EC.presence_of_all_elements_located(
                 (self.locating_key, self.locating_value)

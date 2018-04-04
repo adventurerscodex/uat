@@ -2,6 +2,7 @@
 import pytest
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC # noqa
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support.ui import Select
@@ -12,6 +13,7 @@ from components.core.character import wizard
 from components.core.character.tabs import Tabs
 from components.core.character.profile import Profile
 from components.core.character.other_stats import OtherStats
+from expected_conditions.conditions import table_has_data
 from utils import utils as ut
 
 
@@ -99,9 +101,14 @@ def test_alignment_auto_complete(browser): # noqa
     wizard_main.player.click()
     wizard_main.next_.click()
 
-    ut.select_from_autocomplete(who_are_you, 'alignment', '', browser)
+    ut.select_from_autocomplete(
+        who_are_you,
+        'alignment',
+        browser,
+        has_search_term=False
+    )
 
-    assert who_are_you.alignment.get_attribute('value') == 'Lawful good'
+    assert who_are_you.alignment.get_attribute('value').strip() == 'Lawful good'
 
 
 def test_race_auto_complete(browser): # noqa
@@ -115,9 +122,14 @@ def test_race_auto_complete(browser): # noqa
     wizard_main.player.click()
     wizard_main.next_.click()
 
-    ut.select_from_autocomplete(who_are_you, 'race', '', browser)
+    ut.select_from_autocomplete(
+        who_are_you,
+        'race',
+        browser,
+        has_search_term=False
+    )
 
-    assert who_are_you.race.get_attribute('value') == 'Dwarf'
+    assert who_are_you.race.get_attribute('value').strip() == 'Dwarf'
 
 
 def test_class_auto_complete(browser): # noqa
@@ -131,9 +143,14 @@ def test_class_auto_complete(browser): # noqa
     wizard_main.player.click()
     wizard_main.next_.click()
 
-    ut.select_from_autocomplete(who_are_you, 'class_', '', browser)
+    ut.select_from_autocomplete(
+        who_are_you,
+        'class_',
+        browser,
+        has_search_term=False
+    )
 
-    assert who_are_you.class_.get_attribute('value') == 'Barbarian'
+    assert who_are_you.class_.get_attribute('value').strip() == 'Barbarian'
 
 
 def test_background_auto_complete(browser): # noqa
@@ -147,9 +164,14 @@ def test_background_auto_complete(browser): # noqa
     wizard_main.player.click()
     wizard_main.next_.click()
 
-    ut.select_from_autocomplete(who_are_you, 'background', '', browser)
+    ut.select_from_autocomplete(
+        who_are_you,
+        'background',
+        browser,
+        has_search_term=False
+    )
 
-    assert who_are_you.background.get_attribute('value') == 'Acolyte'
+    assert who_are_you.background.get_attribute('value').strip() == 'Acolyte'
 
 
 def test_add_ability_scores(browser): # noqa
@@ -175,12 +197,12 @@ def test_add_ability_scores(browser): # noqa
     ability_scores.wisdom = '18'
     ability_scores.charisma = '18'
 
-    assert ability_scores.strength.get_attribute('value') == '18'
-    assert ability_scores.dexterity.get_attribute('value') == '18'
-    assert ability_scores.constitution.get_attribute('value') == '18'
-    assert ability_scores.intelligence.get_attribute('value') == '18'
-    assert ability_scores.wisdom.get_attribute('value') == '18'
-    assert ability_scores.charisma.get_attribute('value') == '18'
+    assert ability_scores.strength.get_attribute('value').strip() == '18'
+    assert ability_scores.dexterity.get_attribute('value').strip() == '18'
+    assert ability_scores.constitution.get_attribute('value').strip() == '18'
+    assert ability_scores.intelligence.get_attribute('value').strip() == '18'
+    assert ability_scores.wisdom.get_attribute('value').strip() == '18'
+    assert ability_scores.charisma.get_attribute('value').strip() == '18'
 
 def test_wizard_profile_stats(browser): # noqa
     """As a player, after creating a character via the character creation wizard, I can view all the data entered in the stats and profile modules."""
@@ -198,13 +220,33 @@ def test_wizard_profile_stats(browser): # noqa
 
     who_are_you.character_name = 'Test Char'
     who_are_you.player_name = 'Automated Testing Bot.'
-    ut.select_from_autocomplete(who_are_you, 'alignment', '', browser)
+    ut.select_from_autocomplete(
+        who_are_you,
+        'alignment',
+        browser,
+        has_search_term=False
+    )
     who_are_you.deity = 'Test Deity'
-    ut.select_from_autocomplete(who_are_you, 'race', '', browser)
-    ut.select_from_autocomplete(who_are_you, 'class_', '', browser)
+    ut.select_from_autocomplete(
+        who_are_you,
+        'race',
+        browser,
+        has_search_term=False
+    )
+    ut.select_from_autocomplete(
+        who_are_you,
+        'class_',
+        browser,
+        has_search_term=False
+    )
     who_are_you.gender = 'Test Male'
     who_are_you.age = 21
-    ut.select_from_autocomplete(who_are_you, 'background', '', browser)
+    ut.select_from_autocomplete(
+        who_are_you,
+        'background',
+        browser,
+        has_search_term=False
+    )
     who_are_you.level = 3
     who_are_you.experience = 1000
 
@@ -221,14 +263,14 @@ def test_wizard_profile_stats(browser): # noqa
 
     tabs.profile.click()
 
-    assert profile.name.get_attribute('value') == 'Automated Testing Bot.'
-    assert profile.background.get_attribute('value') == 'Acolyte'
-    assert profile.alignment.get_attribute('value') == 'Lawful good'
-    assert profile.deity.get_attribute('value') == 'Test Deity'
-    assert profile.race.get_attribute('value') == 'Dwarf'
-    assert profile.class_.get_attribute('value') == 'Barbarian'
-    assert profile.gender.get_attribute('value') == 'Test Male'
-    assert profile.age.get_attribute('value') == '21'
+    assert profile.name.get_attribute('value').strip() == 'Automated Testing Bot.'
+    assert profile.background.get_attribute('value').strip() == 'Acolyte'
+    assert profile.alignment.get_attribute('value').strip() == 'Lawful good'
+    assert profile.deity.get_attribute('value').strip() == 'Test Deity'
+    assert profile.race.get_attribute('value').strip() == 'Dwarf'
+    assert profile.class_.get_attribute('value').strip() == 'Barbarian'
+    assert profile.gender.get_attribute('value').strip() == 'Test Male'
+    assert profile.age.get_attribute('value').strip() == '21'
 
     tabs.stats.click()
 
@@ -300,29 +342,35 @@ def test_wizard_backpack_prepop(browser): # noqa
 
     tabs.inventory.click()
 
+    WebDriverWait(browser, 15).until(
+        table_has_data(
+            inventory_table,
+        )
+    )
+
     rows = ut.get_table_rows(inventory_table, 'table')
 
-    assert rows[0].item == 'Backpack'
-    assert rows[0].quantity == '1'
-    assert rows[0].weight == '5 lbs.'
-    assert rows[0].cost == '2 GP'
-    assert rows[0].description == ''
+    assert rows[0].item.strip() == 'Backpack'
+    assert rows[0].quantity.strip() == '1'
+    assert rows[0].weight.strip() == '5 lbs.'
+    assert rows[0].cost.strip() == '2 GP'
+    assert rows[0].description.strip() == ''
 
-    assert rows[1].item == 'Ball bearings (bag of 1000)'
-    assert rows[2].item == 'Bell'
-    assert rows[3].item == 'Candle'
-    assert rows[4].item == 'Crowbar'
-    assert rows[5].item == 'Hammer'
-    assert rows[6].item == 'Lantern hooded'
-    assert rows[7].item == 'Oil (flask)'
-    assert rows[8].item == 'Piton'
-    assert rows[9].item == 'Rations (1 day)'
-    assert rows[10].item == 'Rope hempen (50 feet)'
-    assert rows[11].item == 'String (10 feet)'
-    assert rows[12].item == 'Tinderbox'
+    assert rows[1].item.strip() == 'Ball bearings (bag of 1000)'
+    assert rows[2].item.strip() == 'Bell'
+    assert rows[3].item.strip() == 'Candle'
+    assert rows[4].item.strip() == 'Crowbar'
+    assert rows[5].item.strip() == 'Hammer'
+    assert rows[6].item.strip() == 'Lantern hooded'
+    assert rows[7].item.strip() == 'Oil (flask)'
+    assert rows[8].item.strip() == 'Piton'
+    assert rows[9].item.strip() == 'Rations (1 day)'
+    assert rows[10].item.strip() == 'Rope hempen (50 feet)'
+    assert rows[11].item.strip() == 'String (10 feet)'
+    assert rows[12].item.strip() == 'Tinderbox'
 
-    assert rows[13].item == 'Waterskin'
-    assert rows[13].quantity == '1'
-    assert rows[13].weight == '5 lbs.'
-    assert rows[13].cost == '2 SP'
-    assert rows[13].description == '(full)'
+    assert rows[13].item.strip() == 'Waterskin'
+    assert rows[13].quantity.strip() == '1'
+    assert rows[13].weight.strip() == '5 lbs.'
+    assert rows[13].cost.strip() == '2 SP'
+    assert rows[13].description.strip() == '(full)'

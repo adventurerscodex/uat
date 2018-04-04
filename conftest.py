@@ -53,7 +53,7 @@ def browser(request, web_driver, url):
         driver = webdriver.Safari()
 
     driver.get(url)
-    driver.implicitly_wait(10)
+    driver.maximize_window()
 
     def close_browser():
         driver.quit()

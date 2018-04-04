@@ -45,32 +45,31 @@ def test_add_weapon(player_wizard, browser): # noqa
     weapon_add.quantity = 2
     weapon_add.description = 'Add Description'
 
-    assert weapon_add.name.get_attribute('value') == 'Add Name'
-    assert weapon_add.damage.get_attribute('value') == 'Add Damage'
-    assert weapon_add.magical_modifier.get_attribute('value') == '1'
-    assert weapon_add.to_hit_modifier.get_attribute('value') == '2'
-    assert weapon_add.handedness.get_attribute('value') == 'Add Handedness'
-    assert weapon_add.proficiency.get_attribute('value') == 'Add Proficiency'
-    assert weapon_add.price.get_attribute('value') == '200'
-    assert weapon_add.currency_denomination.get_attribute('value') == 'GP'
-    assert weapon_add.weight.get_attribute('value') == '100'
-    assert weapon_add.range_.get_attribute('value') == '20/40'
-    assert weapon_add.damage_type.get_attribute('value') == 'Add Damage Type'
-    assert weapon_add.property_.get_attribute('value') == 'Add Property'
-    assert weapon_add.quantity.get_attribute('value') == '2'
-    assert weapon_add.description.get_attribute('value') == 'Add Description'
+    assert weapon_add.name.get_attribute('value').strip() == 'Add Name'
+    assert weapon_add.damage.get_attribute('value').strip() == 'Add Damage'
+    assert weapon_add.magical_modifier.get_attribute('value').strip() == '1'
+    assert weapon_add.to_hit_modifier.get_attribute('value').strip() == '2'
+    assert weapon_add.handedness.get_attribute('value').strip() == 'Add Handedness'
+    assert weapon_add.proficiency.get_attribute('value').strip() == 'Add Proficiency'
+    assert weapon_add.price.get_attribute('value').strip() == '200'
+    assert weapon_add.currency_denomination.get_attribute('value').strip() == 'GP'
+    assert weapon_add.weight.get_attribute('value').strip() == '100'
+    assert weapon_add.range_.get_attribute('value').strip() == '20/40'
+    assert weapon_add.damage_type.get_attribute('value').strip() == 'Add Damage Type'
+    assert weapon_add.property_.get_attribute('value').strip() == 'Add Property'
+    assert weapon_add.quantity.get_attribute('value').strip() == '2'
+    assert weapon_add.description.get_attribute('value').strip() == 'Add Description'
 
     weapon_add.add.click()
 
     row = ut.get_table_row(weapon_table, 'table', 1)
-
-    assert row.weapon == 'Add Name  + 1'
-    assert row.to_hit == '+ 9'
-    assert row.damage == 'Add Damage'
-    assert row.damage_type == 'Add Damage Type'
-    assert row.range == '20/40 ft.'
-    assert row.property == 'Add Property'
-    assert row.quantity == '2'
+    assert ' '.join(row.weapon.split()) == 'Add Name + 1'
+    assert row.to_hit.strip() == '+ 9'
+    assert row.damage.strip() == 'Add Damage'
+    assert row.damage_type.strip() == 'Add Damage Type'
+    assert row.range.strip() == '20/40 ft.'
+    assert row.property.strip() == 'Add Property'
+    assert row.quantity.strip() == '2'
 
 def test_delete_weapon(player_wizard, browser): # noqa
     """As a player, I can delete a weapon."""
@@ -88,7 +87,12 @@ def test_delete_weapon(player_wizard, browser): # noqa
     )
 
     weapon_table.add.click()
-    ut.select_from_autocomplete(weapon_add, 'name', '', browser)
+    ut.select_from_autocomplete(
+        weapon_add,
+        'name',
+        browser,
+        has_search_term=False
+    )
     weapon_add.add.click()
 
     WebDriverWait(browser, 10).until(
@@ -99,7 +103,7 @@ def test_delete_weapon(player_wizard, browser): # noqa
     rows[0][7].find_element_by_tag_name('a').click()
     rows = ut.get_table_rows(weapon_table, 'table', values=False)
 
-    assert rows[0][0].text == 'Add a new weapon'
+    assert rows[0][0].text.strip() == 'Add a new weapon'
 
 
 def test_edit_weapon(player_wizard, browser): # noqa
@@ -120,7 +124,12 @@ def test_edit_weapon(player_wizard, browser): # noqa
     )
 
     weapon_table.add.click()
-    ut.select_from_autocomplete(weapon_add, 'name', '', browser)
+    ut.select_from_autocomplete(
+        weapon_add,
+        'name',
+        browser,
+        has_search_term=False
+    )
     weapon_add.add.click()
 
     WebDriverWait(browser, 10).until(
@@ -160,21 +169,21 @@ def test_edit_weapon(player_wizard, browser): # noqa
     weapon_edit.quantity = 2
     weapon_edit.description = 'Edit Description'
 
-    assert weapon_edit.name.get_attribute('value') == 'Edit Name'
-    assert weapon_edit.damage.get_attribute('value') == '1d10'
-    assert weapon_edit.magical_modifier.get_attribute('value') == '2'
-    assert weapon_edit.to_hit_modifier.get_attribute('value') == '2'
-    assert weapon_edit.type_.get_attribute('value') == 'Melee'
-    assert weapon_edit.handedness.get_attribute('value') == 'One-Handed'
-    assert weapon_edit.proficiency.get_attribute('value') == 'Simple'
-    assert weapon_edit.price.get_attribute('value') == '200'
-    assert weapon_edit.currency_denomination.get_attribute('value') == 'GP'
-    assert weapon_edit.weight.get_attribute('value') == '200'
-    assert weapon_edit.range_.get_attribute('value') == '5'
-    assert weapon_edit.damage_type.get_attribute('value') == 'Slashing'
-    assert weapon_edit.property_.get_attribute('value') == 'Versatile'
-    assert weapon_edit.quantity.get_attribute('value') == '2'
-    assert weapon_edit.description.get_attribute('value') == 'Edit Description'
+    assert weapon_edit.name.get_attribute('value').strip() == 'Edit Name'
+    assert weapon_edit.damage.get_attribute('value').strip() == '1d10'
+    assert weapon_edit.magical_modifier.get_attribute('value').strip() == '2'
+    assert weapon_edit.to_hit_modifier.get_attribute('value').strip() == '2'
+    assert weapon_edit.type_.get_attribute('value').strip() == 'Melee'
+    assert weapon_edit.handedness.get_attribute('value').strip() == 'One-Handed'
+    assert weapon_edit.proficiency.get_attribute('value').strip() == 'Simple'
+    assert weapon_edit.price.get_attribute('value').strip() == '200'
+    assert weapon_edit.currency_denomination.get_attribute('value').strip() == 'GP'
+    assert weapon_edit.weight.get_attribute('value').strip() == '200'
+    assert weapon_edit.range_.get_attribute('value').strip() == '5'
+    assert weapon_edit.damage_type.get_attribute('value').strip() == 'Slashing'
+    assert weapon_edit.property_.get_attribute('value').strip() == 'Versatile'
+    assert weapon_edit.quantity.get_attribute('value').strip() == '2'
+    assert weapon_edit.description.get_attribute('value').strip() == 'Edit Description'
 
     weapon_edit.done.click()
 
@@ -184,13 +193,13 @@ def test_edit_weapon(player_wizard, browser): # noqa
 
     row = ut.get_table_row(weapon_table, 'table', 1)
 
-    assert row.weapon == 'Edit Name  + 2'
-    assert row.to_hit == '+ 10'
-    assert row.damage == '1d10'
-    assert row.damage_type == 'Slashing'
-    assert row.range == '5 ft.'
-    assert row.property == 'Versatile'
-    assert row.quantity == '2'
+    assert row.weapon.strip() == 'Edit Name  + 2'
+    assert row.to_hit.strip() == '+ 10'
+    assert row.damage.strip() == '1d10'
+    assert row.damage_type.strip() == 'Slashing'
+    assert row.range.strip() == '5 ft.'
+    assert row.property.strip() == 'Versatile'
+    assert row.quantity.strip() == '2'
 
 def test_preview_weapon(player_wizard, browser): # noqa
     """As a player, I can select a row in the weapon table and view the item
@@ -211,7 +220,12 @@ def test_preview_weapon(player_wizard, browser): # noqa
     )
 
     weapon_table.add.click()
-    ut.select_from_autocomplete(weapon_add, 'name', '', browser)
+    ut.select_from_autocomplete(
+        weapon_add,
+        'name',
+        browser,
+        has_search_term=False
+    )
     weapon_add.add.click()
 
     WebDriverWait(browser, 10).until(
@@ -227,19 +241,19 @@ def test_preview_weapon(player_wizard, browser): # noqa
         )
     )
 
-    assert weapon_preview.name.text == 'Battleaxe'
-    assert weapon_preview.magical_modifier.text == ''
-    assert weapon_preview.damage.text == '1d8 or 1d10'
-    assert weapon_preview.to_hit_modifier.text == '0'
-    assert weapon_preview.range_.text == '5 ft.'
-    assert weapon_preview.type_.text == 'Melee'
-    assert weapon_preview.proficiency.text == 'Martial'
-    assert weapon_preview.handedness.text == 'One or Two Handed'
-    assert weapon_preview.weight.text == '4 lbs.'
-    assert weapon_preview.range_.text == '5 ft.'
-    assert weapon_preview.damage_type.text == 'Slashing'
-    assert weapon_preview.property_.text == 'Versatile'
-    assert '' in weapon_preview.description.text
+    assert weapon_preview.name.text.strip() == 'Battleaxe'
+    assert weapon_preview.magical_modifier.text.strip() == ''
+    assert weapon_preview.damage.text.strip() == '1d8 or 1d10'
+    assert weapon_preview.to_hit_modifier.text.strip() == '0'
+    assert weapon_preview.range_.text.strip() == '5 ft.'
+    assert weapon_preview.type_.text.strip() == 'Melee'
+    assert weapon_preview.proficiency.text.strip() == 'Martial'
+    assert weapon_preview.handedness.text.strip() == 'One or Two Handed'
+    assert weapon_preview.weight.text.strip() == '4 lbs.'
+    assert weapon_preview.range_.text.strip() == '5 ft.'
+    assert weapon_preview.damage_type.text.strip() == 'Slashing'
+    assert weapon_preview.property_.text.strip() == 'Versatile'
+    assert '' in weapon_preview.description.text.strip()
 
 def test_add_weapon_open_model_by_row(player_wizard, browser): # noqa
     """As a player, I can click the first row in weapon table to open
@@ -274,19 +288,49 @@ def test_autocomplete_weapon(player_wizard, browser): # noqa
     )
 
     weapon_table.add.click()
-    ut.select_from_autocomplete(weapon_add, 'name', '', browser)
-    ut.select_from_autocomplete(weapon_add, 'type_', '', browser)
-    ut.select_from_autocomplete(weapon_add, 'handedness', '', browser)
-    ut.select_from_autocomplete(weapon_add, 'proficiency', '', browser)
-    ut.select_from_autocomplete(weapon_add, 'damage_type', '', browser)
-    ut.select_from_autocomplete(weapon_add, 'property_', '', browser)
+    ut.select_from_autocomplete(
+        weapon_add,
+        'name',
+        browser,
+        has_search_term=False
+    )
+    ut.select_from_autocomplete(
+        weapon_add,
+        'type_',
+        browser,
+        has_search_term=False
+    )
+    ut.select_from_autocomplete(
+        weapon_add,
+        'handedness',
+        browser,
+        has_search_term=False
+    )
+    ut.select_from_autocomplete(
+        weapon_add,
+        'proficiency',
+        browser,
+        has_search_term=False
+    )
+    ut.select_from_autocomplete(
+        weapon_add,
+        'damage_type',
+        browser,
+        has_search_term=False
+    )
+    ut.select_from_autocomplete(
+        weapon_add,
+        'property_',
+        browser,
+        has_search_term=False
+    )
 
-    assert weapon_add.name.get_attribute('value') == 'Battleaxe'
-    assert weapon_add.type_.get_attribute('value') == 'Melee'
-    assert weapon_add.handedness.get_attribute('value') == 'One or Two Handed'
-    assert weapon_add.proficiency.get_attribute('value') == 'Martial'
-    assert weapon_add.damage_type.get_attribute('value') == 'Acid'
-    assert weapon_add.property_.get_attribute('value') == 'Ammunition'
+    assert weapon_add.name.get_attribute('value').strip() == 'Battleaxe'
+    assert weapon_add.type_.get_attribute('value').strip() == 'Melee'
+    assert weapon_add.handedness.get_attribute('value').strip() == 'One or Two Handed'
+    assert weapon_add.proficiency.get_attribute('value').strip() == 'Martial'
+    assert weapon_add.damage_type.get_attribute('value').strip() == 'Acid'
+    assert weapon_add.property_.get_attribute('value').strip() == 'Ammunition'
 
 
 def test_weapon_ogl_pre_pop(player_wizard, browser): # noqa
@@ -307,18 +351,23 @@ def test_weapon_ogl_pre_pop(player_wizard, browser): # noqa
     )
 
     weapon_table.add.click()
-    ut.select_from_autocomplete(weapon_add, 'name', '', browser)
+    ut.select_from_autocomplete(
+        weapon_add,
+        'name',
+        browser,
+        has_search_term=False
+    )
     weapon_add.add.click()
 
     row = ut.get_table_row(weapon_table, 'table', 1)
 
-    assert row.weapon.strip() == 'Battleaxe'
-    assert row.to_hit == '+ 6'
-    assert row.damage == '1d8 or 1d10'
-    assert row.damage_type == 'Slashing'
-    assert row.range == '5 ft.'
-    assert row.property == 'Versatile'
-    assert row.quantity == '1'
+    assert row.weapon.strip().strip() == 'Battleaxe'
+    assert row.to_hit.strip() == '+ 6'
+    assert row.damage.strip() == '1d8 or 1d10'
+    assert row.damage_type.strip() == 'Slashing'
+    assert row.range.strip() == '5 ft.'
+    assert row.property.strip() == 'Versatile'
+    assert row.quantity.strip() == '1'
 
 
 def test_weapon_magical_modifier(player_wizard, browser): # noqa
@@ -350,7 +399,7 @@ def test_weapon_magical_modifier(player_wizard, browser): # noqa
 
     row = ut.get_table_row(weapon_table, 'table', 1)
 
-    assert row.weapon == 'Add Name  + 3'
+    assert row.weapon.strip() == 'Add Name  + 3'
 
 
 def test_weapon_persists(player_wizard, browser): # noqa
@@ -371,20 +420,25 @@ def test_weapon_persists(player_wizard, browser): # noqa
     )
 
     weapon_table.add.click()
-    ut.select_from_autocomplete(weapon_add, 'name', '', browser)
+    ut.select_from_autocomplete(
+        weapon_add,
+        'name',
+        browser,
+        has_search_term=False
+    )
     weapon_add.add.click()
 
     browser.refresh()
 
     row = ut.get_table_row(weapon_table, 'table', 1)
 
-    assert row.weapon.strip() == 'Battleaxe'
-    assert row.to_hit == '+ 6'
-    assert row.damage == '1d8 or 1d10'
-    assert row.damage_type == 'Slashing'
-    assert row.range == '5 ft.'
-    assert row.property == 'Versatile'
-    assert row.quantity == '1'
+    assert row.weapon.strip().strip() == 'Battleaxe'
+    assert row.to_hit.strip() == '+ 6'
+    assert row.damage.strip() == '1d8 or 1d10'
+    assert row.damage_type.strip() == 'Slashing'
+    assert row.range.strip() == '5 ft.'
+    assert row.property.strip() == 'Versatile'
+    assert row.quantity.strip() == '1'
 
     row = ut.get_table_row(weapon_table, 'table', values=False)
     row[0].click()
@@ -397,21 +451,21 @@ def test_weapon_persists(player_wizard, browser): # noqa
 
     weapon_tabs.edit.click()
 
-    assert weapon_edit.name.get_attribute('value') == 'Battleaxe'
-    assert weapon_edit.damage.get_attribute('value') == '1d8 or 1d10'
-    assert weapon_edit.magical_modifier.get_attribute('value') == '0'
-    assert weapon_edit.to_hit_modifier.get_attribute('value') == '0'
-    assert weapon_edit.type_.get_attribute('value') == 'Melee'
-    assert weapon_edit.handedness.get_attribute('value') == 'One or Two Handed'
-    assert weapon_edit.proficiency.get_attribute('value') == 'Martial'
-    assert weapon_edit.price.get_attribute('value') == '10'
-    assert weapon_edit.currency_denomination.get_attribute('value') == 'GP'
-    assert weapon_edit.weight.get_attribute('value') == '4'
-    assert weapon_edit.range_.get_attribute('value') == ''
-    assert weapon_edit.damage_type.get_attribute('value') == 'Slashing'
-    assert weapon_edit.property_.get_attribute('value') == 'Versatile'
-    assert weapon_edit.quantity.get_attribute('value') == '1'
-    assert weapon_edit.description.get_attribute('value') == ''
+    assert weapon_edit.name.get_attribute('value').strip() == 'Battleaxe'
+    assert weapon_edit.damage.get_attribute('value').strip() == '1d8 or 1d10'
+    assert weapon_edit.magical_modifier.get_attribute('value').strip() == '0'
+    assert weapon_edit.to_hit_modifier.get_attribute('value').strip() == '0'
+    assert weapon_edit.type_.get_attribute('value').strip() == 'Melee'
+    assert weapon_edit.handedness.get_attribute('value').strip() == 'One or Two Handed'
+    assert weapon_edit.proficiency.get_attribute('value').strip() == 'Martial'
+    assert weapon_edit.price.get_attribute('value').strip() == '10'
+    assert weapon_edit.currency_denomination.get_attribute('value').strip() == 'GP'
+    assert weapon_edit.weight.get_attribute('value').strip() == '4'
+    assert weapon_edit.range_.get_attribute('value').strip() == ''
+    assert weapon_edit.damage_type.get_attribute('value').strip() == 'Slashing'
+    assert weapon_edit.property_.get_attribute('value').strip() == 'Versatile'
+    assert weapon_edit.quantity.get_attribute('value').strip() == '1'
+    assert weapon_edit.description.get_attribute('value').strip() == ''
 
 
 def test_weapon_total_weight(player_wizard, browser): # noqa
@@ -432,7 +486,12 @@ def test_weapon_total_weight(player_wizard, browser): # noqa
     )
 
     weapon_table.add.click()
-    ut.select_from_autocomplete(weapon_add, 'name', '', browser)
+    ut.select_from_autocomplete(
+        weapon_add,
+        'name',
+        browser,
+        has_search_term=False
+    )
     weapon_add.add.click()
 
     WebDriverWait(browser, 10).until(
@@ -440,10 +499,15 @@ def test_weapon_total_weight(player_wizard, browser): # noqa
     )
 
     weapon_table.add.click()
-    ut.select_from_autocomplete(weapon_add, 'name', '', browser)
+    ut.select_from_autocomplete(
+        weapon_add,
+        'name',
+        browser,
+        has_search_term=False
+    )
     weapon_add.add.click()
 
-    assert weapon_table.total_weight.text == '8 (lbs)'
+    assert weapon_table.total_weight.text.strip() == '8 (lbs)'
 
 
 def test_melee_ft(player_wizard, browser): # noqa
@@ -482,7 +546,7 @@ def test_melee_ft(player_wizard, browser): # noqa
 
     row = ut.get_table_row(weapon_table, 'table', values=False)
 
-    assert row[4].text == '5 ft.'
+    assert row[4].text.strip() == '5 ft.'
 
 
 def test_ranged_ft(player_wizard, browser): # noqa
@@ -515,7 +579,7 @@ def test_ranged_ft(player_wizard, browser): # noqa
 
     row = ut.get_table_row(weapon_table, 'table', values=False)
 
-    assert row[4].text == '25 ft.'
+    assert row[4].text.strip() == '25 ft.'
 
 
 def test_reach_ft(player_wizard, browser): # noqa
@@ -548,7 +612,7 @@ def test_reach_ft(player_wizard, browser): # noqa
 
     row = ut.get_table_row(weapon_table, 'table', values=False)
 
-    assert row[4].text == '10 ft.'
+    assert row[4].text.strip() == '10 ft.'
 
 
 def test_weapon_sorting(player_wizard, browser): # noqa
@@ -569,7 +633,12 @@ def test_weapon_sorting(player_wizard, browser): # noqa
     )
 
     weapon_table.add.click()
-    ut.select_from_autocomplete(weapon_add, 'name', '', browser)
+    ut.select_from_autocomplete(
+        weapon_add,
+        'name',
+        browser,
+        has_search_term=False
+    )
     weapon_add.add.click()
 
     WebDriverWait(browser, 10).until(
@@ -577,7 +646,13 @@ def test_weapon_sorting(player_wizard, browser): # noqa
     )
 
     weapon_table.add.click()
-    ut.select_from_autocomplete(weapon_add, 'name', '', browser, arrow_down_count=2)
+    ut.select_from_autocomplete(
+        weapon_add,
+        'name',
+        browser,
+        has_search_term=False,
+        arrow_down_count=2
+    )
     weapon_add.add.click()
 
     WebDriverWait(browser, 10).until(
@@ -696,26 +771,26 @@ def test_add_armor(player_wizard, browser): # noqa
     armor_add.don.click()
     armor_add.description = stub.description
 
-    assert armor_add.name.get_attribute('value') == stub.name
-    assert armor_add.type_.get_attribute('value') == stub.type_
-    assert int(armor_add.magical_modifier.get_attribute('value')) == stub.magical_modifier
-    assert int(armor_add.price.get_attribute('value')) == stub.price
-    assert armor_add.currency_denomination.get_attribute('value') == stub.currency_denomination
-    assert int(armor_add.weight.get_attribute('value')) == stub.weight
-    assert int(armor_add.armor_class.get_attribute('value')) == stub.armor_class
-    assert armor_add.stealth.get_attribute('value') == stub.stealth
-    assert 'active' in armor_add.don.get_attribute('class')
-    assert armor_add.description.get_attribute('value') == stub.description
+    assert armor_add.name.get_attribute('value').strip() == stub.name
+    assert armor_add.type_.get_attribute('value').strip() == stub.type_
+    assert int(armor_add.magical_modifier.get_attribute('value').strip()) == stub.magical_modifier
+    assert int(armor_add.price.get_attribute('value').strip()) == stub.price
+    assert armor_add.currency_denomination.get_attribute('value').strip() == stub.currency_denomination
+    assert int(armor_add.weight.get_attribute('value').strip()) == stub.weight
+    assert int(armor_add.armor_class.get_attribute('value').strip()) == stub.armor_class
+    assert armor_add.stealth.get_attribute('value').strip() == stub.stealth
+    assert 'active' in armor_add.don.get_attribute('class').strip()
+    assert armor_add.description.get_attribute('value').strip() == stub.description
 
     armor_add.add.click()
 
     row = ut.get_table_row(armor_table, 'table', 1)
 
-    assert row.armor == '{}  + {}'.format(
+    assert row.armor.strip() == '{}  + {}'.format(
         stub.name, stub.magical_modifier
     )
-    assert int(row.armor_class) == stub.armor_class
-    assert row.type == stub.type_
+    assert int(row.armor_class.strip()) == stub.armor_class
+    assert row.type.strip() == stub.type_
 
 def test_delete_armor(player_wizard, browser): # noqa
     """As a player, I can delete an armor."""
@@ -733,7 +808,12 @@ def test_delete_armor(player_wizard, browser): # noqa
     )
 
     armor_table.add.click()
-    ut.select_from_autocomplete(armor_add, 'name', '', browser)
+    ut.select_from_autocomplete(
+        armor_add,
+        'name',
+        browser,
+        has_search_term=False
+    )
     armor_add.add.click()
 
     rows = ut.get_table_rows(armor_table, 'table', values=False)
@@ -745,7 +825,7 @@ def test_delete_armor(player_wizard, browser): # noqa
     rows[0][4].find_element_by_tag_name('a').click()
     rows = ut.get_table_rows(armor_table, 'table', values=False)
 
-    assert rows[0][0].text == 'Add a new armor'
+    assert rows[0][0].text.strip() == 'Add a new armor'
 
 def test_edit_armor(player_wizard, browser): # noqa
     """As a player, I can edit an armor."""
@@ -767,7 +847,12 @@ def test_edit_armor(player_wizard, browser): # noqa
     )
 
     armor_table.add.click()
-    ut.select_from_autocomplete(armor_add, 'name', '', browser)
+    ut.select_from_autocomplete(
+        armor_add,
+        'name',
+        browser,
+        has_search_term=False
+    )
     armor_add.add.click()
 
     rows = ut.get_table_rows(armor_table, 'table', values=False)
@@ -796,16 +881,16 @@ def test_edit_armor(player_wizard, browser): # noqa
     armor_edit.doff.click()
     armor_edit.description = stub.description
 
-    assert armor_edit.name.get_attribute('value') == stub.name
-    assert armor_edit.type_.get_attribute('value') == stub.type_
-    assert int(armor_edit.magical_modifier.get_attribute('value')) == stub.magical_modifier
-    assert int(armor_edit.price.get_attribute('value')) == stub.price
-    assert armor_edit.currency_denomination.get_attribute('value') == stub.currency_denomination
-    assert int(armor_edit.weight.get_attribute('value')) == stub.weight
-    assert int(armor_edit.armor_class.get_attribute('value')) == stub.armor_class
-    assert armor_edit.stealth.get_attribute('value') == stub.stealth
-    assert 'active' in armor_add.doff.get_attribute('class')
-    assert armor_edit.description.get_attribute('value') == stub.description
+    assert armor_edit.name.get_attribute('value').strip() == stub.name
+    assert armor_edit.type_.get_attribute('value').strip() == stub.type_
+    assert int(armor_edit.magical_modifier.get_attribute('value').strip()) == stub.magical_modifier
+    assert int(armor_edit.price.get_attribute('value').strip()) == stub.price
+    assert armor_edit.currency_denomination.get_attribute('value').strip() == stub.currency_denomination
+    assert int(armor_edit.weight.get_attribute('value').strip()) == stub.weight
+    assert int(armor_edit.armor_class.get_attribute('value').strip()) == stub.armor_class
+    assert armor_edit.stealth.get_attribute('value').strip() == stub.stealth
+    assert 'active' in browser.find_element(By.ID, armor_add.doff_id).get_attribute('class').strip()
+    assert armor_edit.description.get_attribute('value').strip() == stub.description
 
     armor_edit.done.click()
 
@@ -817,7 +902,7 @@ def test_edit_armor(player_wizard, browser): # noqa
         table_cell_updated(
             armor_table,
             'armor',
-            '{}  + {}'.format(stub.name, stub.magical_modifier),
+            '{} + {}'.format(stub.name, stub.magical_modifier),
             'table',
             1
         )
@@ -825,9 +910,11 @@ def test_edit_armor(player_wizard, browser): # noqa
 
     row = ut.get_table_row(armor_table, 'table', 1)
 
-    assert row.armor == '{}  + {}'.format(stub.name, stub.magical_modifier)
-    assert int(row.armor_class) == stub.armor_class
-    assert row.type == stub.type_
+    armor_field = ' '.join([string.strip() for string in row.armor.split()])
+
+    assert armor_field == '{} + {}'.format(stub.name, stub.magical_modifier)
+    assert int(row.armor_class.strip()) == stub.armor_class
+    assert row.type.strip() == stub.type_
 
 
 def test_preview_armor(player_wizard, browser): # noqa
@@ -849,7 +936,12 @@ def test_preview_armor(player_wizard, browser): # noqa
     )
 
     armor_table.add.click()
-    ut.select_from_autocomplete(armor_add, 'name', '', browser)
+    ut.select_from_autocomplete(
+        armor_add,
+        'name',
+        browser,
+        has_search_term=False
+    )
     armor_add.add.click()
 
     WebDriverWait(browser, 10).until(
@@ -865,11 +957,14 @@ def test_preview_armor(player_wizard, browser): # noqa
         )
     )
 
-    assert armor_preview.name.text == 'Breastplate'
-    assert armor_preview.summary.text == 'AC 14'
-    assert armor_preview.weight.text == 'Weight: 20 lbs.'
-    assert armor_preview.stealth.text == 'Stealth: Normal'
-    assert 'metal chest piece' in armor_preview.description.text
+    armor_weight = ' '.join([string.strip() for string in armor_preview.weight.text.split()])
+    armor_stealth = ' '.join([string.strip() for string in armor_preview.stealth.text.split()])
+
+    assert armor_preview.name.text.strip() == 'Breastplate'
+    assert armor_preview.summary.text.strip() == 'AC 14'
+    assert armor_weight == 'Weight: 20 lbs.'
+    assert armor_stealth == 'Stealth: Normal'
+    assert 'metal chest piece' in armor_preview.description.text.strip()
 
 def test_add_armor_open_model_by_row(player_wizard, browser): # noqa
     """As a player, I can click the first row in armor table to open the
@@ -904,13 +999,28 @@ def test_autocomplete_armor(player_wizard, browser): # noqa
     )
 
     armor_table.add.click()
-    ut.select_from_autocomplete(armor_add, 'name', '', browser)
-    ut.select_from_autocomplete(armor_add, 'type_', '', browser)
-    ut.select_from_autocomplete(armor_add, 'stealth', '', browser)
+    ut.select_from_autocomplete(
+        armor_add,
+        'name',
+        browser,
+        has_search_term=False
+    )
+    ut.select_from_autocomplete(
+        armor_add,
+        'type_',
+        browser,
+        has_search_term=False
+    )
+    ut.select_from_autocomplete(
+        armor_add,
+        'stealth',
+        browser,
+        has_search_term=False
+    )
 
-    assert armor_add.name.get_attribute('value') == 'Breastplate'
-    assert armor_add.type_.get_attribute('value') == 'Light'
-    assert armor_add.stealth.get_attribute('value') == 'Advantage'
+    assert armor_add.name.get_attribute('value').strip() == 'Breastplate'
+    assert armor_add.type_.get_attribute('value').strip() == 'Light'
+    assert armor_add.stealth.get_attribute('value').strip() == 'Advantage'
 
 def test_armor_ogl_pre_pop(player_wizard, browser): # noqa
     """As a player, if I select from armor name field, OGL data auto-completes
@@ -929,14 +1039,19 @@ def test_armor_ogl_pre_pop(player_wizard, browser): # noqa
         )
     )
     armor_table.add.click()
-    ut.select_from_autocomplete(armor_add, 'name', '', browser)
+    ut.select_from_autocomplete(
+        armor_add,
+        'name',
+        browser,
+        has_search_term=False
+    )
     armor_add.add.click()
 
     row = ut.get_table_row(armor_table, 'table', 1)
 
     assert row.armor.strip() == 'Breastplate'
-    assert row.armor_class == '14'
-    assert row.type == 'Medium'
+    assert row.armor_class.strip() == '14'
+    assert row.type.strip() == 'Medium'
 
 def test_magical_modifier(player_wizard, browser): # noqa
     """As a player, if armor is magical, a badge indicating the modifier
@@ -968,8 +1083,9 @@ def test_magical_modifier(player_wizard, browser): # noqa
     )
 
     row = ut.get_table_row(armor_table, 'table', 1)
+    actual = ' '.join([string.strip() for string in row.armor.split()])
 
-    assert row.armor == '{}  + {}'.format(stub.name, stub.magical_modifier)
+    assert actual == '{} + {}'.format(stub.name, stub.magical_modifier)
 
 def test_armor_persists(player_wizard, browser): # noqa
     """As a player, all fields for armor persist after page refresh."""
@@ -989,7 +1105,12 @@ def test_armor_persists(player_wizard, browser): # noqa
     )
 
     armor_table.add.click()
-    ut.select_from_autocomplete(armor_add, 'name', '', browser)
+    ut.select_from_autocomplete(
+        armor_add,
+        'name',
+        browser,
+        has_search_term=False
+    )
     armor_add.add.click()
 
     browser.refresh()
@@ -997,8 +1118,8 @@ def test_armor_persists(player_wizard, browser): # noqa
     row = ut.get_table_row(armor_table, 'table', 1)
 
     assert row.armor.strip() == 'Breastplate'
-    assert row.armor_class == '14'
-    assert row.type == 'Medium'
+    assert row.armor_class.strip() == '14'
+    assert row.type.strip() == 'Medium'
 
     row = ut.get_table_row(armor_table, 'table', values=False)
     row[0].click()
@@ -1011,16 +1132,16 @@ def test_armor_persists(player_wizard, browser): # noqa
 
     armor_tabs.edit.click()
 
-    assert armor_edit.name.get_attribute('value') == 'Breastplate'
-    assert armor_edit.armor_class.get_attribute('value') == '14'
-    assert armor_edit.type_.get_attribute('value') == 'Medium'
-    assert armor_edit.magical_modifier.get_attribute('value') == '0'
-    assert armor_edit.price.get_attribute('value') == '400'
-    assert armor_edit.currency_denomination.get_attribute('value') == 'GP'
-    assert armor_edit.weight.get_attribute('value') == '20'
-    assert armor_edit.armor_class.get_attribute('value') == '14'
-    assert armor_edit.stealth.get_attribute('value') == 'Normal'
-    assert 'armor consists of' in armor_edit.description.get_attribute('value')
+    assert armor_edit.name.get_attribute('value').strip() == 'Breastplate'
+    assert armor_edit.armor_class.get_attribute('value').strip() == '14'
+    assert armor_edit.type_.get_attribute('value').strip() == 'Medium'
+    assert armor_edit.magical_modifier.get_attribute('value').strip() == '0'
+    assert armor_edit.price.get_attribute('value').strip() == '400'
+    assert armor_edit.currency_denomination.get_attribute('value').strip() == 'GP'
+    assert armor_edit.weight.get_attribute('value').strip() == '20'
+    assert armor_edit.armor_class.get_attribute('value').strip() == '14'
+    assert armor_edit.stealth.get_attribute('value').strip() == 'Normal'
+    assert 'armor consists of' in armor_edit.description.get_attribute('value').strip()
 
 
 def test_armor_donned(player_wizard, browser): # noqa
@@ -1052,7 +1173,7 @@ def test_armor_donned(player_wizard, browser): # noqa
 
     row = ut.get_table_row(armor_table, 'table', 1, values=False)
 
-    assert 'fa fa-check' in row[0].find_element_by_tag_name('span').get_attribute('class')
+    assert 'fa fa-check' in row[0].find_element_by_tag_name('span').get_attribute('class').strip()
 
 def test_armor_total_weight(player_wizard, browser): # noqa
     """As a player, in the armor table, total weight is calculated
@@ -1072,7 +1193,12 @@ def test_armor_total_weight(player_wizard, browser): # noqa
     )
 
     armor_table.add.click()
-    ut.select_from_autocomplete(armor_add, 'name', '', browser)
+    ut.select_from_autocomplete(
+        armor_add,
+        'name',
+        browser,
+        has_search_term=False
+    )
     armor_add.add.click()
 
     WebDriverWait(browser, 10).until(
@@ -1080,7 +1206,12 @@ def test_armor_total_weight(player_wizard, browser): # noqa
     )
 
     armor_table.add.click()
-    ut.select_from_autocomplete(armor_add, 'name', '', browser)
+    ut.select_from_autocomplete(
+        armor_add,
+        'name',
+        browser,
+        has_search_term=False
+    )
     armor_add.add.click()
 
     WebDriverWait(browser, 10).until(
@@ -1090,7 +1221,7 @@ def test_armor_total_weight(player_wizard, browser): # noqa
         )
     )
 
-    assert armor_table.total_weight.text == '40 (lbs)'
+    assert armor_table.total_weight.text.strip() == '40 (lbs)'
 
 
 def test_armor_sorting(player_wizard, browser): # noqa
@@ -1111,7 +1242,12 @@ def test_armor_sorting(player_wizard, browser): # noqa
     )
 
     armor_table.add.click()
-    ut.select_from_autocomplete(armor_add, 'name', '', browser)
+    ut.select_from_autocomplete(
+        armor_add,
+        'name',
+        browser,
+        has_search_term=False
+    )
     armor_add.add.click()
 
     WebDriverWait(browser, 10).until(
@@ -1120,7 +1256,11 @@ def test_armor_sorting(player_wizard, browser): # noqa
 
     armor_table.add.click()
     ut.select_from_autocomplete(
-        armor_add, 'name', '', browser, arrow_down_count=2
+        armor_add,
+        'name',
+        browser,
+        arrow_down_count=2,
+        has_search_term=False
     )
     armor_add.add.click()
 

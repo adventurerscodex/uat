@@ -56,7 +56,12 @@ def test_strength_increase(player_wizard, browser): # noqa
 
     weapon_table.add.click()
     # select battleaxe
-    ut.select_from_autocomplete(weapon_add, 'name', '', browser)
+    ut.select_from_autocomplete(
+        weapon_add,
+        'name',
+        browser,
+        has_search_term=False
+    )
     weapon_add.add.click()
 
     to_hit = ut.get_table_row(weapon_table, 'table').to_hit
@@ -64,9 +69,9 @@ def test_strength_increase(player_wizard, browser): # noqa
     status = hud.status_line.find_elements_by_tag_name('span')
     encumbrance_color = status[1].get_attribute('class')
 
-    assert strength.blank2 == '+ 2'
-    assert to_hit == '+ 4'
-    assert athletics.blank2 == '+ 2 (Str)'
+    assert strength.blank2.strip() == '+ 2'
+    assert to_hit.strip() == '+ 4'
+    assert athletics.blank2.strip() == '+ 2 (Str)'
     assert 'text-info' in encumbrance_color
 
 
@@ -114,17 +119,23 @@ def test_dexterity_increase(player_wizard, browser): # noqa
 
     weapon_table.add.click()
     # select a dagger
-    ut.select_from_autocomplete(weapon_add, 'name', '', browser, arrow_down_count=7)
+    ut.select_from_autocomplete(
+        weapon_add,
+        'name',
+        browser,
+        has_search_term=False,
+        arrow_down_count=7
+    )
     weapon_add.add.click()
 
     to_hit = ut.get_table_row(weapon_table, 'table').to_hit
 
-    assert dexterity.blank2 == '+ 2'
-    assert initiative == '2'
-    assert to_hit == '+ 4'
-    assert acrobatics.blank2 == '+ 2 (Dex)'
-    assert sleight_of_hand.blank2 == '+ 2 (Dex)'
-    assert stealth.blank2 == '+ 2 (Dex)'
+    assert dexterity.blank2.strip() == '+ 2'
+    assert initiative.strip() == '2'
+    assert to_hit.strip() == '+ 4'
+    assert acrobatics.blank2.strip() == '+ 2 (Dex)'
+    assert sleight_of_hand.blank2.strip() == '+ 2 (Dex)'
+    assert stealth.blank2.strip() == '+ 2 (Dex)'
 
 def test_constitution_increase(player_wizard, browser): # noqa
     """When constitution is increased or decreased, relevant skills reflect the change."""
@@ -151,7 +162,7 @@ def test_constitution_increase(player_wizard, browser): # noqa
 
     constitution = ut.get_table_row(saving_throw, 'table', row_number=2)
 
-    assert constitution.blank2 == '+ 2'
+    assert constitution.blank2.strip() == '+ 2'
 
 def test_intelligence_increase(player_wizard, browser): # noqa
     """When intelligence is increased or decreased, relevant skills reflect the change."""
@@ -188,12 +199,12 @@ def test_intelligence_increase(player_wizard, browser): # noqa
     nature = ut.get_table_row(skills, 'table', row_number=11)
     religion = ut.get_table_row(skills, 'table', row_number=15)
 
-    assert intelligence.blank2 == '+ 2'
-    assert arcana.blank2 == '+ 2 (Int)'
-    assert history.blank2 == '+ 2 (Int)'
-    assert investigation.blank2 == '+ 2 (Int)'
-    assert nature.blank2 == '+ 2 (Int)'
-    assert religion.blank2 == '+ 2 (Int)'
+    assert intelligence.blank2.strip() == '+ 2'
+    assert arcana.blank2.strip() == '+ 2 (Int)'
+    assert history.blank2.strip() == '+ 2 (Int)'
+    assert investigation.blank2.strip() == '+ 2 (Int)'
+    assert nature.blank2.strip() == '+ 2 (Int)'
+    assert religion.blank2.strip() == '+ 2 (Int)'
 
 def test_wisdom_increase(player_wizard, browser): # noqa
     """When wisdom is increased or decreased, relevant skills and savings throws reflect the change."""
@@ -230,12 +241,12 @@ def test_wisdom_increase(player_wizard, browser): # noqa
     perception = ut.get_table_row(skills, 'table', row_number=12)
     survival = ut.get_table_row(skills, 'table', row_number=18)
 
-    assert wisdom.blank2 == '+ 2'
-    assert animal_handling.blank2 == '+ 2 (Wis)'
-    assert insight.blank2 == '+ 2 (Wis)'
-    assert medicine.blank2 == '+ 2 (Wis)'
-    assert perception.blank2 == '+ 2 (Wis)'
-    assert survival.blank2 == '+ 2 (Wis)'
+    assert wisdom.blank2.strip() == '+ 2'
+    assert animal_handling.blank2.strip() == '+ 2 (Wis)'
+    assert insight.blank2.strip() == '+ 2 (Wis)'
+    assert medicine.blank2.strip() == '+ 2 (Wis)'
+    assert perception.blank2.strip() == '+ 2 (Wis)'
+    assert survival.blank2.strip() == '+ 2 (Wis)'
 
 def test_charisma_increase(player_wizard, browser): # noqa
     """When charisma is increased or decreased, relevant skills and savings throws reflect the change."""
@@ -271,8 +282,8 @@ def test_charisma_increase(player_wizard, browser): # noqa
     performance = ut.get_table_row(skills, 'table', row_number=13)
     persuasion = ut.get_table_row(skills, 'table', row_number=14)
 
-    assert charisma.blank2 == '+ 2'
-    assert deception.blank2 == '+ 2 (Cha)'
-    assert intimidation.blank2 == '+ 2 (Cha)'
-    assert performance.blank2 == '+ 2 (Cha)'
-    assert persuasion.blank2 == '+ 2 (Cha)'
+    assert charisma.blank2.strip() == '+ 2'
+    assert deception.blank2.strip() == '+ 2 (Cha)'
+    assert intimidation.blank2.strip() == '+ 2 (Cha)'
+    assert performance.blank2.strip() == '+ 2 (Cha)'
+    assert persuasion.blank2.strip() == '+ 2 (Cha)'

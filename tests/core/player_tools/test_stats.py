@@ -1,6 +1,4 @@
 """UAT test file for Adventurer's Codex player tools stats module."""
-import time
-
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC # noqa
@@ -71,16 +69,16 @@ def test_data_persists(player_wizard, browser): # noqa
 
     charisma = ut.get_table_row(saving_throw, 'table')
 
-    assert ability_scores_table.strength.text == '15'
-    assert hp_hd.hit_points_bar_label.text == 'HP: 9'
-    assert hp_hd.hitdice1.get_attribute('class') == 'dice-empty'
-    assert charisma.blank2 == '+ 8'
-    assert proficieny[0].get_attribute('class') == 'fa fa-check'
-    assert other_stats.initiative.text == '5'
-    assert other_stats.proficiency_bonus.text == '3'
-    assert other_stats.speed.get_attribute('value') == '40'
-    assert other_stats.level.get_attribute('value') == '3'
-    assert other_stats.experience.get_attribute('value') == '2000'
+    assert ability_scores_table.strength.text.strip() == '15'
+    assert hp_hd.hit_points_bar_label.text.strip() == 'HP: 9'
+    assert hp_hd.hitdice1.get_attribute('class').strip() == 'dice-empty'
+    assert charisma.blank2.strip() == '+ 8'
+    assert proficieny[0].get_attribute('class').strip() == 'fa fa-check'
+    assert other_stats.initiative.text.strip() == '5'
+    assert other_stats.proficiency_bonus.text.strip() == '3'
+    assert other_stats.speed.get_attribute('value').strip() == '40'
+    assert other_stats.level.get_attribute('value').strip() == '3'
+    assert other_stats.experience.get_attribute('value').strip() == '2000'
 
 def test_edit_ability_scores(player_wizard, browser): # noqa
     """As a player, I can edit my ability scores."""
@@ -107,12 +105,12 @@ def test_edit_ability_scores(player_wizard, browser): # noqa
         )
     )
 
-    assert ability_scores_table.strength.text == '15'
-    assert ability_scores_table.dexterity.text == '16'
-    assert ability_scores_table.constitution.text == '17'
-    assert ability_scores_table.intelligence.text == '16'
-    assert ability_scores_table.wisdom.text == '15'
-    assert ability_scores_table.charisma.text == '14'
+    assert ability_scores_table.strength.text.strip() == '15'
+    assert ability_scores_table.dexterity.text.strip() == '16'
+    assert ability_scores_table.constitution.text.strip() == '17'
+    assert ability_scores_table.intelligence.text.strip() == '16'
+    assert ability_scores_table.wisdom.text.strip() == '15'
+    assert ability_scores_table.charisma.text.strip() == '14'
 
 
 def test_ability_scores_modifiers(player_wizard, browser): # noqa
@@ -140,12 +138,12 @@ def test_ability_scores_modifiers(player_wizard, browser): # noqa
         )
     )
 
-    assert ability_scores_table.strength_modifier.text == '+ 2'
-    assert ability_scores_table.dexterity_modifier.text == '+ 3'
-    assert ability_scores_table.constitution_modifier.text == '+ 3'
-    assert ability_scores_table.intelligence_modifier.text == '+ 3'
-    assert ability_scores_table.wisdom_modifier.text == '+ 2'
-    assert ability_scores_table.charisma_modifier.text == '+ 2'
+    assert ability_scores_table.strength_modifier.text.strip() == '+ 2'
+    assert ability_scores_table.dexterity_modifier.text.strip() == '+ 3'
+    assert ability_scores_table.constitution_modifier.text.strip() == '+ 3'
+    assert ability_scores_table.intelligence_modifier.text.strip() == '+ 3'
+    assert ability_scores_table.wisdom_modifier.text.strip() == '+ 2'
+    assert ability_scores_table.charisma_modifier.text.strip() == '+ 2'
 
 
 def test_ability_scores_persist(player_wizard, browser): # noqa
@@ -174,12 +172,12 @@ def test_ability_scores_persist(player_wizard, browser): # noqa
 
     browser.refresh()
 
-    assert ability_scores_table.strength.text == '15'
-    assert ability_scores_table.dexterity.text == '16'
-    assert ability_scores_table.constitution.text == '17'
-    assert ability_scores_table.intelligence.text == '16'
-    assert ability_scores_table.wisdom.text == '15'
-    assert ability_scores_table.charisma.text == '14'
+    assert ability_scores_table.strength.text.strip() == '15'
+    assert ability_scores_table.dexterity.text.strip() == '16'
+    assert ability_scores_table.constitution.text.strip() == '17'
+    assert ability_scores_table.intelligence.text.strip() == '16'
+    assert ability_scores_table.wisdom.text.strip() == '15'
+    assert ability_scores_table.charisma.text.strip() == '14'
 
 def test_hp_stepper(player_wizard, browser): # noqa
     """As a player, I can increase or decrease my hit points via the stepper widget."""
@@ -189,11 +187,11 @@ def test_hp_stepper(player_wizard, browser): # noqa
 
     hp_hd.damage_up.click()
 
-    assert hp_hd.hit_points_bar_label.text == 'HP: 9'
+    assert hp_hd.hit_points_bar_label.text.strip() == 'HP: 9'
 
     hp_hd.damage_down.click()
 
-    assert hp_hd.hit_points_bar_label.text == 'HP: 10'
+    assert hp_hd.hit_points_bar_label.text.strip() == 'HP: 10'
 
 def test_hp_reset(player_wizard, browser): # noqa
     """As a player, I can reset my hp by clicking on the reset icon."""
@@ -203,11 +201,11 @@ def test_hp_reset(player_wizard, browser): # noqa
 
     hp_hd.damage_up.click()
 
-    assert hp_hd.hit_points_bar_label.text == 'HP: 9'
+    assert hp_hd.hit_points_bar_label.text.strip() == 'HP: 9'
 
     hp_hd.reset.click()
 
-    assert hp_hd.hit_points_bar_label.text == 'HP: 10'
+    assert hp_hd.hit_points_bar_label.text.strip() == 'HP: 10'
 
 def test_hit_dice_clickable(player_wizard, browser): # noqa
     """As a player, hit dice are clickable and images change when clicked."""
@@ -216,11 +214,11 @@ def test_hit_dice_clickable(player_wizard, browser): # noqa
 
     hp_hd = HitPointHitDice(browser)
 
-    assert hp_hd.hitdice1.get_attribute('class') == 'dice-full'
+    assert hp_hd.hitdice1.get_attribute('class').strip() == 'dice-full'
 
     hp_hd.hitdice1.click()
 
-    assert hp_hd.hitdice1.get_attribute('class') == 'dice-empty'
+    assert hp_hd.hitdice1.get_attribute('class').strip() == 'dice-empty'
 
 def test_hit_dice_persists(player_wizard, browser): # noqa
     """As a player, if I click on a hit die, the changes persist after I refresh the browser."""
@@ -230,11 +228,11 @@ def test_hit_dice_persists(player_wizard, browser): # noqa
     hp_hd = HitPointHitDice(browser)
     hp_hd.hitdice1.click()
 
-    assert hp_hd.hitdice1.get_attribute('class') == 'dice-empty'
+    assert hp_hd.hitdice1.get_attribute('class').strip() == 'dice-empty'
 
     browser.refresh()
 
-    assert hp_hd.hitdice1.get_attribute('class') == 'dice-empty'
+    assert hp_hd.hitdice1.get_attribute('class').strip() == 'dice-empty'
 
 def test_hit_dice_level(player_wizard, browser): # noqa
     """As a player, if I change the value in the level field, the number of hit dice match the level number."""
@@ -268,8 +266,8 @@ def test_death_saves_clickable(player_wizard, browser): # noqa
     failure = hp_hd.death_failures_empty[0]
     failure.click()
 
-    assert success.get_attribute('class') == 'ds-success-full'
-    assert failure.get_attribute('class') == 'ds-failure-full'
+    assert success.get_attribute('class').strip() == 'ds-success-full'
+    assert failure.get_attribute('class').strip() == 'ds-failure-full'
 
 def test_death_saves_persist(player_wizard, browser): # noqa
     """As a player, death save changes persist after I refresh the browser."""
@@ -309,8 +307,8 @@ def test_character_stable_alert(player_wizard, browser): # noqa
     successes[1].click()
     successes[2].click()
 
-    assert hp_hd.toast_title.text == 'You are now stable.'
-    assert hp_hd.toast_message.text == 'You have been spared...for now.'
+    assert hp_hd.toast_title.text.strip() == 'You are now stable.'
+    assert hp_hd.toast_message.text.strip() == 'You have been spared...for now.'
 
 def test_character_dead_alert(player_wizard, browser): # noqa
     """If 3 death save success are clicked, an alert indicating the player is dead is presented."""
@@ -328,8 +326,8 @@ def test_character_dead_alert(player_wizard, browser): # noqa
     failures[1].click()
     failures[2].click()
 
-    assert hp_hd.toast_title.text == 'You have died.'
-    assert hp_hd.toast_message.text == 'Failing all 3 death saves will do that...'
+    assert hp_hd.toast_title.text.strip() == 'You have died.'
+    assert hp_hd.toast_message.text.strip() == 'Failing all 3 death saves will do that...'
 
 def test_initiative_calculation(player_wizard, browser): # noqa
     """As a player, initiative is correctly calculated."""
@@ -337,7 +335,7 @@ def test_initiative_calculation(player_wizard, browser): # noqa
 
     other_stats = OtherStats(browser)
 
-    assert other_stats.initiative.text == '4'
+    assert other_stats.initiative.text.strip() == '4'
 
 def test_initiative_modifier(player_wizard, browser): # noqa
     """As a player, I can increase or decrease my calculated initiative via a modifier field and this is reflected in the label."""
@@ -348,11 +346,12 @@ def test_initiative_modifier(player_wizard, browser): # noqa
     other_stats.initiative_modifier = 1
     other_stats.initiative_modifier.send_keys(Keys.TAB)
 
-    assert other_stats.initiative.text == '5'
+    assert other_stats.initiative.text.strip() == '5'
 
     other_stats.initiative_modifier = -1
+    other_stats.initiative_modifier.send_keys(Keys.TAB)
 
-    assert other_stats.initiative.text == '4'
+    assert other_stats.initiative.text.strip() == '3'
 
 def test_initiative_popover(player_wizard, browser): # noqa
     """As a player, I can can click on a popover showing the calculation for Initiative."""
@@ -362,7 +361,11 @@ def test_initiative_popover(player_wizard, browser): # noqa
 
     other_stats.initiative_popover_icon.click()
 
-    assert other_stats.initiative_popover_content.text == 'Initiative = Dexterity Modifier + Modifier\nInitiative = 4 + 0'
+    # safari has no newline, so it must be stripped
+    popover = other_stats.initiative_popover_content.text.strip()
+    popover = popover.replace('\n', '')
+
+    assert popover == 'Initiative = Dexterity Modifier + ModifierInitiative = 4 + 0'
 
 def test_proficieny_bonus_calculation(player_wizard, browser): # noqa
     """As a player, proficieny bonus is correctly calculated."""
@@ -373,7 +376,7 @@ def test_proficieny_bonus_calculation(player_wizard, browser): # noqa
     other_stats.level = 5
     other_stats.level.send_keys(Keys.TAB)
 
-    assert other_stats.proficiency_bonus.text == '3'
+    assert other_stats.proficiency_bonus.text.strip() == '3'
 
 def test_proficiency_modifier(player_wizard, browser): # noqa
     """As a player, I can increase or decrease my calculated proficiency via a modifier field and this is reflected in the label."""
@@ -387,7 +390,7 @@ def test_proficiency_modifier(player_wizard, browser): # noqa
     other_stats.proficiency_bonus_modifier = 1
     other_stats.proficiency_bonus_modifier.send_keys(Keys.TAB)
 
-    assert other_stats.proficiency_bonus.text == '4'
+    assert other_stats.proficiency_bonus.text.strip() == '4'
 
 def test_proficiency_popover(player_wizard, browser): # noqa
     """As a player, I can can click on a popover showing the calculation for Proficiency Bonus."""
@@ -397,7 +400,11 @@ def test_proficiency_popover(player_wizard, browser): # noqa
 
     other_stats.proficiency_popover_icon.click()
 
-    assert other_stats.proficiency_popover_content.text == 'Proficiency = (Level / 4) + 1 + Modifier\nProficiency = 1 + 1 + 0'
+    # safari has no newline, so it must be stripped
+    popover = other_stats.proficiency_popover_content.text.strip()
+    popover = popover.replace('\n', '')
+
+    assert popover == 'Proficiency = (Level / 4) + 1 + ModifierProficiency = 1 + 1 + 0'
 
 def test_inpiration_blue_circle(player_wizard, browser): # noqa
     """As a player, if I am inspired, there should be a blue circle around my profice pic."""
@@ -409,7 +416,7 @@ def test_inpiration_blue_circle(player_wizard, browser): # noqa
     other_stats.inspiration = 1
     other_stats.inspiration.send_keys(Keys.TAB)
 
-    assert 'image-border-inspired' in profile_pic.profile_pic_border.get_attribute('class')
+    assert 'image-border-inspired' in profile_pic.profile_pic_border.get_attribute('class').strip()
 
 def test_health_bar_changes_color(player_wizard, browser): # noqa
     """As a player, I can see the hit points bar change colors at certain intervals as hit points decrease."""
@@ -417,7 +424,7 @@ def test_health_bar_changes_color(player_wizard, browser): # noqa
 
     health = HitPointHitDice(browser)
 
-    assert 'progress-bar-danger' not in health.hit_points_bar_regular_hp.get_attribute('class')
+    assert 'progress-bar-danger' not in health.hit_points_bar_regular_hp.get_attribute('class').strip()
 
     health.damage_up.click()
     health.damage_up.click()
@@ -429,7 +436,7 @@ def test_health_bar_changes_color(player_wizard, browser): # noqa
     health.damage_up.click()
     health.damage_up.click()
 
-    assert 'progress-bar-danger' in health.hit_points_bar_regular_hp.get_attribute('class')
+    assert 'progress-bar-danger' in health.hit_points_bar_regular_hp.get_attribute('class').strip()
 
 def test_ac_modifier(player_wizard, browser): # noqa
     """As a player, I can increase or decrease my calculated armor class via a modifier field and this is reflected in the label."""
@@ -440,7 +447,7 @@ def test_ac_modifier(player_wizard, browser): # noqa
     other_stats.ac_modifier = 1
     other_stats.ac_modifier.send_keys(Keys.TAB)
 
-    assert other_stats.ac.text == '15'
+    assert other_stats.ac.text.strip() == '15'
 
 def test_ac_popover(player_wizard, browser): # noqa
     """As a player, I can can click on a popover showing the calculation for Armor Class."""
@@ -450,7 +457,11 @@ def test_ac_popover(player_wizard, browser): # noqa
 
     other_stats.ac_popover_icon.click()
 
-    assert other_stats.ac_popover_content.text == 'Armor Class = Base AC + Dexterity Modifier + Magical Modifier(s) + Shield + Modifier\nArmor Class = 10 + 4 + 0 + 0 + 0'
+    # safari has no newline, so it must be stripped
+    popover = other_stats.proficiency_popover_content.text.strip()
+    popover = popover.replace('\n', '')
+
+    assert popover == 'Armor Class = Base AC + Dexterity Modifier + Magical Modifier(s) + Shield + ModifierArmor Class = 10 + 4 + 0 + 0 + 0'
 
 def test_saving_throw_proficiency(player_wizard, browser): # noqa
     """As a player, I can select to become proficient in a savings throw, and this can be viewed in the table via in icon."""
@@ -480,7 +491,7 @@ def test_saving_throw_proficiency(player_wizard, browser): # noqa
     row = ut.get_table_row(saving_throw, 'table', values=False)
     span = row[0].find_elements(By.TAG_NAME, 'span')
 
-    assert span[0].get_attribute('class') == 'fa fa-check'
+    assert span[0].get_attribute('class').strip() == 'fa fa-check'
 
 def test_saving_throw_modifier(player_wizard, browser): # noqa
     """As a player, I can increase or decrease my savings throws via a modifier field"""
@@ -508,4 +519,4 @@ def test_saving_throw_modifier(player_wizard, browser): # noqa
 
     row = ut.get_table_row(saving_throw, 'table')
 
-    assert row.blank2 == '+ 5'
+    assert row.blank2.strip() == '+ 5'

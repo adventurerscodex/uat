@@ -32,21 +32,21 @@ def test_add_feature(player_wizard, browser): # noqa
     feature.max_ = 4
     feature.short_rest.click()
 
-    assert feature.name.get_attribute('value') == 'Add Name'
-    assert feature.class_.get_attribute('value') == 'Add Class'
-    assert feature.level.get_attribute('value') == '1'
-    assert feature.description.get_attribute('value') == 'Add Description'
-    assert feature.max_.get_attribute('value') == '4'
-    assert 'active' in feature.short_rest.get_attribute('class')
+    assert feature.name.get_attribute('value').strip() == 'Add Name'
+    assert feature.class_.get_attribute('value').strip() == 'Add Class'
+    assert feature.level.get_attribute('value').strip() == '1'
+    assert feature.description.get_attribute('value').strip() == 'Add Description'
+    assert feature.max_.get_attribute('value').strip() == '4'
+    assert 'active' in feature.short_rest.get_attribute('class').strip()
 
     feature.add.click()
 
     row = ut.get_table_row(features_table, 'table', 1)
 
-    assert tracked_table.tracked1_name.text == 'Add Name'
-    assert tracked_table.tracked1_max.text == '4'
-    assert row.class_ == 'Add Class'
-    assert row.feature == 'Add Name'
+    assert tracked_table.tracked1_name.text.strip() == 'Add Name'
+    assert tracked_table.tracked1_max.text.strip() == '4'
+    assert row.class_.strip() == 'Add Class'
+    assert row.feature.strip() == 'Add Name'
 
 
 def test_feature_ogl_pre_pop(player_wizard, browser): # noqa
@@ -59,13 +59,18 @@ def test_feature_ogl_pre_pop(player_wizard, browser): # noqa
     tabs.skills.click()
 
     features_table.add.click()
-    ut.select_from_autocomplete(feature, 'name', '', browser)
+    ut.select_from_autocomplete(
+        feature,
+        'name',
+        browser,
+        has_search_term=False
+    )
     feature.add.click()
 
     row = ut.get_table_row(features_table, 'table', 1)
 
-    assert row.class_ == 'Barbarian'
-    assert row.feature == 'Rage'
+    assert row.class_.strip() == 'Barbarian'
+    assert 'Rage' in row.feature.strip()
 
 
 def test_delete_feature(player_wizard, browser): # noqa
@@ -78,7 +83,12 @@ def test_delete_feature(player_wizard, browser): # noqa
     tabs.skills.click()
 
     features_table.add.click()
-    ut.select_from_autocomplete(feature, 'name', '', browser)
+    ut.select_from_autocomplete(
+        feature,
+        'name',
+        browser,
+        has_search_term=False
+    )
     feature.add.click()
 
     rows = ut.get_table_rows(features_table, 'table', values=False)
@@ -95,7 +105,7 @@ def test_delete_feature(player_wizard, browser): # noqa
     rows[0][2].click()
     rows = ut.get_table_rows(features_table, 'table', values=False)
 
-    assert rows[0][0].text == 'Add a new Feature'
+    assert rows[0][0].text.strip() == 'Add a new Feature'
 
 
 def test_add_autocomplete_feature(player_wizard, browser): # noqa
@@ -108,11 +118,21 @@ def test_add_autocomplete_feature(player_wizard, browser): # noqa
     tabs.skills.click()
 
     features_table.add.click()
-    ut.select_from_autocomplete(feature, 'name', '', browser)
-    ut.select_from_autocomplete(feature, 'class_', '', browser)
+    ut.select_from_autocomplete(
+        feature,
+        'name',
+        browser,
+        has_search_term=False
+    )
+    ut.select_from_autocomplete(
+        feature,
+        'class_',
+        browser,
+        has_search_term=False
+    )
 
-    assert feature.name.get_attribute('value') == 'Rage (Barbarian, Lvl. 1)'
-    assert feature.class_.get_attribute('value') == 'Barbarian'
+    assert feature.name.get_attribute('value').strip() == 'Rage (Barbarian, Lvl. 1)'
+    assert feature.class_.get_attribute('value').strip() == 'Barbarian'
 
 
 def test_add_feature_open_model_by_row(player_wizard, browser): # noqa
@@ -147,7 +167,12 @@ def test_edit_feature(player_wizard, browser): # noqa
     )
 
     features_table.add.click()
-    ut.select_from_autocomplete(feature, 'name', '', browser)
+    ut.select_from_autocomplete(
+        feature,
+        'name',
+        browser,
+        has_search_term=False
+    )
     feature.add.click()
 
     WebDriverWait(browser, 10).until(
@@ -173,12 +198,12 @@ def test_edit_feature(player_wizard, browser): # noqa
     feature_edit.max_ = 4
     feature_edit.short_rest.click()
 
-    assert feature_edit.name.get_attribute('value') == 'Edited Name'
-    assert feature_edit.class_.get_attribute('value') == 'Edited Class'
-    assert feature_edit.level.get_attribute('value') == '1'
-    assert feature_edit.description.get_attribute('value') == 'Edited Description'
-    assert feature_edit.max_.get_attribute('value') == '4'
-    assert 'active' in feature_edit.short_rest.get_attribute('class')
+    assert feature_edit.name.get_attribute('value').strip() == 'Edited Name'
+    assert feature_edit.class_.get_attribute('value').strip() == 'Edited Class'
+    assert feature_edit.level.get_attribute('value').strip() == '1'
+    assert feature_edit.description.get_attribute('value').strip() == 'Edited Description'
+    assert feature_edit.max_.get_attribute('value').strip() == '4'
+    assert 'active' in feature_edit.short_rest.get_attribute('class').strip()
 
     feature_edit.done.click()
 
@@ -188,8 +213,8 @@ def test_edit_feature(player_wizard, browser): # noqa
 
     row = ut.get_table_row(features_table, 'table', 1)
 
-    assert row.feature == 'Edited Name'
-    assert row.class_ == 'Edited Class'
+    assert row.feature.strip() == 'Edited Name'
+    assert row.class_.strip() == 'Edited Class'
 
 
 def test_add_feat(player_wizard, browser): # noqa
@@ -209,18 +234,18 @@ def test_add_feat(player_wizard, browser): # noqa
     feat.max_ = 4
     feat.short_rest.click()
 
-    assert feat.name.get_attribute('value') == 'Add Name'
-    assert feat.description.get_attribute('value') == 'Add Description'
-    assert feat.max_.get_attribute('value') == '4'
-    assert 'active' in feat.short_rest.get_attribute('class')
+    assert feat.name.get_attribute('value').strip() == 'Add Name'
+    assert feat.description.get_attribute('value').strip() == 'Add Description'
+    assert feat.max_.get_attribute('value').strip() == '4'
+    assert 'active' in feat.short_rest.get_attribute('class').strip()
 
     feat.add.click()
 
     row = ut.get_table_row(feats_table, 'table', 1)
 
-    assert tracked_table.tracked1_name.text == 'Add Name'
-    assert tracked_table.tracked1_max.text == '4'
-    assert row.feat == 'Add Name'
+    assert tracked_table.tracked1_name.text.strip() == 'Add Name'
+    assert tracked_table.tracked1_max.text.strip() == '4'
+    assert row.feat.strip() == 'Add Name'
 
 
 def test_feat_ogl_pre_pop(player_wizard, browser): # noqa
@@ -233,12 +258,17 @@ def test_feat_ogl_pre_pop(player_wizard, browser): # noqa
     tabs.skills.click()
 
     feats_table.add.click()
-    ut.select_from_autocomplete(feat, 'name', '', browser)
+    ut.select_from_autocomplete(
+        feat,
+        'name',
+        browser,
+        has_search_term=False
+    )
     feat.add.click()
 
     row = ut.get_table_row(feats_table, 'table', 1)
 
-    assert row.feat == 'Grappler'
+    assert row.feat.strip() == 'Grappler'
 
 
 def test_delete_feat(player_wizard, browser): # noqa
@@ -251,7 +281,12 @@ def test_delete_feat(player_wizard, browser): # noqa
     tabs.skills.click()
 
     feats_table.add.click()
-    ut.select_from_autocomplete(feat, 'name', '', browser)
+    ut.select_from_autocomplete(
+        feat,
+        'name',
+        browser,
+        has_search_term=False
+    )
     feat.add.click()
 
     rows = ut.get_table_rows(feats_table, 'table', values=False)
@@ -264,7 +299,7 @@ def test_delete_feat(player_wizard, browser): # noqa
     rows[0][1].click()
     rows = ut.get_table_rows(feats_table, 'table', values=False)
 
-    assert rows[0][0].text == 'Add a new Feat'
+    assert rows[0][0].text.strip() == 'Add a new Feat'
 
 
 def test_add_autocomplete_feat(player_wizard, browser): # noqa
@@ -277,9 +312,14 @@ def test_add_autocomplete_feat(player_wizard, browser): # noqa
     tabs.skills.click()
 
     feats_table.add.click()
-    ut.select_from_autocomplete(feat, 'name', '', browser)
+    ut.select_from_autocomplete(
+        feat,
+        'name',
+        browser,
+        has_search_term=False
+    )
 
-    assert feat.name.get_attribute('value') == 'Grappler'
+    assert feat.name.get_attribute('value').strip() == 'Grappler'
 
 
 def test_add_feat_open_model_by_row(player_wizard, browser): # noqa
@@ -314,7 +354,12 @@ def test_edit_feat(player_wizard, browser): # noqa
     )
 
     feats_table.add.click()
-    ut.select_from_autocomplete(feat, 'name', '', browser)
+    ut.select_from_autocomplete(
+        feat,
+        'name',
+        browser,
+        has_search_term=False
+    )
     feat.add.click()
 
     WebDriverWait(browser, 10).until(
@@ -338,10 +383,10 @@ def test_edit_feat(player_wizard, browser): # noqa
     feat_edit.max_ = 4
     feat_edit.short_rest.click()
 
-    assert feat_edit.name.get_attribute('value') == 'Edited Name'
-    assert feat_edit.description.get_attribute('value') == 'Edited Description'
-    assert feat_edit.max_.get_attribute('value') == '4'
-    assert 'active' in feat_edit.short_rest.get_attribute('class')
+    assert feat_edit.name.get_attribute('value').strip() == 'Edited Name'
+    assert feat_edit.description.get_attribute('value').strip() == 'Edited Description'
+    assert feat_edit.max_.get_attribute('value').strip() == '4'
+    assert 'active' in feat_edit.short_rest.get_attribute('class').strip()
 
     feat_edit.done.click()
 
@@ -361,7 +406,7 @@ def test_edit_feat(player_wizard, browser): # noqa
 
     row = ut.get_table_row(feats_table, 'table', 1)
 
-    assert row.feat == 'Edited Name'
+    assert row.feat.strip() == 'Edited Name'
 
 
 def test_add_trait(player_wizard, browser): # noqa
@@ -382,20 +427,20 @@ def test_add_trait(player_wizard, browser): # noqa
     trait.max_ = 4
     trait.short_rest.click()
 
-    assert trait.name.get_attribute('value') == 'Add Name'
-    assert trait.race.get_attribute('value') == 'Add Race'
-    assert trait.description.get_attribute('value') == 'Add Description'
-    assert trait.max_.get_attribute('value') == '4'
-    assert 'active' in trait.short_rest.get_attribute('class')
+    assert trait.name.get_attribute('value').strip() == 'Add Name'
+    assert trait.race.get_attribute('value').strip() == 'Add Race'
+    assert trait.description.get_attribute('value').strip() == 'Add Description'
+    assert trait.max_.get_attribute('value').strip() == '4'
+    assert 'active' in trait.short_rest.get_attribute('class').strip()
 
     trait.add.click()
 
     row = ut.get_table_row(traits_table, 'table', 1)
 
-    assert tracked_table.tracked1_name.text == 'Add Name'
-    assert tracked_table.tracked1_max.text == '4'
-    assert row.race == 'Add Race'
-    assert row.trait == 'Add Name'
+    assert tracked_table.tracked1_name.text.strip() == 'Add Name'
+    assert tracked_table.tracked1_max.text.strip() == '4'
+    assert row.race.strip() == 'Add Race'
+    assert row.trait.strip() == 'Add Name'
 
 
 def test_trait_ogl_pre_pop(player_wizard, browser): # noqa
@@ -408,13 +453,18 @@ def test_trait_ogl_pre_pop(player_wizard, browser): # noqa
     tabs.skills.click()
 
     traits_table.add.click()
-    ut.select_from_autocomplete(trait, 'name', '', browser)
+    ut.select_from_autocomplete(
+        trait,
+        'name',
+        browser,
+        has_search_term=False
+    )
     trait.add.click()
 
     row = ut.get_table_row(traits_table, 'table', 1)
 
-    assert row.race == 'Dragonborn'
-    assert row.trait == 'Ability Score Increase'
+    assert row.race.strip() == 'Dragonborn'
+    assert row.trait.strip() == 'Ability Score Increase'
 
 
 def test_delete_trait(player_wizard, browser): # noqa
@@ -433,7 +483,12 @@ def test_delete_trait(player_wizard, browser): # noqa
     )
 
     traits_table.add.click()
-    ut.select_from_autocomplete(trait, 'name', '', browser)
+    ut.select_from_autocomplete(
+        trait,
+        'name',
+        browser,
+        has_search_term=False
+    )
     trait.add.click()
 
     WebDriverWait(browser, 10).until(
@@ -444,7 +499,7 @@ def test_delete_trait(player_wizard, browser): # noqa
     rows[0][2].find_element_by_tag_name('a').click()
     rows = ut.get_table_rows(traits_table, 'table', values=False)
 
-    assert rows[0][0].text == 'Add a new Trait'
+    assert rows[0][0].text.strip() == 'Add a new Trait'
 
 
 def test_add_autocomplete_trait(player_wizard, browser): # noqa
@@ -457,11 +512,21 @@ def test_add_autocomplete_trait(player_wizard, browser): # noqa
     tabs.skills.click()
 
     traits_table.add.click()
-    ut.select_from_autocomplete(trait, 'name', '', browser)
-    ut.select_from_autocomplete(trait, 'race', '', browser)
+    ut.select_from_autocomplete(
+        trait,
+        'name',
+        browser,
+        has_search_term=False
+    )
+    ut.select_from_autocomplete(
+        trait,
+        'race',
+        browser,
+        has_search_term=False
+    )
 
-    assert trait.name.get_attribute('value') == 'Ability Score Increase (Dragonborn)'
-    assert trait.race.get_attribute('value') == 'Dwarf'
+    assert trait.name.get_attribute('value').strip() == 'Ability Score Increase (Dragonborn)'
+    assert trait.race.get_attribute('value').strip() == 'Dwarf'
 
 
 def test_add_trait_open_model_by_row(player_wizard, browser): # noqa
@@ -496,7 +561,12 @@ def test_edit_trait(player_wizard, browser): # noqa
     )
 
     traits_table.add.click()
-    ut.select_from_autocomplete(trait, 'name', '', browser)
+    ut.select_from_autocomplete(
+        trait,
+        'name',
+        browser,
+        has_search_term=False
+    )
     trait.add.click()
 
     WebDriverWait(browser, 10).until(
@@ -527,11 +597,11 @@ def test_edit_trait(player_wizard, browser): # noqa
     trait_edit.max_ = 4
     trait_edit.short_rest.click()
 
-    assert trait_edit.name.get_attribute('value') == 'Edited Name'
-    assert trait_edit.race.get_attribute('value') == 'Edited Race'
-    assert trait_edit.description.get_attribute('value') == 'Edited Description'
-    assert trait_edit.max_.get_attribute('value') == '4'
-    assert 'active' in trait_edit.short_rest.get_attribute('class')
+    assert trait_edit.name.get_attribute('value').strip() == 'Edited Name'
+    assert trait_edit.race.get_attribute('value').strip() == 'Edited Race'
+    assert trait_edit.description.get_attribute('value').strip() == 'Edited Description'
+    assert trait_edit.max_.get_attribute('value').strip() == '4'
+    assert 'active' in trait_edit.short_rest.get_attribute('class').strip()
 
     trait_edit.done.click()
 
@@ -553,8 +623,8 @@ def test_edit_trait(player_wizard, browser): # noqa
 
     row = ut.get_table_row(traits_table, 'table', 1)
 
-    assert row.trait == 'Edited Name'
-    assert row.race == 'Edited Race'
+    assert row.trait.strip() == 'Edited Name'
+    assert row.race.strip() == 'Edited Race'
 
 
 def test_add_proficiency(player_wizard, browser): # noqa
@@ -571,15 +641,15 @@ def test_add_proficiency(player_wizard, browser): # noqa
     proficiency_add.type_ = 'Add Type'
     proficiency_add.description = 'Add Description'
 
-    assert proficiency_add.name.get_attribute('value') == 'Add Name'
-    assert proficiency_add.type_.get_attribute('value') == 'Add Type'
-    assert proficiency_add.description.get_attribute('value') == 'Add Description'
+    assert proficiency_add.name.get_attribute('value').strip() == 'Add Name'
+    assert proficiency_add.type_.get_attribute('value').strip() == 'Add Type'
+    assert proficiency_add.description.get_attribute('value').strip() == 'Add Description'
 
     proficiency_add.add.click()
 
     row = ut.get_table_row(proficiency_table, 'table', 1)
-    assert row.type == 'Add Type'
-    assert row.proficiency == 'Add Name'
+    assert row.type.strip() == 'Add Type'
+    assert row.proficiency.strip() == 'Add Name'
 
 def test_proficiency_ogl_pre_pop(player_wizard, browser): # noqa
     """As a player, if I select from proficiency name field, OGL data auto-completes and the remaining fields pre-populate."""
@@ -591,13 +661,18 @@ def test_proficiency_ogl_pre_pop(player_wizard, browser): # noqa
     tabs.skills.click()
 
     proficiency_table.add.click()
-    ut.select_from_autocomplete(proficiency_add, 'name', '', browser)
+    ut.select_from_autocomplete(
+        proficiency_add,
+        'name',
+        browser,
+        has_search_term=False
+    )
     proficiency_add.add.click()
 
     row = ut.get_table_row(proficiency_table, 'table', 1)
 
-    assert row.type == 'Languages'
-    assert row.proficiency == 'Abyssal'
+    assert row.type.strip() == 'Languages'
+    assert row.proficiency.strip() == 'Abyssal'
 
 def test_delete_proficiency(player_wizard, browser): # noqa
     """As a player, I can delete a proficiency."""
@@ -615,7 +690,12 @@ def test_delete_proficiency(player_wizard, browser): # noqa
     )
 
     proficiency_table.add.click()
-    ut.select_from_autocomplete(proficiency_add, 'name', '', browser)
+    ut.select_from_autocomplete(
+        proficiency_add,
+        'name',
+        browser,
+        has_search_term=False
+    )
     proficiency_add.add.click()
 
     rows = ut.get_table_rows(proficiency_table, 'table', values=False)
@@ -627,7 +707,7 @@ def test_delete_proficiency(player_wizard, browser): # noqa
     rows[0][2].find_element_by_tag_name('a').click()
     rows = ut.get_table_rows(proficiency_table, 'table', values=False)
 
-    assert rows[0][0].text == 'Add a new Proficiency'
+    assert rows[0][0].text.strip() == 'Add a new Proficiency'
 
 def test_autocomplete_proficiency(player_wizard, browser): # noqa
     """As a player, if I start typing in the name field and class field, I can select suggested items in the dropdown."""
@@ -639,11 +719,21 @@ def test_autocomplete_proficiency(player_wizard, browser): # noqa
     tabs.skills.click()
 
     proficiency_table.add.click()
-    ut.select_from_autocomplete(proficiency_add, 'name', '', browser)
-    ut.select_from_autocomplete(proficiency_add, 'type_', '', browser)
+    ut.select_from_autocomplete(
+        proficiency_add,
+        'name',
+        browser,
+        has_search_term=False
+    )
+    ut.select_from_autocomplete(
+        proficiency_add,
+        'type_',
+        browser,
+        has_search_term=False
+    )
 
-    assert proficiency_add.name.get_attribute('value') == 'Abyssal'
-    assert proficiency_add.type_.get_attribute('value') == 'Armor'
+    assert proficiency_add.name.get_attribute('value').strip() == 'Abyssal'
+    assert proficiency_add.type_.get_attribute('value').strip() == 'Armor'
 
 def test_add_proficiency_open_model_by_row(player_wizard, browser): # noqa
     """As a player, I can click the first row in proficiency table to open the proficiency add modal."""
@@ -676,7 +766,12 @@ def test_edit_proficiency(player_wizard, browser): # noqa
     )
 
     proficiency_table.add.click()
-    ut.select_from_autocomplete(proficiency_add, 'name', '', browser)
+    ut.select_from_autocomplete(
+        proficiency_add,
+        'name',
+        browser,
+        has_search_term=False
+    )
     proficiency_add.add.click()
 
     WebDriverWait(browser, 10).until(
@@ -698,9 +793,9 @@ def test_edit_proficiency(player_wizard, browser): # noqa
     proficiency_edit.type_ = 'Edited Type'
     proficiency_edit.description = 'Edited Description'
 
-    assert proficiency_edit.name.get_attribute('value') == 'Edited Name'
-    assert proficiency_edit.type_.get_attribute('value') == 'Edited Type'
-    assert proficiency_edit.description.get_attribute('value') == 'Edited Description'
+    assert proficiency_edit.name.get_attribute('value').strip() == 'Edited Name'
+    assert proficiency_edit.type_.get_attribute('value').strip() == 'Edited Type'
+    assert proficiency_edit.description.get_attribute('value').strip() == 'Edited Description'
 
     proficiency_edit.done.click()
 
@@ -710,8 +805,8 @@ def test_edit_proficiency(player_wizard, browser): # noqa
 
     row = ut.get_table_row(proficiency_table, 'table', 1)
 
-    assert row.proficiency == 'Edited Name'
-    assert row.type == 'Edited Type'
+    assert row.proficiency.strip() == 'Edited Name'
+    assert row.type.strip() == 'Edited Type'
 
 def test_tracked_increase_decrease(player_wizard, browser): # noqa
     """As a player, I can increase or decrease tracked abilities with the stepper widget and the bar reflects these changes."""
@@ -737,11 +832,11 @@ def test_tracked_increase_decrease(player_wizard, browser): # noqa
 
     tracked_table.tracked1_used_up.click()
 
-    assert tracked_table.tracked1_used.text == '1'
+    assert tracked_table.tracked1_used.text.strip() == '1'
 
     tracked_table.tracked1_used_down.click()
 
-    assert tracked_table.tracked1_used.text == '0'
+    assert tracked_table.tracked1_used.text.strip() == '0'
 
 def test_tracked_reset(player_wizard, browser): # noqa
     """As a player, I can reset a tracked ability by clicking on the reset icon."""
@@ -767,11 +862,11 @@ def test_tracked_reset(player_wizard, browser): # noqa
 
     tracked_table.tracked1_used_up.click()
 
-    assert tracked_table.tracked1_used.text == '1'
+    assert tracked_table.tracked1_used.text.strip() == '1'
 
     tracked_table.tracked1_refresh.click()
 
-    assert tracked_table.tracked1_used.text == '0'
+    assert tracked_table.tracked1_used.text.strip() == '0'
 
 def test_proficiency_types(player_wizard, browser): # noqa
     """As a player, I can mark a skill as none, half, proficient, or
@@ -801,6 +896,7 @@ def test_proficiency_types(player_wizard, browser): # noqa
         modal_finished_closing(skills_edit.modal_div_xpath)
     )
 
+    import time; time.sleep(.4)
     acrobatics = ut.get_table_row(skills_table, 'table', values=False)
     spans = acrobatics[0].find_element_by_tag_name('span')
     half = spans.find_element_by_tag_name('span').get_attribute('class')
@@ -817,6 +913,7 @@ def test_proficiency_types(player_wizard, browser): # noqa
     WebDriverWait(browser, 10).until(
         modal_finished_closing(skills_edit.modal_div_xpath)
     )
+    import time; time.sleep(.4)
     acrobatics = ut.get_table_row(skills_table, 'table', values=False)
     spans = acrobatics[0].find_element_by_tag_name('span')
     proficient = spans.find_element_by_tag_name('span').get_attribute('class')
@@ -827,21 +924,22 @@ def test_proficiency_types(player_wizard, browser): # noqa
             (By.XPATH, skills_edit.expertise_xpath)
         )
     )
+
     skills_edit.expertise.click()
     skills_edit.done.click()
 
     WebDriverWait(browser, 10).until(
         modal_finished_closing(skills_edit.modal_div_xpath)
     )
-
+    import time; time.sleep(.4)
     acrobatics = ut.get_table_row(skills_table, 'table', values=False)
     spans = acrobatics[0].find_element_by_tag_name('span')
     expertise = spans.find_element_by_tag_name('span').get_attribute('class')
 
-    assert '' in none
-    assert 'fa fa-adjust' in half
-    assert 'fa fa-check' in proficient
-    assert 'fa fa-check close-check' in expertise
+    assert '' in none.strip()
+    assert 'fa fa-adjust' in half.strip()
+    assert 'fa fa-check' in proficient.strip()
+    assert 'fa fa-check close-check' in expertise.strip()
 
 def test_passive_score(player_wizard, browser): # noqa
     """As a player, I can view my passive score for each skill which is calculated correctly."""
@@ -854,7 +952,7 @@ def test_passive_score(player_wizard, browser): # noqa
 
     acrobatics = ut.get_table_row(skills_table, 'table')
 
-    assert acrobatics.passive == '14'
+    assert acrobatics.passive.strip() == '14'
 
 def test_data_persists(player_wizard, browser): # noqa
     """As a player, all changes I make to features, feats, traits, proficiencies, tracking, and skills persist after I refresh the browser."""
@@ -886,12 +984,17 @@ def test_data_persists(player_wizard, browser): # noqa
 
     feature.add.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, 15).until(
         modal_finished_closing(feature.modal_div_id)
     )
 
     feats_table.add.click()
-    ut.select_from_autocomplete(feat, 'name', '', browser)
+    ut.select_from_autocomplete(
+        feat,
+        'name',
+        browser,
+        has_search_term=False
+    )
     feat.add.click()
 
     WebDriverWait(browser, 10).until(
@@ -899,7 +1002,12 @@ def test_data_persists(player_wizard, browser): # noqa
     )
 
     traits_table.add.click()
-    ut.select_from_autocomplete(trait, 'name', '', browser)
+    ut.select_from_autocomplete(
+        trait,
+        'name',
+        browser,
+        has_search_term=False
+    )
     trait.add.click()
 
     WebDriverWait(browser, 10).until(
@@ -907,7 +1015,12 @@ def test_data_persists(player_wizard, browser): # noqa
     )
 
     proficiency_table.add.click()
-    ut.select_from_autocomplete(proficiency_add, 'name', '', browser)
+    ut.select_from_autocomplete(
+        proficiency_add,
+        'name',
+        browser,
+        has_search_term=False
+    )
     proficiency_add.add.click()
 
     WebDriverWait(browser, 10).until(
@@ -934,21 +1047,21 @@ def test_data_persists(player_wizard, browser): # noqa
 
     row = ut.get_table_row(features_table, 'table', 1)
 
-    assert tracked_table.tracked1_name.text == 'Add Name'
-    assert tracked_table.tracked1_max.text == '4'
-    assert row.class_ == 'Add Class'
-    assert row.feature == 'Add Name'
+    assert tracked_table.tracked1_name.text.strip() == 'Add Name'
+    assert tracked_table.tracked1_max.text.strip() == '4'
+    assert row.class_.strip() == 'Add Class'
+    assert row.feature.strip() == 'Add Name'
 
     row = ut.get_table_row(feats_table, 'table', 1)
 
-    assert row.feat == 'Grappler'
+    assert row.feat.strip() == 'Grappler'
 
     row = ut.get_table_row(traits_table, 'table', 1)
 
-    assert row.race == 'Dragonborn'
-    assert row.trait == 'Ability Score Increase'
+    assert row.race.strip() == 'Dragonborn'
+    assert row.trait.strip() == 'Ability Score Increase'
 
     row = ut.get_table_row(proficiency_table, 'table', 1)
 
-    assert row.type == 'Languages'
-    assert row.proficiency == 'Abyssal'
+    assert row.type.strip() == 'Languages'
+    assert row.proficiency.strip() == 'Abyssal'

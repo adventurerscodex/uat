@@ -12,9 +12,9 @@ def test_screen(dm_wizard, browser): # noqa
     tabs = DMTabs(browser)
     tabs.screen.click()
 
-    assert 'Cover' in screen.cover_heading.text
-    assert 'Travel' in screen.travel_pace_heading.text
-    assert 'Conditions' in screen.conditions_heading.text
-    assert 'Light' in screen.light_heading.text
-    assert 'Difficulty' in screen.difficulty_classes_heading.text
-    assert 'Exhaustion' in screen.exhaustion_heading.text
+    assert 'Cover' in screen.cover_heading.text.strip()
+    assert 'Travel' in screen.travel_pace_heading.text.strip()
+    assert 'Conditions' in screen.conditions_heading.text.strip()
+    assert 'Light' in screen.light_heading.text.strip()
+    assert 'Difficulty' in screen.difficulty_classes_heading.text.strip()
+    assert 'Exhaustion' in screen.exhaustion_heading.text.strip()
