@@ -6,7 +6,7 @@ from factories.fixtures import Fixtures
 
 
 class MagicItem:
-    """Definition of weapon model."""
+    """Definition of magic item model."""
 
     def __init__(
         self,
