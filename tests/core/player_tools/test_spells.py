@@ -226,6 +226,10 @@ def test_preview_spells(player_wizard, browser): # noqa
     )
     spells_add.add.click()
 
+    WebDriverWait(browser, 10).until(
+        modal_finished_closing(spells_add.modal_div_id)
+    )
+
     row = ut.get_table_row(spells_table, 'table', values=False)
     row[1].click()
 

@@ -78,6 +78,7 @@ class SpellStatsEditModal(Component):
 class SpellsAddModal(Component):
     """Definition of Spells add modal component."""
 
+    modal_div_id = 'addSpell'
     name_id = 'spellsAddNameInput'
     prepared_id = 'spellsAddPreparedCheckbox'
     always_prepared_id = 'spellsAddAlwaysPreparedCheckbox'
@@ -118,6 +119,7 @@ class SpellsAddModal(Component):
 class SpellsEditModal(Component):
     """Definition of spells edit modal component."""
 
+    modal_div_id = 'viewSpell'
     name_id = 'spellsEditNameInput'
     prepared_id = 'spellsEditPreparedCheckbox'
     always_prepared_id = 'spellsEditAlwaysPreparedCheckbox'
@@ -125,7 +127,7 @@ class SpellsEditModal(Component):
     level_id = 'spellsEditLevelInput'
     school_id = 'spellsEditSchoolInput'
     type_id = 'spellsEditTypeInput'
-    save_attr_id = 'spellsAddSaveAttrInput'
+    save_attr_id = 'spellsEditSaveAttrInput'
     damage_id = 'spellsEditDamageInput'
     cast_time_id = 'spellsEditCastTimeInput'
     range_id = 'spellsEditRangeInput'
@@ -133,6 +135,7 @@ class SpellsEditModal(Component):
     material_components_id = 'spellsEditMaterialComponentsInput'
     duration_id = 'spellsEditDurationInput'
     description_id = 'spellsEditDescriptionTextarea'
+    done_id = 'spellsPreviewDoneButton'
 
     name = Element(id_=name_id)
     prepared = Element(id_=prepared_id)
@@ -140,7 +143,7 @@ class SpellsEditModal(Component):
     ritual = Element(id_=ritual_id)
     level = Element(id_=level_id)
     school = Element(id_=school_id)
-    type_ = Element(id_=save_attr_id)
+    type_ = Element(id_=type_id)
     save_attr = Element(id_=save_attr_id)
     damage = Element(id_=damage_id)
     cast_time = Element(id_=cast_time_id)
@@ -149,6 +152,7 @@ class SpellsEditModal(Component):
     material_components = Element(id_=material_components_id)
     duration = Element(id_=duration_id)
     description = Element(id_=description_id)
+    done = Element(id_=done_id)
 
 
 class SpellsPreviewModal(Component):
@@ -160,7 +164,7 @@ class SpellsPreviewModal(Component):
     damage_id = 'spellsPreviewDamageLabel'
     cast_time_id = 'spellsPreviewCastTimeLabel'
     range_id = 'spellsPreviewRangeLabel'
-    components_id = 'spellsPreviewComponentsLabel'
+    components_id = 'spellsPreviewCompenentsLabel'
     duration_id = 'spellsPreviewDurationLabel'
     description_id = 'spellsPreviewDescriptionLabel'
     done_id = 'spellsPreviewDoneButton'
