@@ -72,7 +72,7 @@ def test_google_plus_link(player_wizard, browser): # noqa
 
     WebDriverWait(browser, 10).until(
         EC.element_to_be_clickable(
-            (By.ID, footer.google_id)
+            (By.ID, footer.google_plus_id)
         )
     )
     footer.google_plus.click()
