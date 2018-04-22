@@ -11,6 +11,14 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 from utils import utils as ut
 
+
+def _find_element(driver, by):
+    """Get element."""
+    try:
+        return driver.find_element(*by)
+    except NoSuchElementException:
+        return False
+
 class url_in_new_tab_matches:  # noqa
     """Wait until new tab contains redirected url."""
 
@@ -118,23 +126,9 @@ class modal_finished_closing: # noqa
 
     def __call__(self, driver):
         """Test if modal has closed."""
-        # Required for Firefox
-        try:
-            WebDriverWait(driver, 10).until(
-                EC.invisibility_of_element_located(
-                    (By.CLASS_NAME, 'modal-backdrop fade')
-                )
-            )
-        except NoSuchElementException:
-            pass
+        element = _find_element(driver, (By.CSS_SELECTOR, '.modal-backdrop.fade'))
 
-        try:
-            WebDriverWait(driver, 10).until(
-                EC.invisibility_of_element_located(
-                    (By.ID, self.element_id)
-                )
-            )
-        except NoSuchElementException:
-            pass
+        if not element:
+            return True
 
-        return True
+        return False
