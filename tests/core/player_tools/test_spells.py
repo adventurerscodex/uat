@@ -104,7 +104,7 @@ def test_delete_spells(player_wizard, browser): # noqa
     rows[0][7].find_element_by_tag_name('a').click()
     rows = ut.get_table_rows(spells_table, 'table', values=False)
 
-    assert rows[0][0].text == 'Add a new spell'
+    assert rows[0][0].text.strip() == 'Add a new spell'
 
 def test_edit_spells(player_wizard, browser): # noqa
     """As a player, I can edit a spells."""
