@@ -8,7 +8,7 @@ from components.core.character import inventory, coins, magic_items
 from components.core.character.tabs import Tabs
 from expected_conditions.conditions import modal_finished_closing
 from expected_conditions.conditions import sorting_arrow_up, sorting_arrow_down
-from utils import utils as ut
+from utils import general as ut
 
 def test_add_inventory(player_wizard, browser): # noqa
     """As a player, I can add an item to my inventory."""

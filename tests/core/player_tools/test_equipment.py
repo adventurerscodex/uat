@@ -10,7 +10,7 @@ from expected_conditions.conditions import modal_finished_closing
 from expected_conditions.conditions import sorting_arrow_up, sorting_arrow_down
 from expected_conditions.conditions import table_cell_updated
 from factories.core.character.armor import ArmorFactory
-from utils import utils as ut
+from utils import general as ut
 
 
 def test_add_weapon(player_wizard, browser): # noqa
