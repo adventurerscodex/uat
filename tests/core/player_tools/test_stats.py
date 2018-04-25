@@ -11,7 +11,7 @@ from components.core.character.profile_picture import ProfilePicture
 from components.core.character.saving_throw import SavingThrowEditModal, SavingThrowTable
 from expected_conditions.conditions import table_cell_updated
 from expected_conditions.conditions import modal_finished_closing
-from utils import utils as ut
+from utils import general as ut
 
 def test_data_persists(player_wizard, browser): # noqa
     """As a player, all changes I make to hit points, hit dice, ability scores, savings throws, and other stats persist after I refresh the browser."""

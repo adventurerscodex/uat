@@ -10,7 +10,7 @@ from components.core.character.tabs import Tabs
 from expected_conditions.conditions import modal_finished_closing
 from expected_conditions.conditions import sorting_arrow_up, sorting_arrow_down
 from expected_conditions.conditions import table_cell_updated
-from utils import utils as ut
+from utils import general as ut
 
 
 def test_add_feature(player_wizard, browser): # noqa
