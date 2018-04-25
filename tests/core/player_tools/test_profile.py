@@ -5,7 +5,7 @@ from components.core.character.appearance import Appearance
 from components.core.character.background import Background
 from components.core.character.profile import Profile
 from components.core.character.tabs import Tabs
-from utils import utils as ut
+from utils import general as ut
 
 
 def test_profile_persists(player_wizard, browser):

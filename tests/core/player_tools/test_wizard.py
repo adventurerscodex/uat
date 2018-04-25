@@ -14,7 +14,7 @@ from components.core.character.tabs import Tabs
 from components.core.character.profile import Profile
 from components.core.character.other_stats import OtherStats
 from expected_conditions.conditions import table_has_data
-from utils import utils as ut
+from utils import general as ut
 
 
 def test_player_wizard(browser):

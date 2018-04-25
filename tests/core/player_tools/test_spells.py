@@ -7,7 +7,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from components.core.character import spells
 from components.core.character.tabs import Tabs
 from expected_conditions.conditions import modal_finished_closing
-from utils import utils as ut
+from utils import general as ut
 
 def test_add_spells(player_wizard, browser): # noqa
     """As a player, I can add a spells."""
