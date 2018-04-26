@@ -1,3 +1,13 @@
+<div style="background-color:#2c3e50;">
+<h1 style="text-align: center; margin-top: 0.0em; margin-bottom: 0.5em; padding-bottom:0.3em; font-size: 29px; font-family: HelveticaNeue-Bold; page-break-inside: avoid; page-break-after: avoid; color: rgb(51, 51, 51); font-style: normal; color:white;">
+<center><img class="tl-email-image" data-id="455053" height="100" src="https://adventurerscodex.com/images/logo-full-circle.png" style="padding-top: 10px; width: 100px; max-width: 100px;" width="100" /></center>
+Welcome to Adventurer&rsquo;s&nbsp;Codex</h1>
+</div>
+
+[![Build Status](https://travis-ci.org/adventurerscodex/uat.svg?branch=master)](https://travis-ci.org/adventurerscodex/uat)
+
+Experience the next step in tabletop RPGs
+
 What is it?
 ===========
 This is the Adventurer's Codex testing framework for UAT tests.
