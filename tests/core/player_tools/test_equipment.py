@@ -775,7 +775,9 @@ def test_add_armor(player_wizard, browser): # noqa
     assert armor_add.type_.get_attribute('value').strip() == stub.type_
     assert int(armor_add.magical_modifier.get_attribute('value').strip()) == stub.magical_modifier
     assert int(armor_add.price.get_attribute('value').strip()) == stub.price
-    assert armor_add.currency_denomination.get_attribute('value').strip() == stub.currency_denomination
+
+    curr_denomination = stub.currency_denomination
+    assert armor_add.currency_denomination.get_attribute('value').strip() == curr_denomination
     assert int(armor_add.weight.get_attribute('value').strip()) == stub.weight
     assert int(armor_add.armor_class.get_attribute('value').strip()) == stub.armor_class
     assert armor_add.stealth.get_attribute('value').strip() == stub.stealth
@@ -885,7 +887,9 @@ def test_edit_armor(player_wizard, browser): # noqa
     assert armor_edit.type_.get_attribute('value').strip() == stub.type_
     assert int(armor_edit.magical_modifier.get_attribute('value').strip()) == stub.magical_modifier
     assert int(armor_edit.price.get_attribute('value').strip()) == stub.price
-    assert armor_edit.currency_denomination.get_attribute('value').strip() == stub.currency_denomination
+
+    curr_denomination = stub.currency_denomination
+    assert armor_edit.currency_denomination.get_attribute('value').strip() == curr_denomination
     assert int(armor_edit.weight.get_attribute('value').strip()) == stub.weight
     assert int(armor_edit.armor_class.get_attribute('value').strip()) == stub.armor_class
     assert armor_edit.stealth.get_attribute('value').strip() == stub.stealth

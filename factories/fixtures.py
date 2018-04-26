@@ -301,8 +301,10 @@ Fixtures = {
         ]
     },
     'resting': {
-        'shortRestMessage': 'Your relevant Spell Slots, Tracked Features, Feats, and Traits have been restored.',
-        'longRestMessage': 'Your Hit Dice, Spell Slots, Hit Points, Tracked Features, Feats, and Traits have been restored.',
+        'shortRestMessage': ('Your relevant Spell Slots, Tracked Features, Feats, and Traits '
+                             'have been restored.'),
+        'longRestMessage': ('Your Hit Dice, Spell Slots, Hit Points, Tracked Features, Feats, '
+                            'and Traits have been restored.'),
         'shortRestEnum': 'short',
         'longRestEnum': 'long'
     },
@@ -337,4 +339,4 @@ Fixtures = {
             'Scholar\'s  Pack'
         ]
     }
-};
+}

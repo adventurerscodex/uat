@@ -41,10 +41,14 @@ class SkillsEditModal(Component):
     modal_div_xpath = '//*[@id="skills"]/div[3]/div[1]/skills/div[2]'
     modifer_id = 'skillsEditNameInput'
     none_id = 'skillsEditNoneButton'
-    half_xpath = '//*[@id="skills"]/div[3]/div[1]/skills/div[2]/div/div/div[2]/form/div[2]/div/div/label[2]'
-    proficient_xpath = '//*[@id="skills"]/div[3]/div[1]/skills/div[2]/div/div/div[2]/form/div[2]/div/div/label[3]'
-    expertise_xpath = '//*[@id="skills"]/div[3]/div[1]/skills/div[2]/div/div/div[2]/form/div[2]/div/div/label[4]'
-    done_xpath = '//*[@id="skills"]/div[3]/div[1]/skills/div[2]/div/div/div[3]/button'
+    half_xpath = ('//*[@id="skills"]/div[3]/div[1]/skills/div[2]/div/div/div'
+                  '[2]/form/div[2]/div/div/label[2]')
+    proficient_xpath = ('//*[@id="skills"]/div[3]/div[1]/skills/div[2]/div/div'
+                        '/div[2]/form/div[2]/div/div/label[3]')
+    expertise_xpath = ('//*[@id="skills"]/div[3]/div[1]/skills/div[2]/div/div/'
+                       'div[2]/form/div[2]/div/div/label[4]')
+    done_xpath = ('//*[@id="skills"]/div[3]/div[1]/skills/div[2]/div/div/'
+                  'div[3]/button')
 
     modal_div = Element(xpath=modal_div_xpath)
     modifer = Element(id_=modifer_id)

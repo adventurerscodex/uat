@@ -1,6 +1,5 @@
 """Class defintition of Elements."""
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC # noqa
 
@@ -55,7 +54,7 @@ class Element:
         # TODO: this is a workaround for firefox
         try:
             element.clear()
-        except:
+        except: # noqa
             pass
 
         element.send_keys(value)

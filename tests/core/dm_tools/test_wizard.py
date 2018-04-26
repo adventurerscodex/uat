@@ -1,9 +1,7 @@
 """UAT test file for Adventurer's Codex core dm tools."""
 
 from components.core.general.new_character_campaign import NewCharacterCampaign
-from components.core.character import wizard
 from components.core.dm.wizard import TellUsAStory
-from utils import general as ut
 
 
 def test_dm_wizard(browser):

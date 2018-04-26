@@ -203,7 +203,8 @@ def test_edit_spells(player_wizard, browser): # noqa
 
 def test_preview_spells(player_wizard, browser): # noqa
     """As a player, I can select a row in the spells table and view the item in the preview tab."""
-    print('As a player, I can select a row in the spells table and view the item in the preview tab')
+    print(('As a player, I can select a row in the spells table and view the item in the '
+           'preview tab'))
 
     spells_add = spells.SpellsAddModal(browser)
     spells_table = spells.SpellsTable(browser)
