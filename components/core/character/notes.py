@@ -22,13 +22,18 @@ class NotesList(Component):
 class NotesDetail(Component):
     """Definition of notes detail component."""
 
-    preview_tab_xpath = '//*[@id="notes"]/div/div/notes/div/div[2]/div/div/div/div/markdown-edit-preview/ul/li[1]'
-    preview_textarea_xpath = '//*[@id="notes"]/div/div/notes/div/div[2]/div/div/div/div/markdown-edit-preview/div/div[1]/div/div/div'
+    preview_tab_xpath = ('//*[@id="notes"]/div/div/notes/div/div[2]/div/div/div/div/'
+                         'markdown-edit-preview/ul/li[1]')
+    preview_textarea_xpath = ('//*[@id="notes"]/div/div/notes/div/div[2]/div/div/div/div/'
+                              'markdown-edit-preview/div/div[1]/div/div/div')
     no_notes_text_xpath = '//*[@id="notes"]/div/div/notes/div/div[2]/div/p'
     add_xpath = '//*[@id="notes"]/div/div/notes/div/div[2]/div'
-    edit_tab_xpath = '//*[@id="notes"]/div/div/notes/div/div[2]/div/div/div/div/markdown-edit-preview/ul/li[2]'
-    edit_textarea_xpath = '//*[@id="notes"]/div/div/notes/div/div[2]/div/div/div/div/markdown-edit-preview/div/div[2]/div/textarea'
-    markdown_cheatcheat_xpath = '//*[@id="notes"]/div/div/notes/div/div[2]/div/div/div/div/markdown-edit-preview/div/small/a'
+    edit_tab_xpath = ('//*[@id="notes"]/div/div/notes/div/div[2]/div/div/div/div/'
+                      'markdown-edit-preview/ul/li[2]')
+    edit_textarea_xpath = ('//*[@id="notes"]/div/div/notes/div/div[2]/div/div/div/div/'
+                           'markdown-edit-preview/div/div[2]/div/textarea')
+    markdown_cheatcheat_xpath = ('//*[@id="notes"]/div/div/notes/div/div[2]/div/div/div/div/'
+                                 'markdown-edit-preview/div/small/a')
 
     preview_tab = Element(xpath=preview_tab_xpath)
     preview_textarea = Element(xpath=preview_textarea_xpath)

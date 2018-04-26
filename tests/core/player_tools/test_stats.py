@@ -5,7 +5,7 @@ from selenium.webdriver.support import expected_conditions as EC # noqa
 from selenium.webdriver.support.ui import WebDriverWait
 
 from components.core.character.ability_scores import AbilityScoresEditModal, AbilityScoresTable
-from components.core.character.health import HitPointHitDice, HitPointEditModal
+from components.core.character.health import HitPointHitDice
 from components.core.character.other_stats import OtherStats
 from components.core.character.profile_picture import ProfilePicture
 from components.core.character.saving_throw import SavingThrowEditModal, SavingThrowTable
@@ -14,9 +14,12 @@ from expected_conditions.conditions import modal_finished_closing
 from utils import general as ut
 
 def test_data_persists(player_wizard, browser): # noqa
-    """As a player, all changes I make to hit points, hit dice, ability scores, savings throws, and other stats persist after I refresh the browser."""
+    """As a player, all changes I make to hit points, hit dice, ability scores,
+       savings throws, and other stats persist after I refresh the browser."""
 
-    print('As a player, all changes I make to hit points, hit dice, ability scores, savings throws, and other stats persist after I refresh the browser.')
+    print(('As a player, all changes I make to hit points, hit dice, ability '
+           'scores, savings throws, and other stats persist after I refresh '
+           ' the browser.'))
 
     ability_scores_edit = AbilityScoresEditModal(browser)
     ability_scores_table = AbilityScoresTable(browser)
@@ -180,8 +183,10 @@ def test_ability_scores_persist(player_wizard, browser): # noqa
     assert ability_scores_table.charisma.text.strip() == '14'
 
 def test_hp_stepper(player_wizard, browser): # noqa
-    """As a player, I can increase or decrease my hit points via the stepper widget."""
-    print('As a player, I can increase or decrease my hit points via the stepper widget.')
+    """As a player, I can increase or decrease my hit points via the stepper
+       widget."""
+    print(('As a player, I can increase or decrease my hit points via the '
+           'stepper widget.'))
 
     hp_hd = HitPointHitDice(browser)
 
@@ -210,7 +215,8 @@ def test_hp_reset(player_wizard, browser): # noqa
 def test_hit_dice_clickable(player_wizard, browser): # noqa
     """As a player, hit dice are clickable and images change when clicked."""
 
-    print('As a player, hit dice are clickable and images change when clicked.')
+    print(('As a player, hit dice are clickable and images change when '
+           'clicked.'))
 
     hp_hd = HitPointHitDice(browser)
 
@@ -221,9 +227,11 @@ def test_hit_dice_clickable(player_wizard, browser): # noqa
     assert hp_hd.hitdice1.get_attribute('class').strip() == 'dice-empty'
 
 def test_hit_dice_persists(player_wizard, browser): # noqa
-    """As a player, if I click on a hit die, the changes persist after I refresh the browser."""
+    """As a player, if I click on a hit die, the changes persist after I
+       refresh the browser."""
 
-    print('As a player, if I click on a hit die, the changes persist after I refresh the browser.')
+    print(('As a player, if I click on a hit die, the changes persist after I '
+           'refresh the browser.'))
 
     hp_hd = HitPointHitDice(browser)
     hp_hd.hitdice1.click()
@@ -235,9 +243,11 @@ def test_hit_dice_persists(player_wizard, browser): # noqa
     assert hp_hd.hitdice1.get_attribute('class').strip() == 'dice-empty'
 
 def test_hit_dice_level(player_wizard, browser): # noqa
-    """As a player, if I change the value in the level field, the number of hit dice match the level number."""
+    """As a player, if I change the value in the level field, the number of
+       hit dice match the level number."""
 
-    print('As a player, if I change the value in the level field, the number of hit dice match the level number.')
+    print(('As a player, if I change the value in the level field, the number '
+           'of hit dice match the level number.'))
 
     hp_hd = HitPointHitDice(browser)
     other_stats = OtherStats(browser)
@@ -250,9 +260,11 @@ def test_hit_dice_level(player_wizard, browser): # noqa
     assert hit_dice_count == 3
 
 def test_death_saves_clickable(player_wizard, browser): # noqa
-    """As a player, death save successes and failures are clickable and images change when clicked."""
+    """As a player, death save successes and failures are clickable and images
+       change when clicked."""
 
-    print('As a player, death save successes and failures are clickable and images change when clicked.')
+    print(('As a player, death save successes and failures are clickable and '
+           'images change when clicked.'))
 
     hp_hd = HitPointHitDice(browser)
 
@@ -272,7 +284,8 @@ def test_death_saves_clickable(player_wizard, browser): # noqa
 def test_death_saves_persist(player_wizard, browser): # noqa
     """As a player, death save changes persist after I refresh the browser."""
 
-    print('As a player, death save changes persist after I refresh the browser.')
+    print(('As a player, death save changes persist after I refresh the '
+           'browser.'))
 
     hp_hd = HitPointHitDice(browser)
 
@@ -292,9 +305,11 @@ def test_death_saves_persist(player_wizard, browser): # noqa
     assert len(hp_hd.death_failures_empty) == 2
 
 def test_character_stable_alert(player_wizard, browser): # noqa
-    """If 3 death save success are clicked, an alert indicating the player is stable is presented."""
+    """If 3 death save success are clicked, an alert indicating the player is
+       stable is presented."""
 
-    print('If 3 death save success are clicked, an alert indicating the player is stable is presented.')
+    print(('If 3 death save success are clicked, an alert indicating the '
+           'player is stable is presented.'))
 
     hp_hd = HitPointHitDice(browser)
 
@@ -311,9 +326,11 @@ def test_character_stable_alert(player_wizard, browser): # noqa
     assert hp_hd.toast_message.text.strip() == 'You have been spared...for now.'
 
 def test_character_dead_alert(player_wizard, browser): # noqa
-    """If 3 death save success are clicked, an alert indicating the player is dead is presented."""
+    """If 3 death save success are clicked, an alert indicating the player is
+       dead is presented."""
 
-    print('If 3 death save success are clicked, an alert indicating the player is dead is presented.')
+    print(('If 3 death save success are clicked, an alert indicating the '
+           'player is dead is presented.'))
 
     hp_hd = HitPointHitDice(browser)
 
@@ -338,8 +355,10 @@ def test_initiative_calculation(player_wizard, browser): # noqa
     assert other_stats.initiative.text.strip() == '4'
 
 def test_initiative_modifier(player_wizard, browser): # noqa
-    """As a player, I can increase or decrease my calculated initiative via a modifier field and this is reflected in the label."""
-    print('As a player, I can increase or decrease my calculated initiative via a modifier field and this is reflected in the label.')
+    """As a player, I can increase or decrease my calculated initiative via a
+       modifier field and this is reflected in the label."""
+    print(('As a player, I can increase or decrease my calculated initiative '
+           'via a modifier field and this is reflected in the label.'))
 
     other_stats = OtherStats(browser)
 
@@ -354,8 +373,10 @@ def test_initiative_modifier(player_wizard, browser): # noqa
     assert other_stats.initiative.text.strip() == '3'
 
 def test_initiative_popover(player_wizard, browser): # noqa
-    """As a player, I can can click on a popover showing the calculation for Initiative."""
-    print('As a player, I can can click on a popover showing the calculation for Initiative.')
+    """As a player, I can can click on a popover showing the calculation
+       for Initiative."""
+    print(('As a player, I can can click on a popover showing the calculation '
+           'for Initiative.'))
 
     other_stats = OtherStats(browser)
 
@@ -379,8 +400,10 @@ def test_proficieny_bonus_calculation(player_wizard, browser): # noqa
     assert other_stats.proficiency_bonus.text.strip() == '3'
 
 def test_proficiency_modifier(player_wizard, browser): # noqa
-    """As a player, I can increase or decrease my calculated proficiency via a modifier field and this is reflected in the label."""
-    print('As a player, I can increase or decrease my calculated proficiency via a modifier field and this is reflected in the label.')
+    """As a player, I can increase or decrease my calculated proficiency via
+       a modifier field and this is reflected in the label."""
+    print(('As a player, I can increase or decrease my calculated proficiency '
+           'via a modifier field and this is reflected in the label.'))
 
     other_stats = OtherStats(browser)
 
@@ -393,8 +416,10 @@ def test_proficiency_modifier(player_wizard, browser): # noqa
     assert other_stats.proficiency_bonus.text.strip() == '4'
 
 def test_proficiency_popover(player_wizard, browser): # noqa
-    """As a player, I can can click on a popover showing the calculation for Proficiency Bonus."""
-    print('As a player, I can can click on a popover showing the calculation for Proficiency Bonus.')
+    """As a player, I can can click on a popover showing the calculation for
+       Proficiency Bonus."""
+    print(('As a player, I can can click on a popover showing the calculation '
+           'for Proficiency Bonus.'))
 
     other_stats = OtherStats(browser)
 
@@ -407,8 +432,10 @@ def test_proficiency_popover(player_wizard, browser): # noqa
     assert popover == 'Proficiency = (Level / 4) + 1 + ModifierProficiency = 1 + 1 + 0'
 
 def test_inpiration_blue_circle(player_wizard, browser): # noqa
-    """As a player, if I am inspired, there should be a blue circle around my profice pic."""
-    print('As a player, if I am inspired, there should be a blue circle around my profice pic.')
+    """As a player, if I am inspired, there should be a blue circle around my
+       profice pic."""
+    print(('As a player, if I am inspired, there should be a blue circle '
+           'around my profice pic.'))
 
     other_stats = OtherStats(browser)
     profile_pic = ProfilePicture(browser)
@@ -419,12 +446,15 @@ def test_inpiration_blue_circle(player_wizard, browser): # noqa
     assert 'image-border-inspired' in profile_pic.profile_pic_border.get_attribute('class').strip()
 
 def test_health_bar_changes_color(player_wizard, browser): # noqa
-    """As a player, I can see the hit points bar change colors at certain intervals as hit points decrease."""
-    print('As a player, I can see the hit points bar change colors at certain intervals as hit points decrease.')
+    """As a player, I can see the hit points bar change colors at certain
+       intervals as hit points decrease."""
+    print(('As a player, I can see the hit points bar change colors at '
+           'certain intervals as hit points decrease.'))
 
     health = HitPointHitDice(browser)
 
-    assert 'progress-bar-danger' not in health.hit_points_bar_regular_hp.get_attribute('class').strip()
+    hp_bar_class = health.hit_points_bar_regular_hp.get_attribute('class').strip()
+    assert 'progress-bar-danger' not in hp_bar_class
 
     health.damage_up.click()
     health.damage_up.click()
@@ -439,8 +469,10 @@ def test_health_bar_changes_color(player_wizard, browser): # noqa
     assert 'progress-bar-danger' in health.hit_points_bar_regular_hp.get_attribute('class').strip()
 
 def test_ac_modifier(player_wizard, browser): # noqa
-    """As a player, I can increase or decrease my calculated armor class via a modifier field and this is reflected in the label."""
-    print('As a player, I can increase or decrease my calculated armor class via a modifier field and this is reflected in the label.')
+    """As a player, I can increase or decrease my calculated armor class via
+       a modifier field and this is reflected in the label."""
+    print(('As a player, I can increase or decrease my calculated armor class '
+           'via a modifier field and this is reflected in the label.'))
 
     other_stats = OtherStats(browser)
 
@@ -450,8 +482,10 @@ def test_ac_modifier(player_wizard, browser): # noqa
     assert other_stats.ac.text.strip() == '15'
 
 def test_ac_popover(player_wizard, browser): # noqa
-    """As a player, I can can click on a popover showing the calculation for Armor Class."""
-    print('As a player, I can can click on a popover showing the calculation for Armor Class.')
+    """As a player, I can can click on a popover showing the calculation for
+       Armor Class."""
+    print(('As a player, I can can click on a popover showing the calculation '
+           'for Armor Class.'))
 
     other_stats = OtherStats(browser)
 
@@ -461,11 +495,14 @@ def test_ac_popover(player_wizard, browser): # noqa
     popover = other_stats.proficiency_popover_content.text.strip()
     popover = popover.replace('\n', '')
 
-    assert popover == 'Armor Class = Base AC + Dexterity Modifier + Magical Modifier(s) + Shield + ModifierArmor Class = 10 + 4 + 0 + 0 + 0'
+    assert popover == ('Armor Class = Base AC + Dexterity Modifier + Magical Modifier(s) + '
+                       'Shield + ModifierArmor Class = 10 + 4 + 0 + 0 + 0')
 
 def test_saving_throw_proficiency(player_wizard, browser): # noqa
-    """As a player, I can select to become proficient in a savings throw, and this can be viewed in the table via in icon."""
-    print('As a player, I can select to become proficient in a savings throw, and this can be viewed in the table via in icon.')
+    """As a player, I can select to become proficient in a savings throw, and
+       this can be viewed in the table via in icon."""
+    print(('As a player, I can select to become proficient in a savings throw, '
+           'and this can be viewed in the table via in icon.'))
 
     saving_throw = SavingThrowTable(browser)
     saving_throw_edit = SavingThrowEditModal(browser)
@@ -494,8 +531,10 @@ def test_saving_throw_proficiency(player_wizard, browser): # noqa
     assert span[0].get_attribute('class').strip() == 'fa fa-check'
 
 def test_saving_throw_modifier(player_wizard, browser): # noqa
-    """As a player, I can increase or decrease my savings throws via a modifier field"""
-    print('As a player, I can increase or decrease my savings throws via a modifier field.')
+    """As a player, I can increase or decrease my savings throws via a modifier
+       field"""
+    print(('As a player, I can increase or decrease my savings throws via a '
+           'modifier field.'))
 
     saving_throw = SavingThrowTable(browser)
     saving_throw_edit = SavingThrowEditModal(browser)

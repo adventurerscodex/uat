@@ -1,17 +1,12 @@
 """UAT test file for Adventurer's Codex player tools calculations."""
-import time
-
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC # noqa
 from selenium.webdriver.support.ui import WebDriverWait
 
-from components.core.character.ability_scores import AbilityScoresEditModal, AbilityScoresTable
-from components.core.character.health import HitPointHitDice, HitPointEditModal
+from components.core.character.ability_scores import AbilityScoresEditModal
+from components.core.character.ability_scores import AbilityScoresTable
 from components.core.character.hud import HUD
 from components.core.character.other_stats import OtherStats
-from components.core.character.profile_picture import ProfilePicture
-from components.core.character.saving_throw import SavingThrowEditModal, SavingThrowTable
+from components.core.character.saving_throw import SavingThrowTable
 from components.core.character.skills import SkillsTable
 from components.core.character.weapon import WeaponTable, WeaponAddModal
 from components.core.character.tabs import Tabs
@@ -19,9 +14,11 @@ from expected_conditions.conditions import table_cell_updated
 from utils import general as ut
 
 def test_strength_increase(player_wizard, browser): # noqa
-    """When strength is increased or decreased, relevant skills, savings throws, to hit, and encumbrance reflect the change."""
+    """When strength is increased or decreased, relevant skills, savings
+       throws, to hit, and encumbrance reflect the change."""
 
-    print('When strength is increased or decreased, relevant skills, savings throws, to hit, and encumbrance reflect the change.')
+    print(('When strength is increased or decreased, relevant skills, savings '
+           'throws, to hit, and encumbrance reflect the change.'))
 
     saving_throw = SavingThrowTable(browser)
     skills = SkillsTable(browser)
@@ -76,9 +73,12 @@ def test_strength_increase(player_wizard, browser): # noqa
 
 
 def test_dexterity_increase(player_wizard, browser): # noqa
-    """When dexterity is increased or decreased, relevant skills, savings throws, initiative, and to hit (finesse weapons) reflect the change."""
+    """When dexterity is increased or decreased, relevant skills, savings
+       throws, initiative, and to hit (finesse weapons) reflect the change."""
 
-    print('When dexterity is increased or decreased, relevant skills, savings throws, initiative, and to hit (finesse weapons) reflect the change.')
+    print(('When dexterity is increased or decreased, relevant skills, '
+           'savings throws, initiative, and to hit (finesse weapons) reflect '
+           'the change.'))
 
     saving_throw = SavingThrowTable(browser)
     skills = SkillsTable(browser)
@@ -138,9 +138,11 @@ def test_dexterity_increase(player_wizard, browser): # noqa
     assert stealth.blank2.strip() == '+ 2 (Dex)'
 
 def test_constitution_increase(player_wizard, browser): # noqa
-    """When constitution is increased or decreased, relevant skills reflect the change."""
+    """When constitution is increased or decreased, relevant skills reflect
+       the change."""
 
-    print('When constitution is increased or decreased, relevant skills reflect the change.')
+    print(('When constitution is increased or decreased, relevant skills '
+           'reflect the change.'))
 
     saving_throw = SavingThrowTable(browser)
     ability_scores_table = AbilityScoresTable(browser)
@@ -165,9 +167,11 @@ def test_constitution_increase(player_wizard, browser): # noqa
     assert constitution.blank2.strip() == '+ 2'
 
 def test_intelligence_increase(player_wizard, browser): # noqa
-    """When intelligence is increased or decreased, relevant skills reflect the change."""
+    """When intelligence is increased or decreased, relevant skills reflect
+       the change."""
 
-    print('When intelligence is increased or decreased, relevant skills reflect the change.')
+    print(('When intelligence is increased or decreased, relevant skills '
+           'reflect the change.'))
 
     saving_throw = SavingThrowTable(browser)
     skills = SkillsTable(browser)
@@ -207,9 +211,11 @@ def test_intelligence_increase(player_wizard, browser): # noqa
     assert religion.blank2.strip() == '+ 2 (Int)'
 
 def test_wisdom_increase(player_wizard, browser): # noqa
-    """When wisdom is increased or decreased, relevant skills and savings throws reflect the change."""
+    """When wisdom is increased or decreased, relevant skills and savings
+       throws reflect the change."""
 
-    print('When wisdom is increased or decreased, relevant skills and savings throws reflect the change.')
+    print(('When wisdom is increased or decreased, relevant skills and '
+           'savings throws reflect the change.'))
 
     saving_throw = SavingThrowTable(browser)
     skills = SkillsTable(browser)
@@ -249,9 +255,11 @@ def test_wisdom_increase(player_wizard, browser): # noqa
     assert survival.blank2.strip() == '+ 2 (Wis)'
 
 def test_charisma_increase(player_wizard, browser): # noqa
-    """When charisma is increased or decreased, relevant skills and savings throws reflect the change."""
+    """When charisma is increased or decreased, relevant skills and savings
+       throws reflect the change."""
 
-    print('When charisma is increased or decreased, relevant skills and savings throws reflect the change.')
+    print(('When charisma is increased or decreased, relevant skills and '
+           'savings throws reflect the change.'))
 
     saving_throw = SavingThrowTable(browser)
     skills = SkillsTable(browser)

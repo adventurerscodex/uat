@@ -1,6 +1,7 @@
 """UAT test file for Adventurer's Codex player tools skills module."""
+import time
+
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC # noqa
 from selenium.webdriver.support.ui import WebDriverWait
 
@@ -8,7 +9,6 @@ from components.core.character import features, feats, traits
 from components.core.character import tracked, proficiency, skills
 from components.core.character.tabs import Tabs
 from expected_conditions.conditions import modal_finished_closing
-from expected_conditions.conditions import sorting_arrow_up, sorting_arrow_down
 from expected_conditions.conditions import table_cell_updated
 from utils import general as ut
 
@@ -50,8 +50,10 @@ def test_add_feature(player_wizard, browser): # noqa
 
 
 def test_feature_ogl_pre_pop(player_wizard, browser): # noqa
-    """As a player, if I select from feature name field, OGL data auto-completes and the remaining fields pre-populate."""
-    print('As a player, if I select from feature name field, OGL data auto-completes and the remaining fields pre-populate.')
+    """As a player, if I select from feature name field, OGL data
+       auto-completes and the remaining fields pre-populate."""
+    print(('As a player, if I select from feature name field, OGL data '
+           'auto-completes and the remaining fields pre-populate.'))
 
     feature = features.FeatureAddModal(browser)
     features_table = features.FeaturesTable(browser)
@@ -109,8 +111,10 @@ def test_delete_feature(player_wizard, browser): # noqa
 
 
 def test_add_autocomplete_feature(player_wizard, browser): # noqa
-    """As a player, if I start typing in the name field and class field, I can select suggested items in the dropdown."""
-    print('As a player, if I start typing in the name field and class field, I can select suggested items in the dropdown.')
+    """As a player, if I start typing in the name field and class field,
+       I can select suggested items in the dropdown."""
+    print(('As a player, if I start typing in the name field and class field, '
+           'I can select suggested items in the dropdown.'))
 
     feature = features.FeatureAddModal(browser)
     features_table = features.FeaturesTable(browser)
@@ -136,8 +140,10 @@ def test_add_autocomplete_feature(player_wizard, browser): # noqa
 
 
 def test_add_feature_open_model_by_row(player_wizard, browser): # noqa
-    """As a player, I can click the first row in feature table to open the feature add modal."""
-    print('As a player, I can click the first row in feature table to open the feature add modal.')
+    """As a player, I can click the first row in feature table to open the
+       feature add modal."""
+    print(('As a player, I can click the first row in feature table to open '
+           'the feature add modal.'))
 
     features_table = features.FeaturesTable(browser)
     tabs = Tabs(browser)
@@ -249,8 +255,10 @@ def test_add_feat(player_wizard, browser): # noqa
 
 
 def test_feat_ogl_pre_pop(player_wizard, browser): # noqa
-    """As a player, if I select from feat name field, OGL data auto-completes and the remaining fields pre-populate."""
-    print('As a player, if I select from feat name field, OGL data auto-completes and the remaining fields pre-populate.')
+    """As a player, if I select from feat name field, OGL data auto-completes
+       and the remaining fields pre-populate."""
+    print(('As a player, if I select from feat name field, OGL data '
+           'auto-completes and the remaining fields pre-populate.'))
 
     feat = feats.FeatAddModal(browser)
     feats_table = feats.FeatsTable(browser)
@@ -303,8 +311,10 @@ def test_delete_feat(player_wizard, browser): # noqa
 
 
 def test_add_autocomplete_feat(player_wizard, browser): # noqa
-    """As a player, if I start typing in the name field and class field, I can select suggested items in the dropdown."""
-    print('As a player, if I start typing in the name field and class field, I can select suggested items in the dropdown.')
+    """As a player, if I start typing in the name field and class field, I
+       can select suggested items in the dropdown."""
+    print(('As a player, if I start typing in the name field and class field, '
+           'I can select suggested items in the dropdown.'))
 
     feat = feats.FeatAddModal(browser)
     feats_table = feats.FeatsTable(browser)
@@ -323,8 +333,10 @@ def test_add_autocomplete_feat(player_wizard, browser): # noqa
 
 
 def test_add_feat_open_model_by_row(player_wizard, browser): # noqa
-    """As a player, I can click the first row in feat table to open the feat add modal."""
-    print('As a player, I can click the first row in feat table to open the feat add modal.')
+    """As a player, I can click the first row in feat table to open the
+       feat add modal."""
+    print(('As a player, I can click the first row in feat table to open the '
+           'feat add modal.'))
 
     feats_table = feats.FeatsTable(browser)
     tabs = Tabs(browser)
@@ -444,8 +456,10 @@ def test_add_trait(player_wizard, browser): # noqa
 
 
 def test_trait_ogl_pre_pop(player_wizard, browser): # noqa
-    """As a player, if I select from trait name field, OGL data auto-completes and the remaining fields pre-populate."""
-    print('As a player, if I select from trait name field, OGL data auto-completes and the remaining fields pre-populate.')
+    """As a player, if I select from trait name field, OGL data auto-completes
+       and the remaining fields pre-populate."""
+    print(('As a player, if I select from trait name field, OGL data '
+           'auto-completes and the remaining fields pre-populate.'))
 
     trait = traits.TraitAddModal(browser)
     traits_table = traits.TraitsTable(browser)
@@ -503,8 +517,10 @@ def test_delete_trait(player_wizard, browser): # noqa
 
 
 def test_add_autocomplete_trait(player_wizard, browser): # noqa
-    """As a player, if I start typing in the name field and class field, I can select suggested items in the dropdown."""
-    print('As a player, if I start typing in the name field and class field, I can select suggested items in the dropdown.')
+    """As a player, if I start typing in the name field and class field, I
+       can select suggested items in the dropdown."""
+    print(('As a player, if I start typing in the name field and class field, '
+           'I can select suggested items in the dropdown.'))
 
     trait = traits.TraitAddModal(browser)
     traits_table = traits.TraitsTable(browser)
@@ -530,8 +546,10 @@ def test_add_autocomplete_trait(player_wizard, browser): # noqa
 
 
 def test_add_trait_open_model_by_row(player_wizard, browser): # noqa
-    """As a player, I can click the first row in trait table to open the trait add modal."""
-    print('As a player, I can click the first row in trait table to open the trait add modal.')
+    """As a player, I can click the first row in trait table to open the trait
+       add modal."""
+    print(('As a player, I can click the first row in trait table to open the '
+           'trait add modal.'))
 
     traits_table = traits.TraitsTable(browser)
     tabs = Tabs(browser)
@@ -652,8 +670,10 @@ def test_add_proficiency(player_wizard, browser): # noqa
     assert row.proficiency.strip() == 'Add Name'
 
 def test_proficiency_ogl_pre_pop(player_wizard, browser): # noqa
-    """As a player, if I select from proficiency name field, OGL data auto-completes and the remaining fields pre-populate."""
-    print('As a player, if I select from proficiency name field, OGL data auto-completes and the remaining fields pre-populate.')
+    """As a player, if I select from proficiency name field, OGL data
+       auto-completes and the remaining fields pre-populate."""
+    print(('As a player, if I select from proficiency name field, OGL data '
+           'auto-completes and the remaining fields pre-populate.'))
 
     proficiency_add = proficiency.ProficiencyAddModal(browser)
     proficiency_table = proficiency.ProficiencyTable(browser)
@@ -710,8 +730,10 @@ def test_delete_proficiency(player_wizard, browser): # noqa
     assert rows[0][0].text.strip() == 'Add a new Proficiency'
 
 def test_autocomplete_proficiency(player_wizard, browser): # noqa
-    """As a player, if I start typing in the name field and class field, I can select suggested items in the dropdown."""
-    print('As a player, if I start typing in the name field and type field, I can select suggested items in the dropdown.')
+    """As a player, if I start typing in the name field and class field, I can
+       select suggested items in the dropdown."""
+    print(('As a player, if I start typing in the name field and type field, I '
+           'can select suggested items in the dropdown.'))
 
     proficiency_add = proficiency.ProficiencyAddModal(browser)
     proficiency_table = proficiency.ProficiencyTable(browser)
@@ -736,8 +758,10 @@ def test_autocomplete_proficiency(player_wizard, browser): # noqa
     assert proficiency_add.type_.get_attribute('value').strip() == 'Armor'
 
 def test_add_proficiency_open_model_by_row(player_wizard, browser): # noqa
-    """As a player, I can click the first row in proficiency table to open the proficiency add modal."""
-    print('As a player, I can click the first row in proficiency table to open the proficiency add modal.')
+    """As a player, I can click the first row in proficiency table to open the
+       proficiency add modal."""
+    print(('As a player, I can click the first row in proficiency table to '
+           'open the proficiency add modal.'))
 
     proficiency_table = proficiency.ProficiencyTable(browser)
     tabs = Tabs(browser)
@@ -809,9 +833,11 @@ def test_edit_proficiency(player_wizard, browser): # noqa
     assert row.type.strip() == 'Edited Type'
 
 def test_tracked_increase_decrease(player_wizard, browser): # noqa
-    """As a player, I can increase or decrease tracked abilities with the stepper widget and the bar reflects these changes."""
+    """As a player, I can increase or decrease tracked abilities with the
+       stepper widget and the bar reflects these changes."""
 
-    print('As a player, I can increase or decrease tracked abilities with the stepper widget and the bar reflects these changes.')
+    print(('As a player, I can increase or decrease tracked abilities with '
+           'the stepper widget and the bar reflects these changes.'))
 
     feature = features.FeatureAddModal(browser)
     features_table = features.FeaturesTable(browser)
@@ -839,9 +865,11 @@ def test_tracked_increase_decrease(player_wizard, browser): # noqa
     assert tracked_table.tracked1_used.text.strip() == '0'
 
 def test_tracked_reset(player_wizard, browser): # noqa
-    """As a player, I can reset a tracked ability by clicking on the reset icon."""
+    """As a player, I can reset a tracked ability by clicking on the reset
+       icon."""
 
-    print('As a player, I can reset a tracked ability by clicking on the reset icon.')
+    print(('As a player, I can reset a tracked ability by clicking on the '
+           'reset icon.'))
 
     feature = features.FeatureAddModal(browser)
     features_table = features.FeaturesTable(browser)
@@ -870,7 +898,8 @@ def test_tracked_reset(player_wizard, browser): # noqa
 
 def test_proficiency_types(player_wizard, browser): # noqa
     """As a player, I can mark a skill as none, half, proficient, or
-       expertise and view these modifiers, and they are calculated correctly."""
+       expertise and view these modifiers, and they are calculated
+       correctly."""
 
     print(('As a player, I can mark a skill as none, half, proficient, or '
            'expertise and view these modifiers, and they are calculated '
@@ -896,7 +925,7 @@ def test_proficiency_types(player_wizard, browser): # noqa
         modal_finished_closing(skills_edit.modal_div_xpath)
     )
 
-    import time; time.sleep(.4)
+    time.sleep(.4)
     acrobatics = ut.get_table_row(skills_table, 'table', values=False)
     spans = acrobatics[0].find_element_by_tag_name('span')
     half = spans.find_element_by_tag_name('span').get_attribute('class')
@@ -913,7 +942,7 @@ def test_proficiency_types(player_wizard, browser): # noqa
     WebDriverWait(browser, 10).until(
         modal_finished_closing(skills_edit.modal_div_xpath)
     )
-    import time; time.sleep(.4)
+    time.sleep(.4)
     acrobatics = ut.get_table_row(skills_table, 'table', values=False)
     spans = acrobatics[0].find_element_by_tag_name('span')
     proficient = spans.find_element_by_tag_name('span').get_attribute('class')
@@ -931,7 +960,7 @@ def test_proficiency_types(player_wizard, browser): # noqa
     WebDriverWait(browser, 10).until(
         modal_finished_closing(skills_edit.modal_div_xpath)
     )
-    import time; time.sleep(.4)
+    time.sleep(.4)
     acrobatics = ut.get_table_row(skills_table, 'table', values=False)
     spans = acrobatics[0].find_element_by_tag_name('span')
     expertise = spans.find_element_by_tag_name('span').get_attribute('class')
@@ -942,9 +971,11 @@ def test_proficiency_types(player_wizard, browser): # noqa
     assert 'fa fa-check close-check' in expertise.strip()
 
 def test_passive_score(player_wizard, browser): # noqa
-    """As a player, I can view my passive score for each skill which is calculated correctly."""
+    """As a player, I can view my passive score for each skill which is
+       calculated correctly."""
 
-    print('As a player, I can view my passive score for each skill which is calculated correctly.')
+    print(('As a player, I can view my passive score for each skill which is '
+           'calculated correctly.'))
 
     skills_table = skills.SkillsTable(browser)
     tabs = Tabs(browser)
@@ -955,9 +986,13 @@ def test_passive_score(player_wizard, browser): # noqa
     assert acrobatics.passive.strip() == '14'
 
 def test_data_persists(player_wizard, browser): # noqa
-    """As a player, all changes I make to features, feats, traits, proficiencies, tracking, and skills persist after I refresh the browser."""
+    """As a player, all changes I make to features, feats, traits,
+       proficiencies, tracking, and skills persist after I refresh the
+       browser."""
 
-    print('As a player, all changes I make to features, feats, traits, proficiencies, tracking, and skills persist after I refresh the browser.')
+    print(('As a player, all changes I make to features, feats, traits, '
+           'proficiencies, tracking, and skills persist after I refresh the '
+           'browser.'))
 
     feature = features.FeatureAddModal(browser)
     features_table = features.FeaturesTable(browser)

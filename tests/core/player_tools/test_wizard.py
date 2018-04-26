@@ -2,7 +2,6 @@
 import pytest
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC # noqa
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support.ui import Select
@@ -68,7 +67,7 @@ def test_attributes_required(browser):
     assert ability_scores.wisdom_required.is_displayed()
     assert ability_scores.charisma_required.is_displayed()
 
-    with pytest.raises(NoSuchElementException) as excinfo:
+    with pytest.raises(NoSuchElementException):
         browser.find_element_by_id('newCharCampaignFinishButton')
 
 
@@ -86,7 +85,7 @@ def test_name_required(browser):
     assert who_are_you.character_name_required.is_displayed()
     assert who_are_you.player_name_required.is_displayed()
 
-    with pytest.raises(NoSuchElementException) as excinfo:
+    with pytest.raises(NoSuchElementException):
         browser.find_element_by_id('newCharCampaignNextButton')
 
 
@@ -205,8 +204,10 @@ def test_add_ability_scores(browser): # noqa
     assert ability_scores.charisma.get_attribute('value').strip() == '18'
 
 def test_wizard_profile_stats(browser): # noqa
-    """As a player, after creating a character via the character creation wizard, I can view all the data entered in the stats and profile modules."""
-    print('As a player, after creating a character via the character creation wizard, I can view all the data entered in the stats and profile modules.')
+    """As a player, after creating a character via the character creation wizard, I can view all
+       the data entered in the stats and profile modules."""
+    print(('As a player, after creating a character via the character creation wizard, I can '
+           'view all the data entered in the stats and profile modules.'))
     wizard_main = NewCharacterCampaign(browser)
     who_are_you = wizard.WhoAreYou(browser)
     ability_scores = wizard.AbilityScoresManual(browser)
@@ -278,8 +279,10 @@ def test_wizard_profile_stats(browser): # noqa
     assert stats.experience.get_attribute('value') == '1000'
 
 def test_wizard_backpack_prepop(browser): # noqa
-    """As a player, after selecting a backpack, all items are pre-populated in the inventory module."""
-    print('As a player, after selecting a backpack, all items are pre-populated in the inventory module.')
+    """As a player, after selecting a backpack, all items are pre-populated in the inventory
+       module."""
+    print(('As a player, after selecting a backpack, all items are pre-populated in the '
+           'inventory module.'))
 
     wizard_main = NewCharacterCampaign(browser)
     who_are_you = wizard.WhoAreYou(browser)
