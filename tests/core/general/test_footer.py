@@ -9,7 +9,7 @@ from expected_conditions.conditions import url_in_new_tab_matches
 
 def test_facebook_link(player_wizard, browser): # noqa
     """As a player, navbar footer links to facebook."""
-    print('As a player, navbar footer links to facebook.')
+    print('As a player, navbar footer links to facebook.j')
 
     footer = Footer(browser)
 
