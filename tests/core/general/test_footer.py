@@ -4,7 +4,6 @@ from selenium.webdriver.support import expected_conditions as EC # noqa
 from selenium.webdriver.support.ui import WebDriverWait
 
 from components.core.general.footer import Footer
-from components.core.character import tabs
 from expected_conditions.conditions import url_in_new_tab_matches
 
 
@@ -24,7 +23,9 @@ def test_facebook_link(player_wizard, browser): # noqa
     WebDriverWait(browser, 20).until(EC.number_of_windows_to_be(2))
     after_window = browser.window_handles[1]
     browser.switch_to.window(after_window)
-    WebDriverWait(browser, 20).until(url_in_new_tab_matches('https://www.facebook.com/adventurerscodex'))
+    WebDriverWait(browser, 20).until(
+        url_in_new_tab_matches('https://www.facebook.com/adventurerscodex')
+    )
 
     assert browser.current_url.strip() == 'https://www.facebook.com/adventurerscodex'
 
@@ -43,7 +44,9 @@ def test_twitter_link(player_wizard, browser): # noqa
     WebDriverWait(browser, 20).until(EC.number_of_windows_to_be(2))
     after_window = browser.window_handles[1]
     browser.switch_to.window(after_window)
-    WebDriverWait(browser, 20).until(url_in_new_tab_matches('https://twitter.com/adventurercodex'))
+    WebDriverWait(browser, 20).until(
+        url_in_new_tab_matches('https://twitter.com/adventurercodex')
+    )
 
     assert browser.current_url.strip() == 'https://twitter.com/adventurercodex'
 
@@ -61,7 +64,9 @@ def test_reddit_link(player_wizard, browser): # noqa
     WebDriverWait(browser, 20).until(EC.number_of_windows_to_be(2))
     after_window = browser.window_handles[1]
     browser.switch_to.window(after_window)
-    WebDriverWait(browser, 20).until(url_in_new_tab_matches('https://www.reddit.com/r/adventurerscodex/'))
+    WebDriverWait(browser, 20).until(
+        url_in_new_tab_matches('https://www.reddit.com/r/adventurerscodex/')
+    )
 
     assert browser.current_url.strip() == 'https://www.reddit.com/r/adventurerscodex/'
 
@@ -79,7 +84,9 @@ def test_google_plus_link(player_wizard, browser): # noqa
     WebDriverWait(browser, 20).until(EC.number_of_windows_to_be(2))
     after_window = browser.window_handles[1]
     browser.switch_to.window(after_window)
-    WebDriverWait(browser, 20).until(url_in_new_tab_matches('https://plus.google.com/105624626079092258118'))
+    WebDriverWait(browser, 20).until(
+        url_in_new_tab_matches('https://plus.google.com/105624626079092258118')
+    )
 
     assert browser.current_url.strip() == 'https://plus.google.com/105624626079092258118'
 
@@ -97,7 +104,9 @@ def test_github_link(player_wizard, browser): # noqa
     WebDriverWait(browser, 20).until(EC.number_of_windows_to_be(2))
     after_window = browser.window_handles[1]
     browser.switch_to.window(after_window)
-    WebDriverWait(browser, 20).until(url_in_new_tab_matches('https://github.com/adventurerscodex'))
+    WebDriverWait(browser, 20).until(
+        url_in_new_tab_matches('https://github.com/adventurerscodex')
+    )
 
     assert browser.current_url.strip() == 'https://github.com/adventurerscodex'
 
@@ -115,7 +124,9 @@ def test_rss_link(player_wizard, browser): # noqa
     WebDriverWait(browser, 20).until(EC.number_of_windows_to_be(2))
     after_window = browser.window_handles[1]
     browser.switch_to.window(after_window)
-    WebDriverWait(browser, 20).until(url_in_new_tab_matches('https://adventurerscodex.com/feed.xml'))
+    WebDriverWait(browser, 20).until(
+        url_in_new_tab_matches('https://adventurerscodex.com/feed.xml')
+    )
 
     assert browser.current_url.strip() == 'https://adventurerscodex.com/feed.xml'
 
@@ -133,7 +144,9 @@ def test_tiny_letter_link(player_wizard, browser): # noqa
     WebDriverWait(browser, 20).until(EC.number_of_windows_to_be(2))
     after_window = browser.window_handles[1]
     browser.switch_to.window(after_window)
-    WebDriverWait(browser, 20).until(url_in_new_tab_matches('https://tinyletter.com/adventurerscodex'))
+    WebDriverWait(browser, 20).until(
+        url_in_new_tab_matches('https://tinyletter.com/adventurerscodex')
+    )
 
     assert browser.current_url.strip() == 'https://tinyletter.com/adventurerscodex'
 
@@ -151,7 +164,9 @@ def test_blog_link(player_wizard, browser): # noqa
     WebDriverWait(browser, 20).until(EC.number_of_windows_to_be(2))
     after_window = browser.window_handles[1]
     browser.switch_to.window(after_window)
-    WebDriverWait(browser, 20).until(url_in_new_tab_matches('https://adventurerscodex.com/'))
+    WebDriverWait(browser, 20).until(
+        url_in_new_tab_matches('https://adventurerscodex.com/')
+    )
 
     assert browser.current_url.strip() == 'https://adventurerscodex.com/'
 
@@ -169,7 +184,9 @@ def test_contact_us_link(player_wizard, browser): # noqa
     WebDriverWait(browser, 20).until(EC.number_of_windows_to_be(2))
     after_window = browser.window_handles[1]
     browser.switch_to.window(after_window)
-    WebDriverWait(browser, 20).until(url_in_new_tab_matches('https://adventurerscodex.com/support.html'))
+    WebDriverWait(browser, 20).until(
+        url_in_new_tab_matches('https://adventurerscodex.com/support.html')
+    )
 
     assert browser.current_url.strip() == 'https://adventurerscodex.com/support.html'
 
@@ -187,7 +204,9 @@ def test_patreon_link(player_wizard, browser): # noqa
     WebDriverWait(browser, 20).until(EC.number_of_windows_to_be(2))
     after_window = browser.window_handles[1]
     browser.switch_to.window(after_window)
-    WebDriverWait(browser, 20).until(url_in_new_tab_matches('https://www.patreon.com/bePatron?u=5313385'))
+    WebDriverWait(browser, 20).until(
+        url_in_new_tab_matches('https://www.patreon.com/bePatron?u=5313385')
+    )
 
     assert browser.current_url.strip() == 'https://www.patreon.com/bePatron?u=5313385'
 
@@ -205,6 +224,10 @@ def test_ogl_link(player_wizard, browser): # noqa
     WebDriverWait(browser, 20).until(EC.number_of_windows_to_be(2))
     after_window = browser.window_handles[1]
     browser.switch_to.window(after_window)
-    WebDriverWait(browser, 20).until(url_in_new_tab_matches('http://media.wizards.com/2016/downloads/DND/SRD-OGL_V5.1.pdf'))
+    WebDriverWait(browser, 20).until(
+        url_in_new_tab_matches('http://media.wizards.com/2016/downloads/DND/SRD-OGL_V5.1.pdf')
+    )
 
-    assert browser.current_url.strip() == 'http://media.wizards.com/2016/downloads/DND/SRD-OGL_V5.1.pdf'
+    ogl = 'http://media.wizards.com/2016/downloads/DND/SRD-OGL_V5.1.pdf'
+
+    assert browser.current_url.strip() == ogl

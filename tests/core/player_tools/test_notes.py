@@ -36,7 +36,8 @@ def test_delete_note(player_wizard, browser): # noqa
     notes_detail.edit_textarea = 'Test Note 1'
     notes_list.note1_delete.click()
 
-    assert notes_detail.no_notes_text.text.strip() == 'Add a note to begin documenting your adventure'
+    default_message = 'Add a note to begin documenting your adventure'
+    assert notes_detail.no_notes_text.text.strip() == default_message
 
 
 def test_edit_note(player_wizard, browser): # noqa
@@ -112,14 +113,19 @@ def test_markdown_cheatsheet_link(player_wizard, browser): # noqa
     notes_detail.markdown_cheatcheat.click()
     WebDriverWait(browser, 20).until(EC.number_of_windows_to_be(2))
     browser.switch_to.window(browser.window_handles[1])
-    WebDriverWait(browser, 20).until(url_in_new_tab_matches('https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet'))
+    WebDriverWait(browser, 20).until(
+        url_in_new_tab_matches('https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet')
+    )
 
-    assert browser.current_url.strip() == 'https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet'
+    markdown_url = 'https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet'
+    assert browser.current_url.strip() == markdown_url
 
 
 def test_add_note_by_detail_div(player_wizard, browser): # noqa
-    """As a player, if no notes are visible, I can add a note by clicking on the detail div."""
-    print('As a player, if no notes are visible, I can add a note by clicking on the detail div.')
+    """As a player, if no notes are visible, I can add a note by clicking on
+       the detail div."""
+    print(('As a player, if no notes are visible, I can add a note by '
+           'clicking on the detail div.'))
     notes_detail = NotesDetail(browser)
 
     tabs = Tabs(browser)

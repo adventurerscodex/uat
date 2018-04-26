@@ -770,7 +770,8 @@ def test_preview_magic_items(player_wizard, browser): # noqa
         )
     )
 
-    magic_items_type = ' '.join([string.strip() for string in magic_items_preview.type_.text.split()])
+    preview_type_ = magic_items_preview.type_.text.split()
+    magic_items_type = ' '.join([string.strip() for string in preview_type_])
     magic_items_max_charges = ' '.join(
         [
             string.strip()
@@ -895,12 +896,16 @@ def test_magic_items_persists(player_wizard, browser): # noqa
     magic_items_tabs.edit.click()
 
     assert magic_items_edit.item.get_attribute('value').strip() == 'Adamantine Armor'
-    assert magic_items_edit.type_.get_attribute('value').strip() == 'Armor (medium or heavy but not hide)'
+
+    armor_type = 'Armor (medium or heavy but not hide)'
+    assert magic_items_edit.type_.get_attribute('value').strip() == armor_type
     assert magic_items_edit.rarity.get_attribute('value').strip() == 'Uncommon'
     assert magic_items_edit.max_charges.get_attribute('value').strip() == '0'
     assert magic_items_edit.weight.get_attribute('value').strip() == '0'
     assert magic_items_edit.requires_attunement.is_selected() is False
-    assert 'reinforced with adamantine' in magic_items_edit.description.get_attribute('value').strip()
+
+    description = magic_items_edit.description.get_attribute('value').strip()
+    assert 'reinforced with adamantine' in description
 
 
 def test_magic_items_total_weight(player_wizard, browser): # noqa

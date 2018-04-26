@@ -70,19 +70,50 @@ class AbilityScoresManual(Component):
 class AbilityScoresPointBuy(Component):
     """Definition of ability scoreswizard home componenet."""
 
-    points_left_xpath = '//*[@id="content"]/wizard/div/div/div/wizard-ability-score-step/div/div/div[2]/div[1]/div[3]/div/div/span'
-    strength_up_xpath = '//*[@id="content"]/wizard/div/div/div/wizard-ability-score-step/div/div/div[2]/div[1]/div[4]/div[1]/div/div[2]/plus-minus/div[1]/div/button[1]'
-    strength_down_xpath = '//*[@id="content"]/wizard/div/div/div/wizard-ability-score-step/div/div/div[2]/div[1]/div[4]/div[1]/div/div[2]/plus-minus/div[1]/div/button[2]'
-    dexterity_up_xpath = '//*[@id="content"]/wizard/div/div/div/wizard-ability-score-step/div/div/div[2]/div[1]/div[4]/div[2]/div/div[2]/plus-minus/div[1]/div/button[1]'
-    dexterity_down_xpath = '//*[@id="content"]/wizard/div/div/div/wizard-ability-score-step/div/div/div[2]/div[1]/div[4]/div[2]/div/div[2]/plus-minus/div[1]/div/button[2]'
-    constitution_up_xpath = '//*[@id="content"]/wizard/div/div/div/wizard-ability-score-step/div/div/div[2]/div[1]/div[5]/div[1]/div/div[2]/plus-minus/div[1]/div/button[1]'
-    constitution_down_xpath = '//*[@id="content"]/wizard/div/div/div/wizard-ability-score-step/div/div/div[2]/div[1]/div[5]/div[1]/div/div[2]/plus-minus/div[1]/div/button[2]'
-    intelligence_up_xpath = '//*[@id="content"]/wizard/div/div/div/wizard-ability-score-step/div/div/div[2]/div[1]/div[5]/div[2]/div/div[2]/plus-minus/div[1]/div/button[1]'
-    intelligence_down_xpath = '//*[@id="content"]/wizard/div/div/div/wizard-ability-score-step/div/div/div[2]/div[1]/div[5]/div[2]/div/div[2]/plus-minus/div[1]/div/button[2]'
-    wisdom_up_xpath = '//*[@id="content"]/wizard/div/div/div/wizard-ability-score-step/div/div/div[2]/div[1]/div[6]/div[1]/div/div[2]/plus-minus/div[1]/div/button[1]'
-    wisdom_down_xpath = '//*[@id="content"]/wizard/div/div/div/wizard-ability-score-step/div/div/div[2]/div[1]/div[6]/div[1]/div/div[2]/plus-minus/div[1]/div/button[2]'
-    charisma_up_xpath = '//*[@id="content"]/wizard/div/div/div/wizard-ability-score-step/div/div/div[2]/div[1]/div[6]/div[2]/div/div[2]/plus-minus/div[1]/div/button[1]'
-    charisma_down_xpath = '//*[@id="content"]/wizard/div/div/div/wizard-ability-score-step/div/div/div[2]/div[1]/div[6]/div[2]/div/div[2]/plus-minus/div[1]/div/button[2]'
+    points_left_xpath = ('//*[@id="content"]/wizard/div/div/div/wizard-ability'
+                         '-score-step/div/div/div[2]/div[1]/div[3]/div/div/'
+                         'span')
+    strength_up_xpath = ('//*[@id="content"]/wizard/div/div/div/wizard-ability'
+                         '-score-step/div/div/div[2]/div[1]/div[4]/div[1]/div/'
+                         'div[2]/plus-minus/div[1]/div/button[1]')
+    strength_down_xpath = ('//*[@id="content"]/wizard/div/div/div/wizard-'
+                           'ability-score-step/div/div/div[2]/div[1]/div[4]/'
+                           'div[1]/div/div[2]/plus-minus/div[1]/div/button[2]')
+    dexterity_up_xpath = ('//*[@id="content"]/wizard/div/div/div/wizard-'
+                          'ability-score-step/div/div/div[2]/div[1]/div[4]/div'
+                          '[2]/div/div[2]/plus-minus/div[1]/div/button[1]')
+    dexterity_down_xpath = ('//*[@id="content"]/wizard/div/div/div/wizard-'
+                            'ability-score-step/div/div/div[2]/div[1]/div[4]/'
+                            'div[2]/div/div[2]/plus-minus/div[1]/div/button'
+                            '[2]')
+    constitution_up_xpath = ('//*[@id="content"]/wizard/div/div/div/wizard-'
+                             'ability-score-step/div/div/div[2]/div[1]/div[5]/'
+                             'div[1]/div/div[2]/plus-minus/div[1]/div/button'
+                             '[1]')
+    constitution_down_xpath = ('//*[@id="content"]/wizard/div/div/div/wizard-'
+                               'ability-score-step/div/div/div[2]/div[1]/div'
+                               '[5]/div[1]/div/div[2]/plus-minus/div[1]/div/'
+                               'button[2]')
+    intelligence_up_xpath = ('//*[@id="content"]/wizard/div/div/div/wizard-'
+                             'ability-score-step/div/div/div[2]/div[1]/div[5]/'
+                             'div[2]/div/div[2]/plus-minus/div[1]/div/button'
+                             '[1]')
+    intelligence_down_xpath = ('//*[@id="content"]/wizard/div/div/div/wizard'
+                               '-ability-score-step/div/div/div[2]/div[1]/div'
+                               '[5]/div[2]/div/div[2]/plus-minus/div[1]/div/'
+                               'button[2]')
+    wisdom_up_xpath = ('//*[@id="content"]/wizard/div/div/div/wizard-ability'
+                       '-score-step/div/div/div[2]/div[1]/div[6]/div[1]/div/'
+                       'div[2]/plus-minus/div[1]/div/button[1]')
+    wisdom_down_xpath = ('//*[@id="content"]/wizard/div/div/div/wizard-ability'
+                         '-score-step/div/div/div[2]/div[1]/div[6]/div[1]/div/'
+                         'div[2]/plus-minus/div[1]/div/button[2]')
+    charisma_up_xpath = ('//*[@id="content"]/wizard/div/div/div/wizard-ability'
+                         '-score-step/div/div/div[2]/div[1]/div[6]/div[2]/div/'
+                         'div[2]/plus-minus/div[1]/div/button[1]')
+    charisma_down_xpath = ('//*[@id="content"]/wizard/div/div/div/wizard-'
+                           'ability-score-step/div/div/div[2]/div[1]/div[6]/'
+                           'div[2]/div/div[2]/plus-minus/div[1]/div/button[2]')
 
     points_left = Element(xpath=points_left_xpath)
     strength_up = Element(xpath=strength_up_xpath)
@@ -102,8 +133,11 @@ class AbilityScoresPointBuy(Component):
 class AbilityScoresGeneral(Component):
     """Definition of ability scoreswizard home componenet."""
 
-    manual_xpath = '//*[@id="content"]/wizard/div/div/div/wizard-ability-score-step/div/div/div[2]/div[1]/div[1]/div/div/label[1]'
-    point_buy_xpath = '//*[@id="content"]/wizard/div/div/div/wizard-ability-score-step/div/div/div[2]/div[1]/div[1]/div/div/label[2]'
+    manual_xpath = ('//*[@id="content"]/wizard/div/div/div/wizard-ability-'
+                    'score-step/div/div/div[2]/div[1]/div[1]/div/div/label[1]')
+    point_buy_xpath = ('//*[@id="content"]/wizard/div/div/div/wizard-ability'
+                       '-score-step/div/div/div[2]/div[1]/div[1]/div/div/label'
+                       '[2]')
 
     manual = Element(xpath=manual_xpath)
     point_buy = Element(xpath=point_buy_xpath)
