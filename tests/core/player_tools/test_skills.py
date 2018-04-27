@@ -297,13 +297,12 @@ def test_delete_feat(player_wizard, browser): # noqa
     )
     feat.add.click()
 
+    WebDriverWait(browser, 10).until(
+        modal_finished_closing(feat.modal_div_id)
+    )
+
     rows = ut.get_table_rows(feats_table, 'table', values=False)
 
-    WebDriverWait(browser, 10).until(
-        EC.invisibility_of_element_located(
-            (By.ID, 'addFeat')
-        )
-    )
     rows[0][1].click()
     rows = ut.get_table_rows(feats_table, 'table', values=False)
 
