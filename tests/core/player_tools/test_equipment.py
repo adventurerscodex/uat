@@ -401,7 +401,9 @@ def test_weapon_magical_modifier(player_wizard, browser): # noqa
 
     row = ut.get_table_row(weapon_table, 'table', 1)
 
-    assert row.weapon.strip() == 'Add Name  + 3'
+    weapon_name_label = ' '.join([string.strip() for string in row.weapon.split()])
+
+    assert weapon_name_label == 'Add Name + 3'
 
 
 def test_weapon_persists(player_wizard, browser): # noqa
