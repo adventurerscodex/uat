@@ -193,7 +193,9 @@ def test_edit_weapon(player_wizard, browser): # noqa
 
     row = ut.get_table_row(weapon_table, 'table', 1)
 
-    assert row.weapon.strip() == 'Edit Name  + 2'
+    weapon_name_label = ' '.join([string.strip() for string in row.weapon.split()])
+
+    assert weapon_name_label == 'Edit Name + 2'
     assert row.to_hit.strip() == '+ 10'
     assert row.damage.strip() == '1d10'
     assert row.damage_type.strip() == 'Slashing'
@@ -777,6 +779,7 @@ def test_add_armor(player_wizard, browser): # noqa
     assert int(armor_add.price.get_attribute('value').strip()) == stub.price
 
     curr_denomination = stub.currency_denomination
+
     assert armor_add.currency_denomination.get_attribute('value').strip() == curr_denomination
     assert int(armor_add.weight.get_attribute('value').strip()) == stub.weight
     assert int(armor_add.armor_class.get_attribute('value').strip()) == stub.armor_class
