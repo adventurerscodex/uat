@@ -791,7 +791,9 @@ def test_add_armor(player_wizard, browser): # noqa
 
     row = ut.get_table_row(armor_table, 'table', 1)
 
-    assert row.armor.strip() == '{}  + {}'.format(
+    armor_name_label = ' '.join([string.strip() for string in row.armor.split()])
+
+    assert armor_name_label == '{} + {}'.format(
         stub.name, stub.magical_modifier
     )
     assert int(row.armor_class.strip()) == stub.armor_class
