@@ -21,7 +21,7 @@ Requirements and setup
 * Download chrome and/or firefox webdriver (https://selenium-python.readthedocs.io/installation.html#downloading-python-bindings-for-selenium)
 * Add path of webdriver executable to PATH environment variable
 
-Currently Firefox and Chrome are supported.
+Current test coverage supports Chrome, Firefox and Safari.
 
 Usage
 =====
