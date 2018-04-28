@@ -110,14 +110,23 @@ def test_markdown_cheatsheet_link(player_wizard, browser): # noqa
     notes_list.add.click()
     notes_detail.edit_textarea = 'Test Note 1'
 
+    app_window = browser.window_handles[0]
+
     notes_detail.markdown_cheatcheat.click()
+
     WebDriverWait(browser, 20).until(EC.number_of_windows_to_be(2))
-    browser.switch_to.window(browser.window_handles[1])
+
+    for handle in browser.window_handles:
+        if handle.title() != app_window.title():
+            browser.switch_to_window(handle)
+            continue
+
     WebDriverWait(browser, 20).until(
         url_in_new_tab_matches('https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet')
     )
 
     markdown_url = 'https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet'
+
     assert browser.current_url.strip() == markdown_url
 
 

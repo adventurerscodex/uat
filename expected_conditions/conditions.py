@@ -23,7 +23,7 @@ class url_in_new_tab_matches:  # noqa
 
     def __call__(self, driver):
         """Test if url matches."""
-        return driver.current_url == self.url
+        return driver.current_url.strip() == self.url
 
 class table_has_data:  # noqa
     """Wait until table has data."""
