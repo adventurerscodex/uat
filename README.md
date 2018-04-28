@@ -39,6 +39,10 @@ Sample usage:
 
 `py.test --verbose --capture=no tests/`
 
+*with csv report*
+
+`py.test --verbose --capture=no tests/ --csv report.csv`
+
 *with explicit url and web_driver*
 
 `py.test --verbose --capture=no --web_driver=chrome --url=https://nightly.adventurerscodex.com tests/`
