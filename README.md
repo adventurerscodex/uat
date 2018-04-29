@@ -47,9 +47,9 @@ Sample usage:
 
 `py.test --verbose --capture=no --web_driver=chrome --url=https://nightly.adventurerscodex.com tests/`
 
-*with operadriver*
+*with opera driver*
 
-`py.test --verbose --capture=no --web_driver=opera --opera_driver_path=/your/driver/path'
+`py.test --verbose --capture=no --web_driver=opera --opera_driver_path=/your/driver/path`
 
 *run specific test file*
 
