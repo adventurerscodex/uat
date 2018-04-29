@@ -1,6 +1,6 @@
 """MagicItems components."""
 
-from modules.element import Element, Component
+from modules import Element, Component
 
 
 class MagicItemsAddModal(Component):

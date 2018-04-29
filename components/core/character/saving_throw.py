@@ -1,6 +1,6 @@
 """Saving Throw components."""
 
-from modules.element import Element, Component
+from modules import Element, Component
 
 
 class SavingThrowEditModal(Component):
