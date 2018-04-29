@@ -41,7 +41,7 @@ Sample usage:
 
 *with csv report*
 
-`py.test --verbose --capture=no tests/ --csv report.csv`
+`py.test --verbose --capture=no tests/ --csv tests.csv --csv-columns id,module,name,file,doc,status,message,browser,created_at,duration_formatted`
 
 *with explicit url and web_driver*
 

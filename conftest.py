@@ -2,6 +2,8 @@
 
 import logging
 import pytest
+import sys
+from time import gmtime, strftime
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -61,6 +63,21 @@ def browser(request, web_driver, url):
     request.addfinalizer(close_browser)
 
     return driver
+
+
+def pytest_csv_register_columns(columns):
+    """Add custom columns to csv reporting."""
+    browser = None
+    for arg in sys.argv:
+        if '--web_driver' in arg:
+            arg_string = arg.split('=')
+            try:
+                browser = arg_string[1]
+            except IndexError:
+                pass
+
+    columns['browser'] = browser
+    columns['created_at'] = strftime('%Y-%m-%d %H:%M:%S', gmtime())
 
 
 @pytest.fixture(scope='function')
