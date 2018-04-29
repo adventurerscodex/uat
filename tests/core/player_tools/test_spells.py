@@ -97,7 +97,7 @@ def test_delete_spells(player_wizard, browser): # noqa
     spells_add.add.click()
 
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(spells_add.modal_div_id)
+        modal_finished_closing()
     )
 
     rows = ut.get_table_rows(spells_table, 'table', values=False)
@@ -134,7 +134,7 @@ def test_edit_spells(player_wizard, browser): # noqa
     spells_add.add.click()
 
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(spells_add.modal_div_id)
+        modal_finished_closing()
     )
 
     rows = ut.get_table_rows(spells_table, 'table', values=False)
@@ -185,7 +185,7 @@ def test_edit_spells(player_wizard, browser): # noqa
     spells_edit.done.click()
 
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(spells_edit.modal_div_id)
+        modal_finished_closing()
     )
 
     row = ut.get_table_row(spells_table, 'table', 1)
@@ -228,7 +228,7 @@ def test_preview_spells(player_wizard, browser): # noqa
     spells_add.add.click()
 
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(spells_add.modal_div_id)
+        modal_finished_closing()
     )
 
     row = ut.get_table_row(spells_table, 'table', values=False)
