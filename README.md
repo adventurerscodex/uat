@@ -19,6 +19,7 @@ Requirements and setup
 * Create a virtual environment
 * Install requirements `pip install -r requirements.txt`
 * Download chrome and/or firefox webdriver (https://selenium-python.readthedocs.io/installation.html#downloading-python-bindings-for-selenium)
+* Download opera webdriver https://github.com/operasoftware/operachromiumdriver/releases
 * Add path of webdriver executable to PATH environment variable
 
 Current test coverage supports Chrome, Firefox, Opera and Safari.
