@@ -50,7 +50,7 @@ Sample usage:
 
 **with opera driver**
 
-`py.test --verbose --capture=no --web_driver=opera --opera_driver_path=/your/driver/path`
+`py.test --verbose --capture=no --web_driver=opera --opera_binary_path=/your/driver/path`
 
 **with specific test file**
 
