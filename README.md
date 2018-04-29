@@ -36,23 +36,23 @@ By default, url is https://nightly.adventurerscodex.com, and web_driver is chrom
 
 Sample usage:
 
-*always run in verbose mode and no capture (no params will default to https://nightly.adventurerscodex.com and chrome web_driver)*
+**always run in verbose mode and no capture** (no params will default to https://nightly.adventurerscodex.com and chrome web_driver)
 
 `py.test --verbose --capture=no tests/`
 
-*with csv report*
+**with csv report**
 
 `py.test --verbose --capture=no tests/ --csv tests.csv --csv-columns id,module,name,file,doc,status,message,browser,created_at,duration_formatted`
 
-*with explicit url and web_driver*
+**with explicit url and web_driver**
 
 `py.test --verbose --capture=no --web_driver=chrome --url=https://nightly.adventurerscodex.com tests/`
 
-*with opera driver*
+**with opera driver**
 
 `py.test --verbose --capture=no --web_driver=opera --opera_driver_path=/your/driver/path`
 
-*run specific test file*
+**with specific test file**
 
 `py.test --verbose --capture=no tests/core/player_tools/test_player_wizard.py::test_attributes_required`
 
