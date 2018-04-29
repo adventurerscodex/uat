@@ -22,6 +22,7 @@ LOGGER.setLevel(logging.WARNING)
 def pytest_addoption(parser):
     """Command line parameters."""
     parser.addoption('--web_driver', action='store', default='chrome')
+    parser.addoption('--opera_driver_path', action='store')
     parser.addoption(
         '--url',
         action='store',
@@ -36,13 +37,19 @@ def web_driver(request):
 
 
 @pytest.fixture
+def opera_driver_path(request):
+    """Return command line argument."""
+    return request.config.getoption('--opera_driver_path')
+
+
+@pytest.fixture
 def url(request):
     """Return command line argument."""
     return request.config.getoption('--url')
 
 
 @pytest.fixture(scope='function')
-def browser(request, web_driver, url):
+def browser(request, web_driver, opera_driver_path, url):
     """Return selenium webdriver chrome instance."""
     driver = None
     if web_driver.lower() == 'chrome':
@@ -53,6 +60,15 @@ def browser(request, web_driver, url):
 
     elif web_driver.lower() == 'safari':
         driver = webdriver.Safari()
+
+    elif web_driver.lower() == 'opera':
+        if not opera_driver_path:
+            raise Exception('Opera driver path required: --opera_driver_path')
+
+        options = webdriver.ChromeOptions()
+        options.binary_location = opera_driver_path
+
+        driver = webdriver.Opera(options=options)
 
     driver.get(url)
     driver.maximize_window()

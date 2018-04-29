@@ -21,7 +21,7 @@ Requirements and setup
 * Download chrome and/or firefox webdriver (https://selenium-python.readthedocs.io/installation.html#downloading-python-bindings-for-selenium)
 * Add path of webdriver executable to PATH environment variable
 
-Current test coverage supports Chrome, Firefox and Safari.
+Current test coverage supports Chrome, Firefox, Opera and Safari.
 
 Usage
 =====
@@ -46,6 +46,10 @@ Sample usage:
 *with explicit url and web_driver*
 
 `py.test --verbose --capture=no --web_driver=chrome --url=https://nightly.adventurerscodex.com tests/`
+
+*with operadriver*
+
+`py.test --verbose --capture=no --web_driver=opera --opera_driver_path=/your/driver/path'
 
 *run specific test file*
 
