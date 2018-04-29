@@ -33,7 +33,7 @@ def test_data_persists(player_wizard, browser): # noqa
     ability_scores_edit.done.click()
 
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(ability_scores_edit.modal_div_xpath)
+        modal_finished_closing()
     )
 
     hp_hd.damage_up.click()
@@ -522,7 +522,7 @@ def test_saving_throw_proficiency(player_wizard, browser): # noqa
 
     # add custom wait to test for class in nested element
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(saving_throw_edit.modal_div_id)
+        modal_finished_closing()
     )
 
     row = ut.get_table_row(saving_throw, 'table', values=False)

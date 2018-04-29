@@ -101,12 +101,9 @@ class sorting_arrow_down: # noqa
 class modal_finished_closing: # noqa
     """Wait until modal finished closing."""
 
-    def __init__(self, element_id):
-        """Init expected condition.
-
-        :param element_id: ID of DOM element
-        """
-        self.element_id = element_id
+    def __init__(self):
+        """No required parameters."""
+        pass
 
     def __call__(self, driver):
         """Test if modal has closed."""

@@ -70,7 +70,7 @@ def test_delete_inventory(player_wizard, browser): # noqa
     inventory_add.add.click()
 
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(inventory_add.modal_div_id)
+        modal_finished_closing()
     )
 
     rows = ut.get_table_rows(inventory_table, 'table', values=False)
@@ -101,7 +101,7 @@ def test_edit_inventory(player_wizard, browser): # noqa
     inventory_add.add.click()
 
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(inventory_add.modal_div_id)
+        modal_finished_closing()
     )
 
     rows = ut.get_table_rows(inventory_table, 'table', values=False)
@@ -137,7 +137,7 @@ def test_edit_inventory(player_wizard, browser): # noqa
 
     inventory_edit.done.click()
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(inventory_edit.modal_div_id)
+        modal_finished_closing()
     )
     row = ut.get_table_row(inventory_table, 'table', 1)
 
@@ -175,7 +175,7 @@ def test_preview_inventory(player_wizard, browser): # noqa
     inventory_add.add.click()
 
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(inventory_add.modal_div_id)
+        modal_finished_closing()
     )
 
     row = ut.get_table_row(inventory_table, 'table', values=False)
@@ -351,7 +351,7 @@ def test_inventory_total_weight(player_wizard, browser): # noqa
     inventory_add.add.click()
 
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(inventory_add.modal_div_id)
+        modal_finished_closing()
     )
 
     inventory_table.add.click()
@@ -393,7 +393,7 @@ def test_inventory_sorting(player_wizard, browser): # noqa
     inventory_add.add.click()
 
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(inventory_add.modal_div_id)
+        modal_finished_closing()
     )
 
     inventory_table.add.click()
@@ -406,7 +406,7 @@ def test_inventory_sorting(player_wizard, browser): # noqa
     inventory_add.add.click()
 
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(inventory_add.modal_div_id)
+        modal_finished_closing()
     )
 
     inventory_table.item_header.click()
@@ -655,7 +655,7 @@ def test_delete_magic_items(player_wizard, browser): # noqa
     rows = ut.get_table_rows(magic_items_table, 'table', values=False)
 
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(magic_items_add.modal_div_id)
+        modal_finished_closing()
     )
 
     rows[0][5].find_element_by_tag_name('a').click()
@@ -684,7 +684,7 @@ def test_edit_magic_items(player_wizard, browser): # noqa
     magic_items_add.add.click()
 
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(magic_items_add.modal_div_id)
+        modal_finished_closing()
     )
 
     rows = ut.get_table_rows(magic_items_table, 'table', values=False)
@@ -721,7 +721,7 @@ def test_edit_magic_items(player_wizard, browser): # noqa
     magic_items_edit.done.click()
 
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(magic_items_edit.modal_div_id)
+        modal_finished_closing()
     )
 
     row = ut.get_table_row(magic_items_table, 'table', 1)
@@ -758,7 +758,7 @@ def test_preview_magic_items(player_wizard, browser): # noqa
     magic_items_add.add.click()
 
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(magic_items_add.modal_div_id)
+        modal_finished_closing()
     )
 
     row = ut.get_table_row(magic_items_table, 'table', values=False)
@@ -931,7 +931,7 @@ def test_magic_items_total_weight(player_wizard, browser): # noqa
     magic_items_add.add.click()
 
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(magic_items_add.modal_div_id)
+        modal_finished_closing()
     )
 
     magic_items_table.add.click()
@@ -975,7 +975,7 @@ def test_magic_items_sorting(player_wizard, browser): # noqa
     magic_items_add.add.click()
 
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(magic_items_add.modal_div_id)
+        modal_finished_closing()
     )
 
     magic_items_table.add.click()
@@ -991,7 +991,7 @@ def test_magic_items_sorting(player_wizard, browser): # noqa
     magic_items_add.add.click()
 
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(magic_items_add.modal_div_id)
+        modal_finished_closing()
     )
 
     magic_items_table.magic_item_header.click()

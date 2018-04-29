@@ -94,7 +94,7 @@ def test_delete_feature(player_wizard, browser): # noqa
     feature.add.click()
 
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(feature.modal_div_id)
+        modal_finished_closing()
     )
 
     rows = ut.get_table_rows(features_table, 'table', values=False)
@@ -177,7 +177,7 @@ def test_edit_feature(player_wizard, browser): # noqa
     feature.add.click()
 
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(feature.modal_div_id)
+        modal_finished_closing()
     )
 
     rows = ut.get_table_rows(features_table, 'table', values=False)
@@ -209,7 +209,7 @@ def test_edit_feature(player_wizard, browser): # noqa
     feature_edit.done.click()
 
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(feature_edit.modal_div_id)
+        modal_finished_closing()
     )
 
     row = ut.get_table_row(features_table, 'table', 1)
@@ -293,7 +293,7 @@ def test_delete_feat(player_wizard, browser): # noqa
     feat.add.click()
 
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(feat.modal_div_id)
+        modal_finished_closing()
     )
 
     rows = ut.get_table_rows(feats_table, 'table', values=False)
@@ -369,7 +369,7 @@ def test_edit_feat(player_wizard, browser): # noqa
     feat.add.click()
 
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(feat.modal_div_id)
+        modal_finished_closing()
     )
 
     rows = ut.get_table_rows(feats_table, 'table', values=False)
@@ -397,7 +397,7 @@ def test_edit_feat(player_wizard, browser): # noqa
     feat_edit.done.click()
 
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(feat_edit.modal_div_id)
+        modal_finished_closing()
     )
 
     WebDriverWait(browser, 10).until(
@@ -500,7 +500,7 @@ def test_delete_trait(player_wizard, browser): # noqa
     trait.add.click()
 
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(trait.modal_div_id)
+        modal_finished_closing()
     )
 
     rows = ut.get_table_rows(traits_table, 'table', values=False)
@@ -582,7 +582,7 @@ def test_edit_trait(player_wizard, browser): # noqa
     trait.add.click()
 
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(trait.modal_div_id)
+        modal_finished_closing()
     )
 
     rows = ut.get_table_rows(traits_table, 'table', values=False)
@@ -620,7 +620,7 @@ def test_edit_trait(player_wizard, browser): # noqa
     rows = ut.get_table_rows(traits_table, 'table', values=False)
 
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(trait.modal_div_id)
+        modal_finished_closing()
     )
 
     WebDriverWait(browser, 10).until(
@@ -715,7 +715,7 @@ def test_delete_proficiency(player_wizard, browser): # noqa
     rows = ut.get_table_rows(proficiency_table, 'table', values=False)
 
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(proficiency_add.modal_div_id)
+        modal_finished_closing()
     )
 
     rows[0][2].find_element_by_tag_name('a').click()
@@ -793,7 +793,7 @@ def test_edit_proficiency(player_wizard, browser): # noqa
     proficiency_add.add.click()
 
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(proficiency_add.modal_div_id)
+        modal_finished_closing()
     )
 
     rows = ut.get_table_rows(proficiency_table, 'table', values=False)
@@ -818,7 +818,7 @@ def test_edit_proficiency(player_wizard, browser): # noqa
     proficiency_edit.done.click()
 
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(proficiency_edit.modal_div_id)
+        modal_finished_closing()
     )
 
     row = ut.get_table_row(proficiency_table, 'table', 1)
@@ -916,7 +916,7 @@ def test_proficiency_types(player_wizard, browser): # noqa
     skills_edit.done.click()
 
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(skills_edit.modal_div_xpath)
+        modal_finished_closing()
     )
 
     time.sleep(.4)
@@ -934,7 +934,7 @@ def test_proficiency_types(player_wizard, browser): # noqa
     skills_edit.done.click()
 
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(skills_edit.modal_div_xpath)
+        modal_finished_closing()
     )
     time.sleep(.4)
     acrobatics = ut.get_table_row(skills_table, 'table', values=False)
@@ -952,7 +952,7 @@ def test_proficiency_types(player_wizard, browser): # noqa
     skills_edit.done.click()
 
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(skills_edit.modal_div_xpath)
+        modal_finished_closing()
     )
     time.sleep(.4)
     acrobatics = ut.get_table_row(skills_table, 'table', values=False)
@@ -1014,7 +1014,7 @@ def test_data_persists(player_wizard, browser): # noqa
     feature.add.click()
 
     WebDriverWait(browser, 15).until(
-        modal_finished_closing(feature.modal_div_id)
+        modal_finished_closing()
     )
 
     feats_table.add.click()
@@ -1027,7 +1027,7 @@ def test_data_persists(player_wizard, browser): # noqa
     feat.add.click()
 
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(feat.modal_div_id)
+        modal_finished_closing()
     )
 
     traits_table.add.click()
@@ -1040,7 +1040,7 @@ def test_data_persists(player_wizard, browser): # noqa
     trait.add.click()
 
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(trait.modal_div_id)
+        modal_finished_closing()
     )
 
     proficiency_table.add.click()
@@ -1053,7 +1053,7 @@ def test_data_persists(player_wizard, browser): # noqa
     proficiency_add.add.click()
 
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(proficiency_add.modal_div_id)
+        modal_finished_closing()
     )
 
     acrobatics = ut.get_table_row(skills_table, 'table', values=False)
@@ -1069,7 +1069,7 @@ def test_data_persists(player_wizard, browser): # noqa
     skills_edit.done.click()
 
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(skills_edit.modal_div_xpath)
+        modal_finished_closing()
     )
 
     browser.refresh()
