@@ -22,7 +22,7 @@ Requirements and setup
 * Download opera webdriver https://github.com/operasoftware/operachromiumdriver/releases
 * Add path of webdriver executable to PATH environment variable
 
-Current test coverage supports Chrome, Firefox, Opera and Safari.
+*Current test coverage supports Chrome, Firefox, Opera and Safari*.
 
 Usage
 =====
