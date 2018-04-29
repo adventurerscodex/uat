@@ -35,10 +35,12 @@ def web_driver(request):
     """Return command line argument."""
     return request.config.getoption('--web_driver')
 
+
 @pytest.fixture
 def opera_driver_path(request):
     """Return command line argument."""
     return request.config.getoption('--opera_driver_path')
+
 
 @pytest.fixture
 def url(request):
@@ -62,7 +64,7 @@ def browser(request, web_driver, opera_driver_path, url):
     elif web_driver.lower() == 'opera':
         if not opera_driver_path:
             raise Exception('Opera driver path required: --opera_driver_path')
-        
+
         options = webdriver.ChromeOptions()
         options.binary_location = opera_driver_path
 
