@@ -2,8 +2,6 @@
 
 import factory.fuzzy
 
-from factories.fixtures import Fixtures
-
 
 class Feat:
     """Definition of feat model."""
@@ -27,4 +25,4 @@ class FeatFactory(factory.Factory):
         model = Feat
 
     name = factory.fuzzy.FuzzyText(length=125, prefix='Feat_')
-    description = factory.fuzzy.FuzzyText(length=150,prefix='Description_')
+    description = factory.fuzzy.FuzzyText(length=150, prefix='Description_')
