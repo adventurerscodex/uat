@@ -1,6 +1,6 @@
 """Health components."""
 
-from modules import Element, Elements, Component
+from component_objects import Element, Elements, Component
 
 
 class HitPointHitDice(Component):

@@ -1,6 +1,6 @@
 """Footer components."""
 
-from modules import Element, Component
+from component_objects import Element, Component
 
 
 class Footer(Component):

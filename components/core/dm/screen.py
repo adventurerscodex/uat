@@ -1,6 +1,6 @@
 """DM screen component."""
 
-from modules import Element, Component
+from component_objects import Element, Component
 
 
 class Screen(Component):

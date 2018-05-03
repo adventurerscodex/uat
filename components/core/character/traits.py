@@ -1,6 +1,6 @@
 """Trait components."""
 
-from modules import Element, Component
+from component_objects import Element, Component
 
 
 class TraitAddModal(Component):
