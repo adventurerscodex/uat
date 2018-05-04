@@ -8,8 +8,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from components.core.character import features, feats, traits
 from components.core.character import tracked, proficiency, skills
 from components.core.character.tabs import Tabs
-from expected_conditions.conditions import modal_finished_closing
-from expected_conditions.conditions import table_cell_updated
+from expected_conditions.general import modal_finished_closing
+from expected_conditions.general import table_cell_updated
 from utils import general as ut
 
 

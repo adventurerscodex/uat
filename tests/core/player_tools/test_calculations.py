@@ -10,7 +10,7 @@ from components.core.character.saving_throw import SavingThrowTable
 from components.core.character.skills import SkillsTable
 from components.core.character.weapon import WeaponTable, WeaponAddModal
 from components.core.character.tabs import Tabs
-from expected_conditions.conditions import table_cell_updated
+from expected_conditions.general import table_cell_updated
 from utils import general as ut
 
 def test_strength_increase(player_wizard, browser): # noqa

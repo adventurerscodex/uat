@@ -6,7 +6,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 from components.core.character import spells
 from components.core.character.tabs import Tabs
-from expected_conditions.conditions import modal_finished_closing
+from expected_conditions.general import modal_finished_closing
 from utils import general as ut
 
 def test_add_spells(player_wizard, browser): # noqa

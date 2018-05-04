@@ -12,7 +12,7 @@ from components.core.character import wizard
 from components.core.character.tabs import Tabs
 from components.core.character.profile import Profile
 from components.core.character.other_stats import OtherStats
-from expected_conditions.conditions import table_has_data
+from expected_conditions.general import table_has_data
 from utils import general as ut
 
 
