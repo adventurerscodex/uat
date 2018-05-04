@@ -4,7 +4,7 @@ from selenium.webdriver.support import expected_conditions as EC # noqa
 from selenium.webdriver.support.ui import WebDriverWait
 
 from components.core.general.footer import Footer
-from expected_conditions.conditions import url_in_new_tab_matches
+from expected_conditions.general import url_in_new_tab_matches
 
 
 def test_facebook_link(player_wizard, browser): # noqa

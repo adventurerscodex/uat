@@ -6,8 +6,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 from components.core.character import inventory, coins, magic_items
 from components.core.character.tabs import Tabs
-from expected_conditions.conditions import modal_finished_closing
-from expected_conditions.conditions import sorting_arrow_up, sorting_arrow_down
+from expected_conditions.general import modal_finished_closing
+from expected_conditions.general import sorting_arrow_up, sorting_arrow_down
 from utils import general as ut
 
 def test_add_inventory(player_wizard, browser): # noqa

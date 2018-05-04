@@ -5,7 +5,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 from components.core.character.notes import NotesList, NotesDetail
 from components.core.character.tabs import Tabs
-from expected_conditions.conditions import url_in_new_tab_matches
+from expected_conditions.general import url_in_new_tab_matches
 
 
 def test_add_note(player_wizard, browser): # noqa
