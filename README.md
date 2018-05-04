@@ -19,9 +19,10 @@ Requirements and setup
 * Create a virtual environment
 * Install requirements `pip install -r requirements.txt`
 * Download chrome and/or firefox webdriver (https://selenium-python.readthedocs.io/installation.html#downloading-python-bindings-for-selenium)
+* Download opera webdriver https://github.com/operasoftware/operachromiumdriver/releases
 * Add path of webdriver executable to PATH environment variable
 
-Currently Firefox and Chrome are supported.
+*Current test coverage supports Chrome, Firefox, Opera and Safari*.
 
 Usage
 =====
@@ -35,15 +36,23 @@ By default, url is https://nightly.adventurerscodex.com, and web_driver is chrom
 
 Sample usage:
 
-*always run in verbose mode and no capture (no params will default to https://nightly.adventurerscodex.com and chrome web_driver)*
+**always run in verbose mode and no capture** (no params will default to https://nightly.adventurerscodex.com and chrome web_driver)
 
 `py.test --verbose --capture=no tests/`
 
-*with explicit url and web_driver*
+**with csv report**
+
+`py.test --verbose --capture=no tests/ --csv tests.csv --csv-columns id,module,name,file,doc,status,message,browser,created_at,duration_formatted`
+
+**with explicit url and web_driver**
 
 `py.test --verbose --capture=no --web_driver=chrome --url=https://nightly.adventurerscodex.com tests/`
 
-*run specific test file*
+**with opera driver**
+
+`py.test --verbose --capture=no --web_driver=opera --opera_binary_path=/your/driver/path`
+
+**with specific test file**
 
 `py.test --verbose --capture=no tests/core/player_tools/test_player_wizard.py::test_attributes_required`
 

@@ -96,7 +96,7 @@ def test_delete_weapon(player_wizard, browser): # noqa
     weapon_add.add.click()
 
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(weapon_add.modal_div_id)
+        modal_finished_closing()
     )
 
     rows = ut.get_table_rows(weapon_table, 'table', values=False)
@@ -133,7 +133,7 @@ def test_edit_weapon(player_wizard, browser): # noqa
     weapon_add.add.click()
 
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(weapon_add.modal_div_id)
+        modal_finished_closing()
     )
 
     rows = ut.get_table_rows(weapon_table, 'table', values=False)
@@ -188,12 +188,14 @@ def test_edit_weapon(player_wizard, browser): # noqa
     weapon_edit.done.click()
 
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(weapon_edit.modal_div_id)
+        modal_finished_closing()
     )
 
     row = ut.get_table_row(weapon_table, 'table', 1)
 
-    assert row.weapon.strip() == 'Edit Name  + 2'
+    weapon_name_label = ' '.join([string.strip() for string in row.weapon.split()])
+
+    assert weapon_name_label == 'Edit Name + 2'
     assert row.to_hit.strip() == '+ 10'
     assert row.damage.strip() == '1d10'
     assert row.damage_type.strip() == 'Slashing'
@@ -229,7 +231,7 @@ def test_preview_weapon(player_wizard, browser): # noqa
     weapon_add.add.click()
 
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(weapon_add.modal_div_id)
+        modal_finished_closing()
     )
 
     row = ut.get_table_row(weapon_table, 'table', values=False)
@@ -394,12 +396,14 @@ def test_weapon_magical_modifier(player_wizard, browser): # noqa
     weapon_add.add.click()
 
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(weapon_add.modal_div_id)
+        modal_finished_closing()
     )
 
     row = ut.get_table_row(weapon_table, 'table', 1)
 
-    assert row.weapon.strip() == 'Add Name  + 3'
+    weapon_name_label = ' '.join([string.strip() for string in row.weapon.split()])
+
+    assert weapon_name_label == 'Add Name + 3'
 
 
 def test_weapon_persists(player_wizard, browser): # noqa
@@ -495,7 +499,7 @@ def test_weapon_total_weight(player_wizard, browser): # noqa
     weapon_add.add.click()
 
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(weapon_add.modal_div_id)
+        modal_finished_closing()
     )
 
     weapon_table.add.click()
@@ -541,7 +545,7 @@ def test_melee_ft(player_wizard, browser): # noqa
     weapon_add.add.click()
 
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(weapon_add.modal_div_id)
+        modal_finished_closing()
     )
 
     row = ut.get_table_row(weapon_table, 'table', values=False)
@@ -574,7 +578,7 @@ def test_ranged_ft(player_wizard, browser): # noqa
     weapon_add.add.click()
 
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(weapon_add.modal_div_id)
+        modal_finished_closing()
     )
 
     row = ut.get_table_row(weapon_table, 'table', values=False)
@@ -607,7 +611,7 @@ def test_reach_ft(player_wizard, browser): # noqa
     weapon_add.add.click()
 
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(weapon_add.modal_div_id)
+        modal_finished_closing()
     )
 
     row = ut.get_table_row(weapon_table, 'table', values=False)
@@ -642,7 +646,7 @@ def test_weapon_sorting(player_wizard, browser): # noqa
     weapon_add.add.click()
 
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(weapon_add.modal_div_id)
+        modal_finished_closing()
     )
 
     weapon_table.add.click()
@@ -656,7 +660,7 @@ def test_weapon_sorting(player_wizard, browser): # noqa
     weapon_add.add.click()
 
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(weapon_add.modal_div_id)
+        modal_finished_closing()
     )
 
     weapon_table.weapon_header.click()
@@ -777,6 +781,7 @@ def test_add_armor(player_wizard, browser): # noqa
     assert int(armor_add.price.get_attribute('value').strip()) == stub.price
 
     curr_denomination = stub.currency_denomination
+
     assert armor_add.currency_denomination.get_attribute('value').strip() == curr_denomination
     assert int(armor_add.weight.get_attribute('value').strip()) == stub.weight
     assert int(armor_add.armor_class.get_attribute('value').strip()) == stub.armor_class
@@ -788,7 +793,9 @@ def test_add_armor(player_wizard, browser): # noqa
 
     row = ut.get_table_row(armor_table, 'table', 1)
 
-    assert row.armor.strip() == '{}  + {}'.format(
+    armor_name_label = ' '.join([string.strip() for string in row.armor.split()])
+
+    assert armor_name_label == '{} + {}'.format(
         stub.name, stub.magical_modifier
     )
     assert int(row.armor_class.strip()) == stub.armor_class
@@ -821,7 +828,7 @@ def test_delete_armor(player_wizard, browser): # noqa
     rows = ut.get_table_rows(armor_table, 'table', values=False)
 
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(armor_add.modal_div_id)
+        modal_finished_closing()
     )
 
     rows[0][4].find_element_by_tag_name('a').click()
@@ -860,7 +867,7 @@ def test_edit_armor(player_wizard, browser): # noqa
     rows = ut.get_table_rows(armor_table, 'table', values=False)
 
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(armor_add.modal_div_id)
+        modal_finished_closing()
     )
 
     rows[0][0].click()
@@ -899,7 +906,7 @@ def test_edit_armor(player_wizard, browser): # noqa
     armor_edit.done.click()
 
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(armor_add.modal_div_id)
+        modal_finished_closing()
     )
 
     WebDriverWait(browser, 10).until(
@@ -949,7 +956,7 @@ def test_preview_armor(player_wizard, browser): # noqa
     armor_add.add.click()
 
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(armor_add.modal_div_id)
+        modal_finished_closing()
     )
 
     row = ut.get_table_row(armor_table, 'table', values=False)
@@ -1083,7 +1090,7 @@ def test_magical_modifier(player_wizard, browser): # noqa
     armor_add.add.click()
 
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(armor_add.modal_div_id)
+        modal_finished_closing()
     )
 
     row = ut.get_table_row(armor_table, 'table', 1)
@@ -1172,7 +1179,7 @@ def test_armor_donned(player_wizard, browser): # noqa
     armor_add.add.click()
 
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(armor_add.modal_div_id)
+        modal_finished_closing()
     )
 
     row = ut.get_table_row(armor_table, 'table', 1, values=False)
@@ -1206,7 +1213,7 @@ def test_armor_total_weight(player_wizard, browser): # noqa
     armor_add.add.click()
 
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(armor_add.modal_div_id)
+        modal_finished_closing()
     )
 
     armor_table.add.click()
@@ -1255,7 +1262,7 @@ def test_armor_sorting(player_wizard, browser): # noqa
     armor_add.add.click()
 
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(armor_add.modal_div_id)
+        modal_finished_closing()
     )
 
     armor_table.add.click()
@@ -1269,7 +1276,7 @@ def test_armor_sorting(player_wizard, browser): # noqa
     armor_add.add.click()
 
     WebDriverWait(browser, 10).until(
-        modal_finished_closing(armor_add.modal_div_id)
+        modal_finished_closing()
     )
 
     armor_table.armor_header.click()

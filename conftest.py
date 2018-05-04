@@ -2,6 +2,8 @@
 
 import logging
 import pytest
+import sys
+from time import gmtime, strftime
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -20,6 +22,7 @@ LOGGER.setLevel(logging.WARNING)
 def pytest_addoption(parser):
     """Command line parameters."""
     parser.addoption('--web_driver', action='store', default='chrome')
+    parser.addoption('--opera_binary_path', action='store')
     parser.addoption(
         '--url',
         action='store',
@@ -34,13 +37,19 @@ def web_driver(request):
 
 
 @pytest.fixture
+def opera_binary_path(request):
+    """Return command line argument."""
+    return request.config.getoption('--opera_binary_path')
+
+
+@pytest.fixture
 def url(request):
     """Return command line argument."""
     return request.config.getoption('--url')
 
 
 @pytest.fixture(scope='function')
-def browser(request, web_driver, url):
+def browser(request, web_driver, opera_binary_path, url):
     """Return selenium webdriver chrome instance."""
     driver = None
     if web_driver.lower() == 'chrome':
@@ -52,6 +61,15 @@ def browser(request, web_driver, url):
     elif web_driver.lower() == 'safari':
         driver = webdriver.Safari()
 
+    elif web_driver.lower() == 'opera':
+        if not opera_binary_path:
+            raise Exception('Opera binary path required: --opera_binary_path')
+
+        options = webdriver.ChromeOptions()
+        options.binary_location = opera_binary_path
+
+        driver = webdriver.Opera(options=options)
+
     driver.get(url)
     driver.maximize_window()
 
@@ -61,6 +79,21 @@ def browser(request, web_driver, url):
     request.addfinalizer(close_browser)
 
     return driver
+
+
+def pytest_csv_register_columns(columns):
+    """Add custom columns to csv reporting."""
+    browser = None
+    for arg in sys.argv:
+        if '--web_driver' in arg:
+            arg_string = arg.split('=')
+            try:
+                browser = arg_string[1]
+            except IndexError:
+                pass
+
+    columns['browser'] = browser
+    columns['created_at'] = strftime('%Y-%m-%d %H:%M:%S', gmtime())
 
 
 @pytest.fixture(scope='function')

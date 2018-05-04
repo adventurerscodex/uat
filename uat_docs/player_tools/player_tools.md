@@ -117,13 +117,13 @@ Spells
 
 - [ ] As a player, spell name field auto-completes with OGL data and the remaining fields pre-populate
 
-- [ ] As a player, spells can be added, deleted, and edited
+- [x] As a player, spells can be added, deleted, and edited
 
 - [ ] As a player, spell slots can be added, deleted, and edited
 
 - [ ] As a player, spell stats can be added, deleted, and edited
 
-- [ ] As a player, sf no spells are in table, clicking the first row will trigger add modal
+- [x] As a player, if no spells are in table, clicking the first row will trigger add modal
 
 - [ ] As a player, spells may be prepared by clicking in the checkbox, and prepared spells persist
 
@@ -133,7 +133,7 @@ Spells
 
 - [ ] In the modal if a spell is prepared, the always prepared checkbox is disabled
 
-- [ ] As a player, the preview modal for spells displays the data correctly and includes a watermark denoting the correct spell school
+- [x] As a player, the preview modal for spells displays the data correctly and includes a watermark denoting the correct spell school
 
 - [ ] As a player, spell casting ability auto-completes in spell stats modal
 

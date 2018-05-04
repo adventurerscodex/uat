@@ -23,7 +23,7 @@ class url_in_new_tab_matches:  # noqa
 
     def __call__(self, driver):
         """Test if url matches."""
-        return driver.current_url == self.url
+        return driver.current_url.strip() == self.url
 
 class table_has_data:  # noqa
     """Wait until table has data."""
@@ -37,17 +37,6 @@ class table_has_data:  # noqa
         tds = self.table.table.find_elements_by_tag_name('td')
 
         return len(tds) > 1
-
-class element_is_clickable:  # noqa
-    """Wait element is clickable."""
-
-    def __init__(self, element):
-        """Init expected condition."""
-        self.element = element
-
-    def __call__(self, driver):
-        """Test if element is clickable."""
-        return all([self.element.is_enabled(), self.element.is_displayed()])
 
 class table_cell_updated: # noqa
     """Wait until cell data has updated."""
@@ -112,12 +101,9 @@ class sorting_arrow_down: # noqa
 class modal_finished_closing: # noqa
     """Wait until modal finished closing."""
 
-    def __init__(self, element_id):
-        """Init expected condition.
-
-        :param element_id: ID of DOM element
-        """
-        self.element_id = element_id
+    def __init__(self):
+        """No required parameters."""
+        pass
 
     def __call__(self, driver):
         """Test if modal has closed."""
