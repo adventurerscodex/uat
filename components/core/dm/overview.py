@@ -1,6 +1,6 @@
 """DM overview component."""
 
-from modules.element import Element, Component
+from component_objects import Element, Component
 
 
 class DMOverview(Component):
