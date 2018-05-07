@@ -1,6 +1,6 @@
 """Other Stats components."""
 
-from modules.element import Element, Component
+from component_objects import Element, Component
 
 
 class OtherStats(Component):
