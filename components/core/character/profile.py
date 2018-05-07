@@ -1,6 +1,6 @@
 """Profile component."""
 
-from modules.element import Element, Component
+from component_objects import Element, Component
 
 
 class Profile(Component):
