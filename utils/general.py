@@ -98,7 +98,6 @@ def get_table_rows(element_,
         for tr in rows:
             row = tr.find_elements(By.TAG_NAME, 'td')
             values = [r.text for r in row]
-            print(values)
             output.append(Row(*values))
 
         return output
