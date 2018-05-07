@@ -1,6 +1,6 @@
 """Profile component."""
 
-from modules.element import Component, Element
+from component_objects import Element, Component
 
 
 class SpellSlotsTable(Component):
