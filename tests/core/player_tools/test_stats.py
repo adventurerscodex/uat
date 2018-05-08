@@ -9,8 +9,8 @@ from components.core.character.health import HitPointHitDice
 from components.core.character.other_stats import OtherStats
 from components.core.character.profile_picture import ProfilePicture
 from components.core.character.saving_throw import SavingThrowEditModal, SavingThrowTable
-from expected_conditions.conditions import table_cell_updated
-from expected_conditions.conditions import modal_finished_closing
+from expected_conditions.general import table_cell_updated
+from expected_conditions.general import modal_finished_closing
 from utils import general as ut
 
 def test_data_persists(player_wizard, browser): # noqa
