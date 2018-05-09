@@ -25,7 +25,7 @@ class Background:
 
 
 class BackgroundFactory(factory.Factory):
-    """Definition of armor factory."""
+    """Definition of background factory."""
 
     class Meta:
         """Bind model to factory."""
