@@ -2,7 +2,7 @@
 
 import factory
 
-from factories.fixtures import Fixtures, random_wordlist
+from factories.fixtures import Fixtures
 
 
 class Background:
