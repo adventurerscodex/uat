@@ -21,14 +21,14 @@ class Armor:
         description,
     ):
         """Initialize armor instance."""
-        self.name = name,
+        self.name = name
         self.type_ = type_
-        self.magical_modifier = magical_modifier,
-        self.price = price,
-        self.currency_denomination = currency_denomination,
-        self.weight = weight,
-        self.armor_class = armor_class,
-        self.stealth = stealth,
+        self.magical_modifier = magical_modifier
+        self.price = price
+        self.currency_denomination = currency_denomination
+        self.weight = weight
+        self.armor_class = armor_class
+        self.stealth = stealth
         self.description = description
 
 

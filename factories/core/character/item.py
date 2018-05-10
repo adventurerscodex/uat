@@ -18,12 +18,12 @@ class Item:
         currency_denomination,
     ):
         """Initialize item instance."""
-        self.name = name,
-        self.description = description,
-        self.quantity = quantity,
-        self.weight = weight,
-        self.cost = cost,
-        self.currency_denomination = currency_denomination,
+        self.name = name
+        self.description = description
+        self.quantity = quantity
+        self.weight = weight
+        self.cost = cost
+        self.currency_denomination = currency_denomination
 
 
 class ItemFactory(factory.Factory):

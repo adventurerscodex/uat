@@ -17,11 +17,11 @@ class Background:
         personality_trait,
     ):
         """Initialize background instance."""
-        self.name = name,
+        self.name = name
         self.ideal = ideal
-        self.flaw = flaw,
-        self.bond = bond,
-        self.personality_trait = personality_trait,
+        self.flaw = flaw
+        self.bond = bond
+        self.personality_trait = personality_trait
 
 
 class BackgroundFactory(factory.Factory):
