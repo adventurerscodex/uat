@@ -1,6 +1,8 @@
-import factory.fuzzy
+"""Item factory."""
 
-from factories.fixtures import Fixtures
+import factory
+
+from factories.fixtures import Fixtures, random_wordlist
 
 
 class Item:
@@ -32,11 +34,23 @@ class ItemFactory(factory.Factory):
 
         model = Item
 
-    name = factory.fuzzy.FuzzyText(length=40, prefix='Item_')
-    description = factory.fuzzy.FuzzyText(length=150, prefix='description_')
-    quantity = factory.fuzzy.FuzzyInteger(1, 10000)
-    weight = factory.fuzzy.FuzzyInteger(0, 10000)
-    cost = factory.fuzzy.FuzzyInteger(0, 10000)
-    currency_denomination = factory.fuzzy.FuzzyChoice(
-        Fixtures['general']['currencyDenominationList']
+    name = factory.Faker(
+        'word',
+        ext_word_list=random_wordlist(max_length=40, prefix='Item_')
+    )
+
+    quantity = factory.Faker('random_int', min=1, max=10000)
+
+    weight = factory.Faker('random_int', min=0, max=10000)
+
+    cost = factory.Faker('random_int', min=0, max=10000)
+
+    currency_denomination = factory.Faker(
+        'random_element',
+        elements=Fixtures['general']['currencyDenominationList']
+    )
+
+    description = factory.Faker(
+        'text',
+        max_nb_chars=150
     )

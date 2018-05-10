@@ -1,8 +1,8 @@
 """Magic Item factory."""
 
-import factory.fuzzy
+import factory
 
-from factories.fixtures import Fixtures
+from factories.fixtures import Fixtures, random_wordlist
 
 
 class MagicItem:
@@ -40,16 +40,31 @@ class MagicItemFactory(factory.Factory):
 
         model = MagicItem
 
-    name = factory.fuzzy.FuzzyText(length=40, prefix='MagicItem_')
-    type_ = factory.fuzzy.FuzzyChoice(
-        Fixtures['magicItem']['magicItemTypeOptions']
+    name = factory.Faker(
+        'word',
+        ext_word_list=random_wordlist(max_length=40, prefix='MagicItem_')
     )
-    rarity = factory.fuzzy.FuzzyChoice(
-        Fixtures['magicItem']['magicItemRarityOptions']
+
+    type_ = factory.Faker(
+        'random_element',
+        elements=Fixtures['magicItem']['magicItemTypeOptions']
     )
-    requires_attunement = factory.fuzzy.FuzzyChoice([True, False])
-    attuned = factory.fuzzy.FuzzyChoice([True, False])
-    max_charges = factory.fuzzy.FuzzyInteger(0, 1000000)
-    used_charges = factory.fuzzy.FuzzyInteger(0, 1000000)
-    weight = factory.fuzzy.FuzzyInteger(0, 10000)
-    description = factory.fuzzy.FuzzyText(length=150, prefix='description_')
+    rarity = factory.Faker(
+        'random_element',
+        elements=Fixtures['magicItem']['magicItemRarityOptions']
+    )
+
+    requires_attunement = factory.Faker('boolean', chance_of_getting_true=50)
+
+    attuned = factory.Faker('boolean', chance_of_getting_true=50)
+
+    max_charges = factory.Faker('random_int', min=0, max=1000000)
+
+    used_charges = factory.Faker('random_int', min=0, max=1000000)
+
+    weight = factory.Faker('random_int', min=0, max=10000)
+
+    description = factory.Faker(
+        'text',
+        max_nb_chars=150
+    )

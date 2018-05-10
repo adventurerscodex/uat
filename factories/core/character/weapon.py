@@ -1,8 +1,8 @@
 """Weapon factory."""
 
-import factory.fuzzy
+import factory
 
-from factories.fixtures import Fixtures
+from factories.fixtures import Fixtures, random_wordlist
 
 
 class Weapon:
@@ -52,28 +52,62 @@ class WeaponFactory(factory.Factory):
 
         model = Weapon
 
-    name = factory.fuzzy.FuzzyText(length=40, prefix='Weapon_')
-    damage = factory.fuzzy.FuzzyText(length=40, prefix='damage_')
-    magical_modifier = factory.fuzzy.FuzzyInteger(0, 10)
-    to_hit_modifier = factory.fuzzy.FuzzyInteger(0, 10)
-    type_ = factory.fuzzy.FuzzyChoice(
-        Fixtures['weapon']['weaponTypeOptions']
+    name = factory.Faker(
+        'word',
+        ext_word_list=random_wordlist(max_length=40, prefix='Weapon_')
     )
-    handedness = factory.fuzzy.FuzzyChoice(
-        Fixtures['weapon']['weaponHandednessOptions']
+
+    damage = factory.Faker(
+        'word',
+        ext_word_list=random_wordlist(max_length=40, prefix='damage_')
     )
-    proficiency = factory.fuzzy.FuzzyChoice(
-        Fixtures['weapon']['weaponProficiencyOptions']
+
+    magical_modifier = factory.Faker('random_int', min=0, max=10)
+
+    to_hit_modifier = factory.Faker('random_int', min=0, max=10)
+
+    type_ = factory.Faker(
+        'random_element',
+        elements=Fixtures['weapon']['weaponTypeOptions']
     )
-    price = factory.fuzzy.FuzzyInteger(0, 1000000)
-    currency_denomination = factory.fuzzy.FuzzyChoice(
-        Fixtures['general']['currencyDenominationList']
+
+    handedness = factory.Faker(
+        'random_element',
+        elements=Fixtures['weapon']['weaponHandednessOptions']
     )
-    weight = factory.fuzzy.FuzzyInteger(0, 10000)
-    range_ = factory.fuzzy.FuzzyText(length=40, prefix='range_')
-    damage_type = factory.fuzzy.FuzzyText(length=40, prefix='damage_type_')
-    property_ = factory.fuzzy.FuzzyChoice(
-        Fixtures['weapon']['weaponPropertyOptions']
+
+    proficiency = factory.Faker(
+        'random_element',
+        elements=Fixtures['weapon']['weaponProficiencyOptions']
     )
-    quantity = factory.fuzzy.FuzzyInteger(0, 1000)
-    description = factory.fuzzy.FuzzyText(length=150, prefix='description_')
+
+    price = factory.Faker('random_int', min=0, max=1000000)
+
+    currency_denomination = factory.Faker(
+        'random_element',
+        elements=Fixtures['general']['currencyDenominationList']
+    )
+
+    weight = factory.Faker('random_int', min=0, max=10000)
+
+    range_ = factory.Faker(
+        'word',
+        ext_word_list=random_wordlist(max_length=40, prefix='range_')
+    )
+
+    damage_type = factory.Faker(
+        'word',
+        ext_word_list=random_wordlist(max_length=40, prefix='damage_type_')
+    )
+
+    property_ = factory.Faker(
+        'random_element',
+        elements=Fixtures['weapon']['weaponPropertyOptions']
+    )
+
+    quantity = factory.Faker('random_int', min=0, max=1000)
+
+    description = factory.Faker(
+        'text',
+        max_nb_chars=150
+    )

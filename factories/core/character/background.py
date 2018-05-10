@@ -1,6 +1,6 @@
 """Background factory."""
 
-import factory.fuzzy
+import factory
 
 from factories.fixtures import Fixtures
 
@@ -32,10 +32,27 @@ class BackgroundFactory(factory.Factory):
 
         model = Background
 
-    name = factory.fuzzy.FuzzyChoice(
-        Fixtures['profile']['backgroundOptions']
+    name = factory.Faker(
+        'random_element',
+        elements=Fixtures['profile']['backgroundOptions']
     )
-    ideal = factory.fuzzy.FuzzyText(length=150, prefix='ideal_')
-    flaw = factory.fuzzy.FuzzyText(length=150, prefix='flaw_')
-    bond = factory.fuzzy.FuzzyText(length=150, prefix='bond_')
-    personality_trait = factory.fuzzy.FuzzyText(length=150, prefix='personality_trait_')
+
+    ideal = factory.Faker(
+        'text',
+        max_nb_chars=150
+    )
+
+    flaw = factory.Faker(
+        'text',
+        max_nb_chars=150
+    )
+
+    bond = factory.Faker(
+        'text',
+        max_nb_chars=150
+    )
+
+    personality_trait = factory.Faker(
+        'text',
+        max_nb_chars=150
+    )
