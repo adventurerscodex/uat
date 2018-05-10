@@ -2,8 +2,6 @@
 
 import factory
 
-from factories.fixtures import Fixtures, random_wordlist
-
 
 class Coins:
     """Definition of coins model."""
