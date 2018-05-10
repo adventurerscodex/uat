@@ -1,8 +1,8 @@
 """Armor factory."""
 
-import factory.fuzzy
+import factory
 
-from factories.fixtures import Fixtures
+from factories.fixtures import Fixtures, random_wordlist
 
 
 class Armor:
@@ -40,18 +40,34 @@ class ArmorFactory(factory.Factory):
 
         model = Armor
 
-    name = factory.fuzzy.FuzzyText(length=40, prefix='Armor_')
-    type_ = factory.fuzzy.FuzzyChoice(
-        Fixtures['armor']['armorTypeOptions']
+    name = factory.Faker(
+        'word',
+        ext_word_list=random_wordlist(prefix='Armor_', max_length=40)
     )
-    magical_modifier = factory.fuzzy.FuzzyInteger(1, 10)
-    price = factory.fuzzy.FuzzyInteger(0, 1000000)
-    currency_denomination = factory.fuzzy.FuzzyChoice(
-        Fixtures['general']['currencyDenominationList']
+
+    type_ = factory.Faker(
+        'random_element', elements=Fixtures['armor']['armorTypeOptions']
     )
-    weight = factory.fuzzy.FuzzyInteger(0, 10000)
-    armor_class = factory.fuzzy.FuzzyInteger(10, 30)
-    stealth = factory.fuzzy.FuzzyChoice(
-        Fixtures['armor']['armorStealthOptions']
+
+    magical_modifier = factory.Faker('random_int', min=1, max=10)
+
+    price = factory.Faker('random_int', min=0, max=1000000)
+
+    currency_denomination = factory.Faker(
+        'random_element',
+        elements=Fixtures['general']['currencyDenominationList']
     )
-    description = factory.fuzzy.FuzzyText(length=150)
+
+    weight = factory.Faker('random_int', min=0, max=10000)
+
+    armor_class = factory.Faker('random_int', min=10, max=30)
+
+    stealth = factory.Faker(
+        'random_element',
+        elements=Fixtures['armor']['armorStealthOptions']
+    )
+
+    description = factory.Faker(
+        'text',
+        max_nb_chars=150
+    )

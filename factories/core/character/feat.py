@@ -1,6 +1,8 @@
 """Feat factory."""
 
-import factory.fuzzy
+import factory
+
+from factories.fixtures import random_wordlist
 
 
 class Feat:
@@ -24,5 +26,12 @@ class FeatFactory(factory.Factory):
 
         model = Feat
 
-    name = factory.fuzzy.FuzzyText(length=125, prefix='Feat_')
-    description = factory.fuzzy.FuzzyText(length=150, prefix='Description_')
+    name = factory.Faker(
+        'word',
+        ext_word_list=random_wordlist(max_length=125, prefix='Feat_')
+    )
+
+    description = factory.Faker(
+        'text',
+        max_nb_chars=150
+    )

@@ -6,7 +6,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from components.core.general.footer import Footer
 from expected_conditions.general import url_in_new_tab_matches
 
-
 def test_facebook_link(player_wizard, browser): # noqa
     """As a player, navbar footer links to facebook."""
     print('As a player, navbar footer links to facebook.')

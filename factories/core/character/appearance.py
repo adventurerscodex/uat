@@ -1,6 +1,8 @@
 """Appearance factory."""
 
-import factory.fuzzy
+import factory
+
+from factories.fixtures import random_wordlist
 
 
 class Appearance:
@@ -30,8 +32,22 @@ class AppearanceFactory(factory.Factory):
 
         model = Appearance
 
-    weight = factory.fuzzy.FuzzyInteger(0, 10000)
-    height = factory.fuzzy.FuzzyText(length=40, prefix='Height_')
-    hair_color = factory.fuzzy.FuzzyText(length=40, prefix='Hair_Color_')
-    eye_color = factory.fuzzy.FuzzyText(length=40, prefix='Eye_Color_')
-    skin_color = factory.fuzzy.FuzzyText(length=40, prefix='Skin_Color_')
+    weight = factory.Faker('random_int', min=0, max=10000)
+
+    height = factory.Faker(
+        'word',
+        ext_word_list=random_wordlist(prefix='Height_', max_length=40)
+    )
+
+    hair_color = factory.Faker(
+        'word',
+        ext_word_list=random_wordlist(prefix='Hair_Color_', max_length=40)
+    )
+    eye_color = factory.Faker(
+        'word',
+        ext_word_list=random_wordlist(prefix='Eye_Color_', max_length=40)
+    )
+    skin_color = factory.Faker(
+        'word',
+        ext_word_list=random_wordlist(prefix='Skin_Color_', max_length=40)
+    )

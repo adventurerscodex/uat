@@ -1,8 +1,8 @@
 """Spell factory."""
 
-import factory.fuzzy
+import factory
 
-from factories.fixtures import Fixtures
+from factories.fixtures import Fixtures, random_wordlist
 
 
 class Spell:
@@ -52,32 +52,64 @@ class SpellFactory(factory.Factory):
 
         model = Spell
 
-    name = factory.fuzzy.FuzzyText(length=40, prefix='Spell_')
-    type_ = factory.fuzzy.FuzzyChoice(
-        Fixtures['spell']['spellTypeOptions']
+    name = factory.Faker(
+        'word',
+        ext_word_list=random_wordlist(max_length=40, prefix='Spell_'))
+
+    type_ = factory.Faker(
+        'random_element',
+        elements=Fixtures['spell']['spellTypeOptions']
     )
-    damage = factory.fuzzy.FuzzyText(length=40, prefix='damage_')
-    damage_type = factory.fuzzy.FuzzyText(length=40, prefix='damage_type_')
-    school = factory.fuzzy.FuzzyChoice(
-        Fixtures['spell']['spellSchoolOptions']
+
+    damage = factory.Faker(
+        'word',
+        ext_word_list=random_wordlist(max_length=40, prefix='damage_')
     )
-    level = factory.fuzzy.FuzzyInteger(0, 10)
-    description = factory.fuzzy.FuzzyText(length=150, prefix='description_')
-    material_components = factory.fuzzy.FuzzyText(
-        length=40, prefix='material_components_'
+
+    damage_type = factory.Faker(
+        'word',
+        ext_word_list=random_wordlist(max_length=40, prefix='damage_type_')
     )
-    is_ritual = factory.fuzzy.FuzzyChoice([True, False])
-    prepared = factory.fuzzy.FuzzyChoice([True, False])
-    always_prepared = factory.fuzzy.FuzzyChoice([True, False])
-    casting_time = factory.fuzzy.FuzzyChoice(
-        Fixtures['spell']['spellCastingTimeOptions']
+
+    school = factory.Faker(
+        'random_element',
+        elements=Fixtures['spell']['spellSchoolOptions']
     )
-    components = factory.fuzzy.FuzzyChoice(
-        Fixtures['spell']['spellComponentsOptions']
+
+    level = factory.Faker('random_int', min=0, max=10)
+
+    material_components = factory.Faker(
+        'word',
+        ext_word_list=random_wordlist(max_length=40, prefix='material_components_')
     )
-    duration = factory.fuzzy.FuzzyChoice(
-        Fixtures['spell']['spellDurationOptions']
+
+    is_ritual = factory.Faker('boolean', chance_of_getting_true=50)
+
+    prepared = factory.Faker('boolean', chance_of_getting_true=50)
+
+    always_prepared = factory.Faker('boolean', chance_of_getting_true=50)
+
+    casting_time = factory.Faker(
+        'random_element',
+        elements=Fixtures['spell']['spellCastingTimeOptions']
     )
-    range_ = factory.fuzzy.FuzzyChoice(
-        Fixtures['spell']['spellRangeOptions']
+
+    components = factory.Faker(
+        'random_element',
+        elements=Fixtures['spell']['spellComponentsOptions']
+    )
+
+    duration = factory.Faker(
+        'random_element',
+        elements=Fixtures['spell']['spellDurationOptions']
+    )
+
+    range_ = factory.Faker(
+        'random_element',
+        elements=Fixtures['spell']['spellRangeOptions']
+    )
+
+    description = factory.Faker(
+        'text',
+        max_nb_chars=150
     )
