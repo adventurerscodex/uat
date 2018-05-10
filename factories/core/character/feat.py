@@ -14,7 +14,7 @@ class Feat:
         description,
     ):
         """Initialize feat instance."""
-        self.name = name,
+        self.name = name
         self.description = description
 
 

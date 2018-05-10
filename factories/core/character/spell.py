@@ -27,20 +27,20 @@ class Spell:
         range_,
     ):
         """Initialize spell instance."""
-        self.name = name,
-        self.type_ = type_,
-        self.damage = damage,
-        self.damage_type = damage_type,
-        self.school = school,
-        self.level = level,
-        self.description = description,
-        self.material_components = material_components,
-        self.is_ritual = is_ritual,
-        self.prepared = prepared,
-        self.always_prepared = always_prepared,
-        self.casting_time = casting_time,
-        self.components = components,
-        self.duration = duration,
+        self.name = name
+        self.type_ = type_
+        self.damage = damage
+        self.damage_type = damage_type
+        self.school = school
+        self.level = level
+        self.description = description
+        self.material_components = material_components
+        self.is_ritual = is_ritual
+        self.prepared = prepared
+        self.always_prepared = always_prepared
+        self.casting_time = casting_time
+        self.components = components
+        self.duration = duration
         self.range_ = range_
 
 

@@ -21,14 +21,14 @@ class MagicItem:
         description,
     ):
         """Initialize magic item instance."""
-        self.name = name,
-        self.type_ = type_,
-        self.rarity = rarity,
-        self.requires_attunement = requires_attunement,
-        self.attuned = attuned,
-        self.max_charges = max_charges,
-        self.used_charges = used_charges,
-        self.weight = weight,
+        self.name = name
+        self.type_ = type_
+        self.rarity = rarity
+        self.requires_attunement = requires_attunement
+        self.attuned = attuned
+        self.max_charges = max_charges
+        self.used_charges = used_charges
+        self.weight = weight
         self.description = description
 
 

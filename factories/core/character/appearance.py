@@ -17,11 +17,11 @@ class Appearance:
         skin_color,
     ):
         """Initialize appearance instance."""
-        self.weight = weight,
-        self.height = height,
-        self.hair_color = hair_color,
-        self.eye_color = eye_color,
-        self.skin_color = skin_color,
+        self.weight = weight
+        self.height = height
+        self.hair_color = hair_color
+        self.eye_color = eye_color
+        self.skin_color = skin_color
 
 
 class AppearanceFactory(factory.Factory):

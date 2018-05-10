@@ -27,20 +27,20 @@ class Weapon:
         description,
     ):
         """Initialize weapon instance."""
-        self.name = name,
-        self.damage = damage,
-        self.magical_modifier = magical_modifier,
-        self.to_hit_modifier = to_hit_modifier,
-        self.type_ = type_,
-        self.handedness = handedness,
-        self.proficiency = proficiency,
-        self.price = price,
-        self.currency_denomination = currency_denomination,
-        self.weight = weight,
-        self.range_ = range_,
-        self.damage_type = damage_type,
-        self.property_ = property_,
-        self.quantity = quantity,
+        self.name = name
+        self.damage = damage
+        self.magical_modifier = magical_modifier
+        self.to_hit_modifier = to_hit_modifier
+        self.type_ = type_
+        self.handedness = handedness
+        self.proficiency = proficiency
+        self.price = price
+        self.currency_denomination = currency_denomination
+        self.weight = weight
+        self.range_ = range_
+        self.damage_type = damage_type
+        self.property_ = property_
+        self.quantity = quantity
         self.description = description
 
 
