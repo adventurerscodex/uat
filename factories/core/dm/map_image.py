@@ -15,8 +15,8 @@ class MapImage:
         description,
     ):
         """Initialize Map Image instance."""
-        self.image_link = image_link
         self.name = name
+        self.image_link = image_link
         self.description = description
 
 
