@@ -21,7 +21,7 @@ class MapImage:
 
 
 class MapImageFactory(factory.Factory):
-    """Definition of Environment factory."""
+    """Definition of Map Image factory."""
 
     class Meta:
         """Bind model to factory."""
