@@ -2,8 +2,6 @@
 
 import factory
 
-from factories.fixtures import random_wordlist
-
 
 class Note:
     """Definition of Note model."""
@@ -14,6 +12,7 @@ class Note:
     ):
         """Initialize Note instance."""
         self.note = note
+
 
 class NoteFactory(factory.Factory):
     """Definition of Note factory."""
