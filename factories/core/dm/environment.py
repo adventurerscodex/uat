@@ -36,12 +36,12 @@ class EnvironmentFactory(factory.Factory):
 
     weather = factory.Faker(
         'word',
-        ext_word_list=random_wordlist(max_length=40, prefix='weather_')
+        ext_word_list=random_wordlist(max_length=40, prefix='Weather_')
     )
 
     terrain = factory.Faker(
         'word',
-        ext_word_list=random_wordlist(max_length=40, prefix='terrain_')
+        ext_word_list=random_wordlist(max_length=40, prefix='Terrain_')
     )
 
     description = factory.Faker(

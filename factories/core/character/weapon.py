@@ -59,7 +59,7 @@ class WeaponFactory(factory.Factory):
 
     damage = factory.Faker(
         'word',
-        ext_word_list=random_wordlist(max_length=40, prefix='damage_')
+        ext_word_list=random_wordlist(max_length=40, prefix='Damage_')
     )
 
     magical_modifier = factory.Faker('random_int', min=0, max=10)
@@ -92,12 +92,12 @@ class WeaponFactory(factory.Factory):
 
     range_ = factory.Faker(
         'word',
-        ext_word_list=random_wordlist(max_length=40, prefix='range_')
+        ext_word_list=random_wordlist(max_length=40, prefix='Range_')
     )
 
     damage_type = factory.Faker(
         'word',
-        ext_word_list=random_wordlist(max_length=40, prefix='damage_type_')
+        ext_word_list=random_wordlist(max_length=40, prefix='DamageType_')
     )
 
     property_ = factory.Faker(

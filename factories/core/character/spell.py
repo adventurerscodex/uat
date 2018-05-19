@@ -63,12 +63,12 @@ class SpellFactory(factory.Factory):
 
     damage = factory.Faker(
         'word',
-        ext_word_list=random_wordlist(max_length=40, prefix='damage_')
+        ext_word_list=random_wordlist(max_length=40, prefix='Damage_')
     )
 
     damage_type = factory.Faker(
         'word',
-        ext_word_list=random_wordlist(max_length=40, prefix='damage_type_')
+        ext_word_list=random_wordlist(max_length=40, prefix='DamageType_')
     )
 
     school = factory.Faker(
@@ -80,7 +80,7 @@ class SpellFactory(factory.Factory):
 
     material_components = factory.Faker(
         'word',
-        ext_word_list=random_wordlist(max_length=40, prefix='material_components_')
+        ext_word_list=random_wordlist(max_length=40, prefix='MaterialComponents_')
     )
 
     is_ritual = factory.Faker('boolean', chance_of_getting_true=50)

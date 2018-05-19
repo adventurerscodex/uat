@@ -41,13 +41,13 @@ class AppearanceFactory(factory.Factory):
 
     hair_color = factory.Faker(
         'word',
-        ext_word_list=random_wordlist(prefix='Hair_Color_', max_length=40)
+        ext_word_list=random_wordlist(prefix='HairColor_', max_length=40)
     )
     eye_color = factory.Faker(
         'word',
-        ext_word_list=random_wordlist(prefix='Eye_Color_', max_length=40)
+        ext_word_list=random_wordlist(prefix='EyeColor_', max_length=40)
     )
     skin_color = factory.Faker(
         'word',
-        ext_word_list=random_wordlist(prefix='Skin_Color_', max_length=40)
+        ext_word_list=random_wordlist(prefix='SkinColor_', max_length=40)
     )
