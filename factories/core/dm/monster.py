@@ -114,7 +114,7 @@ class MonsterFactory(factory.Factory):
 
     saving_throws = factory.Faker(
         'word',
-        ext_word_list=random_wordlist(prefix='Saving_Throws_', max_length=40)
+        ext_word_list=random_wordlist(prefix='SavingThrows_', max_length=40)
     )
 
     skills = factory.Faker(
@@ -124,22 +124,22 @@ class MonsterFactory(factory.Factory):
 
     damage_immunities = factory.Faker(
         'word',
-        ext_word_list=random_wordlist(prefix='Damage_Immunities_', max_length=40)
+        ext_word_list=random_wordlist(prefix='DamageImmunities_', max_length=40)
     )
 
     damage_vulnerabilities = factory.Faker(
         'word',
-        ext_word_list=random_wordlist(prefix='Damage_Vulnerabilities_', max_length=40)
+        ext_word_list=random_wordlist(prefix='DamageVulnerabilities_', max_length=40)
     )
 
     damage_resistances = factory.Faker(
         'word',
-        ext_word_list=random_wordlist(prefix='Damage_Resistances_', max_length=40)
+        ext_word_list=random_wordlist(prefix='DamageResistances_', max_length=40)
     )
 
     condition_immunities = factory.Faker(
         'word',
-        ext_word_list=random_wordlist(prefix='Condition_Immunities_', max_length=40)
+        ext_word_list=random_wordlist(prefix='ConditionImmunities_', max_length=40)
     )
 
     senses = factory.Faker(
