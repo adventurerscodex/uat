@@ -24,5 +24,5 @@ class NoteFactory(factory.Factory):
 
     note = factory.Faker(
         'text',
-        max_nb_chars=15
+        max_nb_chars=150
     )
