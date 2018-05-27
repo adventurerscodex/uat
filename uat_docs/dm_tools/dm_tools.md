@@ -99,4 +99,4 @@ Global App
 Wizard
 ======
 
-- [x] As a dm, as a dm, I should be able to navigate through the dm wizard
+- [x] As a dm, I should be able to navigate through the dm wizard
