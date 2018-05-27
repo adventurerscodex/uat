@@ -9,6 +9,7 @@ class PointOfInterestAddModal(Component):
     name_xpath = '//*[@id="encounter-tab"]/encounter/div/div/div[2]/div[2]/encounter-detail/div/div[2]/point-of-interest-section/table/thead/tr/th[1]' # noqa
     description_xpath = '//*[@id="encounter-tab"]/encounter/div/div/div[2]/div[2]/encounter-detail/div/div[2]/point-of-interest-section/table/thead/tr/th[2]' # noqa
     add_xpath = '//*[@id="encounter-tab"]/encounter/div/div/div[2]/div[2]/encounter-detail/div/div[2]/point-of-interest-section/table/thead/tr/th[3]' # noqa
+    
     name = Element(xpath_=name_xpath)
     description = Element(xpath_=description_xpath)
     add = Element(xpath_=add_xpath)
