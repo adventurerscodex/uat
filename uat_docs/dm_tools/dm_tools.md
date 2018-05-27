@@ -38,7 +38,11 @@ Encounters
 
 - [ ] As a dm, monsters can be added, edited, deleted, and persist
 
-- [ ] As a dm, read aloud text can be added, edited, delted,  and persist
+- [ ] As a dm, I can add read aloud text to an encounter and the data persists
+
+- [ ] As a dm, I can edit a read aloud text in an encounter and the data persists
+
+- [ ] As a dm, I can delete a read aloud text in an encounter
 
 - [ ] As a dm, treasure aloud text can be added, edited, deleted, and persist
 
