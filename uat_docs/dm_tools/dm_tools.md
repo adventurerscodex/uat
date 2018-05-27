@@ -1,101 +1,102 @@
 Overview
 ========
 
-Campaign info is editable and persists [complete]
+- [x] As a dm, campaign name and setting is editable and persists
 
-Campaign info shows date created
+- [ ] As a dm, campaign section shows date created
 
-If no campaign map and image exists, I can add a new one by clicking in the first row. The image persists.
+- [ ] As a dm, if no campaign map and image exists, I can add a new one by clicking in the first row. The image persists.
 
-I can add a campaign map or image by clicking on the + icon. The image persists.
+- [ ] As a dm, I can add a campaign map or image by clicking on the + icon. The image persists.
 
-I can click on the trashcan and delete a map or image.
+- [ ] As a dm, I can click on the trashcan and delete a map or image
 
-I can sort a map or image by the name.
+- [ ] As a dm, I can sort a map or image by clicking on the name header
 
 Encounters
 ==========
 
-Add an encounter via the + symbol
+- [ ] As a dm, I can add an encounter via the plus icon
 
-Location and Encounter name are editable and persist
+- [ ] As a dm, an added encounter is visible in the encounter list and the encounter details
 
-Clicking + adds the encounter and the encounter is visible in the left and right pane
+- [ ] As a dm, encounter location and encounter name are editable and persist
 
-Clicking on the corresponding trash can deletes the encounter
+- [ ] As a dm, clicking on the corresponding trash in the encounter list deletes the encounter
 
-Clicking edit in the right pane brings up the encounter modal
+- [ ] As a dm, clicking edit in the encounter details displays the encounter add/edit modal
 
-Selecting or removing sections from the encounters modal, adds or removes sections
+- [ ] As a dm, selecting or removing sections from the encounters modal, adds or removes sections
 
-The environments fields are editable and persist
+- [ ] As a dm, the environments fields are editable and persist
 
-Maps and images fields can be added, edited, deleted, and persist
+- [ ] As a dm, maps and images fields can be added, edited, deleted, and persist
 
-Points of interest fields can be added, edited, deleted, and persist
+- [ ] As a dm, points of interest fields can be added, edited, deleted, and persist
 
-NPCs can be added, edited, deleted, and persist
+- [ ] As a dm, NPCs can be added, edited, deleted, and persist
 
-Monsters can be added, edited, deleted, and persist
+- [ ] As a dm, monsters can be added, edited, deleted, and persist
 
-Read aloud text can be added, edited, delted,  and persist
+- [ ] As a dm, read aloud text can be added, edited, delted,  and persist
 
-Treasure aloud text can be added, edited, deleted, and persist
+- [ ] As a dm, treasure aloud text can be added, edited, deleted, and persist
 
-Notes aloud text can be added, edited, and persist
+- [ ] As a dm, notes aloud text can be edited, and persist
 
-Link to markdown style guide in notes section is functional
+- [ ] As a dm, link to markdown style guide in notes section is functional
 
-Monsters name field auto-completes OGL data and the relevant fields auto-populate
+- [ ] As a dm, monsters name field auto-completes OGL data and the relevant fields auto-populate
 
-In the treasure modal, armor, items, magic items, and weapons, auto-complete the name field and auto-populate relevant fields
+- [ ] As a dm, in the treasure modal, armor, items, magic items, and weapons, auto-complete the name field and auto-populate relevant fields
 
 Screen
 ======
 
-As a dm, I can view the dm screen sections [complete]
+- [x] As a dm, I can view the dm screen sections
 
 Global App
 ==========
-As a dm, I should be able to navigate through the dm tabs [complete]
 
-Images may be added and displayed by URL
+- [x] As a dm, I should be able to navigate through the dm tabs
 
-Images may be added and displayed via Gravatar
+- [ ] As a dm, a campaign image may be added and displayed by URL
 
-User should be able to log in
+- [ ] As a dm, a campaign image may be added and displayed via Gravatar
 
-New/Import link is functional
+- [ ] As a dm, a user should be able to log in
 
-A new campaign can be imported from dropbox
+- [ ] As a dm, new/import link is functional
 
-Characters and Games link is functional
+- [ ] As a dm, a new campaign can be imported from dropbox
 
-Characters and Games should be able to be deleted from modal
+- [ ] As a dm, the characters and games link is functional
 
-Remaining storage space is displayed in the modal and increases and decreases accordingly
+- [ ] As a dm, characters and games may be deleted from characters and games modal
 
-Switching between games and characters is functional
+- [ ] As a dm, remaining storage space is displayed in the modal and increases and decreases accordingly
 
-More info on storage link is functional
+- [ ] As a dm, switching between games and characters is functional
 
-Export link is functional
+- [ ] As a dm, more info on storage link is functional
 
-Manage party link is functional
+- [ ] As a dm, export link is functional
 
-A previously saved .json campaign should import the saved data elements
+- [ ] As a dm, manage party link is functional
 
-All imported data elements should include unicode and there should be no html entities
+- [ ] As a dm, a previously saved .json campaign should import the saved data elements
 
-A campaign export should save all data elements in a .json format
+- [ ] As a dm, all imported data elements should include unicode and there should be no html entities
 
-Unicode characters should be saved
+- [ ] As a dm, a campaign export should save all data elements in a .json format
 
-Navbar header links to blog, newsletter, patreon, and website
+- [ ] As a dm, unicode characters should be saved
 
-Navbar footer links to facebook, twitter, google +, github, reddit, rss feed, contact page, and ogl license
+- [ ] As a dm, navbar header links to blog, newsletter, patreon, and website
+
+- [ ] As a dm, navbar footer links to facebook, twitter, google +, github, reddit, rss feed, contact page, and ogl license
 
 Wizard
 ======
 
-As a dm, I should be able to navigate through the dm wizard [complete]
+- [x] As a dm, as a dm, I should be able to navigate through the dm wizard
