@@ -16,14 +16,16 @@ class EncounterAddEditModal(Component):
     read_aloud_text_xpath = '//*[@id="encounter-tab"]/encounter/encounter-add-edit-modal/div/div/div/div[2]/form/encounter-section-visibility[6]/div[1]/div[2]/input' # noqa
     treasure_xpath = '//*[@id="encounter-tab"]/encounter/encounter-add-edit-modal/div/div/div/div[2]/form/encounter-section-visibility[7]/div[1]/div[2]/input' # noqa
     notes_xpath = '//*[@id="encounter-tab"]/encounter/encounter-add-edit-modal/div/div/div/div[2]/form/encounter-section-visibility[8]/div[1]/div[2]/input' # noqa
+    done_xpath = '//*[@id="encounter-tab"]/encounter/encounter-add-edit-modal/div/div/div/div[2]/form/div[4]/div/div/button'
 
-    encounter_name = Element(xpath_=encounter_name_xpath)
-    location = Element(xpath_=location_xpath)
-    environment = Element(xpath_=environment_xpath)
-    maps_and_images = Element(xpath_=maps_and_images_xpath)
-    points_of_interest = Element(xpath_=points_of_interest_xpath)
-    non_player_characters = Element(xpath_=non_player_characters_xpath)
-    monsters = Element(xpath_=monsters_xpath)
-    read_aloud_text = Element(xpath_=read_aloud_text_xpath)
-    treasure = Element(xpath_=treasure_xpath)
-    notes = Element(xpath_=notes_xpath)
+    encounter_name = Element(xpath=encounter_name_xpath)
+    location = Element(xpath=location_xpath)
+    environment = Element(xpath=environment_xpath)
+    maps_and_images = Element(xpath=maps_and_images_xpath)
+    points_of_interest = Element(xpath=points_of_interest_xpath)
+    non_player_characters = Element(xpath=non_player_characters_xpath)
+    monsters = Element(xpath=monsters_xpath)
+    read_aloud_text = Element(xpath=read_aloud_text_xpath)
+    treasure = Element(xpath=treasure_xpath)
+    notes = Element(xpath=notes_xpath)
+    done = Element(xpath=done_xpath)
