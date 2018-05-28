@@ -41,7 +41,7 @@ class ReadAloudTextEditModal(Component):
     """Definition of Point of Interest Edit component."""
 
     name_xpath = '//*[@id="viewWeapon"]/div/div/div[2]/div/div[2]/form/div[1]/div[1]/input'
-    description_xpath = '//*[@id="viewWeapon"]/div/div/div[2]/div/div[2]/form/div[1]/div[2]/textarea'
+    description_xpath = '//*[@id="viewWeapon"]/div/div/div[2]/div/div[2]/form/div[1]/div[2]/textarea' # noqa
     done_xpath = '//*[@id="viewWeapon"]/div/div/div[2]/div/div[2]/form/div[2]/button'
 
     name = Element(xpath_=name_xpath)
