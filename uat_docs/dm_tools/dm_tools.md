@@ -30,13 +30,29 @@ Encounters
 
 - [ ] As a dm, the environments fields are editable and persist
 
-- [ ] As a dm, maps and images fields can be added, edited, deleted, and persist
+- [ ] As a dm, I can add maps and images to an encounter and the data persists
 
-- [ ] As a dm, points of interest fields can be added, edited, deleted, and persist
+- [ ] As a dm, I can edit maps and images in an encounter and the data persists
 
-- [ ] As a dm, NPCs can be added, edited, deleted, and persist
+- [ ] As a dm, I can delete maps and images in an encounter
 
-- [ ] As a dm, monsters can be added, edited, deleted, and persist
+- [ ] As a dm, I can add point of interest to an encounter and the data persists
+
+- [ ] As a dm, I can edit point of interest in an encounter and the data persists
+
+- [ ] As a dm, I can delete point of interest in an encounter
+
+- [ ] As a dm, I can add an NPC to an encounter and the data persists
+
+- [ ] As a dm, I can edit an NPC in an encounter and the data persists
+
+- [ ] As a dm, I can delete an NPC in an encounter
+
+- [ ] As a dm, I can add a monster to an encounter and the data persists
+
+- [ ] As a dm, I can edit a monster in an encounter and the data persists
+
+- [ ] As a dm, I can delete a monster in an encounter
 
 - [ ] As a dm, I can add read aloud text to an encounter and the data persists
 
@@ -44,7 +60,11 @@ Encounters
 
 - [ ] As a dm, I can delete a read aloud text in an encounter
 
-- [ ] As a dm, treasure aloud text can be added, edited, deleted, and persist
+- [ ] As a dm, I can add treasure to an encounter and the data persists
+
+- [ ] As a dm, I can edit treasure in an encounter and the data persists
+
+- [ ] As a dm, I can delete treasure in an encounter
 
 - [ ] As a dm, notes aloud text can be edited, and persist
 
