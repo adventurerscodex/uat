@@ -1,6 +1,6 @@
 """DM Encounter List component."""
 
-from component_objects import Element, Component
+from component_objects import Component, Element
 
 
 class EncounterList(Component):
