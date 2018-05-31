@@ -1,6 +1,6 @@
 """New character/campaign component."""
 
-from component_objects import Element, Component
+from component_objects import Component, Element
 
 
 class NewCharacterCampaign(Component):

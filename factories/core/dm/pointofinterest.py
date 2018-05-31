@@ -1,4 +1,4 @@
-"""Point Of Interest Factory"""
+"""Point Of Interest Factory."""
 
 import factory
 

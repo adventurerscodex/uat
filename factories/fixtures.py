@@ -8,7 +8,7 @@ def random_wordlist(num_words=1, min_length=1, max_length=10, prefix=''):
     words = []
     prefix_length = len(prefix)
     word_length = max_length - prefix_length
-    for i in range(num_words):
+    for _ in range(num_words):
         words.append(
             prefix + ''.join(
                 random.choice(string.ascii_letters) for _ in range(word_length)

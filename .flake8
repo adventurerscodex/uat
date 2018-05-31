@@ -1,3 +1,14 @@
 [flake8]
+import-order-style=google
 exclude=.git,__pycache__
+ignore =
+  N806,   # Variables can be CamelCase
 max-line-length=100
+application-import-names =
+  component_objects,
+  components,
+  expected_conditions,
+  factories,
+  modules,
+  tests,
+  utils

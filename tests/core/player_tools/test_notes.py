@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC # noqa
 from selenium.webdriver.support.ui import WebDriverWait
 
-from components.core.character.notes import NotesList, NotesDetail
+from components.core.character.notes import NotesDetail, NotesList
 from components.core.character.tabs import Tabs
 from expected_conditions.general import url_in_new_tab_matches
 

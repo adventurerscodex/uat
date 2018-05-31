@@ -1,4 +1,4 @@
-"""Map Image Factory"""
+"""Map Image Factory."""
 
 import factory
 

@@ -9,8 +9,8 @@ from components.core.character.health import HitPointHitDice
 from components.core.character.other_stats import OtherStats
 from components.core.character.profile_picture import ProfilePicture
 from components.core.character.saving_throw import SavingThrowEditModal, SavingThrowTable
-from expected_conditions.general import table_cell_updated
 from expected_conditions.general import modal_finished_closing
+from expected_conditions.general import table_cell_updated
 from utils import general as ut
 
 def test_data_persists(player_wizard, browser): # noqa
@@ -269,7 +269,7 @@ def test_death_saves_clickable(player_wizard, browser): # noqa
     hp_hd = HitPointHitDice(browser)
 
     # reduce character to 0 hit points
-    for i in range(10):
+    for _ in range(10):
         hp_hd.damage_up.click()
 
     success = hp_hd.death_successes_empty[0]
@@ -290,7 +290,7 @@ def test_death_saves_persist(player_wizard, browser): # noqa
     hp_hd = HitPointHitDice(browser)
 
     # reduce character to 0 hit points
-    for i in range(10):
+    for _ in range(10):
         hp_hd.damage_up.click()
 
     success = hp_hd.death_successes_empty[0]
@@ -314,7 +314,7 @@ def test_character_stable_alert(player_wizard, browser): # noqa
     hp_hd = HitPointHitDice(browser)
 
     # reduce character to 0 hit points
-    for i in range(10):
+    for _ in range(10):
         hp_hd.damage_up.click()
 
     successes = hp_hd.death_successes_empty
@@ -335,7 +335,7 @@ def test_character_dead_alert(player_wizard, browser): # noqa
     hp_hd = HitPointHitDice(browser)
 
     # reduce character to 0 hit points
-    for i in range(10):
+    for _ in range(10):
         hp_hd.damage_up.click()
 
     failures = hp_hd.death_failures_empty
