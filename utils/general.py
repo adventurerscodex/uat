@@ -1,8 +1,8 @@
 """Selenium testing utils common to player, dm, and collab tools."""
 
 from collections import namedtuple
-import time
 from keyword import iskeyword
+import time
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -25,7 +25,7 @@ def select_from_autocomplete(element_,
     # detecting-when-a-jquery-ui-autocomplete-pops-open-with-selenium
     # TODO: this function is only working when the search_term is ''
     time.sleep(.3)
-    for i in range(arrow_down_count):
+    for _ in range(arrow_down_count):
         element.send_keys(Keys.DOWN)
     element.send_keys(Keys.RETURN)
 

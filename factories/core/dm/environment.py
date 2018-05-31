@@ -1,4 +1,4 @@
-"""Environment Factory"""
+"""Environment Factory."""
 
 import factory
 

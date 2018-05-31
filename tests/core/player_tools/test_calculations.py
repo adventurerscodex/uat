@@ -8,8 +8,8 @@ from components.core.character.hud import HUD
 from components.core.character.other_stats import OtherStats
 from components.core.character.saving_throw import SavingThrowTable
 from components.core.character.skills import SkillsTable
-from components.core.character.weapon import WeaponTable, WeaponAddModal
 from components.core.character.tabs import Tabs
+from components.core.character.weapon import WeaponAddModal, WeaponTable
 from expected_conditions.general import table_cell_updated
 from utils import general as ut
 

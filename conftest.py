@@ -1,19 +1,19 @@
 """Test fixtures for selenium UAT for adventurer's codex."""
 
 import logging
-import pytest
 import sys
 from time import gmtime, strftime
 
+import pytest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.remote_connection import LOGGER
 from selenium.webdriver.support import expected_conditions as EC # noqa
 from selenium.webdriver.support.ui import WebDriverWait
 
-from components.core.general.new_character_campaign import NewCharacterCampaign
 from components.core.character import wizard
 from components.core.dm.wizard import TellUsAStory
+from components.core.general.new_character_campaign import NewCharacterCampaign
 
 
 LOGGER.setLevel(logging.WARNING)

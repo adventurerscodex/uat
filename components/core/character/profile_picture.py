@@ -1,6 +1,6 @@
 """Profile picture components."""
 
-from component_objects import Element, Component
+from component_objects import Component, Element
 
 
 class ProfilePicture(Component):

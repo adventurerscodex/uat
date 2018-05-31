@@ -1,6 +1,6 @@
 """Inventory components."""
 
-from component_objects import Element, Component
+from component_objects import Component, Element
 
 
 class InventoryAddModal(Component):
