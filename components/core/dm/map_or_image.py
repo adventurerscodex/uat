@@ -1,3 +1,5 @@
+"""DM Map or Image component."""
+
 from component_objects import Component, Element
 
 
