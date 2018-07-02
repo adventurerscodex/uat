@@ -5,14 +5,14 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC # noqa
 from selenium.webdriver.support.ui import WebDriverWait
 
+from components.core.dm.points_of_interest import PointOfInterestAddModal
+from components.core.dm.points_of_interest import PointOfInterestTable
 from components.core.dm.read_aloud_text import ReadAloudTextAddModal
 from components.core.dm.read_aloud_text import ReadAloudTextEditModal
 from components.core.dm.read_aloud_text import ReadAloudTextModalTabs
 from components.core.dm.read_aloud_text import ReadAloudTextTable
-from factories.core.dm.read_aloud_text import ReadAloudTextFactory
-from components.core.dm.points_of_interest import PointOfInterestAddModal
-from components.core.dm.points_of_interest import PointOfInterestTable
 from factories.core.dm.pointofinterest import PointOfInterestFactory
+from factories.core.dm.read_aloud_text import ReadAloudTextFactory
 
 
 def test_add_read_aloud_text(dm_wizard, encounter_all_sections, browser):
