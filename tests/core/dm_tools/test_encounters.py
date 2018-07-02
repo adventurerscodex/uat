@@ -9,7 +9,7 @@ from factories.core.dm.read_aloud_text import ReadAloudTextFactory
 
 
 def test_add_read_aloud_text(dm_wizard, encounter_all_sections, browser):
-    """As a dm, I can add read aloud text to an encounter and the data persists"""
+    """As a dm, I can add read aloud text to an encounter and the data persists."""
     print('As a dm, I can add read aloud text to an encounter and the data persists')
 
     read_aloud_text = ReadAloudTextAddModal(browser)
@@ -27,7 +27,7 @@ def test_add_read_aloud_text(dm_wizard, encounter_all_sections, browser):
 
 
 def test_edit_read_aloud_text(dm_wizard, encounter_all_sections, browser):
-    """'As a dm, I can add, edit and delete a read aloud text in an encounter""" # noqa
+    """As a dm, I can add, edit and delete a read aloud text in an encounter.""" # noqa
     print('As a dm, I can add, edit and delete a read aloud text in an encounter ') # noqa
     read_aloud_text = ReadAloudTextAddModal(browser)
     read_aloud_table = ReadAloudTextTable(browser)

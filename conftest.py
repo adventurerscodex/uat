@@ -137,7 +137,7 @@ def dm_wizard(browser):
 
 @pytest.fixture(scope='function')
 def encounter_all_sections(browser):
-    """This fixture will create an encounter with all the sections."""
+    """Will create an encounter with all sections."""
     tabs = DMTabs(browser)
 
     tabs.encounters.click()
