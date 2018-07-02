@@ -32,13 +32,22 @@ def test_add_read_aloud_text(dm_wizard, encounter_all_sections, browser):
         )
     )
 
-    assert read_aloud_table.name.text.strip() == stub.name
-    assert read_aloud_table.description.text.strip() == stub.description
+    before_refresh_name = read_aloud_table.name.text.strip()
+    before_refresh_description = read_aloud_table.description.text.strip()
+
+    browser.refresh()
+
+    after_refresh_name = read_aloud_table.name.text.strip()
+    after_refresh_description = read_aloud_table.description.text.strip()
+
+    assert before_refresh_name == after_refresh_name
+    assert before_refresh_description == after_refresh_description
 
 
 def test_edit_read_aloud_text(dm_wizard, encounter_all_sections, browser):
-    """As a dm, I can add, edit and delete a read aloud text in an encounter.""" # noqa
-    print('As a dm, I can add, edit and delete a read aloud text in an encounter ') # noqa
+    """As a dm, I can add, edit and delete a read aloud text in an encounter and the data persists.""" # noqa
+    print('As a dm I can edit and delete a read aloud text in an encounter and the data persists ') # noqa
+
     read_aloud_text = ReadAloudTextAddModal(browser)
     read_aloud_table = ReadAloudTextTable(browser)
 
@@ -67,8 +76,16 @@ def test_edit_read_aloud_text(dm_wizard, encounter_all_sections, browser):
         )
     )
 
-    assert read_aloud_table.name.text.strip() == stub.name
-    assert read_aloud_table.description.text.strip() == stub.description
+    before_refresh_name = read_aloud_table.name.text.strip()
+    before_refresh_description = read_aloud_table.description.text.strip()
+
+    browser.refresh()
+
+    after_refresh_name = read_aloud_table.name.text.strip()
+    after_refresh_description = read_aloud_table.description.text.strip()
+
+    assert before_refresh_name == after_refresh_name
+    assert before_refresh_description == after_refresh_description
 
     read_aloud_text.remove.click()
 
