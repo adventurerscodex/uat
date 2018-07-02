@@ -10,7 +10,7 @@ class ReadAloudTextAddModal(Component):
     description_xpath = '//*[@id="addPlayerText"]/div/div/div[2]/form/div[1]/div[2]/textarea' # noqa
     add_plus_icon_xpath = '//*[@id="encounter-tab"]/encounter/div/div/div[2]/div[2]/encounter-detail/div/div[2]/player-text-section/table/thead/tr/th[4]/a/i' # noqa
     add_new_point_xpath = '//*[@id="encounter-tab"]/encounter/div/div/div[2]/div[2]/encounter-detail/div/div[2]/player-text-section/table/tbody/tr/td' # noqa
-    remove_xpath = '//*[@id="encounter-tab"]/encounter/div/div/div[2]/div[2]/encounter-detail/div/div[2]/player-text-section/table/tbody/tr/td[5]/a/i'# noqa
+    remove_xpath = '//*[@id="encounter-tab"]/encounter/div/div/div[2]/div[2]/encounter-detail/div/div[2]/player-text-section/table/tbody/tr/td[5]/a/i' # noqa
     add_xpath = '//*[@id="addPlayerText"]/div/div/div[2]/form/div[2]/button'
 
     name = Element(xpath=name_xpath)
@@ -25,7 +25,7 @@ class ReadAloudTextModalTabs(Component):
     """Definition of Read Aloud Text Tab component."""
 
     preview_xpath = '//*[@id="viewWeapon"]/div/div/div[2]/ul/li[1]/a/b'
-    edit_xpath = '//*[@id="viewWeapon"]/div/div/div[2]/ul/li[2]'
+    edit_xpath = '//*[@id="viewWeapon"]/div/div/div[2]/ul/li[2]/a'
 
     preview = Element(xpath=preview_xpath)
     edit = Element(xpath=edit_xpath)
@@ -46,9 +46,9 @@ class ReadAloudTextPreviewModal(Component):
 class ReadAloudTextEditModal(Component):
     """Definition of Read Aloud Text Edit component."""
 
-    name_xpath = '//*[@id="viewWeapon"]/div/div/div[2]/div/div[2]/form/div[1]/div[1]/input'
+    name_xpath = '//*[@id="viewWeapon"]/div/div/div[2]/div/div[2]/form/div[1]/div[1]/input' # noqa
     description_xpath = '//*[@id="viewWeapon"]/div/div/div[2]/div/div[2]/form/div[1]/div[2]/textarea' # noqa
-    done_xpath = '//*[@id="viewWeapon"]/div/div/div[2]/div/div[2]/form/div[2]/button'
+    done_xpath = '//*[@id="viewWeapon"]/div/div/div[2]/div/div[2]/form/div[2]/button' # noqa
 
     name = Element(xpath=name_xpath)
     description = Element(xpath=description_xpath)
@@ -60,7 +60,7 @@ class ReadAloudTextTable(Component):
 
     name_xpath = '//*[@id="encounter-tab"]/encounter/div/div/div[2]/div[2]/encounter-detail/div/div[2]/player-text-section/table/tbody/tr/td[1]' # noqa
     description_xpath = '//*[@id="encounter-tab"]/encounter/div/div/div[2]/div[2]/encounter-detail/div/div[2]/player-text-section/table/tbody/tr/td[3]' # noqa
-    first_row_xpath = '//*[@id="encounter-tab"]/encounter/div/div/div[2]/div[2]/encounter-detail/div/div[2]/player-text-section/table/tbody/tr'
+    first_row_xpath = '//*[@id="encounter-tab"]/encounter/div/div/div[2]/div[2]/encounter-detail/div/div[2]/player-text-section/table/tbody/tr' # noqa
     trash_xpath = '//*[@id="encounter-tab"]/encounter/div/div/div[2]/div[2]/encounter-detail/div/div[2]/player-text-section/table/tbody/tr/td[5]/a/i' # noqa
 
     name = Element(xpath=name_xpath)
