@@ -37,6 +37,12 @@ def test_add_read_aloud_text(dm_wizard, encounter_all_sections, browser):
 
     browser.refresh()
 
+    WebDriverWait(browser, 5).until(
+        EC.element_to_be_clickable(
+            (By.XPATH, read_aloud_table.name_xpath)
+        )
+    )
+
     after_refresh_name = read_aloud_table.name.text.strip()
     after_refresh_description = read_aloud_table.description.text.strip()
 
@@ -80,6 +86,12 @@ def test_edit_read_aloud_text(dm_wizard, encounter_all_sections, browser):
     before_refresh_description = read_aloud_table.description.text.strip()
 
     browser.refresh()
+
+    WebDriverWait(browser, 5).until(
+        EC.element_to_be_clickable(
+            (By.XPATH, read_aloud_table.name_xpath)
+        )
+    )
 
     after_refresh_name = read_aloud_table.name.text.strip()
     after_refresh_description = read_aloud_table.description.text.strip()
