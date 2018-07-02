@@ -7,6 +7,10 @@ from components.core.dm.read_aloud_text import ReadAloudTextModalTabs
 from components.core.dm.read_aloud_text import ReadAloudTextTable
 from factories.core.dm.read_aloud_text import ReadAloudTextFactory
 
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC # noqa
+from selenium.webdriver.support.ui import WebDriverWait
+
 
 def test_add_read_aloud_text(dm_wizard, encounter_all_sections, browser):
     """As a dm, I can add read aloud text to an encounter and the data persists."""
@@ -21,6 +25,12 @@ def test_add_read_aloud_text(dm_wizard, encounter_all_sections, browser):
     read_aloud_text.name = stub.name
     read_aloud_text.description = stub.description
     read_aloud_text.add.click()
+
+    WebDriverWait(browser, 5).until(
+        EC.element_to_be_clickable(
+            (By.XPATH, read_aloud_table.name_xpath)
+        )
+    )
 
     assert read_aloud_table.name.text.strip() == stub.name
     assert read_aloud_table.description.text.strip() == stub.description
@@ -50,6 +60,12 @@ def test_edit_read_aloud_text(dm_wizard, encounter_all_sections, browser):
     read_aloud_edit.name = stub.name
     read_aloud_edit.description = stub.description
     read_aloud_edit.done.click()
+
+    WebDriverWait(browser, 5).until(
+        EC.element_to_be_clickable(
+            (By.XPATH, read_aloud_table.name_xpath)
+        )
+    )
 
     assert read_aloud_table.name.text.strip() == stub.name
     assert read_aloud_table.description.text.strip() == stub.description

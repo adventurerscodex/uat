@@ -17,6 +17,7 @@ from components.core.dm.encounter_list import EncounterList
 from components.core.dm.tabs import DMTabs
 from components.core.dm.wizard import TellUsAStory
 from components.core.general.new_character_campaign import NewCharacterCampaign
+from factories.core.dm.encounter import EncounterAddEditModalFactory
 
 
 LOGGER.setLevel(logging.WARNING)
@@ -148,8 +149,10 @@ def encounter_all_sections(browser):
 
     encounter_add_edit_modal = EncounterAddEditModal(browser)
 
-    encounter_add_edit_modal.encounter_name = 'Encounters'
-    encounter_add_edit_modal.location = 'Location'
+    stub = EncounterAddEditModalFactory.stub()
+
+    encounter_add_edit_modal.encounter_name = stub.encounter_name
+    encounter_add_edit_modal.location = stub.location
     encounter_add_edit_modal.environment.click()
     encounter_add_edit_modal.maps_and_images.click()
     encounter_add_edit_modal.points_of_interest.click()
