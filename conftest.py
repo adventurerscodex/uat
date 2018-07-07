@@ -12,8 +12,12 @@ from selenium.webdriver.support import expected_conditions as EC # noqa
 from selenium.webdriver.support.ui import WebDriverWait
 
 from components.core.character import wizard
+from components.core.dm.encounter_add_edit_modal import EncounterAddEditModal
+from components.core.dm.encounter_list import EncounterList
+from components.core.dm.tabs import DMTabs
 from components.core.dm.wizard import TellUsAStory
 from components.core.general.new_character_campaign import NewCharacterCampaign
+from factories.core.dm.encounter import EncounterAddEditModalFactory
 
 
 LOGGER.setLevel(logging.WARNING)
@@ -130,6 +134,32 @@ def dm_wizard(browser):
     tell_us_a_story.player_name = 'Automated Testing Bot.'
 
     wizard_main.finish.click()
+
+
+@pytest.fixture(scope='function')
+def encounter_all_sections(browser):
+    """Will create an encounter with all sections."""
+    tabs = DMTabs(browser)
+
+    tabs.encounters.click()
+
+    encounter_list = EncounterList(browser)
+
+    encounter_list.add_plus_icon.click()
+
+    encounter_add_edit_modal = EncounterAddEditModal(browser)
+
+    stub = EncounterAddEditModalFactory.stub()
+
+    encounter_add_edit_modal.encounter_name = stub.encounter_name
+    encounter_add_edit_modal.location = stub.location
+    encounter_add_edit_modal.environment.click()
+    encounter_add_edit_modal.maps_and_images.click()
+    encounter_add_edit_modal.points_of_interest.click()
+    encounter_add_edit_modal.non_player_characters.click()
+    encounter_add_edit_modal.monsters.click()
+    encounter_add_edit_modal.treasure.click()
+    encounter_add_edit_modal.done.click()
 
 
 @pytest.fixture(scope='function')
