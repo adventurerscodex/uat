@@ -5,20 +5,20 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC # noqa
 from selenium.webdriver.support.ui import WebDriverWait
 
-from components.core.dm.points_of_interest import PointOfInterestAddModal
-from components.core.dm.points_of_interest import PointOfInterestEditModal
-from components.core.dm.points_of_interest import PointOfInterestModalTabs
-from components.core.dm.points_of_interest import PointOfInterestTable
 from components.core.dm.map_or_image import MapOrImageAddModal
 from components.core.dm.map_or_image import MapOrImageEditModal
 from components.core.dm.map_or_image import MapOrImageModalTabs
 from components.core.dm.map_or_image import MapOrImageTable
+from components.core.dm.points_of_interest import PointOfInterestAddModal
+from components.core.dm.points_of_interest import PointOfInterestEditModal
+from components.core.dm.points_of_interest import PointOfInterestModalTabs
+from components.core.dm.points_of_interest import PointOfInterestTable
 from components.core.dm.read_aloud_text import ReadAloudTextAddModal
 from components.core.dm.read_aloud_text import ReadAloudTextEditModal
 from components.core.dm.read_aloud_text import ReadAloudTextModalTabs
 from components.core.dm.read_aloud_text import ReadAloudTextTable
-from factories.core.dm.pointofinterest import PointOfInterestFactory
 from factories.core.dm.map_image import MapOrImageFactory
+from factories.core.dm.pointofinterest import PointOfInterestFactory
 from factories.core.dm.read_aloud_text import ReadAloudTextFactory
 
 
