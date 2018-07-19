@@ -25,7 +25,7 @@ class PointOfInterestModalTabs(Component):
     """Definition of Point of Interest Tab component."""
 
     preview_xpath = '//*[@id="viewWeapon"]/div/div/div[2]/ul/li[1]/a/b'
-    edit_xpath = '//*[@id="viewWeapon"]/div/div/div[2]/ul/li[2]/a/b'
+    edit_xpath = '//*[@id="viewWeapon"]/div/div/div[2]/ul/li[2]/a'
 
     preview = Element(xpath=preview_xpath)
     edit = Element(xpath=edit_xpath)
@@ -48,7 +48,7 @@ class PointOfInterestEditModal(Component):
 
     name_xpath = '//*[@id="viewWeapon"]/div/div/div[2]/div/div[2]/form/div[1]/div/input'
     description_xpath = '//*[@id="viewWeapon"]/div/div/div[2]/div/div[2]/form/div[2]/div/textarea'
-    done_xpath = 'a//*[@id="viewWeapon"]/div/div/div[2]/div/div[2]/form/div[3]/button'
+    done_xpath = '//*[@id="viewWeapon"]/div/div/div[2]/div/div[2]/form/div[3]/button'
 
     name = Element(xpath=name_xpath)
     description = Element(xpath=description_xpath)
