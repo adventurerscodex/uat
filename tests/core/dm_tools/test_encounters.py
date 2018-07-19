@@ -148,8 +148,8 @@ def test_add_point_of_interest(dm_wizard, encounter_all_sections, browser):
 
 
 def test_edit_point_of_interest(dm_wizard, encounter_all_sections, browser):
-    """As a dm, I can edit amd remover Point of interest to an encounter and the data persists."""
-    print('As a dm, I can edit amd remover Point of interest to an encounter and the data persists')
+    """As a dm, I can edit and delete a Point of interest to an encounter and the data persists."""
+    print('As a dm, I can edit and delete a Point of interest to an encounter and the data persists')
 
     point_of_interest_modal = PointOfInterestAddModal(browser)
     point_of_interest_table = PointOfInterestTable(browser)
