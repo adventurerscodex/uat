@@ -9,11 +9,16 @@ from components.core.dm.points_of_interest import PointOfInterestAddModal
 from components.core.dm.points_of_interest import PointOfInterestEditModal
 from components.core.dm.points_of_interest import PointOfInterestModalTabs
 from components.core.dm.points_of_interest import PointOfInterestTable
+from components.core.dm.map_or_image import MapOrImageAddModal
+from components.core.dm.map_or_image import MapOrImageEditModal
+from components.core.dm.map_or_image import MapOrImageModalTabs
+from components.core.dm.map_or_image import MapOrImageTable
 from components.core.dm.read_aloud_text import ReadAloudTextAddModal
 from components.core.dm.read_aloud_text import ReadAloudTextEditModal
 from components.core.dm.read_aloud_text import ReadAloudTextModalTabs
 from components.core.dm.read_aloud_text import ReadAloudTextTable
 from factories.core.dm.pointofinterest import PointOfInterestFactory
+from factories.core.dm.map_image import MapOrImageFactory
 from factories.core.dm.read_aloud_text import ReadAloudTextFactory
 
 
@@ -199,3 +204,97 @@ def test_edit_point_of_interest(dm_wizard, encounter_all_sections, browser):
     point_of_interest_modal.remove.click()
 
     assert point_of_interest_modal.add_new_point.text.strip() == 'Add a new Point of Interest'
+
+
+def test_add_map_or_image(dm_wizard, encounter_all_sections, browser):
+    """As a dm, I can add a map or image to an encounter and the data persists."""
+    print('As a dm, I can add a map or image to an encounter and the data persists') # noqa
+    map_or_image_modal = MapOrImageAddModal(browser)
+    map_or_image_table = MapOrImageTable(browser)
+
+    map_or_image_modal.add_plus_icon.click()
+    stub = MapOrImageFactory.stub()
+
+    map_or_image_modal.name = stub.name
+    map_or_image_modal.link = stub.image_link
+    map_or_image_modal.description = stub.description
+    map_or_image_modal.add.click()
+
+    WebDriverWait(browser, 5).until(
+        EC.element_to_be_clickable(
+            (By.XPATH, map_or_image_table.name_xpath)
+        )
+    )
+
+    before_refresh_name = map_or_image_table.name.text.strip()
+    before_refresh_description = map_or_image_table.description.text.strip()
+
+    browser.refresh()
+
+    WebDriverWait(browser, 5).until(
+        EC.element_to_be_clickable(
+            (By.XPATH, map_or_image_table.name_xpath)
+        )
+    )
+
+    after_refresh_name = map_or_image_table.name.text.strip()
+    after_refresh_description = map_or_image_table.description.text.strip()
+
+    assert before_refresh_name == after_refresh_name
+    assert before_refresh_description == after_refresh_description
+
+
+def test_edit_map_or_image(dm_wizard, encounter_all_sections, browser):
+    """As a dm, I can edit and delete a map or image to an encounter and the data persists."""
+    print('As a dm, I can edit and delete a map or image to an encounter and the data persists') # noqa
+    map_or_image_modal = MapOrImageAddModal(browser)
+    map_or_image_table = MapOrImageTable(browser)
+
+    map_or_image_modal.add_plus_icon.click()
+    stub = MapOrImageFactory.stub()
+
+    map_or_image_modal.name = stub.name
+    map_or_image_modal.link = stub.image_link
+    map_or_image_modal.description = stub.description
+    map_or_image_modal.add.click()
+
+    map_or_image_edit = MapOrImageEditModal(browser)
+    map_or_image_tabs = MapOrImageModalTabs(browser)
+
+    map_or_image_table.name.click()
+    edit = browser.find_elements_by_xpath(map_or_image_tabs.edit_xpath)[1]
+    time.sleep(1)
+    edit.click()
+
+    map_or_image_edit.name = stub.name
+    map_or_image_edit.link = stub.image_link
+    map_or_image_edit.description = stub.description
+    done = browser.find_elements_by_xpath(map_or_image_edit.done_xpath)[1]
+    done.click()
+
+    WebDriverWait(browser, 5).until(
+        EC.element_to_be_clickable(
+            (By.XPATH, map_or_image_table.name_xpath)
+        )
+    )
+
+    before_refresh_name = map_or_image_table.name.text.strip()
+    before_refresh_description = map_or_image_table.description.text.strip()
+
+    browser.refresh()
+
+    WebDriverWait(browser, 5).until(
+        EC.element_to_be_clickable(
+            (By.XPATH, map_or_image_table.name_xpath)
+        )
+    )
+
+    after_refresh_name = map_or_image_table.name.text.strip()
+    after_refresh_description = map_or_image_table.description.text.strip()
+
+    assert before_refresh_name == after_refresh_name
+    assert before_refresh_description == after_refresh_description
+
+    map_or_image_modal.remove.click()
+
+    assert map_or_image_modal.add_new_point.text.strip() == 'Add a new Map or Image.'

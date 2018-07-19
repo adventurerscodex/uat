@@ -5,7 +5,7 @@ import factory
 from factories.fixtures import random_wordlist
 
 
-class MapImage:
+class MapOrImage:
     """Map Image model."""
 
     def __init__(
@@ -20,13 +20,13 @@ class MapImage:
         self.description = description
 
 
-class MapImageFactory(factory.Factory):
+class MapOrImageFactory(factory.Factory):
     """Definition of Map Image factory."""
 
     class Meta:
         """Bind model to factory."""
 
-        model = MapImage
+        model = MapOrImage
 
     name = factory.Faker(
         'word',

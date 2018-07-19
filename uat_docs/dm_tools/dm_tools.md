@@ -30,11 +30,11 @@ Encounters
 
 - [ ] As a dm, the environments fields are editable and persist
 
-- [ ] As a dm, I can add maps and images to an encounter and the data persists
+- [x] As a dm, I can add maps and images to an encounter and the data persists
 
-- [ ] As a dm, I can edit maps and images in an encounter and the data persists
+- [x] As a dm, I can edit maps and images in an encounter and the data persists
 
-- [ ] As a dm, I can delete maps and images in an encounter
+- [x] As a dm, I can delete maps and images in an encounter
 
 - [x] As a dm, I can add point of interest to an encounter and the data persists
 
