@@ -16,7 +16,7 @@ Overview
 Encounters
 ==========
 
-- [ ] As a dm, I can add an encounter via the plus icon
+- [x] As a dm, I can add an encounter via the plus icon
 
 - [ ] As a dm, an added encounter is visible in the encounter list and the encounter details
 
@@ -36,11 +36,11 @@ Encounters
 
 - [ ] As a dm, I can delete maps and images in an encounter
 
-- [ ] As a dm, I can add point of interest to an encounter and the data persists
+- [x] As a dm, I can add point of interest to an encounter and the data persists
 
-- [ ] As a dm, I can edit point of interest in an encounter and the data persists
+- [x] As a dm, I can edit point of interest in an encounter and the data persists
 
-- [ ] As a dm, I can delete point of interest in an encounter
+- [x] As a dm, I can delete point of interest in an encounter
 
 - [ ] As a dm, I can add an NPC to an encounter and the data persists
 
@@ -54,11 +54,11 @@ Encounters
 
 - [ ] As a dm, I can delete a monster in an encounter
 
-- [ ] As a dm, I can add read aloud text to an encounter and the data persists
+- [x] As a dm, I can add read aloud text to an encounter and the data persists
 
-- [ ] As a dm, I can edit a read aloud text in an encounter and the data persists
+- [x] As a dm, I can edit a read aloud text in an encounter and the data persists
 
-- [ ] As a dm, I can delete a read aloud text in an encounter
+- [x] As a dm, I can delete a read aloud text in an encounter
 
 - [ ] As a dm, I can add treasure to an encounter and the data persists
 
