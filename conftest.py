@@ -17,7 +17,6 @@ from components.core.dm.encounter_list import EncounterList
 from components.core.dm.tabs import DMTabs
 from components.core.dm.wizard import TellUsAStory
 from components.core.general.new_character_campaign import NewCharacterCampaign
-from components.core.general.api_navbar import Loginapi
 from components.core.general.api_navbar import Username
 from components.core.general.api_navbar import Password
 from components.core.general.api_navbar import Submit
@@ -33,8 +32,6 @@ DEFAULT_WAIT_TIME = 15
 def login_user(browser, login, usr, pwd):
     """User logs in"""
     print('As a User, I am able to login')
-    login = Loginapi(browser)
-    login.login_link.click()
 
     user = Username(browser)
     user.username = usr
