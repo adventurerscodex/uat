@@ -17,6 +17,11 @@ from components.core.dm.encounter_list import EncounterList
 from components.core.dm.tabs import DMTabs
 from components.core.dm.wizard import TellUsAStory
 from components.core.general.new_character_campaign import NewCharacterCampaign
+from components.core.general.api_navbar import Loginapi
+from components.core.general.api_navbar import Username
+from components.core.general.api_navbar import Password
+from components.core.general.api_navbar import Submit
+
 from factories.core.dm.encounter import EncounterAddEditModalFactory
 
 
@@ -25,9 +30,28 @@ LOGGER.setLevel(logging.WARNING)
 DEFAULT_WAIT_TIME = 15
 
 
+def login_user(browser, login, usr, pwd):
+    """User logs in"""
+    print('As a User, I am able to login')
+    login = Loginapi(browser)
+    login.login_link.click()
+
+    user = Username(browser)
+    user.username = usr
+
+    password = Password(browser)
+    password.password = pwd
+
+    submit = Submit(browser)
+    submit.submit.click()
+
+
 def pytest_addoption(parser):
     """Command line parameters."""
     parser.addoption('--web_driver', action='store', default='chrome')
+    parser.addoption('--login', action='store', default=False)
+    parser.addoption('--usr', action='store', default=None)
+    parser.addoption('--pwd', action='store', default=None)
     parser.addoption('--opera_binary_path', action='store')
     parser.addoption(
         '--url',
@@ -102,9 +126,31 @@ def pytest_csv_register_columns(columns):
     columns['created_at'] = strftime('%Y-%m-%d %H:%M:%S', gmtime())
 
 
+@pytest.fixture
+def login(request):
+    """Return command line argument."""
+    return request.config.getoption('--login')
+
+
+@pytest.fixture
+def usr(request):
+    """Return command line argument."""
+    return request.config.getoption('--usr')
+
+
+@pytest.fixture
+def pwd(request):
+    """Return command line argument."""
+    return request.config.getoption('--pwd')
+
+
 @pytest.fixture(scope='function')
-def dm_wizard(browser):
+def dm_wizard(browser, login, usr, pwd):
     """Navigate through the dm wizard."""
+
+    if login:
+        login_user(browser, login, usr, pwd)
+
     wizard_main = NewCharacterCampaign(browser)
     tell_us_a_story = TellUsAStory(browser)
 
@@ -165,8 +211,12 @@ def encounter_all_sections(browser):
 
 
 @pytest.fixture(scope='function')
-def player_wizard(browser):
+def player_wizard(browser, login, usr, pwd):
     """Navigate through the player wizard."""
+
+    if login:
+        login_user(browser, login, usr, pwd)
+
     wizard_main = NewCharacterCampaign(browser)
     who_are_you = wizard.WhoAreYou(browser)
     ability_scores = wizard.AbilityScoresManual(browser)
