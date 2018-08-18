@@ -6,14 +6,21 @@ from component_objects import Component, Element
 class MapOrImageAddModal(Component):
     """Definition of Map or Image Add component."""
 
-    name_xpath = '//*[@id="encounter-tab"]/encounter/div/div/div[2]/div[2]/encounter-detail/div/div[2]/maps-and-images-section/table/thead/tr/th[1]' # noqa
-    link_xpath = '//*[@id="encounter-tab"]/encounter/div/div/div[2]/div[2]/encounter-detail/div/div[2]/maps-and-images-section/table/thead/tr/th[3]' # noqa
-    description_xpath = '//*[@id="encounter-tab"]/encounter/div/div/div[2]/div[2]/encounter-detail/div/div[2]/maps-and-images-section/table/thead/tr/th[2]' # noqa
-    add_xpath = '//*[@id="encounter-tab"]/encounter/div/div/div[2]/div[2]/encounter-detail/div/div[2]/maps-and-images-section/table/thead/tr/th[5]/a/i' # noqa
+    name_xpath = '//*[@id="addMapOrImage"]/div/div/div[2]/form/div[1]/div/input'
+    description_xpath = '//*[@id="addMapOrImage"]/div/div/div[2]/form/div[3]/div/textarea'
+    link_xpath = '//*[@id="addMapOrImage"]/div/div/div[2]/form/div[2]/div/input'
+    add_plus_icon_xpath = '//*[@id="encounter-tab"]/encounter/div/div/div[2]/div[2]/encounter-detail/div/div[2]/maps-and-images-section/table/thead/tr/th[5]/a/i' # noqa
+    add_new_point_xpath = '//*[@id="encounter-tab"]/encounter/div/div/div[2]/div[2]/encounter-detail/div/div[2]/maps-and-images-section/table/tbody/tr/td' # noqa
+    remove_xpath = '//*[@id="encounter-tab"]/encounter/div/div/div[2]/div[2]/encounter-detail/div/div[2]/maps-and-images-section/table/tbody/tr/td[5]/a/i' # noqa
+    add_xpath = '//*[@id="addMapOrImage"]/div/div/div[2]/form/div[4]/button'
 
     name = Element(xpath=name_xpath)
-    link = Element(xpath=link_xpath)
     description = Element(xpath=description_xpath)
+    link = Element(xpath=link_xpath)
+    add_plus_icon = Element(xpath=add_plus_icon_xpath)
+    add_new_point = Element(xpath=add_new_point_xpath)
+    description = Element(xpath=description_xpath)
+    remove = Element(xpath=remove_xpath)
     add = Element(xpath=add_xpath)
 
 
@@ -53,3 +60,17 @@ class MapOrImageEditModal(Component):
     link = Element(xpath=link_xpath)
     description = Element(xpath=description_xpath)
     done = Element(xpath=done_xpath)
+
+
+class MapOrImageTable(Component):
+    """Definition of Map or Image Table component."""
+
+    name_xpath = '//*[@id="encounter-tab"]/encounter/div/div/div[2]/div[2]/encounter-detail/div/div[2]/maps-and-images-section/table/tbody/tr/td[1]' # noqa
+    description_xpath = '//*[@id="encounter-tab"]/encounter/div/div/div[2]/div[2]/encounter-detail/div/div[2]/maps-and-images-section/table/tbody/tr/td[2]' # noqa
+    first_row_xpath = '//*[@id="encounter-tab"]/encounter/div/div/div[2]/div[2]/encounter-detail/div/div[2]/maps-and-images-section/table/tbody/tr' # noqa
+    trash_xpath = '//*[@id="encounter-tab"]/encounter/div/div/div[2]/div[2]/encounter-detail/div/div[2]/point-of-interest-section/table/tbody/tr/td[4]/a/i' # noqa
+
+    name = Element(xpath=name_xpath)
+    description = Element(xpath=description_xpath)
+    first_row = Element(xpath=first_row_xpath)
+    trash = Element(xpath=trash_xpath)
