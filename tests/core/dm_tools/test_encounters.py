@@ -17,6 +17,7 @@ from components.core.dm.read_aloud_text import ReadAloudTextAddModal
 from components.core.dm.read_aloud_text import ReadAloudTextEditModal
 from components.core.dm.read_aloud_text import ReadAloudTextModalTabs
 from components.core.dm.read_aloud_text import ReadAloudTextTable
+from expected_conditions.general import modal_finished_closing
 from factories.core.dm.map_image import MapOrImageFactory
 from factories.core.dm.pointofinterest import PointOfInterestFactory
 from factories.core.dm.read_aloud_text import ReadAloudTextFactory
@@ -76,6 +77,14 @@ def test_edit_read_aloud_text(dm_wizard, encounter_all_sections, browser):
 
     read_aloud_edit = ReadAloudTextEditModal(browser)
     read_aloud_tabs = ReadAloudTextModalTabs(browser)
+
+    WebDriverWait(browser, 10).until(modal_finished_closing())
+
+    WebDriverWait(browser, 10).until(
+        EC.element_to_be_clickable(
+            (By.XPATH, read_aloud_table.name_xpath)
+        )
+    )
 
     read_aloud_table.name.click()
     edit = browser.find_elements_by_xpath(read_aloud_tabs.edit_xpath)[1]
@@ -169,6 +178,14 @@ def test_edit_point_of_interest(dm_wizard, encounter_all_sections, browser):
     point_of_interest_edit = PointOfInterestEditModal(browser)
     point_of_interest_tabs = PointOfInterestModalTabs(browser)
 
+    WebDriverWait(browser, 10).until(modal_finished_closing())
+
+    WebDriverWait(browser, 10).until(
+        EC.element_to_be_clickable(
+            (By.XPATH, point_of_interest_table.name_xpath)
+        )
+    )
+
     point_of_interest_table.name.click()
     edit = browser.find_element_by_xpath(point_of_interest_tabs.edit_xpath)
     time.sleep(1)
@@ -250,6 +267,14 @@ def test_edit_map_or_image(dm_wizard, encounter_all_sections, browser):
     map_or_image_modal = MapOrImageAddModal(browser)
     map_or_image_table = MapOrImageTable(browser)
 
+    WebDriverWait(browser, 10).until(modal_finished_closing())
+
+    WebDriverWait(browser, 10).until(
+        EC.element_to_be_clickable(
+            (By.XPATH, map_or_image_modal.add_plus_icon_xpath)
+        )
+    )
+
     map_or_image_modal.add_plus_icon.click()
     stub = MapOrImageFactory.stub()
 
@@ -260,6 +285,14 @@ def test_edit_map_or_image(dm_wizard, encounter_all_sections, browser):
 
     map_or_image_edit = MapOrImageEditModal(browser)
     map_or_image_tabs = MapOrImageModalTabs(browser)
+
+    WebDriverWait(browser, 10).until(modal_finished_closing())
+
+    WebDriverWait(browser, 10).until(
+        EC.element_to_be_clickable(
+            (By.XPATH, map_or_image_table.name_xpath)
+        )
+    )
 
     map_or_image_table.name.click()
     edit = browser.find_elements_by_xpath(map_or_image_tabs.edit_xpath)[1]
