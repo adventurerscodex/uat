@@ -4,6 +4,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC # noqa
 from selenium.webdriver.support.ui import WebDriverWait
 
+from conftest import DEFAULT_WAIT_TIME
 from components.core.character.ability_scores import AbilityScoresEditModal, AbilityScoresTable
 from components.core.character.health import HitPointHitDice
 from components.core.character.other_stats import OtherStats
@@ -32,7 +33,7 @@ def test_data_persists(player_wizard, browser): # noqa
     ability_scores_edit.strength = 15
     ability_scores_edit.done.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
@@ -101,7 +102,7 @@ def test_edit_ability_scores(player_wizard, browser): # noqa
 
     ability_scores_edit.done.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.text_to_be_present_in_element(
             (By.ID, ability_scores_table.strength.get_attribute('id')),
             '15'
@@ -134,7 +135,7 @@ def test_ability_scores_modifiers(player_wizard, browser): # noqa
 
     ability_scores_edit.done.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.text_to_be_present_in_element(
             (By.ID, ability_scores_table.strength.get_attribute('id')),
             '15'
@@ -166,7 +167,7 @@ def test_ability_scores_persist(player_wizard, browser): # noqa
 
     ability_scores_edit.done.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.text_to_be_present_in_element(
             (By.ID, ability_scores_table.strength.get_attribute('id')),
             '15'
@@ -511,7 +512,7 @@ def test_saving_throw_proficiency(player_wizard, browser): # noqa
     # open edit modal
     row[0].click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, saving_throw_edit.proficiency.get_attribute('id'))
         )
@@ -521,7 +522,7 @@ def test_saving_throw_proficiency(player_wizard, browser): # noqa
     saving_throw_edit.done.click()
 
     # add custom wait to test for class in nested element
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
@@ -546,7 +547,7 @@ def test_saving_throw_modifier(player_wizard, browser): # noqa
     saving_throw_edit.modifier = 1
     saving_throw_edit.done.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         table_cell_updated(
             saving_throw,
             'blank2',

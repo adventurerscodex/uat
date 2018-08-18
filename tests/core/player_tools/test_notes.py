@@ -3,6 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC # noqa
 from selenium.webdriver.support.ui import WebDriverWait
 
+from conftest import DEFAULT_WAIT_TIME
 from components.core.character.notes import NotesDetail, NotesList
 from components.core.character.tabs import Tabs
 from expected_conditions.general import url_in_new_tab_matches
@@ -68,7 +69,7 @@ def test_notes_persist_note(player_wizard, browser): # noqa
     tabs = Tabs(browser)
     tabs.notes.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.XPATH, notes_list.add_xpath)
         )
@@ -114,14 +115,14 @@ def test_markdown_cheatsheet_link(player_wizard, browser): # noqa
 
     notes_detail.markdown_cheatcheat.click()
 
-    WebDriverWait(browser, 20).until(EC.number_of_windows_to_be(2))
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(EC.number_of_windows_to_be(2))
 
     for handle in browser.window_handles:
         if handle.title() != app_window.title():
             browser.switch_to_window(handle)
             continue
 
-    WebDriverWait(browser, 20).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         url_in_new_tab_matches('https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet')
     )
 

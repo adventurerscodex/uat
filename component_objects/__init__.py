@@ -3,6 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC # noqa
 
+from conftest import DEFAULT_WAIT_TIME
 
 LOCATOR_MAP = {'css': By.CSS_SELECTOR,
                'id_': By.ID,
@@ -34,7 +35,7 @@ class Element:
 
     def __get__(self, obj, objtype):
         """Descriptor for retrieving element."""
-        element = WebDriverWait(obj.browser, 10).until(
+        element = WebDriverWait(obj.browser, DEFAULT_WAIT_TIME).until(
             EC.visibility_of_element_located(
                 (self.locating_key, self.locating_value)
             )
@@ -44,7 +45,7 @@ class Element:
 
     def __set__(self, obj, value):
         """Descriptor for setting a value."""
-        element = WebDriverWait(obj.browser, 10).until(
+        element = WebDriverWait(obj.browser, DEFAULT_WAIT_TIME).until(
             EC.visibility_of_element_located(
                 (self.locating_key, self.locating_value)
             )
@@ -71,7 +72,7 @@ class Elements:
 
     def __get__(self, obj, objtype):
         """Descriptor for retrieving element."""
-        elements = WebDriverWait(obj.browser, 5).until(
+        elements = WebDriverWait(obj.browser, DEFAULT_WAIT_TIME).until(
             EC.presence_of_all_elements_located(
                 (self.locating_key, self.locating_value)
             )

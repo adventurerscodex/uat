@@ -5,6 +5,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC # noqa
 from selenium.webdriver.support.ui import WebDriverWait
 
+from conftest import DEFAULT_WAIT_TIME
 from components.core.character import feats, features, traits
 from components.core.character import proficiency, skills, tracked
 from components.core.character.tabs import Tabs
@@ -93,7 +94,7 @@ def test_delete_feature(player_wizard, browser): # noqa
     )
     feature.add.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
@@ -161,7 +162,7 @@ def test_edit_feature(player_wizard, browser): # noqa
     tabs = Tabs(browser)
     tabs.skills.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, features_table.add_id)
         )
@@ -176,14 +177,14 @@ def test_edit_feature(player_wizard, browser): # noqa
     )
     feature.add.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
     rows = ut.get_table_rows(features_table, 'table', values=False)
     rows[0][0].click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, feature_tabs.edit_id)
         )
@@ -208,7 +209,7 @@ def test_edit_feature(player_wizard, browser): # noqa
 
     feature_edit.done.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
@@ -292,7 +293,7 @@ def test_delete_feat(player_wizard, browser): # noqa
     )
     feat.add.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
@@ -353,7 +354,7 @@ def test_edit_feat(player_wizard, browser): # noqa
     tabs = Tabs(browser)
     tabs.skills.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, feats_table.add_id)
         )
@@ -368,14 +369,14 @@ def test_edit_feat(player_wizard, browser): # noqa
     )
     feat.add.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
     rows = ut.get_table_rows(feats_table, 'table', values=False)
     rows[0][0].click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, feat_tabs.edit_id)
         )
@@ -396,11 +397,11 @@ def test_edit_feat(player_wizard, browser): # noqa
 
     feat_edit.done.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         table_cell_updated(
             feats_table,
             'feat',
@@ -484,7 +485,7 @@ def test_delete_trait(player_wizard, browser): # noqa
     tabs = Tabs(browser)
     tabs.skills.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, traits_table.add_id)
         )
@@ -499,7 +500,7 @@ def test_delete_trait(player_wizard, browser): # noqa
     )
     trait.add.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
@@ -566,7 +567,7 @@ def test_edit_trait(player_wizard, browser): # noqa
     tabs = Tabs(browser)
     tabs.skills.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, traits_table.add_id)
         )
@@ -581,14 +582,14 @@ def test_edit_trait(player_wizard, browser): # noqa
     )
     trait.add.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
     rows = ut.get_table_rows(traits_table, 'table', values=False)
     rows[0][0].click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, trait_tabs.edit_id)
         )
@@ -596,7 +597,7 @@ def test_edit_trait(player_wizard, browser): # noqa
 
     trait_tabs.edit.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.presence_of_element_located(
             (By.ID, trait_edit.name_id)
         )
@@ -619,11 +620,11 @@ def test_edit_trait(player_wizard, browser): # noqa
 
     rows = ut.get_table_rows(traits_table, 'table', values=False)
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         table_cell_updated(
             traits_table,
             'trait',
@@ -697,7 +698,7 @@ def test_delete_proficiency(player_wizard, browser): # noqa
     tabs = Tabs(browser)
     tabs.skills.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, proficiency_table.add_id)
         )
@@ -714,7 +715,7 @@ def test_delete_proficiency(player_wizard, browser): # noqa
 
     rows = ut.get_table_rows(proficiency_table, 'table', values=False)
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
@@ -777,7 +778,7 @@ def test_edit_proficiency(player_wizard, browser): # noqa
     tabs = Tabs(browser)
     tabs.skills.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, proficiency_table.add_id)
         )
@@ -792,14 +793,14 @@ def test_edit_proficiency(player_wizard, browser): # noqa
     )
     proficiency_add.add.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
     rows = ut.get_table_rows(proficiency_table, 'table', values=False)
     rows[0][0].click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, proficiency_tabs.edit_id)
         )
@@ -817,7 +818,7 @@ def test_edit_proficiency(player_wizard, browser): # noqa
 
     proficiency_edit.done.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
@@ -907,7 +908,7 @@ def test_proficiency_types(player_wizard, browser): # noqa
     acrobatics = ut.get_table_row(skills_table, 'table', values=False)
     none = acrobatics[0].find_element_by_tag_name('span').get_attribute('class')
     acrobatics[0].click()
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.XPATH, skills_edit.half_xpath)
         )
@@ -915,7 +916,7 @@ def test_proficiency_types(player_wizard, browser): # noqa
     skills_edit.half.click()
     skills_edit.done.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
@@ -925,7 +926,7 @@ def test_proficiency_types(player_wizard, browser): # noqa
     half = spans.find_element_by_tag_name('span').get_attribute('class')
 
     acrobatics[0].click()
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.XPATH, skills_edit.proficient_xpath)
         )
@@ -933,7 +934,7 @@ def test_proficiency_types(player_wizard, browser): # noqa
     skills_edit.proficient.click()
     skills_edit.done.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
     time.sleep(.4)
@@ -942,7 +943,7 @@ def test_proficiency_types(player_wizard, browser): # noqa
     proficient = spans.find_element_by_tag_name('span').get_attribute('class')
 
     acrobatics[0].click()
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.XPATH, skills_edit.expertise_xpath)
         )
@@ -951,7 +952,7 @@ def test_proficiency_types(player_wizard, browser): # noqa
     skills_edit.expertise.click()
     skills_edit.done.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
     time.sleep(.4)
@@ -1013,7 +1014,7 @@ def test_data_persists(player_wizard, browser): # noqa
 
     feature.add.click()
 
-    WebDriverWait(browser, 15).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
@@ -1026,7 +1027,7 @@ def test_data_persists(player_wizard, browser): # noqa
     )
     feat.add.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
@@ -1039,7 +1040,7 @@ def test_data_persists(player_wizard, browser): # noqa
     )
     trait.add.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
@@ -1052,14 +1053,14 @@ def test_data_persists(player_wizard, browser): # noqa
     )
     proficiency_add.add.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
     acrobatics = ut.get_table_row(skills_table, 'table', values=False)
     acrobatics[0].click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.XPATH, skills_edit.half_xpath)
         )
@@ -1068,7 +1069,7 @@ def test_data_persists(player_wizard, browser): # noqa
     skills_edit.half.click()
     skills_edit.done.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
