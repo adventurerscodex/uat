@@ -24,6 +24,7 @@ LOGGER.setLevel(logging.WARNING)
 
 DEFAULT_WAIT_TIME = 15
 
+
 def pytest_addoption(parser):
     """Command line parameters."""
     parser.addoption('--web_driver', action='store', default='chrome')

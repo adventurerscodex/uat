@@ -2,6 +2,7 @@
 from selenium.webdriver.support import expected_conditions as EC # noqa
 from selenium.webdriver.support.ui import WebDriverWait
 
+from conftest import DEFAULT_WAIT_TIME
 from components.core.character.ability_scores import AbilityScoresEditModal
 from components.core.character.ability_scores import AbilityScoresTable
 from components.core.character.hud import HUD

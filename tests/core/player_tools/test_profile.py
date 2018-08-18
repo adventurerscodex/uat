@@ -1,7 +1,6 @@
 """UAT test file for Adventurer's Codex player tools profile module."""
 from selenium.webdriver.common.keys import Keys
 
-from conftest import DEFAULT_WAIT_TIME
 from components.core.character.appearance import Appearance
 from components.core.character.background import Background
 from components.core.character.profile import Profile
