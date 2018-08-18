@@ -1,6 +1,7 @@
 """UAT test file for Adventurer's Codex dm tools encounters module."""
 import time
 
+from conftest import DEFAULT_WAIT_TIME
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC # noqa
 from selenium.webdriver.support.ui import WebDriverWait
@@ -17,7 +18,6 @@ from components.core.dm.read_aloud_text import ReadAloudTextAddModal
 from components.core.dm.read_aloud_text import ReadAloudTextEditModal
 from components.core.dm.read_aloud_text import ReadAloudTextModalTabs
 from components.core.dm.read_aloud_text import ReadAloudTextTable
-from conftest import DEFAULT_WAIT_TIME
 from expected_conditions.general import modal_finished_closing
 from factories.core.dm.map_image import MapOrImageFactory
 from factories.core.dm.pointofinterest import PointOfInterestFactory

@@ -1,4 +1,5 @@
 """UAT test file for Adventurer's Codex player tools inventory module."""
+from conftest import DEFAULT_WAIT_TIME
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC # noqa
@@ -6,7 +7,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 from components.core.character import coins, inventory, magic_items
 from components.core.character.tabs import Tabs
-from conftest import DEFAULT_WAIT_TIME
 from expected_conditions.general import modal_finished_closing
 from expected_conditions.general import sorting_arrow_down, sorting_arrow_up
 from utils import general as ut

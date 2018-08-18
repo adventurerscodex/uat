@@ -1,4 +1,5 @@
 """UAT test file for Adventurer's Codex core player tools wizard."""
+from conftest import DEFAULT_WAIT_TIME
 import pytest
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
@@ -11,7 +12,6 @@ from components.core.character import wizard
 from components.core.character.other_stats import OtherStats
 from components.core.character.profile import Profile
 from components.core.character.tabs import Tabs
-from conftest import DEFAULT_WAIT_TIME
 from components.core.general.new_character_campaign import NewCharacterCampaign
 from expected_conditions.general import table_has_data
 from utils import general as ut
