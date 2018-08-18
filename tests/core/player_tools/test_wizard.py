@@ -6,12 +6,12 @@ from selenium.webdriver.support import expected_conditions as EC # noqa
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.ui import WebDriverWait
 
-from conftest import DEFAULT_WAIT_TIME
 from components.core.character import inventory
 from components.core.character import wizard
 from components.core.character.other_stats import OtherStats
 from components.core.character.profile import Profile
 from components.core.character.tabs import Tabs
+from conftest import DEFAULT_WAIT_TIME
 from components.core.general.new_character_campaign import NewCharacterCampaign
 from expected_conditions.general import table_has_data
 from utils import general as ut

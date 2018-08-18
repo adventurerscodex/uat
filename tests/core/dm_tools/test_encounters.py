@@ -5,7 +5,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC # noqa
 from selenium.webdriver.support.ui import WebDriverWait
 
-from conftest import DEFAULT_WAIT_TIME
 from components.core.dm.map_or_image import MapOrImageAddModal
 from components.core.dm.map_or_image import MapOrImageEditModal
 from components.core.dm.map_or_image import MapOrImageModalTabs
@@ -18,6 +17,7 @@ from components.core.dm.read_aloud_text import ReadAloudTextAddModal
 from components.core.dm.read_aloud_text import ReadAloudTextEditModal
 from components.core.dm.read_aloud_text import ReadAloudTextModalTabs
 from components.core.dm.read_aloud_text import ReadAloudTextTable
+from conftest import DEFAULT_WAIT_TIME
 from expected_conditions.general import modal_finished_closing
 from factories.core.dm.map_image import MapOrImageFactory
 from factories.core.dm.pointofinterest import PointOfInterestFactory
@@ -346,7 +346,7 @@ def test_edit_map_or_image(dm_wizard, encounter_all_sections, browser):
     done = browser.find_elements_by_xpath(map_or_image_edit.done_xpath)[1]
     done.click()
 
-    WebDriverWait(browser, 5).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.XPATH, map_or_image_table.name_xpath)
         )
@@ -357,7 +357,7 @@ def test_edit_map_or_image(dm_wizard, encounter_all_sections, browser):
 
     browser.refresh()
 
-    WebDriverWait(browser, 5).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.XPATH, map_or_image_table.name_xpath)
         )

@@ -2,7 +2,6 @@
 from selenium.webdriver.support import expected_conditions as EC # noqa
 from selenium.webdriver.support.ui import WebDriverWait
 
-from conftest import DEFAULT_WAIT_TIME
 from components.core.character.ability_scores import AbilityScoresEditModal
 from components.core.character.ability_scores import AbilityScoresTable
 from components.core.character.hud import HUD
@@ -11,6 +10,7 @@ from components.core.character.saving_throw import SavingThrowTable
 from components.core.character.skills import SkillsTable
 from components.core.character.tabs import Tabs
 from components.core.character.weapon import WeaponAddModal, WeaponTable
+from conftest import DEFAULT_WAIT_TIME
 from expected_conditions.general import table_cell_updated
 from utils import general as ut
 

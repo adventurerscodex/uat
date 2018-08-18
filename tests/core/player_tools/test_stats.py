@@ -4,12 +4,12 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC # noqa
 from selenium.webdriver.support.ui import WebDriverWait
 
-from conftest import DEFAULT_WAIT_TIME
 from components.core.character.ability_scores import AbilityScoresEditModal, AbilityScoresTable
 from components.core.character.health import HitPointHitDice
 from components.core.character.other_stats import OtherStats
 from components.core.character.profile_picture import ProfilePicture
 from components.core.character.saving_throw import SavingThrowEditModal, SavingThrowTable
+from conftest import DEFAULT_WAIT_TIME
 from expected_conditions.general import modal_finished_closing
 from expected_conditions.general import table_cell_updated
 from utils import general as ut

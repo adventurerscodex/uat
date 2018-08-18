@@ -5,10 +5,10 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC # noqa
 from selenium.webdriver.support.ui import WebDriverWait
 
-from conftest import DEFAULT_WAIT_TIME
 from components.core.character import feats, features, traits
 from components.core.character import proficiency, skills, tracked
 from components.core.character.tabs import Tabs
+from conftest import DEFAULT_WAIT_TIME
 from expected_conditions.general import modal_finished_closing
 from expected_conditions.general import table_cell_updated
 from utils import general as ut

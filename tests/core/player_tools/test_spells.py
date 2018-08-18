@@ -4,9 +4,9 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC # noqa
 from selenium.webdriver.support.ui import WebDriverWait
 
-from conftest import DEFAULT_WAIT_TIME
 from components.core.character import spells
 from components.core.character.tabs import Tabs
+from conftest import DEFAULT_WAIT_TIME
 from expected_conditions.general import modal_finished_closing
 from utils import general as ut
 
