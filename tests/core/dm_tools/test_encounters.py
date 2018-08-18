@@ -30,6 +30,14 @@ def test_add_read_aloud_text(dm_wizard, encounter_all_sections, browser):
     read_aloud_text = ReadAloudTextAddModal(browser)
     read_aloud_table = ReadAloudTextTable(browser)
 
+    WebDriverWait(browser, 10).until(modal_finished_closing())
+
+    WebDriverWait(browser, 10).until(
+        EC.element_to_be_clickable(
+            (By.XPATH, read_aloud_text.add_plus_icon_xpath)
+        )
+    )
+
     read_aloud_text.add_plus_icon.click()
     stub = ReadAloudTextFactory.stub()
 
@@ -67,6 +75,14 @@ def test_edit_read_aloud_text(dm_wizard, encounter_all_sections, browser):
 
     read_aloud_text = ReadAloudTextAddModal(browser)
     read_aloud_table = ReadAloudTextTable(browser)
+
+    WebDriverWait(browser, 10).until(modal_finished_closing())
+
+    WebDriverWait(browser, 10).until(
+        EC.element_to_be_clickable(
+            (By.XPATH, read_aloud_text.add_plus_icon_xpath)
+        )
+    )
 
     read_aloud_text.add_plus_icon.click()
     stub = ReadAloudTextFactory.stub()
@@ -130,6 +146,14 @@ def test_add_point_of_interest(dm_wizard, encounter_all_sections, browser):
     point_of_interest_modal = PointOfInterestAddModal(browser)
     point_of_interest_table = PointOfInterestTable(browser)
 
+    WebDriverWait(browser, 10).until(modal_finished_closing())
+
+    WebDriverWait(browser, 10).until(
+        EC.element_to_be_clickable(
+            (By.XPATH, point_of_interest_modal.add_plus_icon_xpath)
+        )
+    )
+
     point_of_interest_modal.add_plus_icon.click()
     stub = PointOfInterestFactory.stub()
 
@@ -167,6 +191,14 @@ def test_edit_point_of_interest(dm_wizard, encounter_all_sections, browser):
 
     point_of_interest_modal = PointOfInterestAddModal(browser)
     point_of_interest_table = PointOfInterestTable(browser)
+
+    WebDriverWait(browser, 10).until(modal_finished_closing())
+
+    WebDriverWait(browser, 10).until(
+        EC.element_to_be_clickable(
+            (By.XPATH, point_of_interest_modal.add_plus_icon_xpath)
+        )
+    )
 
     point_of_interest_modal.add_plus_icon.click()
     stub = PointOfInterestFactory.stub()
@@ -228,6 +260,14 @@ def test_add_map_or_image(dm_wizard, encounter_all_sections, browser):
     print('As a dm, I can add a map or image to an encounter and the data persists') # noqa
     map_or_image_modal = MapOrImageAddModal(browser)
     map_or_image_table = MapOrImageTable(browser)
+
+    WebDriverWait(browser, 10).until(modal_finished_closing())
+
+    WebDriverWait(browser, 10).until(
+        EC.element_to_be_clickable(
+            (By.XPATH, map_or_image_modal.add_plus_icon_xpath)
+        )
+    )
 
     map_or_image_modal.add_plus_icon.click()
     stub = MapOrImageFactory.stub()
