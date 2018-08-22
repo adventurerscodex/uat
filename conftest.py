@@ -22,6 +22,8 @@ from factories.core.dm.encounter import EncounterAddEditModalFactory
 
 LOGGER.setLevel(logging.WARNING)
 
+DEFAULT_WAIT_TIME = 15
+
 
 def pytest_addoption(parser):
     """Command line parameters."""
@@ -106,7 +108,7 @@ def dm_wizard(browser):
     wizard_main = NewCharacterCampaign(browser)
     tell_us_a_story = TellUsAStory(browser)
 
-    WebDriverWait(browser, 15).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, wizard_main.get_started_id)
         )
@@ -114,7 +116,7 @@ def dm_wizard(browser):
 
     wizard_main.get_started.click()
 
-    WebDriverWait(browser, 15).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, wizard_main.dm_id)
         )
@@ -122,7 +124,7 @@ def dm_wizard(browser):
 
     wizard_main.dm.click()
 
-    WebDriverWait(browser, 15).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, wizard_main.next_id)
         )
@@ -169,7 +171,7 @@ def player_wizard(browser):
     who_are_you = wizard.WhoAreYou(browser)
     ability_scores = wizard.AbilityScoresManual(browser)
 
-    WebDriverWait(browser, 15).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, wizard_main.get_started_id)
         )
@@ -177,7 +179,7 @@ def player_wizard(browser):
 
     wizard_main.get_started.click()
 
-    WebDriverWait(browser, 15).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, wizard_main.player_id)
         )
@@ -185,7 +187,7 @@ def player_wizard(browser):
 
     wizard_main.player.click()
 
-    WebDriverWait(browser, 15).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, wizard_main.next_id)
         )
@@ -196,7 +198,7 @@ def player_wizard(browser):
     who_are_you.character_name = 'Test Char'
     who_are_you.player_name = 'Automated Testing Bot.'
 
-    WebDriverWait(browser, 15).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, wizard_main.next_id)
         )

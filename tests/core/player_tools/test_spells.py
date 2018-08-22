@@ -1,4 +1,5 @@
 """UAT test file for Adventurer's Codex player tools spells module."""
+from conftest import DEFAULT_WAIT_TIME
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC # noqa
@@ -18,7 +19,7 @@ def test_add_spells(player_wizard, browser): # noqa
     tabs = Tabs(browser)
     tabs.spells.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, spells_table.add_id)
         )
@@ -28,7 +29,7 @@ def test_add_spells(player_wizard, browser): # noqa
     spells_add.name = 'Acid Arrow'
     spells_add.name.send_keys(Keys.TAB)
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.invisibility_of_element_located(
             (By.CLASS_NAME, 'ui-menu-item-wrapper')
         )
@@ -81,7 +82,7 @@ def test_delete_spells(player_wizard, browser): # noqa
     tabs = Tabs(browser)
     tabs.spells.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, spells_table.add_id)
         )
@@ -96,7 +97,7 @@ def test_delete_spells(player_wizard, browser): # noqa
     )
     spells_add.add.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
@@ -117,7 +118,7 @@ def test_edit_spells(player_wizard, browser): # noqa
     tabs = Tabs(browser)
     tabs.spells.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, spells_table.add_id)
         )
@@ -133,14 +134,14 @@ def test_edit_spells(player_wizard, browser): # noqa
     )
     spells_add.add.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
     rows = ut.get_table_rows(spells_table, 'table', values=False)
     rows[0][1].click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, spells_tabs.edit_id)
         )
@@ -148,7 +149,7 @@ def test_edit_spells(player_wizard, browser): # noqa
 
     spells_tabs.edit.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.presence_of_element_located(
             (By.ID, spells_edit.name_id)
         )
@@ -184,7 +185,7 @@ def test_edit_spells(player_wizard, browser): # noqa
 
     spells_edit.done.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
@@ -212,7 +213,7 @@ def test_preview_spells(player_wizard, browser): # noqa
     tabs = Tabs(browser)
     tabs.spells.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, spells_table.add_id)
         )
@@ -227,14 +228,14 @@ def test_preview_spells(player_wizard, browser): # noqa
     )
     spells_add.add.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
     row = ut.get_table_row(spells_table, 'table', values=False)
     row[1].click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, spells_preview.done_id)
         )

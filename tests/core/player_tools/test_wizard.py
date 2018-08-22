@@ -1,4 +1,5 @@
 """UAT test file for Adventurer's Codex core player tools wizard."""
+from conftest import DEFAULT_WAIT_TIME
 import pytest
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
@@ -290,7 +291,7 @@ def test_wizard_backpack_prepop(browser): # noqa
     tabs = Tabs(browser)
     inventory_table = inventory.InventoryTable(browser)
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, wizard_main.get_started_id)
         )
@@ -298,7 +299,7 @@ def test_wizard_backpack_prepop(browser): # noqa
 
     wizard_main.get_started.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, wizard_main.player_id)
         )
@@ -306,7 +307,7 @@ def test_wizard_backpack_prepop(browser): # noqa
 
     wizard_main.player.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, wizard_main.next_id)
         )
@@ -320,7 +321,7 @@ def test_wizard_backpack_prepop(browser): # noqa
     backpack = Select(browser.find_element_by_id(who_are_you.backpack_id))
     backpack.select_by_index(1)
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, wizard_main.next_id)
         )
@@ -337,7 +338,7 @@ def test_wizard_backpack_prepop(browser): # noqa
 
     wizard_main.finish.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, tabs.inventory_id)
         )
@@ -349,7 +350,7 @@ def test_wizard_backpack_prepop(browser): # noqa
     # https://forums.developer.apple.com/message/184592#184592
     # Javascript example not working either
     if browser.name != 'safari':
-        WebDriverWait(browser, 15).until(
+        WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
             table_has_data(
                 inventory_table,
             )

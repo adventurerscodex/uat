@@ -1,4 +1,5 @@
 """UAT test file for Adventurer's Codex player tools inventory module."""
+from conftest import DEFAULT_WAIT_TIME
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC # noqa
@@ -19,7 +20,7 @@ def test_add_inventory(player_wizard, browser): # noqa
     tabs = Tabs(browser)
     tabs.inventory.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, inventory_table.add_id)
         )
@@ -69,7 +70,7 @@ def test_delete_inventory(player_wizard, browser): # noqa
     )
     inventory_add.add.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
@@ -100,14 +101,14 @@ def test_edit_inventory(player_wizard, browser): # noqa
     )
     inventory_add.add.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
     rows = ut.get_table_rows(inventory_table, 'table', values=False)
     rows[0][0].click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, inventory_tabs.edit_id)
         )
@@ -115,7 +116,7 @@ def test_edit_inventory(player_wizard, browser): # noqa
 
     inventory_tabs.edit.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.presence_of_element_located(
             (By.ID, inventory_edit.name_id)
         )
@@ -136,7 +137,7 @@ def test_edit_inventory(player_wizard, browser): # noqa
     assert inventory_edit.description.get_attribute('value').strip() == 'Edit Description'
 
     inventory_edit.done.click()
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
     row = ut.get_table_row(inventory_table, 'table', 1)
@@ -159,7 +160,7 @@ def test_preview_inventory(player_wizard, browser): # noqa
     tabs = Tabs(browser)
     tabs.inventory.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, inventory_table.add_id)
         )
@@ -174,14 +175,14 @@ def test_preview_inventory(player_wizard, browser): # noqa
     )
     inventory_add.add.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
     row = ut.get_table_row(inventory_table, 'table', values=False)
     row[0].click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, inventory_preview.done_id)
         )
@@ -219,7 +220,7 @@ def test_autocomplete_inventory(player_wizard, browser): # noqa
     tabs = Tabs(browser)
     tabs.inventory.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, inventory_table.add_id)
         )
@@ -247,7 +248,7 @@ def test_inventory_ogl_pre_pop(player_wizard, browser): # noqa
     tabs = Tabs(browser)
     tabs.inventory.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, inventory_table.add_id)
         )
@@ -281,7 +282,7 @@ def test_inventory_persists(player_wizard, browser): # noqa
     tabs = Tabs(browser)
     tabs.inventory.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, inventory_table.add_id)
         )
@@ -309,7 +310,7 @@ def test_inventory_persists(player_wizard, browser): # noqa
     row = ut.get_table_row(inventory_table, 'table', values=False)
     row[0].click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, inventory_tabs.edit_id)
         )
@@ -335,7 +336,7 @@ def test_inventory_total_weight(player_wizard, browser): # noqa
     tabs = Tabs(browser)
     tabs.inventory.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, inventory_table.add_id)
         )
@@ -350,7 +351,7 @@ def test_inventory_total_weight(player_wizard, browser): # noqa
     )
     inventory_add.add.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
@@ -377,7 +378,7 @@ def test_inventory_sorting(player_wizard, browser): # noqa
     tabs = Tabs(browser)
     tabs.inventory.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, inventory_table.add_id)
         )
@@ -392,7 +393,7 @@ def test_inventory_sorting(player_wizard, browser): # noqa
     )
     inventory_add.add.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
@@ -405,13 +406,13 @@ def test_inventory_sorting(player_wizard, browser): # noqa
     )
     inventory_add.add.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
     inventory_table.item_header.click()
 
-    WebDriverWait(browser, 5).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         sorting_arrow_down(
             inventory_table.item_header_sorting_arrow,
         )
@@ -422,7 +423,7 @@ def test_inventory_sorting(player_wizard, browser): # noqa
 
     inventory_table.quantity_header.click()
 
-    WebDriverWait(browser, 5).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         sorting_arrow_up(
             inventory_table.quantity_header_sorting_arrow,
         )
@@ -434,7 +435,7 @@ def test_inventory_sorting(player_wizard, browser): # noqa
 
     inventory_table.weight_header.click()
 
-    WebDriverWait(browser, 5).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         sorting_arrow_up(
             inventory_table.weight_header_sorting_arrow,
         )
@@ -654,7 +655,7 @@ def test_delete_magic_items(player_wizard, browser): # noqa
 
     rows = ut.get_table_rows(magic_items_table, 'table', values=False)
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
@@ -683,14 +684,14 @@ def test_edit_magic_items(player_wizard, browser): # noqa
     )
     magic_items_add.add.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
     rows = ut.get_table_rows(magic_items_table, 'table', values=False)
     rows[0][0].click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, magic_items_tabs.edit_id)
         )
@@ -720,7 +721,7 @@ def test_edit_magic_items(player_wizard, browser): # noqa
 
     magic_items_edit.done.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
@@ -757,14 +758,14 @@ def test_preview_magic_items(player_wizard, browser): # noqa
     )
     magic_items_add.add.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
     row = ut.get_table_row(magic_items_table, 'table', values=False)
     row[0].click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.text_to_be_present_in_element(
             (By.ID, magic_items_preview.item_id), 'Adamantine Armor'
         )
@@ -820,7 +821,7 @@ def test_autocomplete_magic_items(player_wizard, browser): # noqa
     tabs = Tabs(browser)
     tabs.inventory.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, magic_items_table.add_id)
         )
@@ -887,7 +888,7 @@ def test_magic_items_persists(player_wizard, browser): # noqa
     row = ut.get_table_row(magic_items_table, 'table', values=False)
     row[0].click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, magic_items_tabs.edit_id)
         )
@@ -930,7 +931,7 @@ def test_magic_items_total_weight(player_wizard, browser): # noqa
     magic_items_add.weight = 5
     magic_items_add.add.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
@@ -958,7 +959,7 @@ def test_magic_items_sorting(player_wizard, browser): # noqa
     tabs = Tabs(browser)
     tabs.inventory.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, magic_items_table.add_id)
         )
@@ -974,7 +975,7 @@ def test_magic_items_sorting(player_wizard, browser): # noqa
     magic_items_add.weight = 100
     magic_items_add.add.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
@@ -990,12 +991,12 @@ def test_magic_items_sorting(player_wizard, browser): # noqa
     magic_items_add.charges = 1
     magic_items_add.add.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
     magic_items_table.magic_item_header.click()
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         sorting_arrow_down(
             magic_items_table.magic_item_header_sorting_arrow,
         )
@@ -1005,7 +1006,7 @@ def test_magic_items_sorting(player_wizard, browser): # noqa
     assert rows[0].text.strip() == 'Amulet of Health'
 
     magic_items_table.charges_header.click()
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         sorting_arrow_up(
             magic_items_table.charges_header_sorting_arrow,
         )
@@ -1015,7 +1016,7 @@ def test_magic_items_sorting(player_wizard, browser): # noqa
     assert rows[1].text.strip() == 'N/A'
 
     magic_items_table.weight_header.click()
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         sorting_arrow_up(
             magic_items_table.weight_header_sorting_arrow,
         )
@@ -1025,7 +1026,7 @@ def test_magic_items_sorting(player_wizard, browser): # noqa
     assert rows[3].text.strip() == '0 lbs.'
 
     magic_items_table.weight_header.click()
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         sorting_arrow_down(
             magic_items_table.weight_header_sorting_arrow,
         )

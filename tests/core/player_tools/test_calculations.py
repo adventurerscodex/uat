@@ -1,4 +1,5 @@
 """UAT test file for Adventurer's Codex player tools calculations."""
+from conftest import DEFAULT_WAIT_TIME
 from selenium.webdriver.support import expected_conditions as EC # noqa
 from selenium.webdriver.support.ui import WebDriverWait
 
@@ -33,7 +34,7 @@ def test_strength_increase(player_wizard, browser): # noqa
     ability_scores_edit.strength = 14
     ability_scores_edit.done.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         table_cell_updated(
             saving_throw,
             'blank2',
@@ -96,7 +97,7 @@ def test_dexterity_increase(player_wizard, browser): # noqa
     ability_scores_edit.dexterity = 14
     ability_scores_edit.done.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         table_cell_updated(
             saving_throw,
             'blank2',
@@ -152,7 +153,7 @@ def test_constitution_increase(player_wizard, browser): # noqa
     ability_scores_edit.constitution = 14
     ability_scores_edit.done.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         table_cell_updated(
             saving_throw,
             'blank2',
@@ -183,7 +184,7 @@ def test_intelligence_increase(player_wizard, browser): # noqa
     ability_scores_edit.intelligence = 14
     ability_scores_edit.done.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         table_cell_updated(
             saving_throw,
             'blank2',
@@ -227,7 +228,7 @@ def test_wisdom_increase(player_wizard, browser): # noqa
     ability_scores_edit.wisdom = 14
     ability_scores_edit.done.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         table_cell_updated(
             saving_throw,
             'blank2',
@@ -271,7 +272,7 @@ def test_charisma_increase(player_wizard, browser): # noqa
     ability_scores_edit.charisma = 14
     ability_scores_edit.done.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         table_cell_updated(
             saving_throw,
             'blank2',

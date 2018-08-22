@@ -1,4 +1,5 @@
 """UAT test file for Adventurer's Codex player tools equipment module."""
+from conftest import DEFAULT_WAIT_TIME
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC # noqa
@@ -22,7 +23,7 @@ def test_add_weapon(player_wizard, browser): # noqa
     tabs = Tabs(browser)
     tabs.equipment.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, weapon_table.add_id)
         )
@@ -80,7 +81,7 @@ def test_delete_weapon(player_wizard, browser): # noqa
     tabs = Tabs(browser)
     tabs.equipment.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, weapon_table.add_id)
         )
@@ -95,7 +96,7 @@ def test_delete_weapon(player_wizard, browser): # noqa
     )
     weapon_add.add.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
@@ -117,7 +118,7 @@ def test_edit_weapon(player_wizard, browser): # noqa
     tabs = Tabs(browser)
     tabs.equipment.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, weapon_table.add_id)
         )
@@ -132,14 +133,14 @@ def test_edit_weapon(player_wizard, browser): # noqa
     )
     weapon_add.add.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
     rows = ut.get_table_rows(weapon_table, 'table', values=False)
     rows[0][0].click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, weapon_tabs.edit_id)
         )
@@ -147,7 +148,7 @@ def test_edit_weapon(player_wizard, browser): # noqa
 
     weapon_tabs.edit.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.presence_of_element_located(
             (By.ID, weapon_edit.name_id)
         )
@@ -187,7 +188,7 @@ def test_edit_weapon(player_wizard, browser): # noqa
 
     weapon_edit.done.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
@@ -215,7 +216,7 @@ def test_preview_weapon(player_wizard, browser): # noqa
     tabs = Tabs(browser)
     tabs.equipment.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, weapon_table.add_id)
         )
@@ -230,14 +231,14 @@ def test_preview_weapon(player_wizard, browser): # noqa
     )
     weapon_add.add.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
     row = ut.get_table_row(weapon_table, 'table', values=False)
     row[0].click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.XPATH, weapon_preview.done_xpath)
         )
@@ -283,7 +284,7 @@ def test_autocomplete_weapon(player_wizard, browser): # noqa
     tabs = Tabs(browser)
     tabs.equipment.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, weapon_table.add_id)
         )
@@ -346,7 +347,7 @@ def test_weapon_ogl_pre_pop(player_wizard, browser): # noqa
     tabs = Tabs(browser)
     tabs.equipment.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, weapon_table.add_id)
         )
@@ -387,7 +388,7 @@ def test_weapon_magical_modifier(player_wizard, browser): # noqa
     weapon_add.name = 'Add Name'
     weapon_add.magical_modifier = 3
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, weapon_table.add_id)
         )
@@ -395,7 +396,7 @@ def test_weapon_magical_modifier(player_wizard, browser): # noqa
 
     weapon_add.add.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
@@ -417,7 +418,7 @@ def test_weapon_persists(player_wizard, browser): # noqa
     tabs = Tabs(browser)
     tabs.equipment.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, weapon_table.add_id)
         )
@@ -447,7 +448,7 @@ def test_weapon_persists(player_wizard, browser): # noqa
     row = ut.get_table_row(weapon_table, 'table', values=False)
     row[0].click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, weapon_tabs.edit_id)
         )
@@ -483,7 +484,7 @@ def test_weapon_total_weight(player_wizard, browser): # noqa
     tabs = Tabs(browser)
     tabs.equipment.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, weapon_table.add_id)
         )
@@ -498,7 +499,7 @@ def test_weapon_total_weight(player_wizard, browser): # noqa
     )
     weapon_add.add.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
@@ -525,7 +526,7 @@ def test_melee_ft(player_wizard, browser): # noqa
     tabs = Tabs(browser)
     tabs.equipment.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, weapon_table.add_id)
         )
@@ -536,7 +537,7 @@ def test_melee_ft(player_wizard, browser): # noqa
     weapon_add.name = 'Test name'
     weapon_add.type_ = 'Melee'
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, weapon_add.add_id)
         )
@@ -544,7 +545,7 @@ def test_melee_ft(player_wizard, browser): # noqa
 
     weapon_add.add.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
@@ -564,7 +565,7 @@ def test_ranged_ft(player_wizard, browser): # noqa
     tabs = Tabs(browser)
     tabs.equipment.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, weapon_table.add_id)
         )
@@ -577,7 +578,7 @@ def test_ranged_ft(player_wizard, browser): # noqa
 
     weapon_add.add.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
@@ -597,7 +598,7 @@ def test_reach_ft(player_wizard, browser): # noqa
     tabs = Tabs(browser)
     tabs.equipment.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, weapon_table.add_id)
         )
@@ -610,7 +611,7 @@ def test_reach_ft(player_wizard, browser): # noqa
     weapon_add.range_ = '5'
     weapon_add.add.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
@@ -630,7 +631,7 @@ def test_weapon_sorting(player_wizard, browser): # noqa
     tabs = Tabs(browser)
     tabs.equipment.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, weapon_table.add_id)
         )
@@ -645,7 +646,7 @@ def test_weapon_sorting(player_wizard, browser): # noqa
     )
     weapon_add.add.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
@@ -659,13 +660,13 @@ def test_weapon_sorting(player_wizard, browser): # noqa
     )
     weapon_add.add.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
     weapon_table.weapon_header.click()
 
-    WebDriverWait(browser, 5).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         sorting_arrow_down(
             weapon_table.weapon_header_sorting_arrow,
         )
@@ -675,7 +676,7 @@ def test_weapon_sorting(player_wizard, browser): # noqa
     assert rows[0].text.strip() == 'Blowgun'
 
     weapon_table.to_hit_header.click()
-    WebDriverWait(browser, 5).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         sorting_arrow_up(
             weapon_table.to_hit_header_sorting_arrow,
         )
@@ -685,7 +686,7 @@ def test_weapon_sorting(player_wizard, browser): # noqa
     assert rows[1].text.strip() == '+ 6'
 
     weapon_table.damage_header.click()
-    WebDriverWait(browser, 5).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         sorting_arrow_up(
             weapon_table.damage_header_sorting_arrow,
         )
@@ -695,7 +696,7 @@ def test_weapon_sorting(player_wizard, browser): # noqa
     assert rows[2].text.strip() == '1'
 
     weapon_table.damage_type_header.click()
-    WebDriverWait(browser, 5).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         sorting_arrow_up(
             weapon_table.damage_type_header_sorting_arrow,
         )
@@ -705,7 +706,7 @@ def test_weapon_sorting(player_wizard, browser): # noqa
     assert rows[3].text.strip() == 'Piercing'
 
     weapon_table.damage_type_header.click()
-    WebDriverWait(browser, 5).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         sorting_arrow_down(
             weapon_table.damage_type_header_sorting_arrow,
         )
@@ -715,7 +716,7 @@ def test_weapon_sorting(player_wizard, browser): # noqa
     assert rows[3].text.strip() == 'Slashing'
 
     weapon_table.range_header.click()
-    WebDriverWait(browser, 5).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         sorting_arrow_up(
             weapon_table.range_header_sorting_arrow,
         )
@@ -725,7 +726,7 @@ def test_weapon_sorting(player_wizard, browser): # noqa
     assert rows[4].text.strip() == '5 ft.'
 
     weapon_table.property_header.click()
-    WebDriverWait(browser, 5).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         sorting_arrow_up(
             weapon_table.property_header_sorting_arrow,
         )
@@ -735,7 +736,7 @@ def test_weapon_sorting(player_wizard, browser): # noqa
     assert rows[5].text.strip() == 'Ranged, Ammunition, and Loading'
 
     weapon_table.quantity_header.click()
-    WebDriverWait(browser, 5).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         sorting_arrow_up(
             weapon_table.quantity_header_sorting_arrow,
         )
@@ -756,7 +757,7 @@ def test_add_armor(player_wizard, browser): # noqa
 
     stub = ArmorFactory.stub()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, armor_table.add_id)
         )
@@ -810,7 +811,7 @@ def test_delete_armor(player_wizard, browser): # noqa
     tabs = Tabs(browser)
     tabs.equipment.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, armor_table.add_id)
         )
@@ -827,7 +828,7 @@ def test_delete_armor(player_wizard, browser): # noqa
 
     rows = ut.get_table_rows(armor_table, 'table', values=False)
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
@@ -849,7 +850,7 @@ def test_edit_armor(player_wizard, browser): # noqa
 
     stub = ArmorFactory.stub()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, armor_table.add_id)
         )
@@ -866,12 +867,12 @@ def test_edit_armor(player_wizard, browser): # noqa
 
     rows = ut.get_table_rows(armor_table, 'table', values=False)
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
     rows[0][0].click()
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, armor_tabs.edit_id)
         )
@@ -905,11 +906,11 @@ def test_edit_armor(player_wizard, browser): # noqa
 
     armor_edit.done.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         table_cell_updated(
             armor_table,
             'armor',
@@ -940,7 +941,7 @@ def test_preview_armor(player_wizard, browser): # noqa
     tabs = Tabs(browser)
     tabs.equipment.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, armor_table.add_id)
         )
@@ -955,14 +956,14 @@ def test_preview_armor(player_wizard, browser): # noqa
     )
     armor_add.add.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
     row = ut.get_table_row(armor_table, 'table', values=False)
     row[0].click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.text_to_be_present_in_element(
             (By.ID, armor_preview.name_id), 'Breastplate'
         )
@@ -1003,7 +1004,7 @@ def test_autocomplete_armor(player_wizard, browser): # noqa
     tabs = Tabs(browser)
     tabs.equipment.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, armor_table.add_id)
         )
@@ -1044,7 +1045,7 @@ def test_armor_ogl_pre_pop(player_wizard, browser): # noqa
     tabs = Tabs(browser)
     tabs.equipment.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, armor_table.add_id)
         )
@@ -1077,7 +1078,7 @@ def test_magical_modifier(player_wizard, browser): # noqa
 
     stub = ArmorFactory.stub()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, armor_table.add_id)
         )
@@ -1089,7 +1090,7 @@ def test_magical_modifier(player_wizard, browser): # noqa
 
     armor_add.add.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
@@ -1109,7 +1110,7 @@ def test_armor_persists(player_wizard, browser): # noqa
     tabs = Tabs(browser)
     tabs.equipment.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, armor_table.add_id)
         )
@@ -1135,7 +1136,7 @@ def test_armor_persists(player_wizard, browser): # noqa
     row = ut.get_table_row(armor_table, 'table', values=False)
     row[0].click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, armor_tabs.edit_id)
         )
@@ -1166,7 +1167,7 @@ def test_armor_donned(player_wizard, browser): # noqa
 
     stub = ArmorFactory.stub()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, armor_table.add_id)
         )
@@ -1178,7 +1179,7 @@ def test_armor_donned(player_wizard, browser): # noqa
 
     armor_add.add.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
@@ -1197,7 +1198,7 @@ def test_armor_total_weight(player_wizard, browser): # noqa
     tabs = Tabs(browser)
     tabs.equipment.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, armor_table.add_id)
         )
@@ -1212,7 +1213,7 @@ def test_armor_total_weight(player_wizard, browser): # noqa
     )
     armor_add.add.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
@@ -1225,7 +1226,7 @@ def test_armor_total_weight(player_wizard, browser): # noqa
     )
     armor_add.add.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.text_to_be_present_in_element(
             (By.ID, armor_table.total_weight_id),
             '40 (lbs)'
@@ -1246,7 +1247,7 @@ def test_armor_sorting(player_wizard, browser): # noqa
     tabs = Tabs(browser)
     tabs.equipment.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, armor_table.add_id)
         )
@@ -1261,7 +1262,7 @@ def test_armor_sorting(player_wizard, browser): # noqa
     )
     armor_add.add.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
@@ -1275,12 +1276,12 @@ def test_armor_sorting(player_wizard, browser): # noqa
     )
     armor_add.add.click()
 
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
     armor_table.armor_header.click()
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         sorting_arrow_down(
             armor_table.armor_header_sorting_arrow,
         )
@@ -1290,7 +1291,7 @@ def test_armor_sorting(player_wizard, browser): # noqa
     assert rows[1].text.strip() == 'Chain mail'
 
     armor_table.type_header.click()
-    WebDriverWait(browser, 10).until(
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         sorting_arrow_up(
             armor_table.type_header_sorting_arrow,
         )
