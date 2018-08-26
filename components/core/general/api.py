@@ -4,7 +4,7 @@ from component_objects import Component, Element
 
 
 class Navbar(Component):
-    """Definition of Login component."""
+    """Definition of Navbar component."""
 
     login_link_xpath = '//*[@id="content"]/nav/div/div/login/ul/li[1]/a'
 
@@ -12,6 +12,7 @@ class Navbar(Component):
 
 
 class LoginForm(Component):
+    """Definition of Login component."""
 
     username_id = 'id_username'
     password_id = 'id_password'

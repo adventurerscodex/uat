@@ -20,6 +20,7 @@ from components.core.general.api import LoginForm
 from components.core.general.characters_and_games import CharactersAndGamesModal
 from components.core.general.navbar import CharactersAndGames
 from components.core.general.new_character_campaign import NewCharacterCampaign
+from expected_conditions.general import modal_finished_closing
 from factories.core.dm.encounter import EncounterAddEditModalFactory
 
 
@@ -170,10 +171,13 @@ def dm_wizard(request, browser, usr, pwd):
     wizard_main.finish.click()
 
     def delete_campaign():
-
+        """Teardown for removing a campaign."""
         navbar = CharactersAndGames(browser)
         characters_and_games = CharactersAndGamesModal(browser)
 
+        WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+            modal_finished_closing()
+        )
         WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
             EC.element_to_be_clickable(
                 (By.XPATH, navbar.characters_and_games_xpath)
@@ -281,9 +285,13 @@ def player_wizard(request, browser, usr, pwd):
     wizard_main.finish.click()
 
     def delete_character():
-
+        """Teardown for removing a character."""
         navbar = CharactersAndGames(browser)
         characters_and_games = CharactersAndGamesModal(browser)
+
+        WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+            modal_finished_closing()
+        )
 
         WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
             EC.element_to_be_clickable(
