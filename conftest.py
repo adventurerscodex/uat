@@ -16,9 +16,7 @@ from components.core.dm.encounter_add_edit_modal import EncounterAddEditModal
 from components.core.dm.encounter_list import EncounterList
 from components.core.dm.tabs import DMTabs
 from components.core.dm.wizard import TellUsAStory
-from components.core.general.api_navbar import Password
-from components.core.general.api_navbar import Submit
-from components.core.general.api_navbar import Username
+from components.core.general.api import LoginForm
 from components.core.general.characters_and_games import CharactersAndGamesModal
 from components.core.general.navbar import CharactersAndGames
 from components.core.general.new_character_campaign import NewCharacterCampaign
@@ -35,14 +33,12 @@ def login_user(browser, usr, pwd):
     """User logs in."""
     print('As a User, I am able to login')
 
-    user = Username(browser)
-    user.username = usr
+    login = LoginForm(browser)
+    login.username = usr
 
-    password = Password(browser)
-    password.password = pwd
+    login.password = pwd
 
-    submit = Submit(browser)
-    submit.submit.click()
+    login.submit.click()
 
 
 def pytest_addoption(parser):
