@@ -30,9 +30,9 @@ class NewImport(Component):
 class CharactersAndGames(Component):
     """Definition of Characters and Games component."""
 
-    characters_and_games_id = 'navbarCharactersGamesLink'
+    characters_and_games_xpath = '//*[@id="navbar"]/ul/li[2]/a'
 
-    characters_and_games = Element(id_=characters_and_games_id)
+    characters_and_games = Element(xpath=characters_and_games_xpath)
 
 
 class ManageParty(Component):

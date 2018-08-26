@@ -16,18 +16,37 @@ from components.core.dm.encounter_add_edit_modal import EncounterAddEditModal
 from components.core.dm.encounter_list import EncounterList
 from components.core.dm.tabs import DMTabs
 from components.core.dm.wizard import TellUsAStory
+from components.core.general.api import LoginForm
+from components.core.general.characters_and_games import CharactersAndGamesModal
+from components.core.general.navbar import CharactersAndGames
 from components.core.general.new_character_campaign import NewCharacterCampaign
+from expected_conditions.general import modal_finished_closing
 from factories.core.dm.encounter import EncounterAddEditModalFactory
 
 
 LOGGER.setLevel(logging.WARNING)
 
+# This is a required setting
 DEFAULT_WAIT_TIME = 15
+
+
+def login_user(browser, usr, pwd):
+    """User logs in."""
+    print('As a User, I am able to login')
+
+    login = LoginForm(browser)
+    login.username = usr
+
+    login.password = pwd
+
+    login.submit.click()
 
 
 def pytest_addoption(parser):
     """Command line parameters."""
     parser.addoption('--web_driver', action='store', default='chrome')
+    parser.addoption('--usr', action='store', default=None)
+    parser.addoption('--pwd', action='store', default=None)
     parser.addoption('--opera_binary_path', action='store')
     parser.addoption(
         '--url',
@@ -102,9 +121,23 @@ def pytest_csv_register_columns(columns):
     columns['created_at'] = strftime('%Y-%m-%d %H:%M:%S', gmtime())
 
 
+@pytest.fixture
+def usr(request):
+    """Return command line argument."""
+    return request.config.getoption('--usr')
+
+
+@pytest.fixture
+def pwd(request):
+    """Return command line argument."""
+    return request.config.getoption('--pwd')
+
+
 @pytest.fixture(scope='function')
-def dm_wizard(browser):
+def dm_wizard(request, browser, usr, pwd):
     """Navigate through the dm wizard."""
+    login_user(browser, usr, pwd)
+
     wizard_main = NewCharacterCampaign(browser)
     tell_us_a_story = TellUsAStory(browser)
 
@@ -137,6 +170,40 @@ def dm_wizard(browser):
 
     wizard_main.finish.click()
 
+    def delete_campaign():
+        """Teardown for removing a campaign."""
+        navbar = CharactersAndGames(browser)
+        characters_and_games = CharactersAndGamesModal(browser)
+
+        WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+            modal_finished_closing()
+        )
+        WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+            EC.element_to_be_clickable(
+                (By.XPATH, navbar.characters_and_games_xpath)
+            )
+        )
+
+        navbar.characters_and_games.click()
+
+        WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+            EC.element_to_be_clickable(
+                (By.XPATH, characters_and_games.first_line_delete_btn_xpath)
+            )
+        )
+
+        characters_and_games.first_line_delete_btn.click()
+
+        WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+            EC.element_to_be_clickable(
+                (By.XPATH, characters_and_games.first_line_confirm_delete_btn_xpath)
+            )
+        )
+
+        characters_and_games.first_line_confirm_delete_btn.click()
+
+    request.addfinalizer(delete_campaign)
+
 
 @pytest.fixture(scope='function')
 def encounter_all_sections(browser):
@@ -165,8 +232,10 @@ def encounter_all_sections(browser):
 
 
 @pytest.fixture(scope='function')
-def player_wizard(browser):
+def player_wizard(request, browser, usr, pwd):
     """Navigate through the player wizard."""
+    login_user(browser, usr, pwd)
+
     wizard_main = NewCharacterCampaign(browser)
     who_are_you = wizard.WhoAreYou(browser)
     ability_scores = wizard.AbilityScoresManual(browser)
@@ -214,3 +283,38 @@ def player_wizard(browser):
     ability_scores.charisma = '18'
 
     wizard_main.finish.click()
+
+    def delete_character():
+        """Teardown for removing a character."""
+        navbar = CharactersAndGames(browser)
+        characters_and_games = CharactersAndGamesModal(browser)
+
+        WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+            modal_finished_closing()
+        )
+
+        WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+            EC.element_to_be_clickable(
+                (By.XPATH, navbar.characters_and_games_xpath)
+            )
+        )
+
+        navbar.characters_and_games.click()
+
+        WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+            EC.element_to_be_clickable(
+                (By.XPATH, characters_and_games.first_line_delete_btn_xpath)
+            )
+        )
+
+        characters_and_games.first_line_delete_btn.click()
+
+        WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+            EC.element_to_be_clickable(
+                (By.XPATH, characters_and_games.first_line_confirm_delete_btn_xpath)
+            )
+        )
+
+        characters_and_games.first_line_confirm_delete_btn.click()
+
+    request.addfinalizer(delete_character)
