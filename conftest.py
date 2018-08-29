@@ -1,10 +1,12 @@
 """Test fixtures for selenium UAT for adventurer's codex."""
 
+import json
 import logging
 import sys
 from time import gmtime, strftime
 
 import pytest
+import requests
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.remote_connection import LOGGER
@@ -30,23 +32,12 @@ LOGGER.setLevel(logging.WARNING)
 DEFAULT_WAIT_TIME = 15
 
 
-def login_user(browser, usr, pwd):
-    """User logs in."""
-    print('As a User, I am able to login')
-
-    login = LoginForm(browser)
-    login.username = usr
-
-    login.password = pwd
-
-    login.submit.click()
-
-
 def pytest_addoption(parser):
     """Command line parameters."""
     parser.addoption('--web_driver', action='store', default='chrome')
     parser.addoption('--usr', action='store', default=None)
     parser.addoption('--pwd', action='store', default=None)
+    parser.addoption('--token', action='store', default=None)
     parser.addoption('--opera_binary_path', action='store')
     parser.addoption(
         '--url',
@@ -134,10 +125,27 @@ def pwd(request):
 
 
 @pytest.fixture(scope='function')
-def dm_wizard(request, browser, usr, pwd):
-    """Navigate through the dm wizard."""
-    login_user(browser, usr, pwd)
+def login(browser, usr, pwd):
+    """User logs in."""
+    print('As a User, I am able to login')
 
+    login = LoginForm(browser)
+    login.username = usr
+
+    login.password = pwd
+
+    login.submit.click()
+
+
+@pytest.fixture
+def token(request):
+    """Return command line argument."""
+    return request.config.getoption('--token')
+
+
+@pytest.fixture(scope='function')
+def dm_wizard(delete, login, browser):
+    """Navigate through the dm wizard."""
     wizard_main = NewCharacterCampaign(browser)
     tell_us_a_story = TellUsAStory(browser)
 
@@ -170,40 +178,6 @@ def dm_wizard(request, browser, usr, pwd):
 
     wizard_main.finish.click()
 
-    def delete_campaign():
-        """Teardown for removing a campaign."""
-        navbar = CharactersAndGames(browser)
-        characters_and_games = CharactersAndGamesModal(browser)
-
-        WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
-            modal_finished_closing()
-        )
-        WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
-            EC.element_to_be_clickable(
-                (By.XPATH, navbar.characters_and_games_xpath)
-            )
-        )
-
-        navbar.characters_and_games.click()
-
-        WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
-            EC.element_to_be_clickable(
-                (By.XPATH, characters_and_games.first_line_delete_btn_xpath)
-            )
-        )
-
-        characters_and_games.first_line_delete_btn.click()
-
-        WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
-            EC.element_to_be_clickable(
-                (By.XPATH, characters_and_games.first_line_confirm_delete_btn_xpath)
-            )
-        )
-
-        characters_and_games.first_line_confirm_delete_btn.click()
-
-    request.addfinalizer(delete_campaign)
-
 
 @pytest.fixture(scope='function')
 def encounter_all_sections(browser):
@@ -232,10 +206,30 @@ def encounter_all_sections(browser):
 
 
 @pytest.fixture(scope='function')
-def player_wizard(request, browser, usr, pwd):
-    """Navigate through the player wizard."""
-    login_user(browser, usr, pwd)
+def delete(token):
+    """Delete legacy characters and campaigns."""
+    headers = {
+        'Authorization': 'Bearer {}'.format(token),
+    }
 
+    response = requests.get(
+        'https://nightly.adventurerscodex.com/api/core/',
+        headers=headers
+    )
+
+    results = response.json()
+    characters_campaigns = results.get('results')
+
+    if characters_campaigns:
+        for asset in characters_campaigns:
+            url = asset.get('url')
+            if url:
+                requests.delete(url=url, headers=headers)
+
+
+@pytest.fixture(scope='function')
+def player_wizard(delete, login, browser):
+    """Navigate through the player wizard."""
     wizard_main = NewCharacterCampaign(browser)
     who_are_you = wizard.WhoAreYou(browser)
     ability_scores = wizard.AbilityScoresManual(browser)
@@ -283,38 +277,3 @@ def player_wizard(request, browser, usr, pwd):
     ability_scores.charisma = '18'
 
     wizard_main.finish.click()
-
-    def delete_character():
-        """Teardown for removing a character."""
-        navbar = CharactersAndGames(browser)
-        characters_and_games = CharactersAndGamesModal(browser)
-
-        WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
-            modal_finished_closing()
-        )
-
-        WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
-            EC.element_to_be_clickable(
-                (By.XPATH, navbar.characters_and_games_xpath)
-            )
-        )
-
-        navbar.characters_and_games.click()
-
-        WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
-            EC.element_to_be_clickable(
-                (By.XPATH, characters_and_games.first_line_delete_btn_xpath)
-            )
-        )
-
-        characters_and_games.first_line_delete_btn.click()
-
-        WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
-            EC.element_to_be_clickable(
-                (By.XPATH, characters_and_games.first_line_confirm_delete_btn_xpath)
-            )
-        )
-
-        characters_and_games.first_line_confirm_delete_btn.click()
-
-    request.addfinalizer(delete_character)
