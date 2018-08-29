@@ -1,6 +1,5 @@
 """Test fixtures for selenium UAT for adventurer's codex."""
 
-import json
 import logging
 import sys
 from time import gmtime, strftime
@@ -19,10 +18,7 @@ from components.core.dm.encounter_list import EncounterList
 from components.core.dm.tabs import DMTabs
 from components.core.dm.wizard import TellUsAStory
 from components.core.general.api import LoginForm
-from components.core.general.characters_and_games import CharactersAndGamesModal
-from components.core.general.navbar import CharactersAndGames
 from components.core.general.new_character_campaign import NewCharacterCampaign
-from expected_conditions.general import modal_finished_closing
 from factories.core.dm.encounter import EncounterAddEditModalFactory
 
 
