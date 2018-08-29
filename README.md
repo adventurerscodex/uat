@@ -38,23 +38,23 @@ Sample usage:
 
 **always run in verbose mode and no capture** (no params will default to https://nightly.adventurerscodex.com and chrome web_driver)
 
-`py.test --verbose --capture=no tests/`
+`py.test --verbose --capture=no --usr=username --pwd=password --token=token tests/`
 
 **with csv report**
 
-`py.test --verbose --capture=no tests/ --csv tests.csv --csv-columns id,module,name,file,doc,status,message,browser,created_at,duration_formatted`
+`py.test --verbose --capture=no --usr=username --pwd=password --token=token tests/ --csv tests.csv --csv-columns id,module,name,file,doc,status,message,browser,created_at,duration_formatted`
 
 **with explicit url and web_driver**
 
-`py.test --verbose --capture=no --web_driver=chrome --url=https://nightly.adventurerscodex.com tests/`
+`py.test --verbose --capture=no --usr=username --pwd=password --token=token --web_driver=chrome --url=https://nightly.adventurerscodex.com tests/`
 
 **with opera driver**
 
-`py.test --verbose --capture=no --web_driver=opera --opera_binary_path=/your/driver/path`
+`py.test --verbose --capture=no --usr=username --pwd=password --token=token --web_driver=opera --opera_binary_path=/your/driver/path`
 
 **with specific test file**
 
-`py.test --verbose --capture=no tests/core/player_tools/test_player_wizard.py::test_attributes_required`
+`py.test --verbose --capture=no --usr=username --pwd=password --token=token tests/core/player_tools/test_player_wizard.py::test_attributes_required`
 
 How to contribute
 =================
