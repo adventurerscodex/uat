@@ -38,6 +38,19 @@ class table_has_data:  # noqa
 
         return len(tds) > 1
 
+class table_is_empty:  # noqa
+    """Wait until table is empty."""
+
+    def __init__(self, table):
+        """Init expected condition."""
+        self.table = table
+
+    def __call__(self, driver):
+        """Test if table has more than one column."""
+        tds = self.table.table.find_elements_by_tag_name('td')
+
+        return len(tds) == 1
+
 class table_cell_updated: # noqa
     """Wait until cell data has updated."""
 
