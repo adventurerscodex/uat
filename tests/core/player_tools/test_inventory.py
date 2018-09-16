@@ -1,4 +1,6 @@
 """UAT test file for Adventurer's Codex player tools inventory module."""
+import time
+
 from conftest import DEFAULT_WAIT_TIME
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -7,7 +9,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 from components.core.character import coins, inventory, magic_items
 from components.core.character.tabs import Tabs
-from expected_conditions.general import modal_finished_closing
+from expected_conditions.general import modal_finished_closing, table_has_data, table_is_empty
 from expected_conditions.general import sorting_arrow_down, sorting_arrow_up
 from utils import general as ut
 
@@ -43,6 +45,10 @@ def test_add_inventory(player_wizard, browser): # noqa
 
     inventory_add.add.click()
 
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_has_data(inventory_table)
+    )
+
     row = ut.get_table_row(inventory_table, 'table', 1)
 
     assert row.item.strip() == 'Add Name'
@@ -74,8 +80,17 @@ def test_delete_inventory(player_wizard, browser): # noqa
         modal_finished_closing()
     )
 
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_has_data(inventory_table)
+    )
+
     rows = ut.get_table_rows(inventory_table, 'table', values=False)
     rows[0][5].find_element_by_tag_name('a').click()
+
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_is_empty(inventory_table)
+    )
+
     rows = ut.get_table_rows(inventory_table, 'table', values=False)
 
     assert rows[0][0].text.strip() == 'Add a new item'
@@ -103,6 +118,10 @@ def test_edit_inventory(player_wizard, browser): # noqa
 
     WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
+    )
+
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_has_data(inventory_table)
     )
 
     rows = ut.get_table_rows(inventory_table, 'table', values=False)
@@ -140,6 +159,9 @@ def test_edit_inventory(player_wizard, browser): # noqa
     WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
+
+    time.sleep(1)
+
     row = ut.get_table_row(inventory_table, 'table', 1)
 
     assert row.item.strip() == 'Edit Name'
@@ -177,6 +199,10 @@ def test_preview_inventory(player_wizard, browser): # noqa
 
     WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
+    )
+
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_has_data(inventory_table)
     )
 
     row = ut.get_table_row(inventory_table, 'table', values=False)
@@ -263,6 +289,10 @@ def test_inventory_ogl_pre_pop(player_wizard, browser): # noqa
     )
     inventory_add.add.click()
 
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_has_data(inventory_table)
+    )
+
     row = ut.get_table_row(inventory_table, 'table', 1)
 
     assert row.item.strip() == 'Abacus'
@@ -298,6 +328,10 @@ def test_inventory_persists(player_wizard, browser): # noqa
     inventory_add.add.click()
 
     browser.refresh()
+
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_has_data(inventory_table)
+    )
 
     row = ut.get_table_row(inventory_table, 'table', 1)
 
@@ -356,6 +390,9 @@ def test_inventory_total_weight(player_wizard, browser): # noqa
     )
 
     inventory_table.add.click()
+
+    time.sleep(.5)
+
     ut.select_from_autocomplete(
         inventory_add,
         'name',
@@ -363,6 +400,12 @@ def test_inventory_total_weight(player_wizard, browser): # noqa
         has_search_term=False
     )
     inventory_add.add.click()
+
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        EC.text_to_be_present_in_element(
+            (By.ID, inventory_table.total_weight_id), '4 (lbs)'
+        )
+    )
 
     assert inventory_table.total_weight.text.strip() == '4 (lbs)'
 
@@ -406,6 +449,8 @@ def test_inventory_sorting(player_wizard, browser): # noqa
     )
     inventory_add.add.click()
 
+    time.sleep(.5)
+
     WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
@@ -417,6 +462,9 @@ def test_inventory_sorting(player_wizard, browser): # noqa
             inventory_table.item_header_sorting_arrow,
         )
     )
+
+    time.sleep(.5)
+
     rows = ut.get_table_row(inventory_table, 'table', values=False)
 
     assert rows[0].text.strip() == 'Acid (vial)'
@@ -454,6 +502,10 @@ def test_add_coins(player_wizard, browser): # noqa
     tabs = Tabs(browser)
     tabs.inventory.click()
 
+    # For some reason if data loads too fast the values disapear
+    # Something loading in the UI must cause the values to be removed
+    time.sleep(2)
+
     coins_table.platinum = 2
     coins_table.gold = 4
     coins_table.electrum = 6
@@ -474,6 +526,10 @@ def test_delete_coins(player_wizard, browser): # noqa
     coins_table = coins.Coins(browser)
     tabs = Tabs(browser)
     tabs.inventory.click()
+
+    # For some reason if data loads too fast the values disapear
+    # Something loading in the UI must cause the values to be removed
+    time.sleep(2)
 
     coins_table.platinum = 2
     coins_table.gold = 4
@@ -508,6 +564,10 @@ def test_edit_coins(player_wizard, browser): # noqa
     tabs = Tabs(browser)
     tabs.inventory.click()
 
+    # For some reason if data loads too fast the values disapear
+    # Something loading in the UI must cause the values to be removed
+    time.sleep(2)
+
     coins_table.platinum = 2
     coins_table.gold = 4
     coins_table.electrum = 6
@@ -541,11 +601,15 @@ def test_worth_in_gold_coins(player_wizard, browser): # noqa
     tabs = Tabs(browser)
     tabs.inventory.click()
 
+    # For some reason if data loads too fast the values disapear
+    # Something loading in the UI must cause the values to be removed
+    time.sleep(2)
+
     coins_table.platinum = 1
     coins_table.gold = 1
     coins_table.electrum = 2
     coins_table.silver = 10
-    coins_table.copper = '100'
+    coins_table.copper = 100
     coins_table.copper.send_keys(Keys.TAB)
 
     assert coins_table.worth_in_gold.text.strip() == '14'
@@ -559,12 +623,22 @@ def test_coins_total_weight(player_wizard, browser): # noqa
     tabs = Tabs(browser)
     tabs.inventory.click()
 
+    # For some reason if data loads too fast the values disapear
+    # Something loading in the UI must cause the values to be removed
+    time.sleep(2)
+
     coins_table.platinum = 50
     coins_table.gold = 50
     coins_table.electrum = 50
     coins_table.silver = 50
-    coins_table.copper = '49'
+    coins_table.copper = 49
     coins_table.copper.send_keys(Keys.TAB)
+
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        EC.text_to_be_present_in_element(
+            (By.ID, coins_table.total_weight_id), '4 (lbs)'
+        )
+    )
 
     assert coins_table.total_weight.text.strip() == '4 (lbs)'
 
@@ -576,14 +650,20 @@ def test_coins_persists(player_wizard, browser): # noqa
     tabs = Tabs(browser)
     tabs.inventory.click()
 
+    time.sleep(3)
+
     coins_table.platinum = 50
     coins_table.gold = 50
     coins_table.electrum = 50
     coins_table.silver = 50
-    coins_table.copper = '50'
+    coins_table.copper = 50
     coins_table.copper.send_keys(Keys.TAB)
 
+    time.sleep(1)
+
     browser.refresh()
+
+    time.sleep(3)
 
     assert coins_table.platinum.get_attribute('value').strip() == '50'
     assert coins_table.gold.get_attribute('value').strip() == '50'
@@ -624,6 +704,10 @@ def test_add_magic_items(player_wizard, browser): # noqa
 
     magic_items_add.add.click()
 
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_has_data(magic_items_table)
+    )
+
     row = ut.get_table_row(magic_items_table, 'table', 1)
 
     assert row.magic_item.strip() == 'Add Name'
@@ -653,6 +737,10 @@ def test_delete_magic_items(player_wizard, browser): # noqa
     )
     magic_items_add.add.click()
 
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_has_data(magic_items_table)
+    )
+
     rows = ut.get_table_rows(magic_items_table, 'table', values=False)
 
     WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
@@ -660,6 +748,9 @@ def test_delete_magic_items(player_wizard, browser): # noqa
     )
 
     rows[0][5].find_element_by_tag_name('a').click()
+
+    time.sleep(.5)
+
     rows = ut.get_table_rows(magic_items_table, 'table', values=False)
 
     assert rows[0][0].text.strip() == 'Add a new magic item'
@@ -686,6 +777,10 @@ def test_edit_magic_items(player_wizard, browser): # noqa
 
     WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
+    )
+
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_has_data(magic_items_table)
     )
 
     rows = ut.get_table_rows(magic_items_table, 'table', values=False)
@@ -721,8 +816,14 @@ def test_edit_magic_items(player_wizard, browser): # noqa
 
     magic_items_edit.done.click()
 
+    time.sleep(.5)
+
     WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
+    )
+
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_has_data(magic_items_table)
     )
 
     row = ut.get_table_row(magic_items_table, 'table', 1)
@@ -760,6 +861,10 @@ def test_preview_magic_items(player_wizard, browser): # noqa
 
     WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
+    )
+
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_has_data(magic_items_table)
     )
 
     row = ut.get_table_row(magic_items_table, 'table', values=False)
@@ -872,7 +977,15 @@ def test_magic_items_persists(player_wizard, browser): # noqa
     )
     magic_items_add.add.click()
 
+    time.sleep(.5)
+
     browser.refresh()
+
+    time.sleep(.5)
+
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_has_data(magic_items_table)
+    )
 
     row = ut.get_table_row(magic_items_table, 'table', 1)
 
@@ -936,6 +1049,9 @@ def test_magic_items_total_weight(player_wizard, browser): # noqa
     )
 
     magic_items_table.add.click()
+
+    time.sleep(.5)
+
     ut.select_from_autocomplete(
         magic_items_add,
         'item',
@@ -945,6 +1061,12 @@ def test_magic_items_total_weight(player_wizard, browser): # noqa
     )
     magic_items_add.weight = 10
     magic_items_add.add.click()
+
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        EC.text_to_be_present_in_element(
+            (By.ID, magic_items_table.total_weight_id), '15 (lbs)'
+        )
+    )
 
     assert magic_items_table.total_weight.text.strip() == '15 (lbs)'
 
@@ -1001,6 +1123,9 @@ def test_magic_items_sorting(player_wizard, browser): # noqa
             magic_items_table.magic_item_header_sorting_arrow,
         )
     )
+
+    time.sleep(.5)
+
     rows = ut.get_table_row(magic_items_table, 'table', values=False)
 
     assert rows[0].text.strip() == 'Amulet of Health'
