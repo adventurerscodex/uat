@@ -4,7 +4,7 @@ from components.core.dm.wizard import TellUsAStory
 from components.core.general.new_character_campaign import NewCharacterCampaign
 
 
-def test_dm_wizard(browser):
+def test_dm_wizard(delete, login, browser):
     """Test dm wizard using required values."""
     print('As a dm, I should be able to navigate through the dm wizard.')
 
