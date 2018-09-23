@@ -1,4 +1,6 @@
 """UAT test file for Adventurer's Codex core player tools wizard."""
+import time
+
 from conftest import DEFAULT_WAIT_TIME
 import pytest
 from selenium.common.exceptions import NoSuchElementException
@@ -17,7 +19,7 @@ from expected_conditions.general import table_has_data
 from utils import general as ut
 
 
-def test_player_wizard(browser):
+def test_player_wizard(delete, login, browser):
     """A user should be able to navigate through the player wizard."""
     print('As a player, I should be able to navigate through the player wizard.')
 
@@ -44,7 +46,7 @@ def test_player_wizard(browser):
     wizard_main.finish.click()
 
 
-def test_attributes_required(browser):
+def test_attributes_required(delete, login, browser):
     """A user should be required to add attribute values."""
     print('As a player, I should be required to add attribute values.')
 
@@ -72,7 +74,7 @@ def test_attributes_required(browser):
         browser.find_element_by_id('newCharCampaignFinishButton')
 
 
-def test_name_required(browser):
+def test_name_required(delete, login, browser):
     """A user should be required to enter a char and player name."""
     print('As a player, I should be required to enter a char and player name.')
 
@@ -90,7 +92,7 @@ def test_name_required(browser):
         browser.find_element_by_id('newCharCampaignNextButton')
 
 
-def test_alignment_auto_complete(browser): # noqa
+def test_alignment_auto_complete(delete, login, browser): # noqa
     """ As a player, when I start typing in the alignment field, OGL data auto-completes."""
     print('As a player, when I start typing in the alignment field, OGL data auto-completes.')
 
@@ -111,7 +113,7 @@ def test_alignment_auto_complete(browser): # noqa
     assert who_are_you.alignment.get_attribute('value').strip() == 'Lawful good'
 
 
-def test_race_auto_complete(browser): # noqa
+def test_race_auto_complete(delete, login, browser): # noqa
     """As a player, when I start typing in the race field, OGL data auto-completes."""
     print('As a player, when I start typing in the race field, OGL data auto-completes.')
 
@@ -132,7 +134,7 @@ def test_race_auto_complete(browser): # noqa
     assert who_are_you.race.get_attribute('value').strip() == 'Dwarf'
 
 
-def test_class_auto_complete(browser): # noqa
+def test_class_auto_complete(delete, login, browser): # noqa
     """As a player, when I start typing in the class field, OGL data auto-completes."""
     print('As a player, when I start typing in the class field, OGL data auto-completes.')
 
@@ -153,7 +155,7 @@ def test_class_auto_complete(browser): # noqa
     assert who_are_you.class_.get_attribute('value').strip() == 'Barbarian'
 
 
-def test_background_auto_complete(browser): # noqa
+def test_background_auto_complete(delete, login, browser): # noqa
     """As a player, when I start typing in the background field, OGL data auto-completes."""
     print('As a player, when I start typing in the background field, OGL data auto-completes.')
 
@@ -174,7 +176,7 @@ def test_background_auto_complete(browser): # noqa
     assert who_are_you.background.get_attribute('value').strip() == 'Acolyte'
 
 
-def test_add_ability_scores(browser): # noqa
+def test_add_ability_scores(delete, login, browser): # noqa
     """As a player, I can add values to all my ability scores."""
     print('As a player, I can add values to all my ability scores.')
 
@@ -204,7 +206,7 @@ def test_add_ability_scores(browser): # noqa
     assert ability_scores.wisdom.get_attribute('value').strip() == '18'
     assert ability_scores.charisma.get_attribute('value').strip() == '18'
 
-def test_wizard_profile_stats(browser): # noqa
+def test_wizard_profile_stats(delete, login, browser): # noqa
     """As a player, after creating a character via the character creation wizard, I can view all
        the data entered in the stats and profile modules."""
     print(('As a player, after creating a character via the character creation wizard, I can '
@@ -265,12 +267,16 @@ def test_wizard_profile_stats(browser): # noqa
 
     tabs.profile.click()
 
-    assert profile.name.get_attribute('value').strip() == 'Automated Testing Bot.'
+    time.sleep(3)
+
     assert profile.background.get_attribute('value').strip() == 'Acolyte'
     assert profile.alignment.get_attribute('value').strip() == 'Lawful good'
     assert profile.deity.get_attribute('value').strip() == 'Test Deity'
     assert profile.race.get_attribute('value').strip() == 'Dwarf'
+
+    # BUG: class won't persist, it has been logged
     assert profile.class_.get_attribute('value').strip() == 'Barbarian'
+
     assert profile.gender.get_attribute('value').strip() == 'Test Male'
     assert profile.age.get_attribute('value').strip() == '21'
 
@@ -279,7 +285,7 @@ def test_wizard_profile_stats(browser): # noqa
     assert stats.level.get_attribute('value') == '3'
     assert stats.experience.get_attribute('value') == '1000'
 
-def test_wizard_backpack_prepop(browser): # noqa
+def test_wizard_backpack_prepop(delete, login, browser): # noqa
     """As a player, after selecting a backpack, all items are pre-populated in the inventory
        module."""
     print(('As a player, after selecting a backpack, all items are pre-populated in the '
