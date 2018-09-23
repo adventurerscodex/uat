@@ -1,4 +1,6 @@
 """UAT test file for Adventurer's Codex player tools equipment module."""
+import time
+
 from conftest import DEFAULT_WAIT_TIME
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -9,7 +11,7 @@ from components.core.character import armor, weapon
 from components.core.character.tabs import Tabs
 from expected_conditions.general import modal_finished_closing
 from expected_conditions.general import sorting_arrow_down, sorting_arrow_up
-from expected_conditions.general import table_cell_updated
+from expected_conditions.general import table_cell_updated, table_has_data, table_is_empty
 from factories.core.character.armor import ArmorFactory
 from utils import general as ut
 
@@ -61,9 +63,16 @@ def test_add_weapon(player_wizard, browser): # noqa
     assert weapon_add.quantity.get_attribute('value').strip() == '2'
     assert weapon_add.description.get_attribute('value').strip() == 'Add Description'
 
+    weapon_add.name.send_keys(Keys.TAB)
+
     weapon_add.add.click()
 
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_has_data(weapon_table)
+    )
+
     row = ut.get_table_row(weapon_table, 'table', 1)
+
     assert ' '.join(row.weapon.split()) == 'Add Name + 1'
     assert row.to_hit.strip() == '+ 9'
     assert row.damage.strip() == 'Add Damage'
@@ -94,14 +103,26 @@ def test_delete_weapon(player_wizard, browser): # noqa
         browser,
         has_search_term=False
     )
+
+    weapon_add.name.send_keys(Keys.TAB)
+
     weapon_add.add.click()
 
     WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_has_data(weapon_table)
+    )
+
     rows = ut.get_table_rows(weapon_table, 'table', values=False)
     rows[0][7].find_element_by_tag_name('a').click()
+
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_is_empty(weapon_table)
+    )
+
     rows = ut.get_table_rows(weapon_table, 'table', values=False)
 
     assert rows[0][0].text.strip() == 'Add a new weapon'
@@ -125,20 +146,30 @@ def test_edit_weapon(player_wizard, browser): # noqa
     )
 
     weapon_table.add.click()
+
     ut.select_from_autocomplete(
         weapon_add,
         'name',
         browser,
         has_search_term=False
     )
+
+    weapon_add.name.send_keys(Keys.TAB)
+
     weapon_add.add.click()
 
     WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_has_data(weapon_table)
+    )
+
     rows = ut.get_table_rows(weapon_table, 'table', values=False)
     rows[0][0].click()
+
+    time.sleep(1)
 
     WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
@@ -192,6 +223,8 @@ def test_edit_weapon(player_wizard, browser): # noqa
         modal_finished_closing()
     )
 
+    time.sleep(.5)
+
     row = ut.get_table_row(weapon_table, 'table', 1)
 
     weapon_name_label = ' '.join([string.strip() for string in row.weapon.split()])
@@ -229,10 +262,17 @@ def test_preview_weapon(player_wizard, browser): # noqa
         browser,
         has_search_term=False
     )
+
+    weapon_add.name.send_keys(Keys.TAB)
+
     weapon_add.add.click()
 
     WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
+    )
+
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_has_data(weapon_table)
     )
 
     row = ut.get_table_row(weapon_table, 'table', values=False)
@@ -291,6 +331,7 @@ def test_autocomplete_weapon(player_wizard, browser): # noqa
     )
 
     weapon_table.add.click()
+
     ut.select_from_autocomplete(
         weapon_add,
         'name',
@@ -354,13 +395,21 @@ def test_weapon_ogl_pre_pop(player_wizard, browser): # noqa
     )
 
     weapon_table.add.click()
+
     ut.select_from_autocomplete(
         weapon_add,
         'name',
         browser,
         has_search_term=False
     )
+
+    weapon_add.name.send_keys(Keys.TAB)
+
     weapon_add.add.click()
+
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_has_data(weapon_table)
+    )
 
     row = ut.get_table_row(weapon_table, 'table', 1)
 
@@ -385,19 +434,32 @@ def test_weapon_magical_modifier(player_wizard, browser): # noqa
     tabs.equipment.click()
 
     weapon_table.add.click()
+
+    ut.select_from_autocomplete(
+        weapon_add,
+        'name',
+        browser,
+        has_search_term=False
+    )
+
     weapon_add.name = 'Add Name'
+
     weapon_add.magical_modifier = 3
 
-    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
-        EC.element_to_be_clickable(
-            (By.ID, weapon_table.add_id)
-        )
-    )
+    weapon_add.name.send_keys(Keys.TAB)
+
+    time.sleep(.5)
+
+    ## TODO: Pending bug fix will persist magical modifier
 
     weapon_add.add.click()
 
     WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
+    )
+
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_has_data(weapon_table)
     )
 
     row = ut.get_table_row(weapon_table, 'table', 1)
@@ -431,9 +493,19 @@ def test_weapon_persists(player_wizard, browser): # noqa
         browser,
         has_search_term=False
     )
+
+    weapon_add.name.send_keys(Keys.TAB)
+
     weapon_add.add.click()
 
     browser.refresh()
+
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_has_data(weapon_table)
+    )
+
+    # TODO need a custom wait until to hit is + 6, for some reason it's + 4 at first
+    time.sleep(3)
 
     row = ut.get_table_row(weapon_table, 'table', 1)
 
@@ -453,6 +525,8 @@ def test_weapon_persists(player_wizard, browser): # noqa
             (By.ID, weapon_tabs.edit_id)
         )
     )
+
+    time.sleep(3)
 
     weapon_tabs.edit.click()
 
@@ -497,6 +571,9 @@ def test_weapon_total_weight(player_wizard, browser): # noqa
         browser,
         has_search_term=False
     )
+
+    weapon_add.name.send_keys(Keys.TAB)
+
     weapon_add.add.click()
 
     WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
@@ -504,13 +581,19 @@ def test_weapon_total_weight(player_wizard, browser): # noqa
     )
 
     weapon_table.add.click()
+
     ut.select_from_autocomplete(
         weapon_add,
         'name',
         browser,
         has_search_term=False
     )
+
+    weapon_add.name.send_keys(Keys.TAB)
+
     weapon_add.add.click()
+
+    time.sleep(1)
 
     assert weapon_table.total_weight.text.strip() == '8 (lbs)'
 
@@ -535,7 +618,20 @@ def test_melee_ft(player_wizard, browser): # noqa
     weapon_table.add.click()
 
     weapon_add.name = 'Test name'
+    weapon_add.damage = '4d6'
     weapon_add.type_ = 'Melee'
+    weapon_add.magical_modifier = 1
+    weapon_add.to_hit_modifier = 2
+    weapon_add.handedness = 'Handedness'
+    weapon_add.proficiency = 'Proficiency'
+    weapon_add.price = 200
+    weapon_add.currency_denomination = 'GP'
+    weapon_add.weight = 100
+    weapon_add.range_ = '0'
+    weapon_add.damage_type = 'Damage Type'
+    weapon_add.property_ = 'Property'
+    weapon_add.quantity = 2
+    weapon_add.description = 'Description'
 
     WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
@@ -547,6 +643,10 @@ def test_melee_ft(player_wizard, browser): # noqa
 
     WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
+    )
+
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_has_data(weapon_table)
     )
 
     row = ut.get_table_row(weapon_table, 'table', values=False)
@@ -572,14 +672,31 @@ def test_ranged_ft(player_wizard, browser): # noqa
     )
 
     weapon_table.add.click()
+
     weapon_add.name = 'Test name'
+    weapon_add.damage = '4d6'
     weapon_add.type_ = 'Ranged'
+    weapon_add.magical_modifier = 1
+    weapon_add.to_hit_modifier = 2
+    weapon_add.handedness = 'Handedness'
+    weapon_add.proficiency = 'Proficiency'
+    weapon_add.price = 200
+    weapon_add.currency_denomination = 'GP'
+    weapon_add.weight = 100
     weapon_add.range_ = '25'
+    weapon_add.damage_type = 'Damage Type'
+    weapon_add.property_ = 'Property'
+    weapon_add.quantity = 2
+    weapon_add.description = 'Description'
 
     weapon_add.add.click()
 
     WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
+    )
+
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_has_data(weapon_table)
     )
 
     row = ut.get_table_row(weapon_table, 'table', values=False)
@@ -605,15 +722,34 @@ def test_reach_ft(player_wizard, browser): # noqa
     )
 
     weapon_table.add.click()
+
     weapon_add.name = 'Test name'
+    weapon_add.damage = '4d6'
     weapon_add.type_ = 'Melee'
-    weapon_add.property_ = 'Reach'
+    weapon_add.magical_modifier = 1
+    weapon_add.to_hit_modifier = 2
+    weapon_add.handedness = 'Handedness'
+    weapon_add.proficiency = 'Proficiency'
+    weapon_add.price = 200
+    weapon_add.currency_denomination = 'GP'
+    weapon_add.weight = 100
     weapon_add.range_ = '5'
+    weapon_add.damage_type = 'Damage Type'
+    weapon_add.property_ = 'Reach'
+    weapon_add.quantity = 2
+    weapon_add.description = 'Description'
+
     weapon_add.add.click()
 
     WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
+
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_has_data(weapon_table)
+    )
+
+    time.sleep(2)
 
     row = ut.get_table_row(weapon_table, 'table', values=False)
 
@@ -644,10 +780,17 @@ def test_weapon_sorting(player_wizard, browser): # noqa
         browser,
         has_search_term=False
     )
+
+    weapon_add.name.send_keys(Keys.TAB)
+
     weapon_add.add.click()
 
     WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
+    )
+
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_has_data(weapon_table)
     )
 
     weapon_table.add.click()
@@ -658,6 +801,9 @@ def test_weapon_sorting(player_wizard, browser): # noqa
         has_search_term=False,
         arrow_down_count=2
     )
+
+    weapon_add.name.send_keys(Keys.TAB)
+
     weapon_add.add.click()
 
     WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
@@ -671,6 +817,7 @@ def test_weapon_sorting(player_wizard, browser): # noqa
             weapon_table.weapon_header_sorting_arrow,
         )
     )
+
     rows = ut.get_table_row(weapon_table, 'table', values=False)
 
     assert rows[0].text.strip() == 'Blowgun'
@@ -681,6 +828,7 @@ def test_weapon_sorting(player_wizard, browser): # noqa
             weapon_table.to_hit_header_sorting_arrow,
         )
     )
+
     rows = ut.get_table_row(weapon_table, 'table', values=False)
 
     assert rows[1].text.strip() == '+ 6'
@@ -792,6 +940,10 @@ def test_add_armor(player_wizard, browser): # noqa
 
     armor_add.add.click()
 
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_has_data(armor_table)
+    )
+
     row = ut.get_table_row(armor_table, 'table', 1)
 
     armor_name_label = ' '.join([string.strip() for string in row.armor.split()])
@@ -824,15 +976,27 @@ def test_delete_armor(player_wizard, browser): # noqa
         browser,
         has_search_term=False
     )
-    armor_add.add.click()
 
-    rows = ut.get_table_rows(armor_table, 'table', values=False)
+    armor_add.name.send_keys(Keys.TAB)
+
+    armor_add.add.click()
 
     WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_has_data(armor_table)
+    )
+
+    rows = ut.get_table_rows(armor_table, 'table', values=False)
+
     rows[0][4].find_element_by_tag_name('a').click()
+
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_is_empty(armor_table)
+    )
+
     rows = ut.get_table_rows(armor_table, 'table', values=False)
 
     assert rows[0][0].text.strip() == 'Add a new armor'
@@ -863,20 +1027,29 @@ def test_edit_armor(player_wizard, browser): # noqa
         browser,
         has_search_term=False
     )
-    armor_add.add.click()
 
-    rows = ut.get_table_rows(armor_table, 'table', values=False)
+    armor_add.name.send_keys(Keys.TAB)
+
+    armor_add.add.click()
 
     WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_has_data(armor_table)
+    )
+
+    rows = ut.get_table_rows(armor_table, 'table', values=False)
+
     rows[0][0].click()
+
     WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, armor_tabs.edit_id)
         )
     )
+
     armor_tabs.edit.click()
 
     armor_edit.name = stub.name
@@ -948,16 +1121,24 @@ def test_preview_armor(player_wizard, browser): # noqa
     )
 
     armor_table.add.click()
+
     ut.select_from_autocomplete(
         armor_add,
         'name',
         browser,
         has_search_term=False
     )
+
+    armor_add.name.send_keys(Keys.TAB)
+
     armor_add.add.click()
 
     WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
+    )
+
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_has_data(armor_table)
     )
 
     row = ut.get_table_row(armor_table, 'table', values=False)
@@ -1057,7 +1238,14 @@ def test_armor_ogl_pre_pop(player_wizard, browser): # noqa
         browser,
         has_search_term=False
     )
+
+    armor_add.name.send_keys(Keys.TAB)
+
     armor_add.add.click()
+
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_has_data(armor_table)
+    )
 
     row = ut.get_table_row(armor_table, 'table', 1)
 
@@ -1085,8 +1273,18 @@ def test_magical_modifier(player_wizard, browser): # noqa
     )
 
     armor_table.add.click()
-    armor_add.name = stub.name
+
+    ut.select_from_autocomplete(
+        armor_add,
+        'name',
+        browser,
+        arrow_down_count=2,
+        has_search_term=False
+    )
+
     armor_add.magical_modifier = stub.magical_modifier
+
+    armor_add.magical_modifier.send_keys(Keys.TAB)
 
     armor_add.add.click()
 
@@ -1094,10 +1292,14 @@ def test_magical_modifier(player_wizard, browser): # noqa
         modal_finished_closing()
     )
 
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_has_data(armor_table)
+    )
+
     row = ut.get_table_row(armor_table, 'table', 1)
     actual = ' '.join([string.strip() for string in row.armor.split()])
 
-    assert actual == '{} + {}'.format(stub.name, stub.magical_modifier)
+    assert actual == '{} + {}'.format('Chain mail', stub.magical_modifier)
 
 def test_armor_persists(player_wizard, browser): # noqa
     """As a player, all fields for armor persist after page refresh."""
@@ -1123,9 +1325,16 @@ def test_armor_persists(player_wizard, browser): # noqa
         browser,
         has_search_term=False
     )
+
+    armor_add.name.send_keys(Keys.TAB)
+
     armor_add.add.click()
 
     browser.refresh()
+
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_has_data(armor_table)
+    )
 
     row = ut.get_table_row(armor_table, 'table', 1)
 
@@ -1143,6 +1352,14 @@ def test_armor_persists(player_wizard, browser): # noqa
     )
 
     armor_tabs.edit.click()
+    # Sometimes the done button is greyed out, and we need to click twice for some reason
+    armor_tabs.edit.click()
+
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        EC.element_to_be_clickable(
+            (By.ID, armor_edit.name_id)
+        )
+    )
 
     assert armor_edit.name.get_attribute('value').strip() == 'Breastplate'
     assert armor_edit.armor_class.get_attribute('value').strip() == '14'
@@ -1165,8 +1382,6 @@ def test_armor_donned(player_wizard, browser): # noqa
     tabs = Tabs(browser)
     tabs.equipment.click()
 
-    stub = ArmorFactory.stub()
-
     WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
             (By.ID, armor_table.add_id)
@@ -1174,13 +1389,26 @@ def test_armor_donned(player_wizard, browser): # noqa
     )
 
     armor_table.add.click()
-    armor_add.name = stub.name
+
+    ut.select_from_autocomplete(
+        armor_add,
+        'name',
+        browser,
+        has_search_term=False
+    )
+
+    armor_add.name.send_keys(Keys.TAB)
+
     armor_add.don.click()
 
     armor_add.add.click()
 
     WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
+    )
+
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_has_data(armor_table)
     )
 
     row = ut.get_table_row(armor_table, 'table', 1, values=False)
@@ -1211,6 +1439,9 @@ def test_armor_total_weight(player_wizard, browser): # noqa
         browser,
         has_search_term=False
     )
+
+    armor_add.name.send_keys(Keys.TAB)
+
     armor_add.add.click()
 
     WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
@@ -1218,12 +1449,16 @@ def test_armor_total_weight(player_wizard, browser): # noqa
     )
 
     armor_table.add.click()
+
     ut.select_from_autocomplete(
         armor_add,
         'name',
         browser,
         has_search_term=False
     )
+
+    armor_add.name.send_keys(Keys.TAB)
+
     armor_add.add.click()
 
     WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
@@ -1260,6 +1495,9 @@ def test_armor_sorting(player_wizard, browser): # noqa
         browser,
         has_search_term=False
     )
+
+    armor_add.name.send_keys(Keys.TAB)
+
     armor_add.add.click()
 
     WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
@@ -1274,28 +1512,41 @@ def test_armor_sorting(player_wizard, browser): # noqa
         arrow_down_count=2,
         has_search_term=False
     )
+
+    armor_add.name.send_keys(Keys.TAB)
+
     armor_add.add.click()
 
     WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_has_data(armor_table)
+    )
+
     armor_table.armor_header.click()
+
     WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         sorting_arrow_down(
             armor_table.armor_header_sorting_arrow,
         )
     )
+
+    time.sleep(.5)
+
     rows = ut.get_table_row(armor_table, 'table', values=False)
 
     assert rows[1].text.strip() == 'Chain mail'
 
     armor_table.type_header.click()
+
     WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         sorting_arrow_up(
             armor_table.type_header_sorting_arrow,
         )
     )
+
     rows = ut.get_table_row(armor_table, 'table', values=False)
 
     assert rows[2].text.strip() == 'Heavy'
