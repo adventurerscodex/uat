@@ -450,7 +450,7 @@ def test_weapon_magical_modifier(player_wizard, browser): # noqa
 
     time.sleep(.5)
 
-    ## TODO: Pending bug fix will persist magical modifier
+    # TODO: Pending bug fix will persist magical modifier
 
     weapon_add.add.click()
 
