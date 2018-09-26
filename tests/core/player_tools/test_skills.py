@@ -3,13 +3,14 @@ import time
 
 from conftest import DEFAULT_WAIT_TIME
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC # noqa
 from selenium.webdriver.support.ui import WebDriverWait
 
 from components.core.character import feats, features, traits
 from components.core.character import proficiency, skills, tracked
 from components.core.character.tabs import Tabs
-from expected_conditions.general import modal_finished_closing
+from expected_conditions.general import modal_finished_closing, table_has_data, table_is_empty
 from expected_conditions.general import table_cell_updated
 from utils import general as ut
 
@@ -42,6 +43,10 @@ def test_add_feature(player_wizard, browser): # noqa
 
     feature.add.click()
 
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_has_data(features_table)
+    )
+
     row = ut.get_table_row(features_table, 'table', 1)
 
     assert tracked_table.tracked1_name.text.strip() == 'Add Name'
@@ -68,7 +73,14 @@ def test_feature_ogl_pre_pop(player_wizard, browser): # noqa
         browser,
         has_search_term=False
     )
+
+    feature.name.send_keys(Keys.TAB)
+
     feature.add.click()
+
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_has_data(features_table)
+    )
 
     row = ut.get_table_row(features_table, 'table', 1)
 
@@ -92,15 +104,27 @@ def test_delete_feature(player_wizard, browser): # noqa
         browser,
         has_search_term=False
     )
+
+    feature.name.send_keys(Keys.TAB)
+
     feature.add.click()
 
     WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_has_data(features_table)
+    )
+
     rows = ut.get_table_rows(features_table, 'table', values=False)
 
     rows[0][2].click()
+
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_is_empty(features_table)
+    )
+
     rows = ut.get_table_rows(features_table, 'table', values=False)
 
     assert rows[0][0].text.strip() == 'Add a new Feature'
@@ -118,12 +142,14 @@ def test_add_autocomplete_feature(player_wizard, browser): # noqa
     tabs.skills.click()
 
     features_table.add.click()
+
     ut.select_from_autocomplete(
         feature,
         'name',
         browser,
         has_search_term=False
     )
+
     ut.select_from_autocomplete(
         feature,
         'class_',
@@ -169,16 +195,24 @@ def test_edit_feature(player_wizard, browser): # noqa
     )
 
     features_table.add.click()
+
     ut.select_from_autocomplete(
         feature,
         'name',
         browser,
         has_search_term=False
     )
+
+    feature.name.send_keys(Keys.TAB)
+
     feature.add.click()
 
     WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
+    )
+
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_has_data(features_table)
     )
 
     rows = ut.get_table_rows(features_table, 'table', values=False)
@@ -190,6 +224,8 @@ def test_edit_feature(player_wizard, browser): # noqa
         )
     )
 
+    feature_tabs.edit.click()
+    # Clicking twice is required for unknown reason
     feature_tabs.edit.click()
 
     feature_edit.name = 'Edited Name'
@@ -212,6 +248,8 @@ def test_edit_feature(player_wizard, browser): # noqa
     WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
+
+    time.sleep(1)
 
     row = ut.get_table_row(features_table, 'table', 1)
 
@@ -243,6 +281,10 @@ def test_add_feat(player_wizard, browser): # noqa
 
     feat.add.click()
 
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_has_data(feats_table)
+    )
+
     row = ut.get_table_row(feats_table, 'table', 1)
 
     assert tracked_table.tracked1_name.text.strip() == 'Add Name'
@@ -268,7 +310,14 @@ def test_feat_ogl_pre_pop(player_wizard, browser): # noqa
         browser,
         has_search_term=False
     )
+
+    feat.name.send_keys(Keys.TAB)
+
     feat.add.click()
+
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_has_data(feats_table)
+    )
 
     row = ut.get_table_row(feats_table, 'table', 1)
 
@@ -291,15 +340,27 @@ def test_delete_feat(player_wizard, browser): # noqa
         browser,
         has_search_term=False
     )
+
+    feat.name.send_keys(Keys.TAB)
+
     feat.add.click()
 
     WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_has_data(feats_table)
+    )
+
     rows = ut.get_table_rows(feats_table, 'table', values=False)
 
     rows[0][1].click()
+
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_is_empty(feats_table)
+    )
+
     rows = ut.get_table_rows(feats_table, 'table', values=False)
 
     assert rows[0][0].text.strip() == 'Add a new Feat'
@@ -317,6 +378,7 @@ def test_add_autocomplete_feat(player_wizard, browser): # noqa
     tabs.skills.click()
 
     feats_table.add.click()
+
     ut.select_from_autocomplete(
         feat,
         'name',
@@ -361,12 +423,16 @@ def test_edit_feat(player_wizard, browser): # noqa
     )
 
     feats_table.add.click()
+
     ut.select_from_autocomplete(
         feat,
         'name',
         browser,
         has_search_term=False
     )
+
+    feat.name.send_keys(Keys.TAB)
+
     feat.add.click()
 
     WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
@@ -382,6 +448,7 @@ def test_edit_feat(player_wizard, browser): # noqa
         )
     )
 
+    feat_tabs.edit.click()
     feat_tabs.edit.click()
 
     feat_edit.name = 'Edited Name'
@@ -442,6 +509,10 @@ def test_add_trait(player_wizard, browser): # noqa
 
     trait.add.click()
 
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_has_data(traits_table)
+    )
+
     row = ut.get_table_row(traits_table, 'table', 1)
 
     assert tracked_table.tracked1_name.text.strip() == 'Add Name'
@@ -468,7 +539,14 @@ def test_trait_ogl_pre_pop(player_wizard, browser): # noqa
         browser,
         has_search_term=False
     )
+
+    trait.name.send_keys(Keys.TAB)
+
     trait.add.click()
+
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_has_data(traits_table)
+    )
 
     row = ut.get_table_row(traits_table, 'table', 1)
 
@@ -498,14 +576,26 @@ def test_delete_trait(player_wizard, browser): # noqa
         browser,
         has_search_term=False
     )
+
+    trait.name.send_keys(Keys.TAB)
+
     trait.add.click()
 
     WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
     )
 
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_has_data(traits_table)
+    )
+
     rows = ut.get_table_rows(traits_table, 'table', values=False)
     rows[0][2].find_element_by_tag_name('a').click()
+
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_is_empty(traits_table)
+    )
+
     rows = ut.get_table_rows(traits_table, 'table', values=False)
 
     assert rows[0][0].text.strip() == 'Add a new Trait'
@@ -523,6 +613,7 @@ def test_add_autocomplete_trait(player_wizard, browser): # noqa
     tabs.skills.click()
 
     traits_table.add.click()
+
     ut.select_from_autocomplete(
         trait,
         'name',
@@ -574,16 +665,24 @@ def test_edit_trait(player_wizard, browser): # noqa
     )
 
     traits_table.add.click()
+
     ut.select_from_autocomplete(
         trait,
         'name',
         browser,
         has_search_term=False
     )
+
+    trait.name.send_keys(Keys.TAB)
+
     trait.add.click()
 
     WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
+    )
+
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_has_data(traits_table)
     )
 
     rows = ut.get_table_rows(traits_table, 'table', values=False)
@@ -660,7 +759,12 @@ def test_add_proficiency(player_wizard, browser): # noqa
 
     proficiency_add.add.click()
 
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_has_data(proficiency_table)
+    )
+
     row = ut.get_table_row(proficiency_table, 'table', 1)
+
     assert row.type.strip() == 'Add Type'
     assert row.proficiency.strip() == 'Add Name'
 
@@ -682,7 +786,14 @@ def test_proficiency_ogl_pre_pop(player_wizard, browser): # noqa
         browser,
         has_search_term=False
     )
+
+    proficiency_add.name.send_keys(Keys.TAB)
+
     proficiency_add.add.click()
+
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_has_data(proficiency_table)
+    )
 
     row = ut.get_table_row(proficiency_table, 'table', 1)
 
@@ -711,7 +822,14 @@ def test_delete_proficiency(player_wizard, browser): # noqa
         browser,
         has_search_term=False
     )
+
+    proficiency_add.name.send_keys(Keys.TAB)
+
     proficiency_add.add.click()
+
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_has_data(proficiency_table)
+    )
 
     rows = ut.get_table_rows(proficiency_table, 'table', values=False)
 
@@ -720,6 +838,11 @@ def test_delete_proficiency(player_wizard, browser): # noqa
     )
 
     rows[0][2].find_element_by_tag_name('a').click()
+
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_is_empty(proficiency_table)
+    )
+
     rows = ut.get_table_rows(proficiency_table, 'table', values=False)
 
     assert rows[0][0].text.strip() == 'Add a new Proficiency'
@@ -791,10 +914,17 @@ def test_edit_proficiency(player_wizard, browser): # noqa
         browser,
         has_search_term=False
     )
+
+    proficiency_add.name.send_keys(Keys.TAB)
+
     proficiency_add.add.click()
 
     WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         modal_finished_closing()
+    )
+
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_has_data(proficiency_table)
     )
 
     rows = ut.get_table_rows(proficiency_table, 'table', values=False)
@@ -905,6 +1035,10 @@ def test_proficiency_types(player_wizard, browser): # noqa
     tabs = Tabs(browser)
     tabs.skills.click()
 
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_has_data(skills_table)
+    )
+
     acrobatics = ut.get_table_row(skills_table, 'table', values=False)
     none = acrobatics[0].find_element_by_tag_name('span').get_attribute('class')
     acrobatics[0].click()
@@ -976,6 +1110,10 @@ def test_passive_score(player_wizard, browser): # noqa
     tabs = Tabs(browser)
     tabs.skills.click()
 
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_has_data(skills_table)
+    )
+
     acrobatics = ut.get_table_row(skills_table, 'table')
 
     assert acrobatics.passive.strip() == '14'
@@ -1012,6 +1150,8 @@ def test_data_persists(player_wizard, browser): # noqa
     feature.max_ = 4
     feature.short_rest.click()
 
+    time.sleep(1)
+
     feature.add.click()
 
     WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
@@ -1025,6 +1165,9 @@ def test_data_persists(player_wizard, browser): # noqa
         browser,
         has_search_term=False
     )
+
+    feat.name.send_keys(Keys.TAB)
+
     feat.add.click()
 
     WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
@@ -1038,6 +1181,9 @@ def test_data_persists(player_wizard, browser): # noqa
         browser,
         has_search_term=False
     )
+
+    trait.name.send_keys(Keys.TAB)
+
     trait.add.click()
 
     WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
@@ -1051,6 +1197,9 @@ def test_data_persists(player_wizard, browser): # noqa
         browser,
         has_search_term=False
     )
+
+    proficiency_add.name.send_keys(Keys.TAB)
+
     proficiency_add.add.click()
 
     WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
@@ -1074,6 +1223,10 @@ def test_data_persists(player_wizard, browser): # noqa
     )
 
     browser.refresh()
+
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_has_data(features_table)
+    )
 
     row = ut.get_table_row(features_table, 'table', 1)
 
