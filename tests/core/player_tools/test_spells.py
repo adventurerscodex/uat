@@ -1,4 +1,6 @@
 """UAT test file for Adventurer's Codex player tools spells module."""
+import time
+
 from conftest import DEFAULT_WAIT_TIME
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -7,7 +9,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 from components.core.character import spells
 from components.core.character.tabs import Tabs
-from expected_conditions.general import modal_finished_closing
+from expected_conditions.general import modal_finished_closing, table_has_data, table_is_empty
 from utils import general as ut
 
 def test_add_spells(player_wizard, browser): # noqa
@@ -39,7 +41,7 @@ def test_add_spells(player_wizard, browser): # noqa
     spells_add.level = '5'
     spells_add.school = 'Add School'
     spells_add.type_ = 'Savings Throw'
-    spells_add.type_.send_keys(Keys.TAB)
+    spells_add.save_attr = 'Dex'
     spells_add.damage = '1d4'
     spells_add.cast_time = '1 action'
     spells_add.range_ = '5 feet'
@@ -53,6 +55,7 @@ def test_add_spells(player_wizard, browser): # noqa
     assert spells_add.level.get_attribute('value').strip() == '5'
     assert spells_add.school.get_attribute('value').strip() == 'Add School'
     assert spells_add.type_.get_attribute('value').strip() == 'Savings Throw'
+    assert spells_add.save_attr.get_attribute('value').strip() == 'Dex'
     assert spells_add.damage.get_attribute('value').strip() == '1d4'
     assert spells_add.cast_time.get_attribute('value').strip() == '1 action'
     assert spells_add.range_.get_attribute('value').strip() == '5 feet'
@@ -61,6 +64,10 @@ def test_add_spells(player_wizard, browser): # noqa
     assert spells_add.duration.get_attribute('value').strip() == '12 Minutes'
 
     spells_add.add.click()
+
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_has_data(spells_table)
+    )
 
     row = ut.get_table_row(spells_table, 'table', 1)
 
@@ -95,6 +102,7 @@ def test_delete_spells(player_wizard, browser): # noqa
         browser,
         has_search_term=False
     )
+    spells_add.description.click()
     spells_add.add.click()
 
     WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
@@ -103,6 +111,11 @@ def test_delete_spells(player_wizard, browser): # noqa
 
     rows = ut.get_table_rows(spells_table, 'table', values=False)
     rows[0][7].find_element_by_tag_name('a').click()
+
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_is_empty(spells_table)
+    )
+
     rows = ut.get_table_rows(spells_table, 'table', values=False)
 
     assert rows[0][0].text.strip() == 'Add a new spell'
@@ -132,6 +145,7 @@ def test_edit_spells(player_wizard, browser): # noqa
         browser,
         has_search_term=False
     )
+    spells_add.description.click()
     spells_add.add.click()
 
     WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
@@ -148,12 +162,15 @@ def test_edit_spells(player_wizard, browser): # noqa
     )
 
     spells_tabs.edit.click()
+    spells_tabs.edit.click()  # Added as cludge, not sure why click would only work sporadically
 
     WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.presence_of_element_located(
             (By.ID, spells_edit.name_id)
         )
     )
+
+    time.sleep(1)
 
     spells_edit.name = 'Add Name'
     spells_edit.prepared.click()
@@ -189,6 +206,8 @@ def test_edit_spells(player_wizard, browser): # noqa
         modal_finished_closing()
     )
 
+    time.sleep(1)
+
     row = ut.get_table_row(spells_table, 'table', 1)
 
     assert row.spell == 'Add Name'
@@ -209,6 +228,7 @@ def test_preview_spells(player_wizard, browser): # noqa
 
     spells_add = spells.SpellsAddModal(browser)
     spells_table = spells.SpellsTable(browser)
+    spells_tabs = spells.SpellsModalTabs(browser)
     spells_preview = spells.SpellsPreviewModal(browser)
     tabs = Tabs(browser)
     tabs.spells.click()
@@ -226,6 +246,7 @@ def test_preview_spells(player_wizard, browser): # noqa
         browser,
         has_search_term=False
     )
+    spells_add.description.click()  # added blur to facilitate click on Add
     spells_add.add.click()
 
     WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
@@ -237,7 +258,7 @@ def test_preview_spells(player_wizard, browser): # noqa
 
     WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(
-            (By.ID, spells_preview.done_id)
+            (By.ID, spells_tabs.edit_id)
         )
     )
 
