@@ -16,7 +16,7 @@ class EncounterAddEditModal(Component):
     read_aloud_text_xpath = '//*[@id="encounter-tab"]/encounter/encounter-add-edit-modal/div/div/div/div[2]/form/encounter-section-visibility[6]/div[1]/div[2]/input' # noqa
     treasure_xpath = '//*[@id="encounter-tab"]/encounter/encounter-add-edit-modal/div/div/div/div[2]/form/encounter-section-visibility[7]/div[1]/div[2]/input' # noqa
     notes_xpath = '//*[@id="encounter-tab"]/encounter/encounter-add-edit-modal/div/div/div/div[2]/form/encounter-section-visibility[8]/div[1]/div[2]/input' # noqa
-    done_xpath = '//*[@id="encounter-tab"]/encounter/encounter-add-edit-modal/div/div/div/div[2]/form/div[4]/div/div/button' # noqa
+    done_xpath = '//*[@id="encounter-tab"]/encounter/encounter-add-edit-modal/div/div/div/div[2]/form/div[3]/div/div/button' # noqa
 
     encounter_name = Element(xpath=encounter_name_xpath)
     location = Element(xpath=location_xpath)

@@ -18,7 +18,7 @@ from components.core.dm.read_aloud_text import ReadAloudTextAddModal
 from components.core.dm.read_aloud_text import ReadAloudTextEditModal
 from components.core.dm.read_aloud_text import ReadAloudTextModalTabs
 from components.core.dm.read_aloud_text import ReadAloudTextTable
-from expected_conditions.general import modal_finished_closing
+from expected_conditions.general import modal_finished_closing, table_has_data, table_is_empty
 from factories.core.dm.map_image import MapOrImageFactory
 from factories.core.dm.pointofinterest import PointOfInterestFactory
 from factories.core.dm.read_aloud_text import ReadAloudTextFactory
@@ -50,6 +50,10 @@ def test_add_read_aloud_text(dm_wizard, encounter_all_sections, browser):
         EC.element_to_be_clickable(
             (By.XPATH, read_aloud_table.name_xpath)
         )
+    )
+
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_has_data(read_aloud_table)
     )
 
     before_refresh_name = read_aloud_table.name.text.strip()
@@ -102,10 +106,13 @@ def test_edit_read_aloud_text(dm_wizard, encounter_all_sections, browser):
             (By.XPATH, read_aloud_table.name_xpath)
         )
     )
+    time.sleep(1)
 
     read_aloud_table.name.click()
     edit = browser.find_elements_by_xpath(read_aloud_tabs.edit_xpath)[1]
-    time.sleep(1)
+    time.sleep(2)
+
+    edit.click()
     edit.click()
 
     read_aloud_edit.name = stub.name
@@ -137,6 +144,10 @@ def test_edit_read_aloud_text(dm_wizard, encounter_all_sections, browser):
 
     read_aloud_text.remove.click()
 
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_is_empty(read_aloud_table)
+    )
+
     assert read_aloud_text.add_new_point.text.strip() == 'Add new text for your players.'
 
 
@@ -166,6 +177,10 @@ def test_add_point_of_interest(dm_wizard, encounter_all_sections, browser):
         EC.element_to_be_clickable(
             (By.XPATH, point_of_interest_table.name_xpath)
         )
+    )
+
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_has_data(point_of_interest_table)
     )
 
     before_refresh_name = point_of_interest_table.name.text.strip()
@@ -218,7 +233,7 @@ def test_edit_point_of_interest(dm_wizard, encounter_all_sections, browser):
             (By.XPATH, point_of_interest_table.name_xpath)
         )
     )
-
+    time.sleep(1)
     point_of_interest_table.name.click()
     edit = browser.find_element_by_xpath(point_of_interest_tabs.edit_xpath)
     time.sleep(1)
@@ -253,6 +268,10 @@ def test_edit_point_of_interest(dm_wizard, encounter_all_sections, browser):
 
     point_of_interest_modal.remove.click()
 
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_is_empty(point_of_interest_table)
+    )
+
     assert point_of_interest_modal.add_new_point.text.strip() == 'Add a new Point of Interest'
 
 
@@ -282,6 +301,10 @@ def test_add_map_or_image(dm_wizard, encounter_all_sections, browser):
         EC.element_to_be_clickable(
             (By.XPATH, map_or_image_table.name_xpath)
         )
+    )
+
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_has_data(map_or_image_table)
     )
 
     before_refresh_name = map_or_image_table.name.text.strip()
@@ -335,9 +358,11 @@ def test_edit_map_or_image(dm_wizard, encounter_all_sections, browser):
         )
     )
 
+    time.sleep(1)
     map_or_image_table.name.click()
     edit = browser.find_elements_by_xpath(map_or_image_tabs.edit_xpath)[1]
     time.sleep(1)
+    edit.click()
     edit.click()
 
     map_or_image_edit.name = stub.name
@@ -370,5 +395,9 @@ def test_edit_map_or_image(dm_wizard, encounter_all_sections, browser):
     assert before_refresh_description == after_refresh_description
 
     map_or_image_modal.remove.click()
+
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        table_is_empty(map_or_image_table)
+    )
 
     assert map_or_image_modal.add_new_point.text.strip() == 'Add a new Map or Image.'

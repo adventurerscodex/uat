@@ -69,8 +69,10 @@ class MapOrImageTable(Component):
     description_xpath = '//*[@id="encounter-tab"]/encounter/div/div/div[2]/div[2]/encounter-detail/div/div[2]/maps-and-images-section/table/tbody/tr/td[2]' # noqa
     first_row_xpath = '//*[@id="encounter-tab"]/encounter/div/div/div[2]/div[2]/encounter-detail/div/div[2]/maps-and-images-section/table/tbody/tr' # noqa
     trash_xpath = '//*[@id="encounter-tab"]/encounter/div/div/div[2]/div[2]/encounter-detail/div/div[2]/point-of-interest-section/table/tbody/tr/td[4]/a/i' # noqa
+    table_xpath = '//*[@id="encounter-tab"]/encounter/div/div/div[2]/div[2]/encounter-detail/div/div[2]/maps-and-images-section' # noqa
 
     name = Element(xpath=name_xpath)
     description = Element(xpath=description_xpath)
     first_row = Element(xpath=first_row_xpath)
     trash = Element(xpath=trash_xpath)
+    table = Element(xpath=table_xpath)
