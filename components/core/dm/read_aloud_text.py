@@ -62,8 +62,10 @@ class ReadAloudTextTable(Component):
     description_xpath = '//*[@id="encounter-tab"]/encounter/div/div/div[2]/div[2]/encounter-detail/div/div[2]/player-text-section/table/tbody/tr/td[3]' # noqa
     first_row_xpath = '//*[@id="encounter-tab"]/encounter/div/div/div[2]/div[2]/encounter-detail/div/div[2]/player-text-section/table/tbody/tr' # noqa
     trash_xpath = '//*[@id="encounter-tab"]/encounter/div/div/div[2]/div[2]/encounter-detail/div/div[2]/player-text-section/table/tbody/tr/td[5]/a/i' # noqa
+    table_xpath = '//*[@id="encounter-tab"]/encounter/div/div/div[2]/div[2]/encounter-detail/div/div[2]/player-text-section' # noqa
 
     name = Element(xpath=name_xpath)
     description = Element(xpath=description_xpath)
     first_row = Element(xpath=first_row_xpath)
-    trash = Element(xpath=trash_xpath)
+    trash = Element(xpath=table_xpath)
+    table = Element(xpath=table_xpath)
