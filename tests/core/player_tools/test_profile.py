@@ -1,253 +1,306 @@
 """UAT test file for Adventurer's Codex player tools profile module."""
-from selenium.webdriver.common.keys import Keys
+from conftest import DEFAULT_WAIT_TIME
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC # noqa
+from selenium.webdriver.support.ui import WebDriverWait
 
-from components.core.character.appearance import Appearance
-from components.core.character.background import Background
-from components.core.character.profile import Profile
+from components.core.character.appearance import AppearanceEdit, AppearanceView
+from components.core.character.background import BackgroundEdit, BackgroundView
+from components.core.character.profile import ProfileEdit, ProfileView
 from components.core.character.tabs import Tabs
 from utils import general as ut
 
 
-def test_profile_persists(player_wizard, browser):
+def test_profile_and_appearance_persists(player_wizard, browser):
     """Profile inputs should persist data."""
     print('As a player, profile inputs persist data.')
-    profile = Profile(browser)
+    profile_edit = ProfileEdit(browser)
+    profile_view = ProfileView(browser)
+
+    appearance_edit = AppearanceEdit(browser)
+    appearance_view = AppearanceView(browser)
 
     tabs = Tabs(browser)
     tabs.profile.click()
 
-    profile.name = 'Gandalf'
-    profile.name.send_keys(Keys.TAB)
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        EC.text_to_be_present_in_element(
+            (By.XPATH, profile_view.alignment_xpath),
+            'No Alignment'
+        )
+    )
+
+    profile_edit.edit_btn.click()
+
+    profile_edit.alignment = 'Chaotic Good'
+
+    assert profile_edit.alignment.get_attribute('value').strip() == 'Chaotic Good'
+
+    profile_edit.deity = 'Moridin'
+
+    assert profile_edit.deity.get_attribute('value').strip() == 'Moridin'
+
+    profile_edit.race = 'Gnome'
+
+    assert profile_edit.race.get_attribute('value').strip() == 'Gnome'
+
+    profile_edit.class_ = 'Fighter'
+
+    assert profile_edit.class_.get_attribute('value').strip() == 'Fighter'
+
+    profile_edit.gender = 'Male'
+
+    assert profile_edit.gender.get_attribute('value').strip() == 'Male'
+
+    profile_edit.age = '12'
+
+    assert profile_edit.age.get_attribute('value').strip() == '12'
+
+    appearance_edit.weight = '165'
+
+    assert appearance_edit.weight.get_attribute('value').strip() == '165'
+
+    appearance_edit.hair_color = 'Brown'
+
+    assert appearance_edit.hair_color.get_attribute('value').strip() == 'Brown'
+
+    appearance_edit.eye_color = 'Brown'
+
+    assert appearance_edit.eye_color.get_attribute('value').strip() == 'Brown'
+
+    appearance_edit.skin_color = 'Fair'
+
+    assert appearance_edit.skin_color.get_attribute('value').strip() == 'Fair'
+
+    profile_edit.save_btn.click()
+
     browser.refresh()
 
-    assert profile.name.get_attribute('value').strip() == 'Gandalf'
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        EC.text_to_be_present_in_element(
+            (By.XPATH, profile_view.alignment_xpath),
+            'Chaotic Good'
+        )
+    )
 
-    profile.background = 'Sage'
-    profile.background.send_keys(Keys.TAB)
-    browser.refresh()
-
-    assert profile.background.get_attribute('value').strip() == 'Sage'
-
-    profile.alignment = 'Chaotic Good'
-    profile.alignment.send_keys(Keys.TAB)
-    browser.refresh()
-
-    assert profile.alignment.get_attribute('value').strip() == 'Chaotic Good'
-
-    profile.deity = 'Moridin'
-    profile.deity.send_keys(Keys.TAB)
-    browser.refresh()
-
-    assert profile.deity.get_attribute('value').strip() == 'Moridin'
-
-    profile.race = 'Gnome'
-    profile.race.send_keys(Keys.TAB)
-    browser.refresh()
-
-    assert profile.race.get_attribute('value').strip() == 'Gnome'
-
-    profile.class_ = 'Fighter'
-    profile.class_.send_keys(Keys.TAB)
-    browser.refresh()
-
-    assert profile.class_.get_attribute('value').strip() == 'Fighter'
-
-    profile.gender = 'Male'
-    profile.gender.send_keys(Keys.TAB)
-    browser.refresh()
-
-    assert profile.gender.get_attribute('value').strip() == 'Male'
-
-    profile.age = '12'
-    profile.age.send_keys(Keys.TAB)
-    browser.refresh()
-
-    assert profile.age.get_attribute('value').strip() == '12'
+    assert profile_view.alignment.text.strip() == 'Chaotic Good'
+    assert profile_view.deity.text.strip() == 'Moridin'
+    assert profile_view.race.text.strip() == 'Gnome'
+    assert profile_view.class_.text.strip() == 'Fighter'
+    assert profile_view.gender.text.strip() == 'Male'
+    assert profile_view.age.text.strip() == '12'
+    assert appearance_view.weight.text.strip() == '165'
+    assert appearance_view.hair_color.text.strip() == 'Brown'
+    assert appearance_view.eye_color.text.strip() == 'Brown'
+    assert appearance_view.skin_color.text.strip() == 'Fair'
 
 
 def test_background_persists(player_wizard, browser):
     """Profile background should persist data."""
     print('As a player, background textareas persist data.')
-    background = Background(browser)
+    background_edit = BackgroundEdit(browser)
+    background_view = BackgroundView(browser)
+    profile_view = ProfileView(browser)
 
     tabs = Tabs(browser)
     tabs.profile.click()
 
-    background.traits = 'Traits...'
-    background.traits.send_keys(Keys.TAB)
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        EC.text_to_be_present_in_element(
+            (By.XPATH, profile_view.alignment_xpath),
+            'No Alignment'
+        )
+    )
+
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        EC.text_to_be_present_in_element(
+            (By.XPATH, background_view.traits_xpath),
+            'No Personality Trait'
+        )
+    )
+
+    background_edit.edit_btn.click()
+
+    background_edit.name = 'Sage...'
+    background_edit.traits = 'Traits...'
+    background_edit.ideals = 'Ideals...'
+    background_edit.bonds = 'Bonds...'
+    background_edit.flaws = 'Flaws...'
+
+    background_edit.save_btn.click()
+
     browser.refresh()
 
-    assert background.traits.get_attribute('value').strip() == 'Traits...'
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        EC.text_to_be_present_in_element(
+            (By.XPATH, background_view.traits_xpath),
+            'Traits...'
+        )
+    )
 
-    background.ideals = 'Ideals...'
-    background.ideals.send_keys(Keys.TAB)
-    browser.refresh()
+    assert background_view.name.text.strip() == 'Sage...'
+    assert background_view.traits.text.strip() == 'Traits...'
+    assert background_view.ideals.text.strip() == 'Ideals...'
+    assert background_view.bonds.text.strip() == 'Bonds...'
+    assert background_view.flaws.text.strip() == 'Flaws...'
 
-    assert background.ideals.get_attribute('value').strip() == 'Ideals...'
-
-    background.bonds = 'Bonds...'
-    background.bonds.send_keys(Keys.TAB)
-    browser.refresh()
-
-    assert background.bonds.get_attribute('value').strip() == 'Bonds...'
-
-    background.flaws = 'Flaws...'
-    background.flaws.send_keys(Keys.TAB)
-    browser.refresh()
-
-    assert background.flaws.get_attribute('value').strip() == 'Flaws...'
-
-
-def test_appearance_persists(player_wizard, browser):
-    """Profile appearance should persist data."""
-    print('As a player, appearance textareas persist data.')
-    appearance = Appearance(browser)
-
-    tabs = Tabs(browser)
-    tabs.profile.click()
-
-    appearance.height = '5ft'
-    appearance.height.send_keys(Keys.TAB)
-    browser.refresh()
-
-    assert appearance.height.get_attribute('value').strip() == '5ft'
-
-    appearance.weight = '165'
-    appearance.weight.send_keys(Keys.TAB)
-    browser.refresh()
-
-    assert appearance.weight.get_attribute('value').strip() == '165'
-
-    appearance.hair_color = 'Brown'
-    appearance.hair_color.send_keys(Keys.TAB)
-    browser.refresh()
-
-    assert appearance.hair_color.get_attribute('value').strip() == 'Brown'
-
-    appearance.eye_color = 'Brown'
-    appearance.eye_color.send_keys(Keys.TAB)
-    browser.refresh()
-
-    assert appearance.eye_color.get_attribute('value').strip() == 'Brown'
-
-    appearance.skin_color = 'Fair'
-    appearance.skin_color.send_keys(Keys.TAB)
-    browser.refresh()
-
-    assert appearance.skin_color.get_attribute('value').strip() == 'Fair'
 
 def test_alignment_autocomplete(player_wizard, browser): # noqa
     """As a player, if I start typing in the alignment field, OGL data auto-completes."""
     print('As a player, if I start typing in the alignment field, OGL data auto-completes.')
 
-    profile = Profile(browser)
+    profile_edit = ProfileEdit(browser)
+    profile_view = ProfileView(browser)
+
     tabs = Tabs(browser)
     tabs.profile.click()
 
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        EC.text_to_be_present_in_element(
+            (By.XPATH, profile_view.alignment_xpath),
+            'No Alignment'
+        )
+    )
+
+    profile_edit.edit_btn.click()
+
     ut.select_from_autocomplete(
-        profile,
+        profile_edit,
         'alignment',
         browser,
         has_search_term=False
     )
 
-    assert profile.alignment.get_attribute('value').strip() == 'Lawful good'
+    assert profile_edit.alignment.get_attribute('value').strip() == 'Lawful good'
 
-    profile.alignment.clear()
+    profile_edit.alignment.clear()
 
     ut.select_from_autocomplete(
-        profile,
+        profile_edit,
         'alignment',
         browser,
         has_search_term=True,
         search_term='c'
     )
 
-    assert profile.alignment.get_attribute('value').strip() == 'Chaotic good'
+    assert profile_edit.alignment.get_attribute('value').strip() == 'Chaotic good'
 
 def test_race_autocomplete(player_wizard, browser): # noqa
     """As a player, if I start typing in the race field, OGL data auto-completes."""
     print('As a player, if I start typing in the race field, OGL data auto-completes.')
 
-    profile = Profile(browser)
+    profile_edit = ProfileEdit(browser)
+    profile_view = ProfileView(browser)
+
     tabs = Tabs(browser)
     tabs.profile.click()
 
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        EC.text_to_be_present_in_element(
+            (By.XPATH, profile_view.alignment_xpath),
+            'No Alignment'
+        )
+    )
+
+    profile_edit.edit_btn.click()
+
     ut.select_from_autocomplete(
-        profile,
+        profile_edit,
         'race',
         browser,
         has_search_term=False
     )
 
-    assert profile.race.get_attribute('value').strip() == 'Dwarf'
+    assert profile_edit.race.get_attribute('value').strip() == 'Dwarf'
 
-    profile.race.clear()
+    profile_edit.race.clear()
 
     ut.select_from_autocomplete(
-        profile,
+        profile_edit,
         'race',
         browser,
         has_search_term=True,
         search_term='c'
     )
 
-    assert profile.race.get_attribute('value').strip() == 'Rock Gnome'
+    assert profile_edit.race.get_attribute('value').strip() == 'Rock Gnome'
 
 def test_class_autocomplete(player_wizard, browser): # noqa
     """As a player, if I start typing in the class field, OGL data auto-completes."""
     print('As a player, if I start typing in the class field, OGL data auto-completes.')
 
-    profile = Profile(browser)
+    profile_edit = ProfileEdit(browser)
+    profile_view = ProfileView(browser)
+
     tabs = Tabs(browser)
     tabs.profile.click()
 
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        EC.text_to_be_present_in_element(
+            (By.XPATH, profile_view.alignment_xpath),
+            'No Alignment'
+        )
+    )
+
+    profile_edit.edit_btn.click()
+
     ut.select_from_autocomplete(
-        profile,
+        profile_edit,
         'class_',
         browser,
         has_search_term=False
     )
 
-    assert profile.class_.get_attribute('value').strip() == 'Barbarian'
+    assert profile_edit.class_.get_attribute('value').strip() == 'Barbarian'
 
-    profile.class_.clear()
+    profile_edit.class_.clear()
 
     ut.select_from_autocomplete(
-        profile,
+        profile_edit,
         'class_',
         browser,
         has_search_term=True,
         search_term='c'
     )
 
-    assert profile.class_.get_attribute('value').strip() == 'Cleric'
+    assert profile_edit.class_.get_attribute('value').strip() == 'Cleric'
 
 def test_background_autocomplete(player_wizard, browser): # noqa
     """As a player, if I start typing in the background field, OGL data auto-completes."""
     print('As a player, if I start typing in the background field, OGL data auto-completes.')
 
-    profile = Profile(browser)
+    background_edit = BackgroundEdit(browser)
+    profile_view = ProfileView(browser)
+
     tabs = Tabs(browser)
     tabs.profile.click()
 
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        EC.text_to_be_present_in_element(
+            (By.XPATH, profile_view.alignment_xpath),
+            'No Alignment'
+        )
+    )
+
+    background_edit.edit_btn.click()
+
     ut.select_from_autocomplete(
-        profile,
-        'background',
+        background_edit,
+        'name',
         browser,
         has_search_term=False
     )
 
-    assert profile.background.get_attribute('value').strip() == 'Acolyte'
+    assert background_edit.name.get_attribute('value').strip() == 'Acolyte'
 
-    profile.background.clear()
+    background_edit.name.clear()
 
     ut.select_from_autocomplete(
-        profile,
-        'background',
+        background_edit,
+        'name',
         browser,
         has_search_term=True,
         search_term='f'
     )
 
-    assert profile.background.get_attribute('value').strip() == 'Folk Hero'
+    assert background_edit.name.get_attribute('value').strip() == 'Folk Hero'
