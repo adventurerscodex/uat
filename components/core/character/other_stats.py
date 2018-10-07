@@ -19,7 +19,7 @@ class OtherStats(Component):
     proficiency_popover_icon_id = 'otherStatsProficiencyPopoverIconSpan'
     proficiency_popover_content_xpath = '//*[contains(@id, "popover")]/div[2]'
     level_id = 'otherStatsLevelInput'
-    inspiration_id = 'otherStatsInspirationInput'
+    inspiration_xpath = '//*[@id="stats"]/div[4]/div[2]/div/div/div/div/other-stats/div[4]/div/div/div/span'
     speed_id = 'otherStatsSpeedInput'
     experience_id = 'otherStatsExperienceInput'
 
@@ -36,6 +36,6 @@ class OtherStats(Component):
     proficiency_popover_icon = Element(id_=proficiency_popover_icon_id)
     proficiency_popover_content = Element(xpath=proficiency_popover_content_xpath)
     level = Element(id_=level_id)
-    inspiration = Element(id_=inspiration_id)
+    inspiration = Element(xpath=inspiration_xpath)
     speed = Element(id_=speed_id)
     experience = Element(id_=experience_id)
