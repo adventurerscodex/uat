@@ -3,23 +3,43 @@
 from component_objects import Component, Element
 
 
-class Profile(Component):
-    """Definition of profile componenet."""
+class ProfileEdit(Component):
+    """Definition of profile edit componenet."""
 
-    alignment_id = 'profileAlignmentInput'
-    name_id = 'profilePlayerNameInput'
-    background_id = 'profileBackgroundInput'
-    deity_id = 'profileDeityInput'
-    race_id = 'profileRaceInput'
-    class_id = 'profileClassInput'
-    gender_id = 'profileGenderInput'
-    age_id = 'profileAgeInput'
+    alignment_xpath = '//*[@id="profileAlignmentInput"]'
+    deity_xpath = '//*[@id="profileDeityInput"]'
+    race_xpath = '//*[@id="profileRaceInput"]'
+    class_xpath = '//*[@id="profileClassInput"]'
+    gender_xpath = '//*[@id="profileGenderInput"]'
+    age_xpath = '//*[@id="profileAgeInput"]'
+    edit_btn_xpath = '//*[@id="profile"]/div[1]/div[2]/profile/div/div/preview-edit/div[1]/div/span' # noqa
+    save_btn_xpath = '//*[@id="profile"]/div[1]/div[2]/profile/div/div/preview-edit/div[1]/button[1]' # noqa
+    cancel_btn_xpath = '//*[@id="profile"]/div[1]/div[2]/profile/div/div/preview-edit/div[1]/button[2]' # noqa
 
-    alignment = Element(id_=alignment_id)
-    name = Element(id_=name_id)
-    background = Element(id_=background_id)
-    deity = Element(id_=deity_id)
-    race = Element(id_=race_id)
-    class_ = Element(id_=class_id)
-    gender = Element(id_=gender_id)
-    age = Element(id_=age_id)
+    edit_btn = Element(xpath=edit_btn_xpath)
+    save_btn = Element(xpath=save_btn_xpath)
+    cancel_btn = Element(xpath=cancel_btn_xpath)
+    alignment = Element(xpath=alignment_xpath)
+    deity = Element(xpath=deity_xpath)
+    race = Element(xpath=race_xpath)
+    class_ = Element(xpath=class_xpath)
+    gender = Element(xpath=gender_xpath)
+    age = Element(xpath=age_xpath)
+
+
+class ProfileView(Component):
+    """Definition of profile view componenet."""
+
+    alignment_xpath = '//*[@id="profile"]/div[1]/div[2]/profile/div/div/preview-edit/div[2]/div[1]/div' # noqa
+    deity_xpath = '//*[@id="profile"]/div[1]/div[2]/profile/div/div/preview-edit/div[2]/div[2]/div'
+    race_xpath = '//*[@id="profile"]/div[1]/div[2]/profile/div/div/preview-edit/div[3]/div[1]/div'
+    class_xpath = '//*[@id="profile"]/div[1]/div[2]/profile/div/div/preview-edit/div[3]/div[2]/div'
+    gender_xpath = '//*[@id="profile"]/div[1]/div[2]/profile/div/div/preview-edit/div[4]/div[1]/div'
+    age_xpath = '//*[@id="profile"]/div[1]/div[2]/profile/div/div/preview-edit/div[4]/div[2]/div'
+
+    alignment = Element(xpath=alignment_xpath)
+    deity = Element(xpath=deity_xpath)
+    race = Element(xpath=race_xpath)
+    class_ = Element(xpath=class_xpath)
+    gender = Element(xpath=gender_xpath)
+    age = Element(xpath=age_xpath)
