@@ -368,8 +368,7 @@ def test_edit_map_or_image(dm_wizard, encounter_all_sections, browser):
     map_or_image_edit.name = stub.name
     map_or_image_edit.link = stub.image_link
     map_or_image_edit.description = stub.description
-    done = browser.find_elements_by_xpath(map_or_image_edit.done_xpath)[1]
-    done.click()
+    map_or_image_edit.done.click()
 
     WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
         EC.element_to_be_clickable(

@@ -10,14 +10,18 @@ def test_campaign_info(dm_wizard, browser):
 
     dm_overview = DMOverview(browser)
 
-    dm_overview.setting = 'The Lost World'
-    dm_overview.setting.send_keys(Keys.TAB)
+    dm_overview.edit_btn.click()
+    dm_overview.setting_input = 'The Lost World'
+    dm_overview.setting_input.send_keys(Keys.TAB)
+    dm_overview.save_btn.click()
     browser.refresh()
 
-    assert dm_overview.setting.get_attribute('value').strip() == 'The Lost World'
+    assert dm_overview.setting_label.text.strip() == 'The Lost World'
 
-    dm_overview.dm_name = 'Automated Testing Bot'
-    dm_overview.dm_name.send_keys(Keys.TAB)
+    dm_overview.edit_btn.click()
+    dm_overview.dm_name_input = 'Automated Testing Bot'
+    dm_overview.dm_name_input.send_keys(Keys.TAB)
+    dm_overview.save_btn.click()
     browser.refresh()
 
-    assert dm_overview.dm_name.get_attribute('value').strip() == 'Automated Testing Bot'
+    assert dm_overview.dm_name_label.text.strip() == 'Automated Testing Bot'
