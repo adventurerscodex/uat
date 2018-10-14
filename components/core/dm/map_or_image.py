@@ -54,7 +54,7 @@ class MapOrImageEditModal(Component):
     name_xpath = '//*[@id="viewMapOrImage"]/div/div/div[2]/div[1]/div[2]/form/div[1]/div/input' # noqa
     link_xpath = '//*[@id="viewMapOrImage"]/div/div/div[2]/div[1]/div[2]/form/div[2]/div/input' # noqa
     description_xpath = '//*[@id="viewMapOrImage"]/div/div/div[2]/div[1]/div[2]/form/div[3]/div/textarea' # noqa
-    done_xpath = '//*[@id="viewMapOrImage"]/div/div/div[2]/div[2]/button'
+    done_xpath = '//*[@id="viewMapOrImage"]/div/div/div[2]/div/div[2]/form/div[4]/button'
 
     name = Element(xpath=name_xpath)
     link = Element(xpath=link_xpath)
