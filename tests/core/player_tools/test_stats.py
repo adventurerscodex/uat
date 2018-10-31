@@ -35,10 +35,8 @@ def test_data_persists(player_wizard, browser): # noqa
 
     ability_scores_table.table.click()
 
-    ability_scores_edit.charisma.click()
-    ability_scores_edit.charisma.send_keys(Keys.TAB)
-
     ability_scores_edit.strength = 15
+    ability_scores_edit.strength.send_keys(Keys.TAB)
     ability_scores_edit.done.click()
 
     WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
@@ -57,46 +55,54 @@ def test_data_persists(player_wizard, browser): # noqa
     saving_throw_edit.proficiency.click()
     saving_throw_edit.done.click()
 
+    time.sleep(3)
+
+    other_stats.edit_btn.click()
+
+    other_stats.ac_modifier_input = 1
+    other_stats.ac_modifier_input.send_keys(Keys.TAB)
+
+    other_stats.initiative_modifier_input = 1
+    other_stats.initiative_modifier_input.send_keys(Keys.TAB)
+
+    other_stats.proficiency_bonus_input = 1
+    other_stats.proficiency_bonus_input.send_keys(Keys.TAB)
+
+    other_stats.speed_input = 40
+    other_stats.speed_input.send_keys(Keys.TAB)
+
+    other_stats.level_input = 3
+    other_stats.level_input.send_keys(Keys.TAB)
+
+    other_stats.experience_input = 2000
     time.sleep(1)
+    other_stats.experience_input.send_keys(Keys.TAB)
 
-    other_stats.ac_modifier = 1
-    other_stats.ac_modifier.send_keys(Keys.TAB)
+    other_stats.inspiration_input.click()
 
-    other_stats.initiative_modifier = 1
-    other_stats.initiative_modifier.send_keys(Keys.TAB)
+    other_stats.save_btn.click()
 
-    other_stats.proficiency_bonus_modifier = 1
-    other_stats.proficiency_bonus_modifier.send_keys(Keys.TAB)
-
-    other_stats.speed = 40
-    other_stats.speed.send_keys(Keys.TAB)
-
-    other_stats.level = 3
-    other_stats.level.send_keys(Keys.TAB)
-
-    other_stats.experience = 2000
-    time.sleep(1)
-    other_stats.experience.send_keys(Keys.TAB)
+    time.sleep(2)
 
     browser.refresh()
 
-    time.sleep(3)
+    time.sleep(10)
 
     row = ut.get_table_row(saving_throw, 'table', values=False)
-    proficieny = row[0].find_elements(By.TAG_NAME, 'span')
+    proficiency = row[0].find_elements(By.TAG_NAME, 'span')
 
     charisma = ut.get_table_row(saving_throw, 'table')
 
     assert ability_scores_table.strength.text.strip() == '15'
     assert hp_hd.hit_points_bar_label.text.strip() == 'HP: 9'
     assert hp_hd.hitdice3.get_attribute('class').strip() == 'dice-empty'
-    assert charisma.blank2.strip() == '+ 8'
-    assert proficieny[0].get_attribute('class').strip() == 'fa fa-check'
-    assert other_stats.initiative.text.strip() == '5'
-    assert other_stats.proficiency_bonus.text.strip() == '3'
-    assert other_stats.speed.get_attribute('value').strip() == '40'
-    assert other_stats.level.get_attribute('value').strip() == '3'
-    assert other_stats.experience.get_attribute('value').strip() == '2000'
+    assert proficiency[0].get_attribute('class').strip() == 'fa fa-check'
+    assert other_stats.initiative_label.text.strip() == '5'
+    assert other_stats.proficiency_bonus_label.text.strip() == '3'
+    assert other_stats.speed_label.text.strip() == '40'
+    assert other_stats.level_label.text.strip() == '3'
+    assert other_stats.experience_label.text.strip() == '2000'
+    # TODO check if inspiration is clicked
 
 def test_edit_ability_scores(player_wizard, browser): # noqa
     """As a player, I can edit my ability scores."""
@@ -275,8 +281,12 @@ def test_hit_dice_level(player_wizard, browser): # noqa
     hp_hd = HitPointHitDice(browser)
     other_stats = OtherStats(browser)
 
-    other_stats.level = 3
-    other_stats.level.send_keys(Keys.TAB)
+    other_stats.edit_btn.click()
+
+    other_stats.level_input = 3
+    other_stats.level_input.send_keys(Keys.TAB)
+
+    other_stats.save_btn.click()
 
     time.sleep(3)
 
@@ -341,56 +351,71 @@ def test_death_saves_persist(player_wizard, browser): # noqa
     assert len(hp_hd.death_successes_empty) == 2
     assert len(hp_hd.death_failures_empty) == 2
 
-# def test_character_stable_alert(player_wizard, browser): # noqa
-#     """If 3 death save success are clicked, an alert indicating the player is
-#        stable is presented."""
+def test_character_stable_alert(player_wizard, browser): # noqa
+    """If 3 death save success are clicked, an alert indicating the player is
+       stable is presented."""
 
-#     print(('If 3 death save success are clicked, an alert indicating the '
-#            'player is stable is presented.'))
+    print(('If 3 death save success are clicked, an alert indicating the '
+           'player is stable is presented.'))
 
-#     time.sleep(3)
+    time.sleep(3)
 
-#     hp_hd = HitPointHitDice(browser)
+    hp_hd = HitPointHitDice(browser)
 
-#     # reduce character to 0 hit points
-#     for _ in range(10):
-#         time.sleep(1)
-#         hp_hd.damage_up.click()
+    # reduce character to 0 hit points
+    for _ in range(10):
+        time.sleep(1)
+        hp_hd.damage_up.click()
 
-#     time.sleep(1)
+    successes = hp_hd.death_successes_empty
+    successes[0].click()
+    successes = hp_hd.death_successes_empty
+    successes[0].click()
+    successes = hp_hd.death_successes_empty
+    successes[0].click()
 
-#     successes = hp_hd.death_successes_empty
-#     successes[0].click()
-#     successes[1].click()
-#     successes[2].click()
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        EC.text_to_be_present_in_element(
+            (By.XPATH, hp_hd.toast_title_xpath),
+            'You are now stable.'
+        )
+    )
 
-#     time.sleep(2)
+    assert hp_hd.toast_title.text.strip() == 'You are now stable.'
+    assert hp_hd.toast_message.text.strip() == 'You have been spared...for now.'
 
-#     assert hp_hd.toast_title.text.strip() == 'You are now stable.'
-#     assert hp_hd.toast_message.text.strip() == 'You have been spared...for now.'
+def test_character_dead_alert(player_wizard, browser): # noqa
+    """If 3 death save success are clicked, an alert indicating the player is
+       dead is presented."""
 
-# def test_character_dead_alert(player_wizard, browser): # noqa
-#     """If 3 death save success are clicked, an alert indicating the player is
-#        dead is presented."""
+    print(('If 3 death save success are clicked, an alert indicating the '
+           'player is dead is presented.'))
 
-#     print(('If 3 death save success are clicked, an alert indicating the '
-#            'player is dead is presented.'))
+    time.sleep(3)
 
-#     time.sleep(3)
+    hp_hd = HitPointHitDice(browser)
 
-#     hp_hd = HitPointHitDice(browser)
+    # reduce character to 0 hit points
+    for _ in range(10):
+        hp_hd.damage_up.click()
+        time.sleep(1)
 
-#     # reduce character to 0 hit points
-#     for _ in range(10):
-#         hp_hd.damage_up.click()
+    failures = hp_hd.death_failures_empty
+    failures[0].click()
+    failures = hp_hd.death_failures_empty
+    failures[0].click()
+    failures = hp_hd.death_failures_empty
+    failures[0].click()
 
-#     failures = hp_hd.death_failures_empty
-#     failures[0].click()
-#     failures[1].click()
-#     failures[2].click()
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        EC.text_to_be_present_in_element(
+            (By.XPATH, hp_hd.toast_title_xpath),
+            'You have died.'
+        )
+    )
 
-#     assert hp_hd.toast_title.text.strip() == 'You have died.'
-#     assert hp_hd.toast_message.text.strip() == 'Failing all 3 death saves will do that...'
+    assert hp_hd.toast_title.text.strip() == 'You have died.'
+    assert hp_hd.toast_message.text.strip() == 'Failing all 3 death saves will do that...'
 
 def test_initiative_calculation(player_wizard, browser): # noqa
     """As a player, initiative is correctly calculated."""
@@ -400,7 +425,7 @@ def test_initiative_calculation(player_wizard, browser): # noqa
 
     other_stats = OtherStats(browser)
 
-    assert other_stats.initiative.text.strip() == '4'
+    assert other_stats.initiative_label.text.strip() == '4'
 
 def test_initiative_modifier(player_wizard, browser): # noqa
     """As a player, I can increase or decrease my calculated initiative via a
@@ -412,19 +437,37 @@ def test_initiative_modifier(player_wizard, browser): # noqa
 
     other_stats = OtherStats(browser)
 
-    other_stats.initiative_modifier = 1
-    other_stats.initiative_modifier.send_keys(Keys.TAB)
+    other_stats.edit_btn.click()
 
-    time.sleep(1)
+    other_stats.initiative_modifier_input = 1
+    other_stats.initiative_modifier_input.send_keys(Keys.TAB)
 
-    assert other_stats.initiative.text.strip() == '5'
+    other_stats.save_btn.click()
 
-    other_stats.initiative_modifier = -1
-    other_stats.initiative_modifier.send_keys(Keys.TAB)
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        EC.text_to_be_present_in_element(
+            (By.XPATH, other_stats.initiative_label_xpath),
+            '5'
+        )
+    )
 
-    time.sleep(1)
+    assert other_stats.initiative_label.text.strip() == '5'
 
-    assert other_stats.initiative.text.strip() == '3'
+    other_stats.edit_btn.click()
+
+    other_stats.initiative_modifier_input = -1
+    other_stats.initiative_modifier_input.send_keys(Keys.TAB)
+
+    other_stats.save_btn.click()
+
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        EC.text_to_be_present_in_element(
+            (By.XPATH, other_stats.initiative_label_xpath),
+            '3'
+        )
+    )
+
+    assert other_stats.initiative_label.text.strip() == '3'
 
 def test_initiative_popover(player_wizard, browser): # noqa
     """As a player, I can can click on a popover showing the calculation
@@ -454,12 +497,21 @@ def test_proficieny_bonus_calculation(player_wizard, browser): # noqa
 
     other_stats = OtherStats(browser)
 
-    other_stats.level = 5
-    other_stats.level.send_keys(Keys.TAB)
+    other_stats.edit_btn.click()
 
-    time.sleep(1)
+    other_stats.level_input = 5
+    other_stats.level_input.send_keys(Keys.TAB)
 
-    assert other_stats.proficiency_bonus.text.strip() == '3'
+    other_stats.save_btn.click()
+
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        EC.text_to_be_present_in_element(
+            (By.XPATH, other_stats.proficiency_bonus_label_xpath),
+            '3'
+        )
+    )
+
+    assert other_stats.proficiency_bonus_label.text.strip() == '3'
 
 def test_proficiency_modifier(player_wizard, browser): # noqa
     """As a player, I can increase or decrease my calculated proficiency via
@@ -471,16 +523,22 @@ def test_proficiency_modifier(player_wizard, browser): # noqa
 
     other_stats = OtherStats(browser)
 
-    other_stats.level = 5
-    time.sleep(1)
-    other_stats.level.send_keys(Keys.TAB)
+    other_stats.edit_btn.click()
 
-    other_stats.proficiency_bonus_modifier = 1
-    other_stats.proficiency_bonus_modifier.send_keys(Keys.TAB)
+    other_stats.level_input = 5
+    other_stats.proficiency_bonus_input = 1
+    other_stats.proficiency_bonus_input.send_keys(Keys.TAB)
 
-    time.sleep(3)
+    other_stats.save_btn.click()
 
-    assert other_stats.proficiency_bonus.text.strip() == '4'
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        EC.text_to_be_present_in_element(
+            (By.XPATH, other_stats.proficiency_bonus_label_xpath),
+            '4'
+        )
+    )
+
+    assert other_stats.proficiency_bonus_label.text.strip() == '4'
 
 def test_proficiency_popover(player_wizard, browser): # noqa
     """As a player, I can can click on a popover showing the calculation for
@@ -513,7 +571,18 @@ def test_inpiration_blue_circle(player_wizard, browser): # noqa
     other_stats = OtherStats(browser)
     profile_pic = ProfilePicture(browser)
 
-    other_stats.inspiration.click()
+    other_stats.edit_btn.click()
+
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        EC.element_to_be_clickable(
+            (By.XPATH, other_stats.inspiration_input_xpath)
+        )
+    )
+
+    other_stats.inspiration_input.click()
+    other_stats.ac_modifier_input.send_keys(Keys.TAB)
+
+    other_stats.save_btn.click()
 
     time.sleep(4)
 
@@ -556,16 +625,25 @@ def test_ac_modifier(player_wizard, browser): # noqa
     print(('As a player, I can increase or decrease my calculated armor class '
            'via a modifier field and this is reflected in the label.'))
 
-    time.sleep(4)
+    time.sleep(5)
 
     other_stats = OtherStats(browser)
 
-    other_stats.ac_modifier = 1
-    other_stats.ac_modifier.send_keys(Keys.TAB)
+    other_stats.edit_btn.click()
 
-    time.sleep(3)
+    other_stats.ac_modifier_input = 1
+    other_stats.ac_modifier_input.send_keys(Keys.TAB)
 
-    assert other_stats.ac.text.strip() == '15'
+    other_stats.save_btn.click()
+
+    WebDriverWait(browser, DEFAULT_WAIT_TIME).until(
+        EC.text_to_be_present_in_element(
+            (By.XPATH, other_stats.ac_label_xpath),
+            '15'
+        )
+    )
+
+    assert other_stats.ac_label.text.strip() == '15'
 
 def test_ac_popover(player_wizard, browser): # noqa
     """As a player, I can can click on a popover showing the calculation for
@@ -597,7 +675,7 @@ def test_saving_throw_proficiency(player_wizard, browser): # noqa
     saving_throw = SavingThrowTable(browser)
     saving_throw_edit = SavingThrowEditModal(browser)
 
-    time.sleep(3)
+    time.sleep(10)
 
     row = ut.get_table_row(saving_throw, 'table', values=False)
     # open edit modal
@@ -629,7 +707,7 @@ def test_saving_throw_modifier(player_wizard, browser): # noqa
     print(('As a player, I can increase or decrease my savings throws via a '
            'modifier field.'))
 
-    time.sleep(3)
+    time.sleep(10)
 
     saving_throw = SavingThrowTable(browser)
     saving_throw_edit = SavingThrowEditModal(browser)
