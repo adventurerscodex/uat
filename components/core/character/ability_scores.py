@@ -57,16 +57,3 @@ class AbilityScoresTable(Component):
     wisdom_modifier = Element(xpath=wisdom_modifier_id)
     charisma = Element(xpath=charisma_id)
     charisma_modifier = Element(xpath=charisma_modifier_id)
-
-    # strength_id = 'abilityScoresTableStrengthSpan'
-    # strength_modifier_id = 'abilityScoresTableStrengthModifierSpan'
-    # dexterity_id = 'abilityScoresTableDexteritySpan'
-    # dexterity_modifier_id = 'abilityScoresTableDexterityModifierSpan'
-    # constitution_id = 'abilityScoresTableConstitutionSpan'
-    # constitution_modifier_id = 'abilityScoresTableConstitutionModifierSpan'
-    # intelligence_id = 'abilityScoresTableIntelligIntelligenceSpan'
-    # intelligence_modifier_id = 'abilityScoresTableIntelligIntelligenceModifierSpan'
-    # wisdom_id = 'abilityScoresTableWisdomSpan'
-    # wisdom_modifier_id = 'abilityScoresTableWisdomModifierSpan'
-    # charisma_id = 'abilityScoresTableCharismaSpan'
-    # charisma_modifier_id = 'abilityScoresTableCharismaModifierSpan'
