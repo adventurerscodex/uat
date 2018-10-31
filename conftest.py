@@ -2,6 +2,7 @@
 
 import logging
 import sys
+import time
 from time import gmtime, strftime
 
 import pytest
@@ -83,7 +84,6 @@ def browser(request, web_driver, opera_binary_path, url):
         driver = webdriver.Opera(options=options)
 
     driver.get(url)
-    driver.maximize_window()
 
     def close_browser():
         driver.quit()
@@ -213,6 +213,8 @@ def delete(token):
         headers=headers
     )
 
+    response.raise_for_status()
+
     results = response.json()
     characters_campaigns = results.get('results')
 
@@ -220,7 +222,10 @@ def delete(token):
         for asset in characters_campaigns:
             url = asset.get('url')
             if url:
-                requests.delete(url=url, headers=headers)
+                response = requests.delete(url=url, headers=headers)
+                response.raise_for_status()
+
+    time.sleep(1)
 
 
 @pytest.fixture(scope='function')

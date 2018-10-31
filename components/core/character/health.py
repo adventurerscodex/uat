@@ -29,6 +29,10 @@ class HitPointHitDice(Component):
     open_edit_modal_xpath = ('//*[@id="stats"]/div[1]/div[2]/stats/div/div/div'
                              '/div/table/tbody/tr/td[1]')
 
+    death_failure_1_xpath = '//*[@id="0" and class="ds-failure-empty"]'
+    death_failure_2_xpath = '//*[@id="1" and class="ds-failure-empty"]'
+    death_failure_3_xpath = '//*[@id="2" and class="ds-failure-empty"]'
+
     max_hit_points = Element(xpath=max_hit_points_xpath)
     hit_points_bar_label = Element(xpath=hit_points_bar_label_xpath)
     hit_points_bar_regular_hp = Element(xpath=hit_points_bar_regular_hp_xpath)
@@ -42,6 +46,11 @@ class HitPointHitDice(Component):
     toast_message = Element(xpath=toast_message_xpath)
     death_successes_empty = Elements(class_name=death_successes_empty_xpath)
     death_failures_empty = Elements(class_name=death_failures_empty_xpath)
+
+    death_failure_1 = Element(xpath=death_failure_1_xpath)
+    death_failure_2 = Element(xpath=death_failure_2_xpath)
+    death_failure_3 = Element(xpath=death_failure_3_xpath)
+
     hit_dice_list = Element(xpath=hit_dice_list_xpath)
     open_edit_modal = Element(xpath=open_edit_modal_xpath)
 
