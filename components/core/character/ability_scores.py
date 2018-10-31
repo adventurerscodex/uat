@@ -8,12 +8,12 @@ class AbilityScoresEditModal(Component):
 
     modal_div_xpath = '//*[@id="stats"]/div[3]/div/ability-scores/div[2]'
     title_xpath = '//*[@id="stats"]/div[3]/div/ability-scores/div[2]/div/div/div[1]/h4'
-    strength_xpath = '//*[@id="stats"]/div[3]/div/ability-scores/div[2]/div/div/div[2]/form/div[1]/div/input'
-    dexterity_xpath = '//*[@id="stats"]/div[3]/div/ability-scores/div[2]/div/div/div[2]/form/div[2]/div/input'
-    constitution_xpath = '//*[@id="stats"]/div[3]/div/ability-scores/div[2]/div/div/div[2]/form/div[3]/div/input'
-    intelligence_xpath = '//*[@id="stats"]/div[3]/div/ability-scores/div[2]/div/div/div[2]/form/div[4]/div/input'
-    wisdom_xpath = '//*[@id="stats"]/div[3]/div/ability-scores/div[2]/div/div/div[2]/form/div[5]/div/input'
-    charisma_xpath = '//*[@id="stats"]/div[3]/div/ability-scores/div[2]/div/div/div[2]/form/div[6]/div/input'
+    strength_xpath = '//*[@id="stats"]/div[3]/div/ability-scores/div[2]/div/div/div[2]/form/div[1]/div/input' # noqa
+    dexterity_xpath = '//*[@id="stats"]/div[3]/div/ability-scores/div[2]/div/div/div[2]/form/div[2]/div/input' # noqa
+    constitution_xpath = '//*[@id="stats"]/div[3]/div/ability-scores/div[2]/div/div/div[2]/form/div[3]/div/input' # noqa
+    intelligence_xpath = '//*[@id="stats"]/div[3]/div/ability-scores/div[2]/div/div/div[2]/form/div[4]/div/input' # noqa
+    wisdom_xpath = '//*[@id="stats"]/div[3]/div/ability-scores/div[2]/div/div/div[2]/form/div[5]/div/input' # noqa
+    charisma_xpath = '//*[@id="stats"]/div[3]/div/ability-scores/div[2]/div/div/div[2]/form/div[6]/div/input' # noqa
     done_xpath = '//*[@id="abilityScoresEditDoneButton"]'
 
     modal_div = Element(xpath=modal_div_xpath)

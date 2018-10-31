@@ -91,8 +91,6 @@ def test_data_persists(player_wizard, browser): # noqa
     row = ut.get_table_row(saving_throw, 'table', values=False)
     proficiency = row[0].find_elements(By.TAG_NAME, 'span')
 
-    charisma = ut.get_table_row(saving_throw, 'table')
-
     assert ability_scores_table.strength.text.strip() == '15'
     assert hp_hd.hit_points_bar_label.text.strip() == 'HP: 9'
     assert hp_hd.hitdice3.get_attribute('class').strip() == 'dice-empty'
